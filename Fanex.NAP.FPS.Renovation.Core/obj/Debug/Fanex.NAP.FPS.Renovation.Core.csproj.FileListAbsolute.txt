@@ -1,0 +1,6 @@
+D:\Projects\Fanex.NAP.FPS.Renovation\Fanex.NAP.FPS.Renovation.Core\bin\Debug\Fanex.NAP.FPS.Renovation.Core.dll
+D:\Projects\Fanex.NAP.FPS.Renovation\Fanex.NAP.FPS.Renovation.Core\bin\Debug\Fanex.NAP.FPS.Renovation.Core.pdb
+D:\Projects\Fanex.NAP.FPS.Renovation\Fanex.NAP.FPS.Renovation.Core\obj\Debug\Fanex.NAP.FPS.Renovation.Core.csprojAssemblyReference.cache
+D:\Projects\Fanex.NAP.FPS.Renovation\Fanex.NAP.FPS.Renovation.Core\obj\Debug\Fanex.NAP.FPS.Renovation.Core.csproj.CoreCompileInputs.cache
+D:\Projects\Fanex.NAP.FPS.Renovation\Fanex.NAP.FPS.Renovation.Core\obj\Debug\Fanex.NAP.FPS.Renovation.Core.dll
+D:\Projects\Fanex.NAP.FPS.Renovation\Fanex.NAP.FPS.Renovation.Core\obj\Debug\Fanex.NAP.FPS.Renovation.Core.pdb

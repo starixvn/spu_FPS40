@@ -1,0 +1,7 @@
+D:\Projects\Fanex.NAP.FPS.Renovation\Fanex.NAP.FPS.Renovation.CapturingData.Service\bin\Debug\Fanex.NAP.FPS.Renovation.CapturingData.Service.exe.config
+D:\Projects\Fanex.NAP.FPS.Renovation\Fanex.NAP.FPS.Renovation.CapturingData.Service\bin\Debug\Fanex.NAP.FPS.Renovation.CapturingData.Service.exe
+D:\Projects\Fanex.NAP.FPS.Renovation\Fanex.NAP.FPS.Renovation.CapturingData.Service\bin\Debug\Fanex.NAP.FPS.Renovation.CapturingData.Service.pdb
+D:\Projects\Fanex.NAP.FPS.Renovation\Fanex.NAP.FPS.Renovation.CapturingData.Service\obj\Debug\Fanex.NAP.FPS.Renovation.CapturingData.Service.csprojAssemblyReference.cache
+D:\Projects\Fanex.NAP.FPS.Renovation\Fanex.NAP.FPS.Renovation.CapturingData.Service\obj\Debug\Fanex.NAP.FPS.Renovation.CapturingData.Service.csproj.CoreCompileInputs.cache
+D:\Projects\Fanex.NAP.FPS.Renovation\Fanex.NAP.FPS.Renovation.CapturingData.Service\obj\Debug\Fanex.NAP.FPS.Renovation.CapturingData.Service.exe
+D:\Projects\Fanex.NAP.FPS.Renovation\Fanex.NAP.FPS.Renovation.CapturingData.Service\obj\Debug\Fanex.NAP.FPS.Renovation.CapturingData.Service.pdb
