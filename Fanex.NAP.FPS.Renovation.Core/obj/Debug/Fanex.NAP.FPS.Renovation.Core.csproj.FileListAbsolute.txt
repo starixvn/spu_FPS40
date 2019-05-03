@@ -4,3 +4,12 @@ D:\Projects\Fanex.NAP.FPS.Renovation\Fanex.NAP.FPS.Renovation.Core\obj\Debug\Fan
 D:\Projects\Fanex.NAP.FPS.Renovation\Fanex.NAP.FPS.Renovation.Core\obj\Debug\Fanex.NAP.FPS.Renovation.Core.csproj.CoreCompileInputs.cache
 D:\Projects\Fanex.NAP.FPS.Renovation\Fanex.NAP.FPS.Renovation.Core\obj\Debug\Fanex.NAP.FPS.Renovation.Core.dll
 D:\Projects\Fanex.NAP.FPS.Renovation\Fanex.NAP.FPS.Renovation.Core\obj\Debug\Fanex.NAP.FPS.Renovation.Core.pdb
+D:\Projects\FPS40\Fanex.NAP.FPS.Renovation.Core\bin\Debug\Fanex.NAP.FPS.Renovation.Core.dll
+D:\Projects\FPS40\Fanex.NAP.FPS.Renovation.Core\bin\Debug\Fanex.NAP.FPS.Renovation.Core.pdb
+D:\Projects\FPS40\Fanex.NAP.FPS.Renovation.Core\bin\Debug\Fanex.NAP.FPS.Renovation.Model.dll
+D:\Projects\FPS40\Fanex.NAP.FPS.Renovation.Core\bin\Debug\Fanex.NAP.FPS.Renovation.Model.pdb
+D:\Projects\FPS40\Fanex.NAP.FPS.Renovation.Core\obj\Debug\Fanex.NAP.FPS.Renovation.Core.csprojAssemblyReference.cache
+D:\Projects\FPS40\Fanex.NAP.FPS.Renovation.Core\obj\Debug\Fanex.NAP.FPS.Renovation.Core.csproj.CoreCompileInputs.cache
+D:\Projects\FPS40\Fanex.NAP.FPS.Renovation.Core\obj\Debug\Fanex.NAP.FPS.Renovation.Core.csproj.CopyComplete
+D:\Projects\FPS40\Fanex.NAP.FPS.Renovation.Core\obj\Debug\Fanex.NAP.FPS.Renovation.Core.dll
+D:\Projects\FPS40\Fanex.NAP.FPS.Renovation.Core\obj\Debug\Fanex.NAP.FPS.Renovation.Core.pdb
