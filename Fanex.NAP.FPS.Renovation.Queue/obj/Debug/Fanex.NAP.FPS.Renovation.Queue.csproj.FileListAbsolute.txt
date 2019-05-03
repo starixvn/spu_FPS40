@@ -12,3 +12,17 @@ D:\Projects\Fanex.NAP.FPS.Renovation\Fanex.NAP.FPS.Renovation.Queue\bin\Debug\Ra
 D:\Projects\Fanex.NAP.FPS.Renovation\Fanex.NAP.FPS.Renovation.Queue\obj\Debug\Fanex.NAP.FPS.Renovation.Queue.csproj.CopyComplete
 D:\Projects\Fanex.NAP.FPS.Renovation\Fanex.NAP.FPS.Renovation.Queue\obj\Debug\Fanex.NAP.FPS.Renovation.Queue.dll
 D:\Projects\Fanex.NAP.FPS.Renovation\Fanex.NAP.FPS.Renovation.Queue\obj\Debug\Fanex.NAP.FPS.Renovation.Queue.pdb
+D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Queue\bin\Debug\Fanex.NAP.FPS.Renovation.Queue.dll
+D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Queue\bin\Debug\Fanex.NAP.FPS.Renovation.Queue.pdb
+D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Queue\bin\Debug\EasyNetQ.dll
+D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Queue\bin\Debug\Microsoft.Diagnostics.Tracing.EventSource.dll
+D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Queue\bin\Debug\Newtonsoft.Json.dll
+D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Queue\bin\Debug\RabbitMQ.Client.dll
+D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Queue\bin\Debug\Microsoft.Diagnostics.Tracing.EventSource.xml
+D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Queue\bin\Debug\Newtonsoft.Json.xml
+D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Queue\bin\Debug\RabbitMQ.Client.xml
+D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Queue\obj\Debug\Fanex.NAP.FPS.Renovation.Queue.csprojAssemblyReference.cache
+D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Queue\obj\Debug\Fanex.NAP.FPS.Renovation.Queue.csproj.CoreCompileInputs.cache
+D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Queue\obj\Debug\Fanex.NAP.FPS.Renovation.Queue.csproj.CopyComplete
+D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Queue\obj\Debug\Fanex.NAP.FPS.Renovation.Queue.dll
+D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Queue\obj\Debug\Fanex.NAP.FPS.Renovation.Queue.pdb

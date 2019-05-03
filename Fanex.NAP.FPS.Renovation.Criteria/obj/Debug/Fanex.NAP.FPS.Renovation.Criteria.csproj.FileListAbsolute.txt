@@ -4,3 +4,9 @@ D:\Projects\Fanex.NAP.FPS.Renovation\Fanex.NAP.FPS.Renovation.Criteria\obj\Debug
 D:\Projects\Fanex.NAP.FPS.Renovation\Fanex.NAP.FPS.Renovation.Criteria\obj\Debug\Fanex.NAP.FPS.Renovation.Criteria.csproj.CoreCompileInputs.cache
 D:\Projects\Fanex.NAP.FPS.Renovation\Fanex.NAP.FPS.Renovation.Criteria\obj\Debug\Fanex.NAP.FPS.Renovation.Criteria.dll
 D:\Projects\Fanex.NAP.FPS.Renovation\Fanex.NAP.FPS.Renovation.Criteria\obj\Debug\Fanex.NAP.FPS.Renovation.Criteria.pdb
+D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Criteria\bin\Debug\Fanex.NAP.FPS.Renovation.Criteria.dll
+D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Criteria\bin\Debug\Fanex.NAP.FPS.Renovation.Criteria.pdb
+D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Criteria\obj\Debug\Fanex.NAP.FPS.Renovation.Criteria.csprojAssemblyReference.cache
+D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Criteria\obj\Debug\Fanex.NAP.FPS.Renovation.Criteria.csproj.CoreCompileInputs.cache
+D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Criteria\obj\Debug\Fanex.NAP.FPS.Renovation.Criteria.dll
+D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Criteria\obj\Debug\Fanex.NAP.FPS.Renovation.Criteria.pdb
