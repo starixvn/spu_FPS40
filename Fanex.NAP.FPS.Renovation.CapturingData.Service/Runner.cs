@@ -12,9 +12,11 @@
         private static CapturingDataService _capturingDataService;
         //private static EasyNetQ _rabbitMq;
 
+        public IBus Bus { get; set; }
+
         public EasyNetQ.Topology.IExchange Exchange { get; set; }
 
-        private EasyNetQ.Topology.IBinding Binding { get; set; }
+        public EasyNetQ.Topology.IBinding Binding { get; set; }
            
         public EasyNetQ.Topology.IQueue Queue { get; set; }
 
@@ -34,27 +36,25 @@
             string localhost = "host=localhost";
 
             // create bus
-            var bus = EasyNetQ.RabbitHutch.CreateBus(localhost);
+            Bus = EasyNetQ.RabbitHutch.CreateBus(localhost);
        
             // create exchange
-            ExchangeDeclare(bus);
+            ExchangeDeclare(Bus);
 
             // create queue
-            QueueDeclare(bus);
+            QueueDeclare(Bus);
 
             // bind queue
-            //QueueBind(bus);
+            QueueBind(Bus);
 
             // publish message
-            //PublishMessage(bus);
-
-            // Get message
-            ReceiverMessage(bus);
+            //PublishMessage(Bus);
         }
 
         protected override void OnStart(string[] args)
         {
-
+            // Get message
+            ReceiverMessage(Bus);
         }
 
         protected override void OnStop()
