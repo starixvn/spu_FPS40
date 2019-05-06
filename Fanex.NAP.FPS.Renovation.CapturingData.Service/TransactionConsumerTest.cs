@@ -5,10 +5,10 @@
     using RabbitMQ.Client;
     using RabbitMQ.Client.Events;
 
-    public class TransactionConsumer
+    public class TransactionConsumerTest
     {
-        private const string exchangeName = "HelloExchange";
-        private const string queueName = "HelloQueue";
+        private const string exchangeName = "FraudCaseExchange";
+        private const string queueName = "CapturingTransaction";
 
         public static void ConsumerMessage()
         {
@@ -44,6 +44,7 @@
                             consumer: consumer);
                 }
             }
-        }
+        }        
+
     }
 }

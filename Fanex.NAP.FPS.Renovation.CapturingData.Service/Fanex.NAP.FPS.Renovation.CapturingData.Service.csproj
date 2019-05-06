@@ -102,9 +102,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Implement\CapturingDataService.cs" />
     <Compile Include="Services\Interface\ICapturingDataService.cs" />
-    <Compile Include="Services\Interface\IExecutorService.cs" />
-    <Compile Include="TransactionConsumer.cs" />
-    <Compile Include="TransactionProducer.cs" />
+    <Compile Include="TransactionConsumerTest.cs" />
+    <Compile Include="TransactionProducerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -115,6 +114,10 @@
     <ProjectReference Include="..\Fanex.NAP.FPS.Renovation.Core\Fanex.NAP.FPS.Renovation.Core.csproj">
       <Project>{91543a37-f0a0-4a4f-8c1d-dbb0bcc75699}</Project>
       <Name>Fanex.NAP.FPS.Renovation.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.NAP.FPS.Renovation.Model\Fanex.NAP.FPS.Renovation.Model.csproj">
+      <Project>{07f5d4e0-8c77-48a8-ba21-b7f7e0439a64}</Project>
+      <Name>Fanex.NAP.FPS.Renovation.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fanex.NAP.FPS.Renovation.Queue\Fanex.NAP.FPS.Renovation.Queue.csproj">
       <Project>{fa790109-f8c1-44b7-9246-05b5f1a32696}</Project>

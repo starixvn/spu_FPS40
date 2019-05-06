@@ -1,18 +1,13 @@
 ﻿namespace Fanex.NAP.FPS.Renovation.CapturingData.Service.Services
 {
-    using System;
-    using System.Collections.Generic;
+    using System;    
 
     public class CapturingDataService : ICapturingDataService
     {
-        public IEnumerable<T> PrCondition<T>()
+        public void InsertCapturingTransactions()
         {
             throw new NotImplementedException();
         }
 
-        public void Rule()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
