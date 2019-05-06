@@ -1,15 +1,12 @@
-﻿namespace Fanex.NAP.FPS.Renovation.CapturingData.Service
-{   
+﻿namespace Fanex.NAP.FPS.Renovation.CapturingData.Service.ProducerTest
+{
     using Fanex.NAP.FPS.Renovation.Core;
     using Fanex.NAP.FPS.Renovation.Model;
-    using RabbitMQ.Client;
-    using System;    
-    using System.IO;
-    using System.Runtime.Serialization.Formatters.Binary;
+    using System;
     using Fanex.NAP.FPS.Renovation.Queue;
     using EasyNetQ;
 
-    public class TransactionProducerTest
+    class TransactionProducerTest
     {
         private const string exchangeName = "FraudCaseExchange";
         private const string queueName = "newfpstransQueue";
@@ -31,13 +28,25 @@
                     .DeclareRoutingKey(routingKey)
                     .Bind();
 
-            CapturingTransactionMessage transaction = BuildCapturingTransaction();
+            Console.WriteLine("If you want exit, input 0");
+            while (true)
+            {
+                Console.WriteLine("Enter input: ");
+                string line = Console.ReadLine();
+                if (line == "0")
+                {
+                    break;
+                }
 
-            Message<CapturingTransactionMessage> message = new Message<CapturingTransactionMessage>(transaction);
+                CapturingTransactionMessage transaction = BuildCapturingTransaction();
 
-            _rabbitMQ.AdvanceBus.Publish<CapturingTransactionMessage>(_rabbitMQ.Exchange, routingKey, false, message);
+                Message<CapturingTransactionMessage> message = new Message<CapturingTransactionMessage>(transaction);
 
-            Console.WriteLine("Message Sent Successful");
+                _rabbitMQ.AdvanceBus.Publish<CapturingTransactionMessage>(_rabbitMQ.Exchange, routingKey, false, message);
+
+                Console.WriteLine("Message Sent Successful");
+            }
+            
         }
 
         private static CapturingTransactionMessage BuildCapturingTransaction()
@@ -45,7 +54,7 @@
             CapturingTransactionMessage transaction = new CapturingTransactionMessage();
             transaction.Account = "acount 01";
             transaction.Action = "action 01";
-            transaction.ActionResult = "Action Result 01";            
+            transaction.ActionResult = "Action Result 01";
             transaction.Device = "Device 01";
             transaction.Ip = "IP 01";
             transaction.Subscriber = "Subscriber 01";
@@ -55,6 +64,6 @@
 
             return transaction;
         }
-    
+
     }
 }
