@@ -1,24 +1,17 @@
 ﻿namespace Fanex.NAP.FPS.Renovation.CapturingData.Service
 {
     using System.ServiceProcess;
-    using System.Text;
+    using System.Threading;
     using EasyNetQ;
     using Fanex.NAP.FPS.Renovation.CapturingData.Service.Services;
     using RabbitMQ.Client;
-    //using Fanex.NAP.FPS.Renovation.Queue;    
+    //using Fanex.NAP.FPS.Renovation.Queue;
 
     public partial class Runner : ServiceBase
     {
-        private static CapturingDataService _capturingDataService;
-        //private static EasyNetQ _rabbitMq;
-
-        public IBus Bus { get; set; }
-
-        public EasyNetQ.Topology.IExchange Exchange { get; set; }
-
-        public EasyNetQ.Topology.IBinding Binding { get; set; }
-           
-        public EasyNetQ.Topology.IQueue Queue { get; set; }
+        private CapturingDataService _capturingDataService;
+        private Thread _threadProducerTest = null;
+        private Thread _threadConsumer = null;        
 
         public Runner()
         {
@@ -30,31 +23,16 @@
             //                           AppSetting.PrefetchCount,
             //                           AppSetting.UserName,
             //                           AppSetting.Password);
-
-            //_rabbitMq.CreateBus().DeclareExchange(AppSetting.Exchange);
-          
-            string localhost = "host=localhost";
-
-            // create bus
-            Bus = EasyNetQ.RabbitHutch.CreateBus(localhost);
-       
-            // create exchange
-            ExchangeDeclare(Bus);
-
-            // create queue
-            QueueDeclare(Bus);
-
-            // bind queue
-            QueueBind(Bus);
-
-            // publish message
-            //PublishMessage(Bus);
         }
 
         protected override void OnStart(string[] args)
         {
-            // Get message
-            ReceiverMessage(Bus);
+            // test transaction producer
+            _threadProducerTest = new Thread(new ThreadStart(ThreadProducerTest));
+            _threadProducerTest.Start();
+
+            //_threadConsumer = new Thread(new ThreadStart(ThreadConsumer));
+            _threadConsumer.Start();
         }
 
         protected override void OnStop()
@@ -62,39 +40,33 @@
 
         }
 
-        private void ExchangeDeclare(EasyNetQ.IBus bus)
+        private void ThreadProducerTest()
         {
-            Exchange = bus.Advanced.ExchangeDeclare("demoExchange", ExchangeType.Direct);       
+            TransactionProducer.PublishMessage();            
         }
 
-        private void QueueDeclare(EasyNetQ.IBus bus)
+        private void ThreadConsumer()
         {
-            Queue = bus.Advanced.QueueDeclare("demoqueue");
-        }
+            int interval = 5000;
+            int elapsed = 0;
 
-        private void QueueBind(EasyNetQ.IBus bus)
-        {
-            Binding = bus.Advanced.Bind(Exchange, Queue, "directexchange_key");
-        }
-
-        private void PublishMessage(EasyNetQ.IBus bus)
-        {
-            var message = new Message<string>("Direct message");
-
-            bus.Advanced.PublishAsync(Exchange, "directexchange_key", false, message);
-        }
-
-        private void ReceiverMessage(EasyNetQ.IBus bus)
-        {
-            bus.Advanced.Consume(Queue, x => x.Add<string>((message, info) =>
+            int waitTime = 1000;
+            try
             {
-                HandleMessage(message.Body);
-            }));
-        }
-
-        private void HandleMessage(string message)
-        {
-
+                while (true)
+                {
+                    if (interval >= elapsed)
+                    {
+                        elapsed = 0;
+                        TransactionConsumer.ConsumerMessage();
+                    }
+                    Thread.Sleep(waitTime);
+                    elapsed += waitTime;
+                }
+            }
+            catch (ThreadAbortException)
+            {
+            }
         }
 
     }

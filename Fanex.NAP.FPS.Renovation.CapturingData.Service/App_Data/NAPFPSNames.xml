@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Functions>
+  <Function Name="TransactionRawData">
+    <Setting Key="FPS_Transaction_RawData" SpName="FPS_Transaction_RawData" DbName="DBFS.bodb_FraudSensor.bodbSPUNet" />
+  </Function>
+</Functions>

@@ -103,14 +103,14 @@
     <Compile Include="Services\Implement\CapturingDataService.cs" />
     <Compile Include="Services\Interface\ICapturingDataService.cs" />
     <Compile Include="Services\Interface\IExecutorService.cs" />
+    <Compile Include="TransactionConsumer.cs" />
+    <Compile Include="TransactionProducer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Fanex.NAP.FPS.Renovation.Core\Fanex.NAP.FPS.Renovation.Core.csproj">
       <Project>{91543a37-f0a0-4a4f-8c1d-dbb0bcc75699}</Project>
@@ -120,6 +120,12 @@
       <Project>{fa790109-f8c1-44b7-9246-05b5f1a32696}</Project>
       <Name>Fanex.NAP.FPS.Renovation.Queue</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\NAPFPSNames.LOCAL.xml" />
+    <Content Include="App_Data\NAPFPSNames.PRO.xml" />
+    <Content Include="App_Data\NAPFPSNames.UAT.xml" />
+    <Content Include="App_Data\NAPFPSNames.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
