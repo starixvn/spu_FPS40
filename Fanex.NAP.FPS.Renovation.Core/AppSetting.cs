@@ -40,5 +40,7 @@
 
         public static string Exchange => ConfigurationManager.AppSettings["Queue-Exchange"];
 
+        public static string AppDataSetting => ConfigurationManager.AppSettings["AppData-Path"];
+
     }
 }

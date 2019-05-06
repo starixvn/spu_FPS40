@@ -2,6 +2,6 @@
 {
     interface ICapturingDataService
     {     
-        void InsertCapturingTransactions();
+        void InsertCapturingTransaction();
     }
 }

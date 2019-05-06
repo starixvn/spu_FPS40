@@ -1,6 +1,10 @@
 ﻿namespace Fanex.NAP.FPS.Renovation.CapturingData.Service
 {
+    using Fanex.Data;
+    using Fanex.Data.MySql;
+    using Fanex.NAP.FPS.Renovation.Core;
     using System;
+    using System.Collections.Generic;
     using System.Reflection;
     using System.ServiceProcess;
 
@@ -11,6 +15,11 @@
         /// </summary>
         public static void Main(string[] args)
         {
+            DbSettingProviderManager
+             .StartNewSession()
+             .WithMySql(resourcePath: AppSetting.AppDataSetting) 
+             .Run();
+
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {

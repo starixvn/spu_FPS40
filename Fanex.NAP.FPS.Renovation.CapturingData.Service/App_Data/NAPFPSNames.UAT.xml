@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <Functions>
-  <Function Name="TransactionRawData">
-    <Setting Key="FPS_Transaction_RawData" SpName="FPS_Transaction_RawData_xtest" DbName="DBFS.bodb_FraudSensor.bodbSPUNet" />
+  <Function Name="CapturingTransaction">
+    <Setting Key="FPS_Capturing_Transaction_Insert" SpName="FPS_Capturing_Transaction_Insert" DbName="fanexdatatests" />
   </Function>
 </Functions>

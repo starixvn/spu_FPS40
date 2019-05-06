@@ -12,8 +12,8 @@
     public class TransactionProducerTest
     {
         private const string exchangeName = "FraudCaseExchange";
-        private const string queueName = "CapturingTransaction";
-        private const string routingKey = "CapturingTransactionKey";
+        private const string queueName = "newfpstransQueue";
+        private const string routingKey = "newfpstransQueueKey";
 
         private static EasyNetQ _rabbitMQ;
 
@@ -27,8 +27,8 @@
             _rabbitMQ.CreateBus()
                      .DeclareExchange(AppSetting.Exchange);
 
-            _rabbitMQ.DeclareQueue("CapturingTransaction")
-                    .DeclareRoutingKey("CapturingTransactionKey")
+            _rabbitMQ.DeclareQueue(queueName)
+                    .DeclareRoutingKey(routingKey)
                     .Bind();
 
             CapturingTransactionMessage transaction = BuildCapturingTransaction();
@@ -45,9 +45,13 @@
             CapturingTransactionMessage transaction = new CapturingTransactionMessage();
             transaction.Account = "acount 01";
             transaction.Action = "action 01";
-            transaction.ActionResult = "Action Result 01";
-            transaction.CaptchaResult = "Captcha Result 01";
+            transaction.ActionResult = "Action Result 01";            
             transaction.Device = "Device 01";
+            transaction.Ip = "IP 01";
+            transaction.Subscriber = "Subscriber 01";
+            transaction.SubscriberDate = DateTime.Now;
+            transaction.Token = "Token 01";
+            transaction.CaptchaResult = "Captcha Result 01";
 
             return transaction;
         }

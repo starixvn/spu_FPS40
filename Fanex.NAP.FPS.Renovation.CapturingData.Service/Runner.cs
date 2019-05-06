@@ -18,8 +18,7 @@
         public Runner()
         {
             InitializeComponent();
-
-            _capturingDataService = new CapturingDataService();
+            
             _rabbitMQ = new EasyNetQ(AppSetting.Host + ":" + AppSetting.Post,
                                        AppSetting.VirtualHost,
                                        AppSetting.PrefetchCount,
@@ -32,14 +31,10 @@
 
         protected override void OnStart(string[] args)
         {
-            #region Test on localhost
-            // test transaction producer
+            #region test transaction producer
             //_threadProducerTest = new Thread(new ThreadStart(ThreadProducerTest));
             //_threadProducerTest.Start();
-
-            //_threadConsumer = new Thread(new ThreadStart(ThreadConsumer));
-            //_threadConsumer.Start();
-            #endregion Test on localhost
+            #endregion test transaction producer
 
             _threadConsumer = new Thread(new ThreadStart(ConsumerCapturingTransaction));
             _threadConsumer.Start();
@@ -55,42 +50,18 @@
             _rabbitMQ.Dispose();
         }
 
-        #region Test on localhost
+        #region test transaction producer
 
         private void ThreadProducerTest()
         {
             TransactionProducerTest.PublishTransactionMessage();            
         }
 
-        private void ThreadConsumer()
-        {
-            int interval = 100000;
-            int elapsed = 0;
-
-            int waitTime = 1000;
-            try
-            {
-                while (true)
-                {
-                    if (interval <= elapsed)
-                    {
-                        elapsed = 0;
-                        TransactionConsumerTest.ConsumerMessage();
-                    }
-                    Thread.Sleep(waitTime);
-                    elapsed += waitTime;
-                }
-            }
-            catch (ThreadAbortException)
-            {
-            }
-        }
-
-        #endregion Test on localhost
+        #endregion test transaction producer
 
         private void ConsumerCapturingTransaction()
         {
-            int interval = 10000;
+            int interval = 5000;
             int elapsed = 0;
 
             int waitTime = 1000;
@@ -114,8 +85,8 @@
 
         private void GetMessage()
         {
-            _rabbitMQ.DeclareQueue("CapturingTransaction")
-                       .DeclareRoutingKey("CapturingTransactionKey")
+            _rabbitMQ.DeclareQueue("newfpstransQueue")
+                       .DeclareRoutingKey("newfpstransQueueKey")
                        .Bind();
 
             CapturingTransactionMessage capturingTransactionMessage = null;
@@ -129,7 +100,8 @@
 
         private void ProcessMessage(CapturingTransactionMessage message)
         {
-        
+            _capturingDataService = new CapturingDataService(message);
+            _capturingDataService.InsertCapturingTransaction();
         }
 
     }

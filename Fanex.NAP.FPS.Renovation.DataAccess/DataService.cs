@@ -33,6 +33,8 @@
 
                 objectDb.ExecuteNonQuery(param, transaction);
 
+                transaction.Commit();
+
                 var code = param["ErrCode"];
                 var intCode = (code is DBNull) ? 0 : Convert.ToInt32(code);
 
@@ -43,7 +45,7 @@
                     OutParam = param
                 };
             }
-            catch
+            catch (Exception ex)
             {
                 transaction.Rollback();
             }

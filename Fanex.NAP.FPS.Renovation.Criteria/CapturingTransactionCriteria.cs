@@ -1,8 +1,9 @@
 ﻿namespace Fanex.NAP.FPS.Renovation.Criteria
 {
+    using Fanex.Data.Repository;
     using System;
 
-    public class CapturingTransactionCriteria
+    public class CapturingTransactionCriteria : CriteriaBase
     {
         public string Account { get; set; }
 
@@ -19,11 +20,11 @@
         public DateTime SubscriberDate { get; set; }
 
         public string Token { get; set; }
-        
-        public string CaptchaResult { get; set; }               
 
-        //public override string GetSettingKey() => "FS_Rpt_OfficeIP_Get";
+        public string CaptchaResult { get; set; }
 
-        //public override bool IsValid() => true;
+        public override string GetSettingKey() => "FPS_Capturing_Transaction_Insert";
+
+        public override bool IsValid() => true;
     }
 }
