@@ -2,11 +2,11 @@
 {
     using Fanex.NAP.FPS.Renovation.CapturingData.Service.Services;
     using Fanex.NAP.FPS.Renovation.Queue;
-    using Fanex.NAP.FPS.Renovation.Core;
-    using Fanex.NAP.FPS.Renovation.Model;
+    using Fanex.NAP.FPS.Renovation.Core;    
     using System.ServiceProcess;
     using System;
     using Fanex.Logging;
+    using Fanex.Oneyed.Infrastructure.Models;
 
     public partial class Runner : ServiceBase
     {
@@ -18,7 +18,8 @@
         public Runner()
         {
             InitializeComponent();
-            
+            _capturingDataService = new CapturingDataService();
+
             _rabbitMQ = new EasyNetQ(AppSetting.Host + ":" + AppSetting.Post,
                                        AppSetting.VirtualHost,
                                        AppSetting.PrefetchCount,
@@ -64,17 +65,16 @@
         
         private void ConsumerCapturingTransaction()
         {
-            _rabbitMQ.AdvanceBus.Consume(_rabbitMQ.Queue, x => x.Add<CapturingTransactionMessage>((message, info) =>
+            _rabbitMQ.AdvanceBus.Consume(_rabbitMQ.Queue, x => x.Add<MessageQueue>((message, info) =>
             {
                 ProcessMessage(message.Body);
             }));
         }
 
-        private void ProcessMessage(CapturingTransactionMessage message)
+        private void ProcessMessage(MessageQueue message)
         {
-            _capturingDataService = new CapturingDataService(message);
-            _capturingDataService.InsertCapturingTransaction();
+            _capturingDataService.InsertCapturingTransaction(message);
         }
-
+      
     }
 }

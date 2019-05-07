@@ -5,6 +5,7 @@
     using System;
     using Fanex.NAP.FPS.Renovation.Queue;
     using EasyNetQ;
+    using Fanex.Oneyed.Infrastructure.Models;
 
     class TransactionProducerTest
     {
@@ -36,32 +37,30 @@
                     break;
                 }
 
-                CapturingTransactionMessage transaction = BuildCapturingTransaction();
+                MessageQueue transaction = BuildCapturingTransaction();
 
-                Message<CapturingTransactionMessage> message = new Message<CapturingTransactionMessage>(transaction);
+                Message<MessageQueue> message = new Message<MessageQueue>(transaction);
 
-                _rabbitMQ.AdvanceBus.Publish<CapturingTransactionMessage>(_rabbitMQ.Exchange, routingKey, false, message);
+                _rabbitMQ.AdvanceBus.Publish<MessageQueue>(_rabbitMQ.Exchange, routingKey, false, message);
 
                 Console.WriteLine("Message Sent Successful");
             }
-            
         }
 
-        private static CapturingTransactionMessage BuildCapturingTransaction()
+        private static MessageQueue BuildCapturingTransaction()
         {
-            CapturingTransactionMessage transaction = new CapturingTransactionMessage();
+            MessageQueue transaction = new MessageQueue();
+            
             transaction.Account = "acount 01";
             transaction.Action = "action 01";
             transaction.ActionResult = "Action Result 01";
             transaction.Device = "Device 01";
-            transaction.Ip = "IP 01";
+            transaction.IP = "IP 01";
             transaction.Subscriber = "Subscriber 01";
             transaction.SubscriberDate = DateTime.Now;
             transaction.Token = "Token 01";
-            transaction.CaptchaResult = "Captcha Result 01";
 
             return transaction;
         }
-
-    }
+    }  
 }

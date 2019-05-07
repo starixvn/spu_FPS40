@@ -2,30 +2,27 @@
 {
     using Fanex.NAP.FPS.Renovation.Criteria;
     using Fanex.NAP.FPS.Renovation.DataAccess;
-    using Fanex.NAP.FPS.Renovation.Model;
+    using Fanex.Oneyed.Infrastructure.Models;
 
     public class CapturingDataService : ICapturingDataService
     {
-        private CapturingTransactionMessage _message = null;
-
-        public CapturingDataService(CapturingTransactionMessage message)
+        public CapturingDataService()
         {
-            _message = message;
         }
 
-        public void InsertCapturingTransaction()
+        public void InsertCapturingTransaction(MessageQueue message)
         {
             var criteria = new CapturingTransactionCriteria()
             {
-                Account = _message.Account,
-                Action = _message.Action,
-                ActionResult = _message.ActionResult,
-                Device = _message.Device,
-                Ip = _message.Ip,
-                Subscriber = _message.Subscriber,
-                SubscriberDate = _message.SubscriberDate,
-                Token = _message.Token,
-                CaptchaResult = _message.CaptchaResult
+                Account = message.Account,
+                Action = message.Action,
+                ActionResult = message.ActionResult,
+                Device = message.Device,
+                Ip = message.IP,
+                Subscriber = message.Subscriber,
+                SubscriberDate = message.SubscriberDate,
+                Token = message.Token,
+                CaptchaResult = string.Empty
             };
 
             DataService.UpdateData(criteria, string.Empty);
