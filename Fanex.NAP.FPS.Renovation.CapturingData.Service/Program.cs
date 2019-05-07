@@ -15,10 +15,10 @@
         /// </summary>
         public static void Main(string[] args)
         {
-            DbSettingProviderManager
-             .StartNewSession()
-             .WithMySql(resourcePath: AppSetting.AppDataSetting) 
-             .Run();
+             DbSettingProviderManager
+                 .StartNewSession()
+                 .WithMySql(resourcePath: AppSetting.AppDataSetting) 
+                 .Run();
 
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]

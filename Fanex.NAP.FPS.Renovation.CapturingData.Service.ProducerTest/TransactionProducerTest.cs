@@ -8,9 +8,8 @@
 
     class TransactionProducerTest
     {
-        private const string exchangeName = "FraudCaseExchange";
         private const string queueName = "newfpstransQueue";
-        private const string routingKey = "newfpstransQueueKey";
+        private const string routingKey = "fpstransMessage";
 
         private static EasyNetQ _rabbitMQ;
 
@@ -22,9 +21,8 @@
                                        AppSetting.UserName,
                                        AppSetting.Password);
             _rabbitMQ.CreateBus()
-                     .DeclareExchange(AppSetting.Exchange);
-
-            _rabbitMQ.DeclareQueue(queueName)
+                    .DeclareExchange(AppSetting.Exchange)
+                    .DeclareQueue(queueName)
                     .DeclareRoutingKey(routingKey)
                     .Bind();
 
