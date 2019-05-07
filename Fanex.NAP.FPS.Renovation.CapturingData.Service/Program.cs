@@ -2,7 +2,10 @@
 {
     using Fanex.Data;
     using Fanex.Data.MySql;
+    using Fanex.Logging;
+    using Fanex.Logging.Sentry.RavenClient;
     using Fanex.NAP.FPS.Renovation.Core;
+    using SharpRaven;
     using System;
     using System.Collections.Generic;
     using System.Reflection;
@@ -19,6 +22,16 @@
                  .StartNewSession()
                  .WithMySql(resourcePath: AppSetting.AppDataSetting) 
                  .Run();
+
+             LogManager
+                .SetDefaultLogCategory(AppSetting.FanexLogCategory)
+                .Use(new List<ILogEngine>
+                {
+                    new SentryLogging(new SentryEngineOptions
+                    {
+                        Dsn = new Dsn(AppSetting.SentryLogging)
+                    })
+                });
 
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]

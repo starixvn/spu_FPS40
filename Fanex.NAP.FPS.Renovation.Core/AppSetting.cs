@@ -42,5 +42,9 @@
 
         public static string AppDataSetting => ConfigurationManager.AppSettings["AppData-Path"];
 
+        public static string FanexLogCategory => ConfigurationManager.AppSettings["Fanex.Log.Category"];
+
+        public static string SentryLogging => ConfigurationManager.AppSettings["Log-SentryLogging-Config"];
+
     }
 }
