@@ -63,7 +63,7 @@ namespace Fanex.NAP.FPS.Renovation.Queue
         public EasyNetQ DeclareExchange(string exchangeName)
         {
             if (string.IsNullOrWhiteSpace(exchangeName)) return this;
-            Exchange = AdvanceBus.ExchangeDeclare(exchangeName, ExchangeType.Direct);
+            Exchange = AdvanceBus.ExchangeDeclare(exchangeName, ExchangeType.Fanout);
 
             if (Exchange != null)
             {

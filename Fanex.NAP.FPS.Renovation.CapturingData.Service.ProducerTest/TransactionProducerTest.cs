@@ -23,9 +23,9 @@
                                        AppSetting.Password);
             _rabbitMQ.CreateBus()
                     .DeclareExchange(AppSetting.Exchange)
-                    .DeclareQueue(queueName)
-                    .DeclareRoutingKey(routingKey)
-                    .Bind();
+                    .DeclareQueue(queueName);
+                    //.DeclareRoutingKey(routingKey)
+                    //.Bind();
 
             Console.WriteLine("If you want exit, input 0");
             while (true)

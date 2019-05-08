@@ -25,21 +25,21 @@
                                        AppSetting.PrefetchCount,
                                        AppSetting.UserName,
                                        AppSetting.Password);
-            
-            //string strTimer = DateTime.Now.Hour.ToString("00") + DateTime.Now.Minute.ToString("00") + DateTime.Now.Second.ToString("00") + DateTime.Now.Millisecond.ToString("000");
-            //string queueName = _queuePrefix + " " + strTimer + new Random().Next(0, 9000);
 
-            //_rabbitMQ.CreateBus()
-            //         .DeclareExchange(AppSetting.Exchange)
-            //         .DeclareQueue(queueName)
-            //         .DeclareRoutingKey(_routingKey)
-            //         .Bind();
+            string strTimer = DateTime.Now.Hour.ToString("00") + DateTime.Now.Minute.ToString("00") + DateTime.Now.Second.ToString("00") + DateTime.Now.Millisecond.ToString("000");
+            string queueName = _queuePrefix + " " + strTimer + new Random().Next(0, 9000);
 
             _rabbitMQ.CreateBus()
                      .DeclareExchange(AppSetting.Exchange)
-                     .DeclareQueue(_queuePrefix)
+                     .DeclareQueue(queueName)
                      .DeclareRoutingKey(_routingKey)
                      .Bind();
+
+            //_rabbitMQ.CreateBus()
+            //         .DeclareExchange(AppSetting.Exchange)
+            //         .DeclareQueue(_queuePrefix)
+            //         .DeclareRoutingKey(_routingKey)
+            //         .Bind();
         }
 
         protected override void OnStart(string[] args)
