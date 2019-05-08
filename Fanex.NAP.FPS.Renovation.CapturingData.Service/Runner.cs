@@ -46,21 +46,21 @@
         {
             ConsumerCapturingTransaction();
             
-            LogService.Info("Capturing Data service has been started.");
+            LogService.Info("Capturing data service has been started.");
         }
 
         protected override void OnStop()
         {
             _rabbitMQ.Dispose();
 
-            LogService.Info("Capturing Data service has been stopped.");
+            LogService.Info("Capturing data service has been stopped.");
         }
 
         protected override void OnShutdown()
         {
             _rabbitMQ.Dispose();
 
-            LogService.Info("Capturing Data service has been shut down.");
+            LogService.Info("Capturing data service has been shut down.");
         }      
         
         private void ConsumerCapturingTransaction()
@@ -73,7 +73,14 @@
 
         private void ProcessMessage(MessageQueue message)
         {
-            _capturingDataService.InsertCapturingTransaction(message);
+            try
+            {
+                _capturingDataService.InsertCapturingTransaction(message);
+            }
+            catch (Exception ex)
+            {
+                LogService.Error("Insert Capturing data fail: " + ex.ToString());
+            }            
         }
       
     }
