@@ -259,3 +259,7 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/Fanex.NAP.FPS.Renovation.CapturingData.Service/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+/Fanex.NAP.FPS.Renovation.CapturingData.Service/obj/Debug/Fanex.NAP.FPS.Renovation.CapturingData.Service.csproj.CoreCompileInputs.cache
+/Fanex.NAP.FPS.Renovation.CapturingData.Service/obj/Debug/Fanex.NAP.FPS.Renovation.CapturingData.Service.csprojAssemblyReference.cache
+/Fanex.NAP.FPS.Renovation.Model/obj/Debug/Fanex.NAP.FPS.Renovation.Model.csproj.CoreCompileInputs.cache
