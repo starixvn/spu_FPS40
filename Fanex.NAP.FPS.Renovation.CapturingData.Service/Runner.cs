@@ -12,8 +12,10 @@
     {
         private static EasyNetQ _rabbitMQ;
         private ICapturingDataService _capturingDataService;
-        private string _queuePrefix = "newfpstransQueue";
-        private string _routingKey = "fpstransMessage";
+
+        private const string exchangeName = "fpstransExchangeTest";
+        private const string queueName = "newfpstransQueue";
+        private const string routingKey = "fpstransMessage";
 
         public Runner()
         {
@@ -24,22 +26,12 @@
                                        AppSetting.VirtualHost,
                                        AppSetting.PrefetchCount,
                                        AppSetting.UserName,
-                                       AppSetting.Password);
-
-            string strTimer = DateTime.Now.Hour.ToString("00") + DateTime.Now.Minute.ToString("00") + DateTime.Now.Second.ToString("00") + DateTime.Now.Millisecond.ToString("000");
-            string queueName = _queuePrefix + " " + strTimer + new Random().Next(0, 9000);
-
+                                       AppSetting.Password);           
             _rabbitMQ.CreateBus()
-                     .DeclareExchange(AppSetting.Exchange)
+                     .DeclareExchange(exchangeName)
                      .DeclareQueue(queueName)
-                     .DeclareRoutingKey(_routingKey)
-                     .Bind();
-
-            //_rabbitMQ.CreateBus()
-            //         .DeclareExchange(AppSetting.Exchange)
-            //         .DeclareQueue(_queuePrefix)
-            //         .DeclareRoutingKey(_routingKey)
-            //         .Bind();
+                     .DeclareRoutingKey(routingKey)
+                     .Bind();       
         }
 
         protected override void OnStart(string[] args)

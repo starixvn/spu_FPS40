@@ -9,8 +9,9 @@
 
     class TransactionProducerTest
     {
-        private const string exchangeName = "exchangetest";
-        private const string routingKey = "routingkeytest";
+        private const string exchangeName = "fpstransExchangeTest";
+        private const string queueName = "newfpstransQueue";
+        private const string routingKey = "fpstransMessage";
         
         public static void PublishTransactionMessage()
         {
@@ -19,29 +20,12 @@
                                        AppSetting.PrefetchCount,
                                        AppSetting.UserName,
                                        AppSetting.Password);
+
             _rabbitMQ.CreateBus()
                     .DeclareExchange(exchangeName)
-                    .DeclareQueue("queuetest1")
+                    .DeclareQueue(queueName)
                     .DeclareRoutingKey(routingKey)
                     .Bind();
-
-            _rabbitMQ.CreateBus()
-                .DeclareExchange(exchangeName)
-                .DeclareQueue("queuetest2")
-                .DeclareRoutingKey(routingKey)
-                .Bind();
-
-            _rabbitMQ.CreateBus()
-                .DeclareExchange(exchangeName)
-                .DeclareQueue("queuetest3")
-                .DeclareRoutingKey(routingKey)
-                .Bind();
-
-            _rabbitMQ.CreateBus()
-                .DeclareExchange(exchangeName)
-                .DeclareQueue("newfpstransQueue")
-                .DeclareRoutingKey(routingKey)
-                .Bind();
 
             try
             {
@@ -50,15 +34,14 @@
                 do
                 {
                     counter++;
-                    var message = new Message<string>("testing", new MessageProperties() { DeliveryMode = 2, Priority = 9 });
 
-                    _rabbitMQ.AdvanceBus.Publish<string>(_rabbitMQ.Exchange, routingKey, false, message);
+                    var message = new Message<MessageQueue>(BuildCapturingTransaction(), new MessageProperties() { DeliveryMode = 2, Priority = 9 });
+                    
+                    _rabbitMQ.AdvanceBus.Publish<MessageQueue>(_rabbitMQ.Exchange, routingKey, false, message);
 
                     Console.WriteLine($"Message({counter}) is published.");
 
                 } while (counter < 10);
-                
-
 
             }
             catch (Exception ex)
