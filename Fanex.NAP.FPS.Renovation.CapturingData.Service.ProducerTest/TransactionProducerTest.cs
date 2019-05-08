@@ -9,41 +9,61 @@
 
     class TransactionProducerTest
     {
-        private const string queueName = "newfpstransQueue";
-        private const string routingKey = "fpstransMessage";
-
-        private static EasyNetQ _rabbitMQ;
-
+        private const string exchangeName = "exchangetest";
+        private const string routingKey = "routingkeytest";
+        
         public static void PublishTransactionMessage()
         {
-            _rabbitMQ = new EasyNetQ(AppSetting.Host + ":" + AppSetting.Post,
+           var _rabbitMQ = new EasyNetQ(AppSetting.Host + ":" + AppSetting.Post,
                                        AppSetting.VirtualHost,
                                        AppSetting.PrefetchCount,
                                        AppSetting.UserName,
                                        AppSetting.Password);
             _rabbitMQ.CreateBus()
-                    .DeclareExchange(AppSetting.Exchange)
-                    .DeclareQueue(queueName);
-                    //.DeclareRoutingKey(routingKey)
-                    //.Bind();
+                    .DeclareExchange(exchangeName)
+                    .DeclareQueue("queuetest1")
+                    .DeclareRoutingKey(routingKey)
+                    .Bind();
 
-            Console.WriteLine("If you want exit, input 0");
-            while (true)
+            _rabbitMQ.CreateBus()
+                .DeclareExchange(exchangeName)
+                .DeclareQueue("queuetest2")
+                .DeclareRoutingKey(routingKey)
+                .Bind();
+
+            _rabbitMQ.CreateBus()
+                .DeclareExchange(exchangeName)
+                .DeclareQueue("queuetest3")
+                .DeclareRoutingKey(routingKey)
+                .Bind();
+
+            _rabbitMQ.CreateBus()
+                .DeclareExchange(exchangeName)
+                .DeclareQueue("newfpstransQueue")
+                .DeclareRoutingKey(routingKey)
+                .Bind();
+
+            try
             {
-                Console.WriteLine("Enter input: ");
-                string line = Console.ReadLine();
-                if (line == "0")
+                int counter = 0;
+
+                do
                 {
-                    break;
-                }
+                    counter++;
+                    var message = new Message<string>("testing", new MessageProperties() { DeliveryMode = 2, Priority = 9 });
 
-                MessageQueue transaction = BuildCapturingTransaction();
+                    _rabbitMQ.AdvanceBus.Publish<string>(_rabbitMQ.Exchange, routingKey, false, message);
 
-                Message<MessageQueue> message = new Message<MessageQueue>(transaction);
+                    Console.WriteLine($"Message({counter}) is published.");
 
-                _rabbitMQ.AdvanceBus.Publish<MessageQueue>(_rabbitMQ.Exchange, routingKey, false, message);
+                } while (counter < 10);
+                
 
-                Console.WriteLine("Message Sent Successful");
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
 
