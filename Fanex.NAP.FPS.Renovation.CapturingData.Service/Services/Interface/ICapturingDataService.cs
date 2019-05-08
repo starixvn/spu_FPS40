@@ -4,6 +4,6 @@
 
     interface ICapturingDataService
     {     
-        void InsertCapturingTransaction(MessageQueue message);
+        void InsertTransaction(MessageQueue message);
     }
 }

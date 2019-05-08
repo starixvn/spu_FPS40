@@ -10,7 +10,7 @@
         {
         }
 
-        public void InsertCapturingTransaction(MessageQueue message)
+        public void InsertTransaction(MessageQueue message)
         {
             var criteria = new CapturingTransactionCriteria()
             {

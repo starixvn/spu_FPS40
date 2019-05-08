@@ -44,7 +44,7 @@
 
         protected override void OnStart(string[] args)
         {
-            ConsumerCapturingTransaction();
+            ConsumerTransactions();
             
             LogService.Info("Capturing data service has been started.");
         }
@@ -63,7 +63,7 @@
             LogService.Info("Capturing data service has been shut down.");
         }      
         
-        private void ConsumerCapturingTransaction()
+        private void ConsumerTransactions()
         {
             _rabbitMQ.AdvanceBus.Consume(_rabbitMQ.Queue, x => x.Add<MessageQueue>((message, info) =>
             {
@@ -75,7 +75,7 @@
         {
             try
             {
-                _capturingDataService.InsertCapturingTransaction(message);
+                _capturingDataService.InsertTransaction(message);
             }
             catch (Exception ex)
             {
