@@ -14,7 +14,7 @@
         private ICapturingDataService _capturingDataService;
 
         private const string exchangeName = "fpstransExchangeTest";
-        private const string queueName = "newfpstransQueue";
+        private const string queueName = "newfpstransQueueTest";
         private const string routingKey = "fpstransMessage";
 
         public Runner()

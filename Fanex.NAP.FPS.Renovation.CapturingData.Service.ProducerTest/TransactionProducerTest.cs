@@ -1,7 +1,6 @@
 ﻿namespace Fanex.NAP.FPS.Renovation.CapturingData.Service.ProducerTest
 {
     using Fanex.NAP.FPS.Renovation.Core;
-    using Fanex.NAP.FPS.Renovation.Model;
     using System;
     using Fanex.NAP.FPS.Renovation.Queue;
     using EasyNetQ;
@@ -10,7 +9,7 @@
     class TransactionProducerTest
     {
         private const string exchangeName = "fpstransExchangeTest";
-        private const string queueName = "newfpstransQueue";
+        private const string queueName = "newfpstransQueueTest";
         private const string routingKey = "fpstransMessage";
         
         public static void PublishTransactionMessage()
