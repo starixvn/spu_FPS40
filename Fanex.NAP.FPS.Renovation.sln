@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2042
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.452
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAP.FPS.Renovation.Core", "Fanex.NAP.FPS.Renovation.Core\Fanex.NAP.FPS.Renovation.Core.csproj", "{91543A37-F0A0-4A4F-8C1D-DBB0BCC75699}"
 EndProject
@@ -16,6 +16,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAP.FPS.Renovation.DataAccess", "Fanex.NAP.FPS.Renovation.DataAccess\Fanex.NAP.FPS.Renovation.DataAccess.csproj", "{AD798634-BDA0-4399-A135-1F91DAD9073D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAP.FPS.Renovation.CapturingData.Service.ProducerTest", "Fanex.NAP.FPS.Renovation.CapturingData.Service.ProducerTest\Fanex.NAP.FPS.Renovation.CapturingData.Service.ProducerTest.csproj", "{47ECBA42-1BD4-4D63-BD66-E1934E483499}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAP.FPS.Renovation.DataCenter.Transforming.Service", "Fanex.NAP.FPS.Renovation.DataCenter.Transforming.Service\Fanex.NAP.FPS.Renovation.DataCenter.Transforming.Service.csproj", "{C51D0246-F037-48C1-A7BA-4039F97EA9A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAP.FPS.Renovation.GraphDB.Transforming.Service", "Fanex.NAP.FPS.Renovation.GraphDB.Transforming.Service\Fanex.NAP.FPS.Renovation.GraphDB.Transforming.Service.csproj", "{0B2122BE-21DC-48AC-B1CB-56BA75E31BBD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +55,14 @@ Global
 		{47ECBA42-1BD4-4D63-BD66-E1934E483499}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47ECBA42-1BD4-4D63-BD66-E1934E483499}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47ECBA42-1BD4-4D63-BD66-E1934E483499}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C51D0246-F037-48C1-A7BA-4039F97EA9A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C51D0246-F037-48C1-A7BA-4039F97EA9A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C51D0246-F037-48C1-A7BA-4039F97EA9A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C51D0246-F037-48C1-A7BA-4039F97EA9A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B2122BE-21DC-48AC-B1CB-56BA75E31BBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B2122BE-21DC-48AC-B1CB-56BA75E31BBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B2122BE-21DC-48AC-B1CB-56BA75E31BBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B2122BE-21DC-48AC-B1CB-56BA75E31BBD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
