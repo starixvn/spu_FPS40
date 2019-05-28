@@ -19,15 +19,20 @@
                 Action = message.Action,
                 ActionResult = message.ActionResult,
                 Device = message.Device,
-                Ip = message.IP,
                 Subscriber = message.Subscriber,
                 SubscriberDate = message.SubscriberDate,
                 Token = message.Token,
-                CaptchaResult = string.Empty
+                CaptchaResult = string.Empty,
+                City = message.IpInfo.City,
+                CountryCode = message.IpInfo.CountryCode,
+                CountryName = message.IpInfo.CountryName,
+                Flag = message.IpInfo.Flag,
+                IP = message.IpInfo.IP,
+                ISP = message.IpInfo.ISP,
+                Region = message.IpInfo.Region
             };
 
             capturingData.InsertTransaction(model);
         }
-
     }
 }

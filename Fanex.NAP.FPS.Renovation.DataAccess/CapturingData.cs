@@ -22,7 +22,7 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
                 ActionResult = model.ActionResult,
                 CaptchaResult = model.CaptchaResult,
                 Device =  model.Device,
-                Ip = model.Ip,
+                Ip = model.IP,
                 Subscriber = model.Subscriber,
                 SubscriberDate = model.SubscriberDate,
                 Token = model.Token
