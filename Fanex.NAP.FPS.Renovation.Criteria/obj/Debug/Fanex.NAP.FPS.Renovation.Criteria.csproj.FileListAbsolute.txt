@@ -17,3 +17,16 @@ D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Criteria\bin\Debug\System.Val
 D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Criteria\bin\Debug\Dapper.xml
 D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Criteria\bin\Debug\System.ValueTuple.xml
 D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Criteria\obj\Debug\Fanex.NAP.FPS.Renovation.Criteria.csproj.CopyComplete
+D:\Work\FPS\NewGenFPS\fps40\Fanex.NAP.FPS.Renovation.Criteria\bin\Debug\Fanex.NAP.FPS.Renovation.Criteria.dll
+D:\Work\FPS\NewGenFPS\fps40\Fanex.NAP.FPS.Renovation.Criteria\bin\Debug\Fanex.NAP.FPS.Renovation.Criteria.pdb
+D:\Work\FPS\NewGenFPS\fps40\Fanex.NAP.FPS.Renovation.Criteria\bin\Debug\Dapper.dll
+D:\Work\FPS\NewGenFPS\fps40\Fanex.NAP.FPS.Renovation.Criteria\bin\Debug\Fanex.Data.dll
+D:\Work\FPS\NewGenFPS\fps40\Fanex.NAP.FPS.Renovation.Criteria\bin\Debug\Fanex.Data.Repository.dll
+D:\Work\FPS\NewGenFPS\fps40\Fanex.NAP.FPS.Renovation.Criteria\bin\Debug\System.ValueTuple.dll
+D:\Work\FPS\NewGenFPS\fps40\Fanex.NAP.FPS.Renovation.Criteria\bin\Debug\Dapper.xml
+D:\Work\FPS\NewGenFPS\fps40\Fanex.NAP.FPS.Renovation.Criteria\bin\Debug\System.ValueTuple.xml
+D:\Work\FPS\NewGenFPS\fps40\Fanex.NAP.FPS.Renovation.Criteria\obj\Debug\Fanex.NAP.FPS.Renovation.Criteria.csprojAssemblyReference.cache
+D:\Work\FPS\NewGenFPS\fps40\Fanex.NAP.FPS.Renovation.Criteria\obj\Debug\Fanex.NAP.FPS.Renovation.Criteria.csproj.CoreCompileInputs.cache
+D:\Work\FPS\NewGenFPS\fps40\Fanex.NAP.FPS.Renovation.Criteria\obj\Debug\Fanex.NAP.FPS.Renovation.Criteria.csproj.CopyComplete
+D:\Work\FPS\NewGenFPS\fps40\Fanex.NAP.FPS.Renovation.Criteria\obj\Debug\Fanex.NAP.FPS.Renovation.Criteria.dll
+D:\Work\FPS\NewGenFPS\fps40\Fanex.NAP.FPS.Renovation.Criteria\obj\Debug\Fanex.NAP.FPS.Renovation.Criteria.pdb
