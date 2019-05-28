@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CapturingTransactionCriteria.cs" />
+    <Compile Include="GraphDB\AddCustomerAndAssociationCriteria.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

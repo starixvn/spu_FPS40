@@ -39,8 +39,15 @@
     <Reference Include="Fanex.Graph.Data">
       <HintPath>GraphDBLib\Fanex.Graph.Data.dll</HintPath>
     </Reference>
+    <Reference Include="Neo4j.Driver">
+      <HintPath>GraphDBLib\Neo4j.Driver.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,6 +57,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Neo4j\Neo4jCommandBuilder.cs" />
+    <Compile Include="Neo4j\Neo4jDriverFactory.cs" />
+    <Compile Include="Neo4j\Neo4jExecutor.cs" />
     <Compile Include="Runner.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -80,6 +90,7 @@
     <None Include="App_Data\Scripts\FPS\RemoveEvidenceByCustomerList.scrypt" />
     <None Include="App_Data\Scripts\FPS\UpdateCustomerUsername2.scrypt" />
     <None Include="App_Data\Scripts\HelloApi.scrypt" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Script.xml" />
@@ -90,6 +101,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Fanex.NAP.FPS.Renovation.Criteria\Fanex.NAP.FPS.Renovation.Criteria.csproj">
+      <Project>{1fda7272-3467-4d5b-a64d-7f4edb287f17}</Project>
+      <Name>Fanex.NAP.FPS.Renovation.Criteria</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
