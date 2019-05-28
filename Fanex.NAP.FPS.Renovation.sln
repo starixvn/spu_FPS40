@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28803.452
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.645
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAP.FPS.Renovation.Core", "Fanex.NAP.FPS.Renovation.Core\Fanex.NAP.FPS.Renovation.Core.csproj", "{91543A37-F0A0-4A4F-8C1D-DBB0BCC75699}"
 EndProject
@@ -18,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAP.FPS.Renovation.DataCenter.Service", "Fanex.NAP.FPS.Renovation.DataCenter.Service\Fanex.NAP.FPS.Renovation.DataCenter.Service.csproj", "{C51D0246-F037-48C1-A7BA-4039F97EA9A8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAP.FPS.Renovation.GraphDB.Service", "Fanex.NAP.FPS.Renovation.GraphDB.Service\Fanex.NAP.FPS.Renovation.GraphDB.Service.csproj", "{0B2122BE-21DC-48AC-B1CB-56BA75E31BBD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{B6BDC55E-99F2-4170-9042-87B0374F72C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -60,6 +62,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5132621C-43CF-4924-8FA8-713E9BD1C436} = {B6BDC55E-99F2-4170-9042-87B0374F72C1}
+		{C51D0246-F037-48C1-A7BA-4039F97EA9A8} = {B6BDC55E-99F2-4170-9042-87B0374F72C1}
+		{0B2122BE-21DC-48AC-B1CB-56BA75E31BBD} = {B6BDC55E-99F2-4170-9042-87B0374F72C1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9D882FBC-31B6-450C-9F38-878C58354454}
