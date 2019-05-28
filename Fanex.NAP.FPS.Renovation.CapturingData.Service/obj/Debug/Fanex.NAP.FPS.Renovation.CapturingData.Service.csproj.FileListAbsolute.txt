@@ -38,3 +38,7 @@ D:\Projects\FPS40\Fanex.NAP.FPS.Renovation.CapturingData.Service\bin\Debug\Micro
 D:\Projects\FPS40\Fanex.NAP.FPS.Renovation.CapturingData.Service\bin\Debug\Newtonsoft.Json.xml
 D:\Projects\FPS40\Fanex.NAP.FPS.Renovation.CapturingData.Service\bin\Debug\RabbitMQ.Client.xml
 D:\Projects\FPS40\Fanex.NAP.FPS.Renovation.CapturingData.Service\bin\Debug\Fanex.NAP.FPS.Renovation.Model.pdb
+D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.CapturingData.Service\obj\Debug\Fanex.NAP.FPS.Renovation.CapturingData.Service.csprojAssemblyReference.cache
+D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.CapturingData.Service\obj\Debug\Fanex.NAP.FPS.Renovation.CapturingData.Service.csproj.CoreCompileInputs.cache
+D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.CapturingData.Service\obj\Debug\Fanex.NAP.FPS.Renovation.CapturingData.Service.exe
+D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.CapturingData.Service\obj\Debug\Fanex.NAP.FPS.Renovation.CapturingData.Service.pdb

@@ -17,11 +17,11 @@
                 switch (environment)
                 {
                     case "1":
-                        return Convert.ToInt16(Model.Environment.Local);
+                        return Convert.ToInt16(Core.Environment.LOCAL);
                     case "2":
-                        return Convert.ToInt16(Model.Environment.UAT);
+                        return Convert.ToInt16(Core.Environment.UAT);
                     default:
-                        return Convert.ToInt16(Model.Environment.Production);
+                        return Convert.ToInt16(Core.Environment.PRODUCTION);
                 }
             }
         }
@@ -39,6 +39,10 @@
         public static int PrefetchCount => Convert.ToInt16(ConfigurationManager.AppSettings["Queue-PrefetchCount"]);
 
         public static string Exchange => ConfigurationManager.AppSettings["Queue-Exchange"];
+
+        public static string QueueName => ConfigurationManager.AppSettings["Queue-Name"];
+
+        public static string RoutingKey => ConfigurationManager.AppSettings["Queue-RoutingKey"];
 
         public static string AppDataSetting => ConfigurationManager.AppSettings["AppData-Path"];
 

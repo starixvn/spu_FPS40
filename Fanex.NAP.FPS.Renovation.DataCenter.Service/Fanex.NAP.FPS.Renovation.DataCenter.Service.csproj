@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0B2122BE-21DC-48AC-B1CB-56BA75E31BBD}</ProjectGuid>
+    <ProjectGuid>{C51D0246-F037-48C1-A7BA-4039F97EA9A8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Fanex.NAP.FPS.Renovation.GraphDB.Transforming.Service</RootNamespace>
-    <AssemblyName>Fanex.NAP.FPS.Renovation.GraphDB.Transforming.Service</AssemblyName>
+    <RootNamespace>Fanex.NAP.FPS.Renovation.DataCenter.Service</RootNamespace>
+    <AssemblyName>Fanex.NAP.FPS.Renovation.DataCenter.Service</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

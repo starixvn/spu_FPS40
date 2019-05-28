@@ -1,12 +1,11 @@
-﻿namespace Fanex.NAP.FPS.Renovation.CapturingData.Service
+﻿namespace Fanex.NAP.FPS.Renovation.RawTransaction.Service
 {
-    using Fanex.NAP.FPS.Renovation.CapturingData.Service.Services;
-    using Fanex.NAP.FPS.Renovation.Queue;
-    using Fanex.NAP.FPS.Renovation.Core;    
-    using System.ServiceProcess;
-    using System;
     using Fanex.Logging;
+    using Fanex.NAP.FPS.Renovation.Core;
+    using Fanex.NAP.FPS.Renovation.Queue;
     using Fanex.Oneyed.Infrastructure.Models;
+    using System;
+    using System.ServiceProcess;
 
     public partial class Runner : ServiceBase
     {
@@ -20,6 +19,7 @@
         public Runner()
         {
             InitializeComponent();
+
             _capturingDataService = new CapturingDataService();
 
             _rabbitMQ = new EasyNetQ(AppSetting.Host + ":" + AppSetting.Post,
@@ -28,9 +28,9 @@
                                        AppSetting.UserName,
                                        AppSetting.Password);           
             _rabbitMQ.CreateBus()
-                     .DeclareExchange(exchangeName)
-                     .DeclareQueue(queueName)
-                     .DeclareRoutingKey(routingKey)
+                     .DeclareExchange(AppSetting.Exchange)
+                     .DeclareQueue(AppSetting.QueueName)
+                     .DeclareRoutingKey(AppSetting.RoutingKey)
                      .Bind();       
         }
 

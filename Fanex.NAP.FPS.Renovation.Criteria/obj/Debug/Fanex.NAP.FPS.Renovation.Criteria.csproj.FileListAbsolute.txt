@@ -10,3 +10,10 @@ D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Criteria\obj\Debug\Fanex.NAP.
 D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Criteria\obj\Debug\Fanex.NAP.FPS.Renovation.Criteria.csproj.CoreCompileInputs.cache
 D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Criteria\obj\Debug\Fanex.NAP.FPS.Renovation.Criteria.dll
 D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Criteria\obj\Debug\Fanex.NAP.FPS.Renovation.Criteria.pdb
+D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Criteria\bin\Debug\Dapper.dll
+D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Criteria\bin\Debug\Fanex.Data.dll
+D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Criteria\bin\Debug\Fanex.Data.Repository.dll
+D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Criteria\bin\Debug\System.ValueTuple.dll
+D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Criteria\bin\Debug\Dapper.xml
+D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Criteria\bin\Debug\System.ValueTuple.xml
+D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Criteria\obj\Debug\Fanex.NAP.FPS.Renovation.Criteria.csproj.CopyComplete

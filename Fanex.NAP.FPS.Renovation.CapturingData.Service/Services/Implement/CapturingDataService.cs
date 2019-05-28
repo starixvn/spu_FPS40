@@ -1,18 +1,19 @@
-﻿namespace Fanex.NAP.FPS.Renovation.CapturingData.Service.Services
+﻿namespace Fanex.NAP.FPS.Renovation.RawTransaction.Service
 {
-    using Fanex.NAP.FPS.Renovation.Criteria;
-    using Fanex.NAP.FPS.Renovation.DataAccess;
+    using Fanex.NAP.FPS.Renovation.Model;
     using Fanex.Oneyed.Infrastructure.Models;
 
     public class CapturingDataService : ICapturingDataService
     {
+        private DataAccess.CapturingData capturingData;
         public CapturingDataService()
         {
+            capturingData = new DataAccess.CapturingData();
         }
 
         public void InsertTransaction(MessageQueue message)
         {
-            var criteria = new CapturingTransactionCriteria()
+            var model = new RawTransactionModel()
             {
                 Account = message.Account,
                 Action = message.Action,
@@ -25,7 +26,7 @@
                 CaptchaResult = string.Empty
             };
 
-            DataService.UpdateData(criteria, string.Empty);
+            capturingData.InsertTransaction(model);
         }
 
     }

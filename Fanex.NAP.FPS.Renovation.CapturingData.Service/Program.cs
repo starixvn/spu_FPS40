@@ -1,4 +1,4 @@
-﻿namespace Fanex.NAP.FPS.Renovation.CapturingData.Service
+﻿namespace Fanex.NAP.FPS.Renovation.RawTransaction.Service
 {
     using Fanex.Data;
     using Fanex.Data.MySql;
@@ -39,7 +39,7 @@
                 new Runner()
             };
 
-            if (Environment.UserInteractive)
+            if (System.Environment.UserInteractive)
             {
                 // run console
                 var type = typeof(ServiceBase);

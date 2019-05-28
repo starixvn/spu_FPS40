@@ -5,7 +5,7 @@ using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fanex.NAP.FPS.Renovation.DataCenter.Transforming.Service
+namespace Fanex.NAP.FPS.Renovation.DataCenter.Service
 {
     static class Program
     {

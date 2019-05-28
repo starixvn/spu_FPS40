@@ -3,7 +3,7 @@
     using Fanex.Data.Repository;
     using System;
 
-    public class CapturingTransactionCriteria : CriteriaBase
+    public class CapturingTransactionCriteria : NonQueryCommand
     {
         public string Account { get; set; }
 

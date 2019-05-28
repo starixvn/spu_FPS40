@@ -1,4 +1,4 @@
-﻿namespace Fanex.NAP.FPS.Renovation.CapturingData.Service.Services
+﻿namespace Fanex.NAP.FPS.Renovation.RawTransaction.Service
 {
     using Fanex.Oneyed.Infrastructure.Models;
 

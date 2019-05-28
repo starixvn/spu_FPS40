@@ -1,4 +1,4 @@
-﻿namespace Fanex.NAP.FPS.Renovation.GraphDB.Transforming.Service
+﻿namespace Fanex.NAP.FPS.Renovation.DataCenter.Service
 {
     partial class Runner
     {

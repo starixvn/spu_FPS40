@@ -5,7 +5,7 @@ using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fanex.NAP.FPS.Renovation.GraphDB.Transforming.Service
+namespace Fanex.NAP.FPS.Renovation.GraphDB.Service
 {
     static class Program
     {

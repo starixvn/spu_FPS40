@@ -8,7 +8,7 @@ using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fanex.NAP.FPS.Renovation.GraphDB.Transforming.Service
+namespace Fanex.NAP.FPS.Renovation.DataCenter.Service
 {
     public partial class Runner : ServiceBase
     {
