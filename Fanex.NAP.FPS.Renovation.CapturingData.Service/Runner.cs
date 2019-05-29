@@ -9,7 +9,7 @@
 
     public partial class Runner : ServiceBase
     {
-        private static EasyNetQ _rabbitMQ;
+        private static EasyNetQConnector _rabbitMQ;
         private ICapturingDataService _capturingDataService;
 
         private const string exchangeName = "fpstransExchangeTest";
@@ -22,7 +22,7 @@
 
             _capturingDataService = new CapturingDataService();
 
-            _rabbitMQ = new EasyNetQ(AppSetting.Host + ":" + AppSetting.Post,
+            _rabbitMQ = new EasyNetQConnector(AppSetting.Host + ":" + AppSetting.Post,
                                        AppSetting.VirtualHost,
                                        AppSetting.PrefetchCount,
                                        AppSetting.UserName,

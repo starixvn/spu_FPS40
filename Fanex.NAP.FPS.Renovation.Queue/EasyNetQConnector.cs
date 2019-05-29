@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Fanex.NAP.FPS.Renovation.Queue
 {
-    public class EasyNetQ
+    public class EasyNetQConnector
     {
         private string Host { get; set; }
 
@@ -33,7 +33,7 @@ namespace Fanex.NAP.FPS.Renovation.Queue
 
         public IQueue Queue { get; set; }
 
-        public EasyNetQ(string host, string virtualHost, int? prefetchCount, string username, string password)
+        public EasyNetQConnector(string host, string virtualHost, int? prefetchCount, string username, string password)
         {
             Host = host ?? Host;
             VirtualHost = virtualHost ?? VirtualHost;
@@ -42,7 +42,7 @@ namespace Fanex.NAP.FPS.Renovation.Queue
             Password = password ?? Password;
         }
 
-        public EasyNetQ CreateBus()
+        public EasyNetQConnector CreateBus()
         {
             var connectionString =
                 $"host={this.Host};virtualHost={this.VirtualHost};prefetchcount={this.PrefetchCount};username={this.Username};password={this.Password}";
@@ -60,7 +60,7 @@ namespace Fanex.NAP.FPS.Renovation.Queue
             return this;
         }
 
-        public EasyNetQ DeclareExchange(string exchangeName)
+        public EasyNetQConnector DeclareExchange(string exchangeName)
         {
             if (string.IsNullOrWhiteSpace(exchangeName)) return this;
             Exchange = AdvanceBus.ExchangeDeclare(exchangeName, ExchangeType.Direct);
@@ -73,14 +73,14 @@ namespace Fanex.NAP.FPS.Renovation.Queue
             return this;
         }
 
-        public EasyNetQ DeclareRoutingKey(string routingKey)
+        public EasyNetQConnector DeclareRoutingKey(string routingKey)
         {
             RoutingKey = routingKey ?? RoutingKey;
 
             return this;
         }
 
-        public EasyNetQ DeclareQueue(string queueName)
+        public EasyNetQConnector DeclareQueue(string queueName)
         {
             if (string.IsNullOrWhiteSpace(queueName)) return this;
             this.Queue = AdvanceBus.QueueDeclare(queueName);
@@ -93,7 +93,7 @@ namespace Fanex.NAP.FPS.Renovation.Queue
             return this;
         }
 
-        public EasyNetQ Bind()
+        public EasyNetQConnector Bind()
         {
             Binding = AdvanceBus.Bind(this.Exchange, this.Queue, this.RoutingKey);
 

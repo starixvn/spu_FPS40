@@ -1,5 +1,6 @@
 ﻿using Fanex.Graph.Data;
 using Fanex.NAP.FPS.Renovation.Criteria.GraphDB;
+using Fanex.NAP.FPS.Renovation.Queue;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +15,8 @@ namespace Fanex.NAP.FPS.Renovation.GraphDB.Service
 {
     public partial class Runner : ServiceBase
     {
+        private EasyNetQConnector easyNetQService;
+
         public Runner()
         {
             InitializeComponent();
@@ -21,12 +24,32 @@ namespace Fanex.NAP.FPS.Renovation.GraphDB.Service
 
         protected override void OnStart(string[] args)
         {
+            easyNetQService = new EasyNetQConnector(AppSettings.RabbitMQ_Host,
+                AppSettings.RabbitMQ_VirtualHost,
+                Convert.ToInt32(AppSettings.RabbitMQ_PrefetchCount),
+                AppSettings.RabbitMQ_Username,
+                AppSettings.RabbitMQ_Password).CreateBus();
+            easyNetQService.DeclareQueue(AppSettings.RabbitMQ_Queue)
+                            .DeclareExchange(AppSettings.RabbitMQ_Exchange)
+                            .DeclareRoutingKey(AppSettings.RabbitMQ_RoutingKey)
+                            .Bind();
+
+            AddHandlerForGetMassage(InsertCustomer);
         }
 
         protected override void OnStop()
         {
+            easyNetQService.Dispose();
         }
 
+        public void AddHandlerForGetMassage(Action<AddCustomerAndAssociationCriteria> handler)
+        {
+            easyNetQService.AdvanceBus.Consume(easyNetQService.Queue,
+                registration => registration.Add<AddCustomerAndAssociationCriteria>((message, info) =>
+                {
+                    handler(message.Body);
+                }));
+        }
         private void InsertCustomer(AddCustomerAndAssociationCriteria criteria)
         {
             // ko luu SMA, chi luu member, roleid = 1
