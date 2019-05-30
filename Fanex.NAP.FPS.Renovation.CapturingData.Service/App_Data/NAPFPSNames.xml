@@ -2,6 +2,9 @@
 
 <Functions>
   <Function Name="CapturingTransaction">
-    <Setting Key="FPS_Capturing_Transaction_Insert" SpName="FPS_Capturing_Transaction_Insert" DbName="MySQL.FanexDataTests" />
+    <Setting Key="RT_RawTrans_InsertByXML" SpName="RT_RawTrans_InsertByXML" DbName="MySQL.FPS_RawTrans" />
+  </Function>
+  <Function name="IPEntities">
+    <Setting Key="GetIPDetail" SpName="GetIPDetail" DbName="SQL.IPDB"></Setting>
   </Function>
 </Functions>

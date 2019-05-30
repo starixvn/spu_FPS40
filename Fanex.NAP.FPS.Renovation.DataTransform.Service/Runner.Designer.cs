@@ -1,6 +1,6 @@
 ﻿namespace Fanex.NAP.FPS.Renovation.DataTransform.Service
 {
-    partial class Service1
+    partial class Runner
     {
         /// <summary> 
         /// Required designer variable.

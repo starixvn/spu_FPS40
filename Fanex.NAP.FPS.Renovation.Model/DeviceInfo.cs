@@ -1,0 +1,33 @@
+﻿namespace Fanex.NAP.FPS.Renovation.Model
+{
+    public class DeviceInfo
+    {
+        public string OSName { get; set; }
+
+        public string DeviceFPCode { get; set; }
+
+        public string DeviceNo { get; set; }
+
+        public string NA { get; set; }
+
+        public string AppVersion { get; set; }
+
+        public string TimeZone { get; set; }
+
+        public string UserAgent { get; set; }
+
+        public ScreenInfo Screen { get; set; }
+
+        public string HRef { get; set; }
+
+        public long CapturedDate { get; set; }
+
+        public string Battery { get; set; }
+
+        public string Ip { get; set; }
+
+        public string LocalIps { get; set; }
+
+        public bool IsNonManilaCSD { get; set; }
+    }
+}

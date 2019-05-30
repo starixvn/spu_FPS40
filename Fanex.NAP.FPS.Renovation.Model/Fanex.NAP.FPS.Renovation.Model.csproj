@@ -41,8 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BrowserPlugin.cs" />
+    <Compile Include="DeviceInfo.cs" />
+    <Compile Include="IpInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RawTransactionModel.cs" />
+    <Compile Include="RawTransaction.cs" />
+    <Compile Include="ScreenInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

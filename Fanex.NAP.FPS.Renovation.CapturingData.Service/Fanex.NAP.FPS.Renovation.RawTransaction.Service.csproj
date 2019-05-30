@@ -54,6 +54,18 @@
     <Reference Include="Fanex.Data.Repository, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.Data.Repository.4.0.0-beta1\lib\net461\Fanex.Data.Repository.dll</HintPath>
     </Reference>
+    <Reference Include="Fanex.Data.SqlServer, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.Data.SqlServer.4.0.0-beta1\lib\net461\Fanex.Data.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.DeviceDetector, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.Oneyed.DeviceDetector.2.0.1\lib\Fanex.DeviceDetector.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.DeviceDetector.Models, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.Oneyed.DeviceDetector.2.0.1\lib\Fanex.DeviceDetector.Models.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.DI.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.Oneyed.DeviceDetector.2.0.1\lib\Fanex.DI.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Fanex.Logging, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.Logging.2.0.1\lib\net461\Fanex.Logging.dll</HintPath>
     </Reference>
@@ -74,7 +86,7 @@
       <HintPath>..\packages\MySql.Data.8.0.16\lib\net452\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="RabbitMQ.Client, Version=5.0.0.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
       <HintPath>..\packages\RabbitMQ.Client.5.1.0\lib\net451\RabbitMQ.Client.dll</HintPath>

@@ -11,21 +11,13 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
 {
     public class CapturingData
     {
-        public void InsertTransaction(RawTransactionModel model)
+        public void InsertTransaction(string xmlTrans)
         {
             var repository = new DynamicRepository();
 
             var criteria = new CapturingTransactionCriteria()
             {
-                Account = model.Account,
-                Action = model.Action,
-                ActionResult = model.ActionResult,
-                CaptchaResult = model.CaptchaResult,
-                Device =  model.Device,
-                Ip = model.IP,
-                Subscriber = model.Subscriber,
-                SubscriberDate = model.SubscriberDate,
-                Token = model.Token
+                inRawTransXml = xmlTrans
             };
 
             repository.Execute(criteria);

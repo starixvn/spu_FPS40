@@ -1,9 +1,14 @@
 ﻿namespace Fanex.NAP.FPS.Renovation.RawTransaction.Service
 {
-    using Fanex.Oneyed.Infrastructure.Models;
+    using Fanex.NAP.FPS.Renovation.Model;
+    using System.Collections.Generic;
 
     interface ICapturingDataService
     {     
-        void InsertTransaction(MessageQueue message);
+        void InsertTransaction(List<RawTransaction> rawTrans);
+
+        IpInfo GetIpInfo(string ipAddress);
+
+        DeviceInfo GetDeviceInfo(string deviceCode);
     }
 }

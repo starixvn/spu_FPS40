@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace Fanex.NAP.FPS.Renovation.DataTransform.Service
 {
-    public partial class Service1 : ServiceBase
+    public partial class Runner : ServiceBase
     {
-        public Service1()
+        public Runner()
         {
             InitializeComponent();
         }

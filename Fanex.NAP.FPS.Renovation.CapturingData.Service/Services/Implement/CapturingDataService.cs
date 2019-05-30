@@ -1,38 +1,113 @@
 ﻿namespace Fanex.NAP.FPS.Renovation.RawTransaction.Service
 {
+    using Fanex.DeviceDetector.Factory;
+    using Fanex.NAP.FPS.Renovation.Core;
     using Fanex.NAP.FPS.Renovation.Model;
-    using Fanex.Oneyed.Infrastructure.Models;
+    using System;
+    using System.Collections.Generic;
 
     public class CapturingDataService : ICapturingDataService
     {
         private DataAccess.CapturingData capturingData;
+        private DataAccess.Common common;
+        private const string _EMPTY = "-";
         public CapturingDataService()
         {
             capturingData = new DataAccess.CapturingData();
+            common = new DataAccess.Common();
         }
 
-        public void InsertTransaction(MessageQueue message)
+        public Model.IpInfo GetIpInfo(string ipAddress)
         {
-            var model = new RawTransactionModel()
+            if(!ipAddress.Trim().Equals("unknown", StringComparison.OrdinalIgnoreCase)
+               && Utilities.IsIPv4(ipAddress))
+            { 
+                return common.GetIpInfo(ipAddress);
+            }
+
+            return new Model.IpInfo()
             {
-                Account = message.Account,
-                Action = message.Action,
-                ActionResult = message.ActionResult,
-                Device = message.Device,
-                Subscriber = message.Subscriber,
-                SubscriberDate = message.SubscriberDate,
-                Token = message.Token,
-                CaptchaResult = string.Empty,
-                City = message.IpInfo.City,
-                CountryCode = message.IpInfo.CountryCode,
-                CountryName = message.IpInfo.CountryName,
-                Flag = message.IpInfo.Flag,
-                IP = message.IpInfo.IP,
-                ISP = message.IpInfo.ISP,
-                Region = message.IpInfo.Region
+                IP = ipAddress,
+                City = _EMPTY,
+                CountryName = _EMPTY,
+                CountryCode = _EMPTY,
+                Flag = _EMPTY,
+                Region = _EMPTY,
+                ISP = _EMPTY
             };
+        }
+
+        public void InsertTransaction(List<RawTransaction> rawTrans)
+        {
+            var model = Utilities.XMLConvert(rawTrans);
 
             capturingData.InsertTransaction(model);
+        }
+
+        public DeviceInfo GetDeviceInfo(string deviceCode)
+        {
+            if (string.IsNullOrWhiteSpace(deviceCode))
+            {
+                return TransformEmptyDeviceInfo();
+            }
+
+            var deviceInfo = DeviceFactory.GetDeviceInfo(deviceCode);
+
+            if (deviceInfo != null)
+            {
+                return TransformDeviceInfo(deviceInfo);
+            }
+
+            return TransformEmptyDeviceInfo();
+        }
+
+        private DeviceInfo TransformEmptyDeviceInfo()
+        {
+            return new DeviceInfo
+            {
+                AppVersion = "N/A",
+                CapturedDate = 0,
+                DeviceFPCode = "N/A",
+                DeviceNo = "N/A",
+                HRef = "N/A",
+                NA = "N/A",
+                Screen = new ScreenInfo
+                {
+                    ColorDepth = 0,
+                    Height = 0,
+                    Width = 0
+                },
+                TimeZone = "N/A",
+                UserAgent = "N/A"
+            };
+        }
+
+        private DeviceInfo TransformDeviceInfo(DeviceDetector.Models.DeviceInfo deviceInfo)
+        {
+            return new DeviceInfo
+            {
+                AppVersion = deviceInfo.AppVersion,
+                CapturedDate = deviceInfo.CapturedDate,
+                DeviceFPCode = deviceInfo.DeviceCode,
+                DeviceNo = deviceInfo.DeviceId,
+                HRef = deviceInfo.HRef,
+                NA = deviceInfo.NA,
+                TimeZone = deviceInfo.TimeZone,
+                UserAgent = deviceInfo.UserAgent,
+                Screen = deviceInfo.Screen == null
+                    ? new ScreenInfo
+                    {
+                        ColorDepth = 0,
+                        Height = 0,
+                        Width = 0
+                    }
+                    : new ScreenInfo
+                    {
+                        ColorDepth = deviceInfo.Screen.ColorDepth,
+                        Height = deviceInfo.Screen.Height,
+                        Width = deviceInfo.Screen.Width
+                    }
+            };
         }
     }
 }
