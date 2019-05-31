@@ -17,7 +17,7 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
 
             var criteria = new CapturingTransactionCriteria()
             {
-                inRawTransXml = xmlTrans
+                RawTransXml = xmlTrans   
             };
 
             repository.Execute(criteria);

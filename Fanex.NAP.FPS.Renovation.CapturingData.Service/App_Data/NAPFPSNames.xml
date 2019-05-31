@@ -2,9 +2,7 @@
 
 <Functions>
   <Function Name="CapturingTransaction">
-    <Setting Key="RT_RawTrans_InsertByXML" SpName="RT_RawTrans_InsertByXML" DbName="MySQL.FPS_RawTrans" />
-  </Function>
-  <Function name="IPEntities">
-    <Setting Key="GetIPDetail" SpName="GetIPDetail" DbName="SQL.IPDB"></Setting>
+    <Setting Key="RT_RawTrans_InsertByXML" SpName="RT_RawTrans_InsertByXML" DbName="MySQL.FPS_RawTrans">
+    </Setting>
   </Function>
 </Functions>

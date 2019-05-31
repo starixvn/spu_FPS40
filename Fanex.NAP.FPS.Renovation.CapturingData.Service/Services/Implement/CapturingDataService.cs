@@ -3,7 +3,6 @@
     using Fanex.DeviceDetector.Factory;
     using Fanex.NAP.FPS.Renovation.Core;
     using Fanex.NAP.FPS.Renovation.Model;
-    using System;
     using System.Collections.Generic;
 
     public class CapturingDataService : ICapturingDataService
@@ -15,26 +14,6 @@
         {
             capturingData = new DataAccess.CapturingData();
             common = new DataAccess.Common();
-        }
-
-        public Model.IpInfo GetIpInfo(string ipAddress)
-        {
-            if(!ipAddress.Trim().Equals("unknown", StringComparison.OrdinalIgnoreCase)
-               && Utilities.IsIPv4(ipAddress))
-            { 
-                return common.GetIpInfo(ipAddress);
-            }
-
-            return new Model.IpInfo()
-            {
-                IP = ipAddress,
-                City = _EMPTY,
-                CountryName = _EMPTY,
-                CountryCode = _EMPTY,
-                Flag = _EMPTY,
-                Region = _EMPTY,
-                ISP = _EMPTY
-            };
         }
 
         public void InsertTransaction(List<RawTransaction> rawTrans)

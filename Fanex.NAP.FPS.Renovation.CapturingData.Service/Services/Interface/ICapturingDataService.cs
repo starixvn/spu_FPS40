@@ -7,8 +7,6 @@
     {     
         void InsertTransaction(List<RawTransaction> rawTrans);
 
-        IpInfo GetIpInfo(string ipAddress);
-
         DeviceInfo GetDeviceInfo(string deviceCode);
     }
 }
