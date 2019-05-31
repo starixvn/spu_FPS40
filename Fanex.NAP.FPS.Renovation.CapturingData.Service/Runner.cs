@@ -96,7 +96,7 @@ namespace Fanex.NAP.FPS.Renovation.RawTransaction.Service
                 DeviceCode = deviceInfo.DeviceNo,
                 LoginName = message.Account,
                 SubscriberName = message.Subscriber,
-                TransDate = message.TransDate.ToString("yyyy-MM-dd hh:mm:ss"),
+                TransDate = Convert.ToDateTime(message.TransDate.ToString("yyyy-MM-dd hh:mm:ss")),
                 IP = message.IP,
                 PluginID = 0,
                 DeviceStatus = 0,

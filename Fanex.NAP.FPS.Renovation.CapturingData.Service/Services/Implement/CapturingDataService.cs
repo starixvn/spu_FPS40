@@ -7,8 +7,8 @@
 
     public class CapturingDataService : ICapturingDataService
     {
-        private DataAccess.CapturingData capturingData;
-        private DataAccess.Common common;
+        private readonly DataAccess.CapturingData capturingData;
+        private readonly DataAccess.Common common;
         private const string _EMPTY = "-";
         public CapturingDataService()
         {

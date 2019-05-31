@@ -56,7 +56,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InsertDataCenterTransactionCriteria.cs" />
     <Compile Include="CapturingTransactionCriteria.cs" />
+    <Compile Include="GetStagingRawTransactionCriteria.cs" />
     <Compile Include="GraphDB\AddCustomerAndAssociationCriteria.cs" />
     <Compile Include="IpInfoCriteria.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,10 +1,13 @@
 ﻿namespace Fanex.NAP.FPS.Renovation.Core
 {
     using System;
+    using System.Collections.Generic;
     using System.Net;
+    using System.Security.Cryptography;
+    using System.Text;
     using System.Xml;
     using System.Xml.Serialization;
-
+    using System.Linq;
     public static class Utilities
     {
         public static string GetURLFromDeviceCode(string di)
@@ -71,6 +74,31 @@
             }
 
             return false;
+        }
+
+        public static string Encode(string original)
+        {
+            if (string.IsNullOrWhiteSpace(original)) return string.Empty;
+
+            byte[] encodedBytes;
+
+            using (var md5 = new MD5CryptoServiceProvider())
+            {
+                var originalBytes = Encoding.Default.GetBytes(original);
+                encodedBytes = md5.ComputeHash(originalBytes);
+            }
+
+            return Convert.ToBase64String(encodedBytes);
+        }
+
+        public static IEnumerable<IEnumerable<TValue>> Chunk<TValue>(
+            this IEnumerable<TValue> values,
+            Int32 chunkSize)
+        {
+            return values
+                .Select((v, i) => new { v, groupIndex = i / chunkSize })
+                .GroupBy(x => x.groupIndex)
+                .Select(g => g.Select(x => x.v));
         }
     }
 }

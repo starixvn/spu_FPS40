@@ -20,7 +20,7 @@ namespace Fanex.NAP.FPS.Renovation.Model
         public string SubscriberName { get; set; }
 
         [XmlAttribute]
-        public string TransDate { get; set; }
+        public DateTime TransDate { get; set; }
 
         [XmlAttribute]
         public string IP { get; set; }
