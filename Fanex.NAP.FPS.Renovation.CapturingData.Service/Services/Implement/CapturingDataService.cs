@@ -7,12 +7,12 @@
 
     public class CapturingDataService : ICapturingDataService
     {
-        private readonly DataAccess.CapturingData capturingData;
+        private readonly DataAccess.RawTransaction capturingData;
         private readonly DataAccess.Common common;
         private const string _EMPTY = "-";
         public CapturingDataService()
         {
-            capturingData = new DataAccess.CapturingData();
+            capturingData = new DataAccess.RawTransaction();
             common = new DataAccess.Common();
         }
 

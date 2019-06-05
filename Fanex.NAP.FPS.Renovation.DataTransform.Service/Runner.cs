@@ -12,19 +12,20 @@ using System.Timers;
 using Fanex.NAP.FPS.Renovation.Core;
 using Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Implement;
 using Fanex.NAP.FPS.Renovation.Model;
+using Fanex.Logging.Extensions;
+using Fanex.Logging;
+using Fanex.Logging.Extensions.Database;
 
 namespace Fanex.NAP.FPS.Renovation.DataTransform.Service
 {
     public partial class Runner : ServiceBase
     {
         private static IDataTransformService dataTransformService;
-        private static List<StagingRawTransaction> _rawTransactionList;
         private static Timer timer;
         private static bool isRunning;
         public Runner()
         {
             dataTransformService = new DataTransformService();
-            _rawTransactionList = new List<StagingRawTransaction>();
             isRunning = false;
 
             InitializeComponent();
@@ -49,26 +50,37 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service
 
         private static void OnTimedEvent(object source, ElapsedEventArgs e)
         {
-            if (isRunning) return;
-
-            isRunning = true;
-
-            var result = dataTransformService.GetStagingRawTransaction();
-
-            if (result != null && result.Any())
+            try
             {
-                var chunkResult = result.OrderBy(x => x.StagingTransId).Chunk(100);
+                if (isRunning) return;
 
-                foreach (var rawData in chunkResult)
+                isRunning = true;
+
+                var result = dataTransformService.GetStagingRawTransaction();
+
+                if (result != null && result.Any())
                 {
-                    if (rawData.Any())
+                    var chunkResult = result.OrderBy(x => x.StagingTransId).Chunk(100);
+
+                    foreach (var rawData in chunkResult)
                     {
-                        dataTransformService.InsertTransaction(rawData.ToList());
+                        if (rawData.Any())
+                        {
+                            dataTransformService.InsertTransaction(rawData.ToList());
+                        }
                     }
                 }
-            }
 
-            isRunning = false;
+                isRunning = false;
+            }
+            catch (Exception ex)
+            {
+                var logMessage = new LogMessage(ex.Message)
+                    .AddSection("Data Info", DatabaseInfoGetters.GetDbExceptionInfo(ex))
+                    .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
+
+                LogService.Error(ex.Message);
+            }
         }
     }
 }

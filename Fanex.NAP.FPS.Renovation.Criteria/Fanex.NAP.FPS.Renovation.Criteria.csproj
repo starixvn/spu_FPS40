@@ -56,12 +56,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GetCustomerInfoCriteria.cs" />
+    <Compile Include="GetNewCustomerCriteria.cs" />
     <Compile Include="InsertDataCenterTransactionCriteria.cs" />
     <Compile Include="CapturingTransactionCriteria.cs" />
     <Compile Include="GetStagingRawTransactionCriteria.cs" />
-    <Compile Include="GraphDB\AddCustomerAndAssociationCriteria.cs" />
     <Compile Include="IpInfoCriteria.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UpdateCustomerInfoCriteria.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

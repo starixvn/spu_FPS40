@@ -27,6 +27,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{0618FFB5-51D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAP.FPS.Renovation.DataTransform.Service", "Fanex.NAP.FPS.Renovation.DataTransform.Service\Fanex.NAP.FPS.Renovation.DataTransform.Service.csproj", "{763BB29F-AFBC-4039-BFF7-72F571880A08}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebAPI", "WebAPI", "{CB3801AF-986F-4AE4-AB99-75B9F05A3975}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fanex.NAP.FPS.Renovation.PresentData.API", "Fanex.NAP.FPS.Renovation.PresentData.API\Fanex.NAP.FPS.Renovation.PresentData.API.csproj", "{60E8C49E-3734-4DA6-AEEE-783A13D78512}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +73,10 @@ Global
 		{763BB29F-AFBC-4039-BFF7-72F571880A08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{763BB29F-AFBC-4039-BFF7-72F571880A08}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{763BB29F-AFBC-4039-BFF7-72F571880A08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60E8C49E-3734-4DA6-AEEE-783A13D78512}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60E8C49E-3734-4DA6-AEEE-783A13D78512}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60E8C49E-3734-4DA6-AEEE-783A13D78512}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60E8C49E-3734-4DA6-AEEE-783A13D78512}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -83,6 +91,7 @@ Global
 		{C51D0246-F037-48C1-A7BA-4039F97EA9A8} = {B6BDC55E-99F2-4170-9042-87B0374F72C1}
 		{0B2122BE-21DC-48AC-B1CB-56BA75E31BBD} = {B6BDC55E-99F2-4170-9042-87B0374F72C1}
 		{763BB29F-AFBC-4039-BFF7-72F571880A08} = {B6BDC55E-99F2-4170-9042-87B0374F72C1}
+		{60E8C49E-3734-4DA6-AEEE-783A13D78512} = {CB3801AF-986F-4AE4-AB99-75B9F05A3975}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9D882FBC-31B6-450C-9F38-878C58354454}

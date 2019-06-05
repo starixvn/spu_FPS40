@@ -1,15 +1,9 @@
 ﻿using Fanex.Graph.Data;
-using Fanex.NAP.FPS.Renovation.Criteria.GraphDB;
+using Fanex.NAP.FPS.Renovation.Model;
 using Fanex.NAP.FPS.Renovation.Queue;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.Linq;
 using System.ServiceProcess;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fanex.NAP.FPS.Renovation.GraphDB.Service
 {
@@ -42,15 +36,16 @@ namespace Fanex.NAP.FPS.Renovation.GraphDB.Service
             easyNetQService.Dispose();
         }
 
-        public void AddHandlerForGetMassage(Action<AddCustomerAndAssociationCriteria> handler)
+        public void AddHandlerForGetMassage(Action<AssociationCustomer> handler)
         {
             easyNetQService.AdvanceBus.Consume(easyNetQService.Queue,
-                registration => registration.Add<AddCustomerAndAssociationCriteria>((message, info) =>
+                registration => registration.Add<AssociationCustomer>((message, info) =>
                 {
                     handler(message.Body);
                 }));
         }
-        private void InsertCustomer(AddCustomerAndAssociationCriteria criteria)
+
+        private void InsertCustomer(AssociationCustomer criteria)
         {
             // ko luu SMA, chi luu member, roleid = 1
             if (criteria.RoleId == 1)

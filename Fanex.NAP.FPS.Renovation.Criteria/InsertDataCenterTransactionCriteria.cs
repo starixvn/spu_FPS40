@@ -15,9 +15,6 @@
         [SpParam(SqlParamName = "op_ErrorMessage")]
         public string ErrMessage { get; set; }
 
-        [SpParam(SqlParamName = "MaxStagingTransID")]
-        public int MaxStagingTransId { get; set; }
-
         public override string GetSettingKey() => "DC_DataCenter_ProcessTransaction";
 
         public override bool IsValid() => true;

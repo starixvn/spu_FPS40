@@ -41,10 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account.cs" />
+    <Compile Include="AssociationCustomer.cs" />
     <Compile Include="BrowserPlugin.cs" />
+    <Compile Include="CustomerInfo.cs" />
     <Compile Include="DataResult.cs" />
     <Compile Include="DeviceInfo.cs" />
     <Compile Include="IpInfo.cs" />
+    <Compile Include="NewCustomer.cs" />
+    <Compile Include="NewCustomerInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RawTransaction.cs" />
     <Compile Include="ScreenInfo.cs" />

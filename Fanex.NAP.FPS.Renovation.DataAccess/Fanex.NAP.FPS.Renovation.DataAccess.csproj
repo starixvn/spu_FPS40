@@ -77,7 +77,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CapturingData.cs" />
+    <Compile Include="RawTransaction.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="DataCenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

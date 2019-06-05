@@ -29,18 +29,23 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Implement
             return stagingRawTransaction.GetStagingRawTrans();
         }
 
-        public void InsertTransaction(List<StagingRawTransaction> model)
+        public DataResult InsertTransaction(List<StagingRawTransaction> model)
         {
             var transformData = model.Select(x => TransformTranction(x)).ToList();
 
-            if(transformData.Any())
-            { 
-                var maxStagingTransId = transformData.Max(x => x.StagingTransID);
-
+            if (transformData.Any())
+            {
                 var xmlTrans = Utilities.XMLConvert(transformData);
 
-                dataCenter.InsertTransaction(xmlTrans, maxStagingTransId);
+                return dataCenter.InsertTransaction(xmlTrans);
+
             }
+
+            return new DataResult()
+            {
+                ErrorCode = -1,
+                ErrorMessage = "Cannot insert transaction."
+            };
         }
 
         private Transaction TransformTranction(StagingRawTransaction model)

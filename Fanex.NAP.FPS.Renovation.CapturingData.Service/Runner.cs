@@ -3,6 +3,8 @@
 namespace Fanex.NAP.FPS.Renovation.RawTransaction.Service
 {
     using Fanex.Logging;
+    using Fanex.Logging.Extensions;
+    using Fanex.Logging.Extensions.Database;
     using Fanex.NAP.FPS.Renovation.Core;
     using Fanex.NAP.FPS.Renovation.Model;
     using Fanex.NAP.FPS.Renovation.Queue;
@@ -82,7 +84,11 @@ namespace Fanex.NAP.FPS.Renovation.RawTransaction.Service
             }
             catch (Exception ex)
             {
-                LogService.Error("Insert Capturing data fail: " + ex.ToString());
+                var logMessage = new LogMessage(ex.Message)
+                    .AddSection("Data Info", DatabaseInfoGetters.GetDbExceptionInfo(ex))
+                    .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
+
+                LogService.Error(ex.Message);
             }
         }
 

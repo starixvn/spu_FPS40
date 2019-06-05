@@ -11,6 +11,6 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Interface
     {
         List<StagingRawTransaction> GetStagingRawTransaction();
 
-        void InsertTransaction(List<StagingRawTransaction> model);
+        DataResult InsertTransaction(List<StagingRawTransaction> model);
     }
 }
