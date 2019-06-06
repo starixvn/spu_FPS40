@@ -29,7 +29,7 @@ namespace Fanex.NAP.FPS.Renovation.Model
         public DateTime CreatedDate { get; set; }
 
         [XmlAttribute]
-        public int IPID { get; set; }
+        public int IP { get; set; }
 
         [XmlAttribute]
         public int PluginID { get; set; }

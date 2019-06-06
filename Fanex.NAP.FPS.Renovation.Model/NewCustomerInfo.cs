@@ -17,7 +17,7 @@ namespace Fanex.NAP.FPS.Renovation.Model
         public int SubscriberID { get; set; }
 
         [XmlAttribute]
-        public bool IsDeposit { get; set; }
+        public int IsDeposit { get; set; }
 
         [XmlAttribute]
         public int CustID { get; set; }

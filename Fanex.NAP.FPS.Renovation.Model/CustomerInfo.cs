@@ -20,7 +20,7 @@ namespace Fanex.NAP.FPS.Renovation.Model
 
         public string Site { get; set; }
 
-        public bool IsDeposit { get; set; }
+        public int IsDeposit { get; set; }
 
         public int CurrencyId { get; set; }
 

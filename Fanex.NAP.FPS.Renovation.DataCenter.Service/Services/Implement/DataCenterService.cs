@@ -33,7 +33,7 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface
 
         public DataResult UpdateCustomerInfo(List<CustomerInfo> customerInfo)
         {
-            var newCustomerInfo = customerInfo.Select(x => TransformCustomerInfo(x));
+            var newCustomerInfo = customerInfo.Select(x => TransformCustomerInfo(x)).ToList();
 
             var newXmlCustomerInfo = Utilities.XMLConvert(newCustomerInfo);
 

@@ -38,9 +38,6 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service
             timer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
             timer.Interval = 10000;
             timer.Enabled = true;
-
-            Console.WriteLine("Press \'q\' to quit the sample.");
-            while (Console.Read() != 'q') ;
         }
 
         protected override void OnStop()
@@ -79,7 +76,9 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service
                     .AddSection("Data Info", DatabaseInfoGetters.GetDbExceptionInfo(ex))
                     .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
 
-                LogService.Error(ex.Message);
+                LogService.Error(logMessage);
+
+                isRunning = false;
             }
         }
     }

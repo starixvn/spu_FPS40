@@ -75,7 +75,7 @@ namespace Fanex.NAP.FPS.Renovation.RawTransaction.Service
 
                 _transactionList.Add(trans);
 
-                if (_transactionList.Count >= 10)
+                if (_transactionList.Count >= 100)
                 {
                     _capturingDataService.InsertTransaction(_transactionList);
 
@@ -88,7 +88,7 @@ namespace Fanex.NAP.FPS.Renovation.RawTransaction.Service
                     .AddSection("Data Info", DatabaseInfoGetters.GetDbExceptionInfo(ex))
                     .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
 
-                LogService.Error(ex.Message);
+                LogService.Error(logMessage);
             }
         }
 
