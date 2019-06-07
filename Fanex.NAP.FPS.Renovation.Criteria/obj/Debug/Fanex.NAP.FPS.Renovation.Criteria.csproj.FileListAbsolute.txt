@@ -29,3 +29,4 @@ D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Criteria\obj\Debug\Fanex.NAP.
 D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Criteria\obj\Debug\Fanex.NAP.FPS.Renovation.Criteria.csproj.CopyComplete
 D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Criteria\obj\Debug\Fanex.NAP.FPS.Renovation.Criteria.dll
 D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Criteria\obj\Debug\Fanex.NAP.FPS.Renovation.Criteria.pdb
+D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.Criteria\obj\Debug\Fanex.NAP.FPS.Renovation.Criteria.csprojAssemblyReference.cache

@@ -99,8 +99,7 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service
             }
             catch (Exception ex)
             {
-                var logMessage = new LogMessage(ex.Message)
-                    .AddSection("Data Info", DatabaseInfoGetters.GetDbExceptionInfo(ex))
+                var logMessage = new LogMessage(ex.Message)                    
                     .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
 
                 LogService.Error(logMessage);

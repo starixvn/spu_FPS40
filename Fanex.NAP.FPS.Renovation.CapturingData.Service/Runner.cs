@@ -40,16 +40,12 @@ namespace Fanex.NAP.FPS.Renovation.RawTransaction.Service
 
         protected override void OnStart(string[] args)
         {
-            ConsumerTransactions();
-
-            LogService.Info("Capturing data service has been started.");
+            ConsumerTransactions();            
         }
 
         protected override void OnStop()
         {
-            _rabbitMQ.Dispose();
-
-            LogService.Info("Capturing data service has been stopped.");
+            _rabbitMQ.Dispose();            
         }
 
         protected override void OnShutdown()
@@ -80,12 +76,13 @@ namespace Fanex.NAP.FPS.Renovation.RawTransaction.Service
                     _capturingDataService.InsertTransaction(_transactionList);
 
                     _transactionList.Clear();
+
+                    Console.WriteLine(DateTime.Now);
                 }
             }
             catch (Exception ex)
             {
-                var logMessage = new LogMessage(ex.Message)
-                    .AddSection("Data Info", DatabaseInfoGetters.GetDbExceptionInfo(ex))
+                var logMessage = new LogMessage(ex.Message)                   
                     .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
 
                 LogService.Error(logMessage);

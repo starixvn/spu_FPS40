@@ -47,34 +47,44 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service
 
         private static void OnTimedEvent(object source, ElapsedEventArgs e)
         {
+            var insertResult = new DataResult();
+
             try
             {
                 if (isRunning) return;
 
                 isRunning = true;
 
-                var result = dataTransformService.GetStagingRawTransaction();
+                var result = dataTransformService.GetStagingRawTransaction();                
 
                 if (result != null && result.Any())
                 {
-                    var chunkResult = result.OrderBy(x => x.StagingTransId).Chunk(100);
+                    var chunkResult = result.Chunk(100);
 
                     foreach (var rawData in chunkResult)
                     {
                         if (rawData.Any())
                         {
-                            dataTransformService.InsertTransaction(rawData.ToList());
+                           insertResult = dataTransformService.InsertTransaction(rawData.ToList());
+
+                            Console.WriteLine(DateTime.Now);
                         }
                     }
-                }
+                }                
 
                 isRunning = false;
             }
             catch (Exception ex)
-            {
+            {                
+                var errorHanler = new Dictionary<string, object>();
+                errorHanler.Add("ErrorCode", insertResult.ErrorCode);
+                errorHanler.Add("ErrorMsg", insertResult.ErrorMessage);
+
                 var logMessage = new LogMessage(ex.Message)
-                    .AddSection("Data Info", DatabaseInfoGetters.GetDbExceptionInfo(ex))
-                    .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
+                    .AddSection("Data Info", errorHanler)
+                    .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex))
+                    
+                    .ToString();
 
                 LogService.Error(logMessage);
 
