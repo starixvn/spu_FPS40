@@ -52,7 +52,7 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service
             timer = new Timer();
 
             timer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
-            timer.Interval = 10000;
+            timer.Interval = AppSetting.Interval;
             timer.Enabled = true;
             
         }

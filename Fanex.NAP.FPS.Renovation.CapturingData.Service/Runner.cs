@@ -71,7 +71,7 @@ namespace Fanex.NAP.FPS.Renovation.RawTransaction.Service
 
                 _transactionList.Add(trans);
 
-                if (_transactionList.Count >= 100)
+                if (_transactionList.Count >= AppSetting.TransBatch)
                 {
                     _capturingDataService.InsertTransaction(_transactionList);
 
