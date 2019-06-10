@@ -32,16 +32,16 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service
         {
             dataCenterService = new DataCenterService();
 
-            _rabbitMQ = new EasyNetQConnector(AppSetting.Host + ":" + AppSetting.Post,
-                AppSetting.VirtualHost,
-                AppSetting.PrefetchCount,
-                AppSetting.UserName,
-                AppSetting.Password);
+            _rabbitMQ = new EasyNetQConnector(AppSettings.Host + ":" + AppSettings.Post,
+                AppSettings.VirtualHost,
+                AppSettings.PrefetchCount,
+                AppSettings.UserName,
+                AppSettings.Password);
 
             _rabbitMQ.CreateBus()
-                .DeclareExchange(AppSetting.Exchange)
-                .DeclareQueue(AppSetting.QueueName)
-                .DeclareRoutingKey(AppSetting.RoutingKey)
+                .DeclareExchange(AppSettings.Exchange)
+                .DeclareQueue(AppSettings.QueueName)
+                .DeclareRoutingKey(AppSettings.RoutingKey)
                 .Bind();
 
             InitializeComponent();
@@ -52,7 +52,7 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service
             timer = new Timer();
 
             timer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
-            timer.Interval = AppSetting.Interval;
+            timer.Interval = AppSettings.Interval;
             timer.Enabled = true;
             
         }

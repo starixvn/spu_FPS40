@@ -53,6 +53,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RawTransaction.cs" />
     <Compile Include="ScreenInfo.cs" />
+    <Compile Include="TotalAssociationByCustomer.cs" />
     <Compile Include="Transaction.cs" />
     <Compile Include="StagingRawTransaction.cs" />
   </ItemGroup>

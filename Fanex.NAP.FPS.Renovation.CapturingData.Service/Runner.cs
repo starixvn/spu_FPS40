@@ -24,15 +24,15 @@ namespace Fanex.NAP.FPS.Renovation.RawTransaction.Service
 
             _capturingDataService = new CapturingDataService();
 
-            _rabbitMQ = new EasyNetQConnector(AppSetting.Host + ":" + AppSetting.Post,
-                                       AppSetting.VirtualHost,
-                                       AppSetting.PrefetchCount,
-                                       AppSetting.UserName,
-                                       AppSetting.Password);
+            _rabbitMQ = new EasyNetQConnector(AppSettings.Host + ":" + AppSettings.Post,
+                                       AppSettings.VirtualHost,
+                                       AppSettings.PrefetchCount,
+                                       AppSettings.UserName,
+                                       AppSettings.Password);
             _rabbitMQ.CreateBus()
-                     .DeclareExchange(AppSetting.Exchange)
-                     .DeclareQueue(AppSetting.QueueName)
-                     .DeclareRoutingKey(AppSetting.RoutingKey)
+                     .DeclareExchange(AppSettings.Exchange)
+                     .DeclareQueue(AppSettings.QueueName)
+                     .DeclareRoutingKey(AppSettings.RoutingKey)
                      .Bind();
 
             _transactionList = new List<RawTransaction>();
@@ -71,7 +71,7 @@ namespace Fanex.NAP.FPS.Renovation.RawTransaction.Service
 
                 _transactionList.Add(trans);
 
-                if (_transactionList.Count >= AppSetting.TransBatch)
+                if (_transactionList.Count >= AppSettings.TransBatch)
                 {
                     _capturingDataService.InsertTransaction(_transactionList);
 

@@ -24,17 +24,17 @@ namespace Fanex.NAP.FPS.Renovation.RawTransaction.Service
                  .StartNewSession()
                  .WithSqlServer()
                  .WithMySql() 
-                 .UseDefaultDbSettingProvider(resourcePath: AppSetting.AppDataSetting)
+                 .UseDefaultDbSettingProvider(resourcePath: AppSettings.AppDataSetting)
                  .UseDefaultConnectionStringProvider()
                  .Run();
 
              LogManager
-                .SetDefaultLogCategory(AppSetting.FanexLogCategory)
+                .SetDefaultLogCategory(AppSettings.FanexLogCategory)
                 .Use(new List<ILogEngine>
                 {
                     new SentryLogging(new SentryEngineOptions
                     {
-                        Dsn = new Dsn(AppSetting.SentryLogging)
+                        Dsn = new Dsn(AppSettings.SentryLogging)
                     })
                 });
 

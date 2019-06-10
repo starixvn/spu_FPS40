@@ -36,7 +36,7 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service
             timer = new Timer();
 
             timer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
-            timer.Interval = AppSetting.Interval;
+            timer.Interval = AppSettings.Interval;
             timer.Enabled = true;
         }
 

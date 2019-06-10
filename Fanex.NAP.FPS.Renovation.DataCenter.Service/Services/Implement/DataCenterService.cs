@@ -28,7 +28,7 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface
 
         public List<NewCustomer> GetNewCustomer()
         {
-            return dataCenter.GetNewCustomer();
+            return dataCenter.GetNewCustomer(AppSettings.TransBatch);
         }
 
         public DataResult UpdateCustomerInfo(List<CustomerInfo> customerInfo)

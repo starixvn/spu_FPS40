@@ -32,11 +32,14 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
             };
         }
 
-        public List<Model.NewCustomer> GetNewCustomer()
+        public List<Model.NewCustomer> GetNewCustomer(int size)
         {
             var repository = new DynamicRepository();
 
-            var criteria = new GetNewCustomerCriteria();
+            var criteria = new GetNewCustomerCriteria()
+            {
+                Size = size
+            };
 
             using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
