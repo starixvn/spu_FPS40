@@ -260,3 +260,9 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/Fanex.NAP.FPS.Renovation.Core/obj
+/Fanex.NAP.FPS.Renovation.Criteria/obj
+/Fanex.NAP.FPS.Renovation.Model/bin
+/Fanex.NAP.FPS.Renovation.Model/obj
+/Fanex.NAP.FPS.Renovation.Criteria/bin
+/Fanex.NAP.FPS.Renovation.Core/bin
