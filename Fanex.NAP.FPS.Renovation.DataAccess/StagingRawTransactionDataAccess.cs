@@ -10,17 +10,20 @@ using System.Threading.Tasks;
 
 namespace Fanex.NAP.FPS.Renovation.DataAccess
 {
-    public class StagingRawTransaction
+    public class StagingRawTransactionDataAccess
     {
-        public List<Model.StagingRawTransaction> GetStagingRawTrans()
+        public List<Model.StagingRawTransactionModel> GetStagingRawTrans(int isProcessed = 0)
         {
             var repository = new DynamicRepository();
 
-            var criteria = new GetStagingRawTransactionCriteria();
+            var criteria = new GetRawTransactionCriteria()
+            {
+                IsProcessed = isProcessed
+            };
 
             using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                return db.Query<Model.StagingRawTransaction>(criteria).ToList();
+                return db.Query<Model.StagingRawTransactionModel>(criteria).ToList();
             }
         }
     }

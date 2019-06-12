@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Fanex.Data;
+using Fanex.Data.MySql;
+using Fanex.NAP.FPS.Renovation.Core;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -13,7 +16,7 @@ namespace Fanex.NAP.FPS.Renovation.PresentData.API
     public class Program
     {
         public static void Main(string[] args)
-        {
+        {         
             CreateWebHostBuilder(args).Build().Run();
         }
 

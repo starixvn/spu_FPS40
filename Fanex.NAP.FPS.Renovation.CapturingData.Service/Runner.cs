@@ -17,7 +17,7 @@ namespace Fanex.NAP.FPS.Renovation.RawTransaction.Service
     {
         private static EasyNetQConnector _rabbitMQ;
         private ICapturingDataService _capturingDataService;
-        private static List<RawTransaction> _transactionList;
+        private static List<RawTransactionModel> _transactionList;
         public Runner()
         {
             InitializeComponent();
@@ -35,7 +35,7 @@ namespace Fanex.NAP.FPS.Renovation.RawTransaction.Service
                      .DeclareRoutingKey(AppSettings.RoutingKey)
                      .Bind();
 
-            _transactionList = new List<RawTransaction>();
+            _transactionList = new List<RawTransactionModel>();
         }
 
         protected override void OnStart(string[] args)
@@ -89,12 +89,12 @@ namespace Fanex.NAP.FPS.Renovation.RawTransaction.Service
             }
         }
 
-        private RawTransaction TransformRawTransaction(MessageQueue message)
+        private RawTransactionModel TransformRawTransaction(MessageQueue message)
         {
             var deviceCode = Utilities.GetDeviceCodeFromCapturedData(message.Device);
             var deviceInfo = _capturingDataService.GetDeviceInfo(deviceCode);
 
-            return new RawTransaction()
+            return new RawTransactionModel()
             {
                 DeviceCode = deviceInfo.DeviceNo,
                 LoginName = message.Account,

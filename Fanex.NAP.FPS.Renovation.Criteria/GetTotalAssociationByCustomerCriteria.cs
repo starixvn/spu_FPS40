@@ -2,17 +2,18 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Fanex.NAP.FPS.Renovation.Criteria
 {
-    public class GetStagingRawTransactionCriteria : CriteriaBase
+    public class GetTotalAssociationByCustomerCriteria : CriteriaBase
     {
+        public string CustIds { get; set; }
+
         public override string GetSettingKey()
         {
-            return "RT_StagingRawTransaction_GetProcessedTransList";
+            return "DC_GetTotalAssociationByCustomers";
         }
 
         public override bool IsValid()

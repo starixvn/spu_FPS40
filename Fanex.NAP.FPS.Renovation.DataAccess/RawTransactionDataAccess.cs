@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Fanex.NAP.FPS.Renovation.DataAccess
 {
-    public class RawTransaction
+    public class RawTransactionDataAccess
     {
         public void InsertTransaction(string xmlTrans)
         {

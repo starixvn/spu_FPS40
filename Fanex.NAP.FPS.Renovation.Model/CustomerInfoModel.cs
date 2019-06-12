@@ -2,7 +2,7 @@
 
 namespace Fanex.NAP.FPS.Renovation.Model
 {
-    public class CustomerInfo
+    public class CustomerInfoModel
     {
         public int AccountId { get; set; }
 

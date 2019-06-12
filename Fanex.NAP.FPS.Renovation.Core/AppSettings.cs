@@ -52,9 +52,6 @@
 
         public static int Interval => Convert.ToInt32(ConfigurationManager.AppSettings["Interval"]);
 
-        public static int TransBatch => Convert.ToInt32(ConfigurationManager.AppSettings["Trans-Batch"]);
-
-        public string SecretKey { get; set; }
-
+        public static int TransBatch => Convert.ToInt32(ConfigurationManager.AppSettings["Trans-Batch"]);           
     }
 }

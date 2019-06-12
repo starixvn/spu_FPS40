@@ -1,6 +1,6 @@
 ﻿namespace Fanex.NAP.FPS.Renovation.Model
 {
-    public class ScreenInfo
+    public class ScreenInfoModel
     {
         public int Width { get; set; }
 

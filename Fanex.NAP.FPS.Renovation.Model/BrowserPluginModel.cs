@@ -2,7 +2,7 @@
 
 namespace Fanex.NAP.FPS.Renovation.Model
 {
-    public class BrowserPlugin
+    public class BrowserPluginModel
     {
         public int Id { get; set; }
 

@@ -1,6 +1,6 @@
 ﻿namespace Fanex.NAP.FPS.Renovation.Model
 {
-    public class IpInfo
+    public class IpInfoModel
     {
         public string City { get; set; }
 

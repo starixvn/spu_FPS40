@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace Fanex.NAP.FPS.Renovation.Model
 {
-    public class StagingRawTransaction : RawTransaction
+    public class StagingRawTransactionModel : RawTransactionModel
     {
         public int StagingTransId { get; set; }
 

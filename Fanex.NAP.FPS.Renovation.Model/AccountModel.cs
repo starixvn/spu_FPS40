@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Fanex.NAP.FPS.Renovation.Model
 {
-   public class Account
+   public class AccountModel
     {
         public int AccountID { get; set; }
 

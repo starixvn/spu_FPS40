@@ -10,9 +10,9 @@ using Fanex.Data;
 
 namespace Fanex.NAP.FPS.Renovation.DataAccess
 {
-    public class Common
+    public class CommonDataAccess
     {
-        public IpInfo GetIpInfo(string ipAddress)
+        public IpInfoModel GetIpInfo(string ipAddress)
         {
             var criteria = new IpInfoCriteria()
             {
@@ -21,7 +21,7 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
 
             using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                return db.QueryEntity<IpInfo>(criteria);
+                return db.QueryEntity<IpInfoModel>(criteria);
             }
         }
     }

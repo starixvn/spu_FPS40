@@ -7,13 +7,7 @@
     public class InsertDataCenterTransactionCriteria : NonQueryCommand
     {
         [SpParam(SqlParamName = "ip_TransXml")]
-        public string StagingTransXml { get; set; }
-
-        [SpParam(SqlParamName = "op_ErrorCode")]
-        public int ErrCode { get; set; }
-
-        [SpParam(SqlParamName = "op_ErrorMessage")]
-        public string ErrMessage { get; set; }
+        public string StagingTransXml { get; set; }       
 
         public override string GetSettingKey() => "DC_DataCenter_ProcessTransaction";
 

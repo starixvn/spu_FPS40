@@ -7,23 +7,23 @@
 
     public class CapturingDataService : ICapturingDataService
     {
-        private readonly DataAccess.RawTransaction capturingData;
-        private readonly DataAccess.Common common;
+        private readonly DataAccess.RawTransactionDataAccess capturingData;
+        private readonly DataAccess.CommonDataAccess common;
         private const string _EMPTY = "-";
         public CapturingDataService()
         {
-            capturingData = new DataAccess.RawTransaction();
-            common = new DataAccess.Common();
+            capturingData = new DataAccess.RawTransactionDataAccess();
+            common = new DataAccess.CommonDataAccess();
         }
 
-        public void InsertTransaction(List<RawTransaction> rawTrans)
+        public void InsertTransaction(List<RawTransactionModel> rawTrans)
         {
             var model = Utilities.XMLConvert(rawTrans);
 
             capturingData.InsertTransaction(model);
         }
 
-        public DeviceInfo GetDeviceInfo(string deviceCode)
+        public DeviceInfoModel GetDeviceInfo(string deviceCode)
         {
             if (string.IsNullOrWhiteSpace(deviceCode))
             {
@@ -40,9 +40,9 @@
             return TransformEmptyDeviceInfo();
         }
 
-        private DeviceInfo TransformEmptyDeviceInfo()
+        private DeviceInfoModel TransformEmptyDeviceInfo()
         {
-            return new DeviceInfo
+            return new DeviceInfoModel
             {
                 AppVersion = "N/A",
                 CapturedDate = 0,
@@ -50,7 +50,7 @@
                 DeviceNo = "N/A",
                 HRef = "N/A",
                 NA = "N/A",
-                Screen = new ScreenInfo
+                Screen = new ScreenInfoModel
                 {
                     ColorDepth = 0,
                     Height = 0,
@@ -61,9 +61,9 @@
             };
         }
 
-        private DeviceInfo TransformDeviceInfo(DeviceDetector.Models.DeviceInfo deviceInfo)
+        private DeviceInfoModel TransformDeviceInfo(DeviceDetector.Models.DeviceInfo deviceInfo)
         {
-            return new DeviceInfo
+            return new DeviceInfoModel
             {
                 AppVersion = deviceInfo.AppVersion,
                 CapturedDate = deviceInfo.CapturedDate,
@@ -74,13 +74,13 @@
                 TimeZone = deviceInfo.TimeZone,
                 UserAgent = deviceInfo.UserAgent,
                 Screen = deviceInfo.Screen == null
-                    ? new ScreenInfo
+                    ? new ScreenInfoModel
                     {
                         ColorDepth = 0,
                         Height = 0,
                         Width = 0
                     }
-                    : new ScreenInfo
+                    : new ScreenInfoModel
                     {
                         ColorDepth = deviceInfo.Screen.ColorDepth,
                         Height = deviceInfo.Screen.Height,

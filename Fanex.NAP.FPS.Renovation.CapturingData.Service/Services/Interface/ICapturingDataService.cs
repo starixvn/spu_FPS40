@@ -5,8 +5,8 @@
 
     interface ICapturingDataService
     {     
-        void InsertTransaction(List<RawTransaction> rawTrans);
+        void InsertTransaction(List<RawTransactionModel> rawTrans);
 
-        DeviceInfo GetDeviceInfo(string deviceCode);
+        DeviceInfoModel GetDeviceInfo(string deviceCode);
     }
 }

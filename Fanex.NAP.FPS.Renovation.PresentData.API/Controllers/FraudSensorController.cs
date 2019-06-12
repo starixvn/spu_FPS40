@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Fanex.NAP.FPS.Renovation.Model;
+using Fanex.NAP.FPS.Renovation.PresentData.API.Services.Implement;
+using Fanex.NAP.FPS.Renovation.PresentData.API.Services.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,21 +14,17 @@ namespace Fanex.NAP.FPS.Renovation.PresentData.API.Controllers
     [ApiController]
     public class FraudSensorController : ControllerBase
     {
-        [HttpGet("{customers}")]
-        public JsonResult GetTotalAssociationByCustomer(string customers)
+        private readonly IFraudSensorService fraudSensorService;
+
+        public FraudSensorController()
         {
-            var data = new List<TotalAssociationByCustomer>();
+            fraudSensorService = new FraudSensorService();
+        }
 
-            data.Add(new TotalAssociationByCustomer {
-                CustId = 1,
-                TotalAssocaition = 2
-            });
-
-            data.Add(new TotalAssociationByCustomer
-            {
-                CustId = 3,
-                TotalAssocaition = 4
-            });
+        [HttpPost]
+        public JsonResult GetTotalAssociationByCustomer([FromBody] string custIds)
+        {
+            var data = fraudSensorService.GetTotalAssociationByCustomer(custIds);
 
             return new JsonResult(data);
         }
@@ -34,13 +32,9 @@ namespace Fanex.NAP.FPS.Renovation.PresentData.API.Controllers
         [HttpPost]
         public JsonResult GetAssociationByCustomer([FromBody] string custIds)
         {
-            return null;
-        }
+            var data = fraudSensorService.GetAssociationByCustomers(custIds);
 
-        [HttpPost]
-        public JsonResult GetEvidenceByCustomer()
-        {
-            return null;
-        }
+            return new JsonResult(data);
+        }       
     }
 }

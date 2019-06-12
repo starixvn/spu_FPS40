@@ -1,6 +1,6 @@
 ﻿namespace Fanex.NAP.FPS.Renovation.Model
 {
-    public class DeviceInfo
+    public class DeviceInfoModel
     {
         public string OSName { get; set; }
 
@@ -16,7 +16,7 @@
 
         public string UserAgent { get; set; }
 
-        public ScreenInfo Screen { get; set; }
+        public ScreenInfoModel Screen { get; set; }
 
         public string HRef { get; set; }
 

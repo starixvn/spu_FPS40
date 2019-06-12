@@ -11,13 +11,7 @@ namespace Fanex.NAP.FPS.Renovation.Criteria
     public class UpdateCustomerInfoCriteria : NonQueryCommand
     {
         [SpParam(SqlParamName = "custDataXml")]
-        public string CustDataXml { get; set; }
-
-        [SpParam(SqlParamName = "op_ErrorCode")]
-        public int ErrCode { get; set; }
-
-        [SpParam(SqlParamName = "op_ErrorMessage")]
-        public string ErrMessage { get; set; }
+        public string CustDataXml { get; set; }     
 
         public override string GetSettingKey()
         {

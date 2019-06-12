@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 namespace Fanex.NAP.FPS.Renovation.Model
 {
     [XmlType(TypeName = "customer")]
-    public class NewCustomer
+    public class NewCustomerModel
     {
         [XmlAttribute]
         public int AccountID { get; set; }

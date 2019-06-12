@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Fanex.NAP.FPS.Renovation.Model
 {
-   public class TotalAssociationByCustomer
+   public class TotalAssociationByCustomerModel
     {
         public int CustId { get; set; }
 
-        public int TotalAssocaition { get; set; }
+        public int TotalAssociation { get; set; }
     }
 }

@@ -10,10 +10,10 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface
 {
     interface IDataCenterService
     {
-        List<NewCustomer> GetNewCustomer();
+        List<NewCustomerModel> GetNewCustomer();
 
-        DataResult UpdateCustomerInfo(List<CustomerInfo> customerInfo);
+        DataResult UpdateCustomerInfo(List<CustomerInfoModel> customerInfo);
 
-        List<CustomerInfo> GetCustomerInfo(List<NewCustomer> newCustomers);
+        List<CustomerInfoModel> GetCustomerInfo(List<NewCustomerModel> newCustomers);
     }
 }

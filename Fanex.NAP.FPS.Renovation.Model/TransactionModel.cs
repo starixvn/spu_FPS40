@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 namespace Fanex.NAP.FPS.Renovation.Model
 {
     [XmlType(TypeName = "transaction")]
-    public class Transaction
+    public class TransactionModel
     {
         [XmlAttribute]
         public int StagingTransID { get; set; }

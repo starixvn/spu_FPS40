@@ -1,6 +1,6 @@
 ﻿namespace Fanex.NAP.FPS.Renovation.Model
 {
-    public class AssociationCustomer
+    public class AssociationModel
     {
         private string username2;
         private int? roleId;

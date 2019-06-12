@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 namespace Fanex.NAP.FPS.Renovation.Model
 {
     [XmlType(TypeName = "transaction")]
-    public class RawTransaction
+    public class RawTransactionModel
     {
         [XmlAttribute]
         public string DeviceCode { get; set; }

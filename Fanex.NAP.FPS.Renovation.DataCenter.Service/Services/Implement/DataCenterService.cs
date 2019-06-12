@@ -1,4 +1,5 @@
 ﻿using Fanex.NAP.FPS.Renovation.Core;
+using Fanex.NAP.FPS.Renovation.DataAccess;
 using Fanex.NAP.FPS.Renovation.Model;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,14 +8,14 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface
 {
     public class DataCenterService : IDataCenterService
     {
-        private readonly DataAccess.DataCenter dataCenter;
+        private readonly DataAccess.DataCenterDataAccess dataCenter;
         
         public DataCenterService()
         {
-            dataCenter = new DataAccess.DataCenter();
+            dataCenter = new DataCenterDataAccess();
         }
 
-        public List<CustomerInfo> GetCustomerInfo(List<NewCustomer> newCustomers)
+        public List<CustomerInfoModel> GetCustomerInfo(List<NewCustomerModel> newCustomers)
         {
             if (newCustomers != null && newCustomers.Any())
             {
@@ -23,15 +24,15 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface
                 return dataCenter.GetCustomerInfo(newXmlCustomer);
             }
 
-            return new List<CustomerInfo>();
+            return new List<CustomerInfoModel>();
         }
 
-        public List<NewCustomer> GetNewCustomer()
+        public List<NewCustomerModel> GetNewCustomer()
         {
             return dataCenter.GetNewCustomer(AppSettings.TransBatch);
         }
 
-        public DataResult UpdateCustomerInfo(List<CustomerInfo> customerInfo)
+        public DataResult UpdateCustomerInfo(List<CustomerInfoModel> customerInfo)
         {
             var newCustomerInfo = customerInfo.Select(x => TransformCustomerInfo(x)).ToList();
 
@@ -40,7 +41,7 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface
             return dataCenter.UpdateCustomerInfo(newXmlCustomerInfo);
         }
 
-        private NewCustomerInfo TransformCustomerInfo(CustomerInfo customerInfo)
+        private NewCustomerInfo TransformCustomerInfo(CustomerInfoModel customerInfo)
         {
             return new NewCustomerInfo()
             {

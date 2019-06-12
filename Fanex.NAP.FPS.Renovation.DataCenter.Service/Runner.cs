@@ -87,7 +87,7 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service
                             {
                                 var associationCustomer = TransformCustomerInfo(customer);
 
-                                var messageQueue = new Message<AssociationCustomer>(associationCustomer, new MessageProperties() { DeliveryMode = 2, Priority = 9 });
+                                var messageQueue = new Message<AssociationModel>(associationCustomer, new MessageProperties() { DeliveryMode = 2, Priority = 9 });
 
                                 _rabbitMQ.AdvanceBus.PublishAsync(_rabbitMQ.Exchange, _rabbitMQ.RoutingKey, false, messageQueue);
                             }
@@ -108,9 +108,9 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service
             }
         }
 
-        private AssociationCustomer TransformCustomerInfo(CustomerInfo customerInfo)
+        private AssociationModel TransformCustomerInfo(CustomerInfoModel customerInfo)
         {
-            return new AssociationCustomer()
+            return new AssociationModel()
             {
                 CreatedDate = customerInfo.CreatedDate.ToString("yyyy-MM-dd hh:mm:ss"),
                 CustId = customerInfo.CustId,

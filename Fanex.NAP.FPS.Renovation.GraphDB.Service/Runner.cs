@@ -36,16 +36,16 @@ namespace Fanex.NAP.FPS.Renovation.GraphDB.Service
             easyNetQService.Dispose();
         }
 
-        public void AddHandlerForGetMassage(Action<AssociationCustomer> handler)
+        public void AddHandlerForGetMassage(Action<AssociationModel> handler)
         {
             easyNetQService.AdvanceBus.Consume(easyNetQService.Queue,
-                registration => registration.Add<AssociationCustomer>((message, info) =>
+                registration => registration.Add<AssociationModel>((message, info) =>
                 {
                     handler(message.Body);
                 }));
         }
 
-        private void InsertCustomer(AssociationCustomer criteria)
+        private void InsertCustomer(AssociationModel criteria)
         {
             // ko luu SMA, chi luu member, roleid = 1
             if (criteria.RoleId == 1)

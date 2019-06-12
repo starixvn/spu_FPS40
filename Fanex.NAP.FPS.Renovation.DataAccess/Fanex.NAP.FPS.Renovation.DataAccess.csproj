@@ -77,11 +77,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RawTransaction.cs" />
-    <Compile Include="Common.cs" />
-    <Compile Include="DataCenter.cs" />
+    <Compile Include="AssociationDataAccess.cs" />
+    <Compile Include="RawTransactionDataAccess.cs" />
+    <Compile Include="CommonDataAccess.cs" />
+    <Compile Include="DataCenterDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StagingRawTransaction.cs" />
+    <Compile Include="StagingRawTransactionDataAccess.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
