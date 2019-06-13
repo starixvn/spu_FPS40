@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EasyNetQ" Version="3.5.1" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Fanex.NAP.FPS.Renovation.Core\Fanex.NAP.FPS.Renovation.Core.csproj" />
+    <ProjectReference Include="..\Fanex.NAP.FPS.Renovation.Model\Fanex.NAP.FPS.Renovation.Model.csproj" />
+    <ProjectReference Include="..\Fanex.NAP.FPS.Renovation.Queue\Fanex.NAP.FPS.Renovation.Queue.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Fanex.Oneyed.Infrastructure.Models">
+      <HintPath>..\Components\Fanex.Oneyed.Infrastructure.Models.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

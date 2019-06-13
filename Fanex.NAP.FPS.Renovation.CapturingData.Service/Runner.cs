@@ -11,7 +11,9 @@ namespace Fanex.NAP.FPS.Renovation.RawTransaction.Service
     using Fanex.Oneyed.Infrastructure.Models;
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.ServiceProcess;
+    using System.Text;
 
     public partial class Runner : ServiceBase
     {
@@ -35,17 +37,17 @@ namespace Fanex.NAP.FPS.Renovation.RawTransaction.Service
                      .DeclareRoutingKey(AppSettings.RoutingKey)
                      .Bind();
 
-            _transactionList = new List<RawTransactionModel>();
+            _transactionList = new List<RawTransactionModel>();           
         }
 
         protected override void OnStart(string[] args)
         {
-            ConsumerTransactions();            
+            ConsumerTransactions();
         }
 
         protected override void OnStop()
         {
-            _rabbitMQ.Dispose();            
+            _rabbitMQ.Dispose();
         }
 
         protected override void OnShutdown()
@@ -67,7 +69,7 @@ namespace Fanex.NAP.FPS.Renovation.RawTransaction.Service
         {
             try
             {
-                var trans = TransformRawTransaction(message);
+                var trans = TransformRawTransaction(message);                               
 
                 _transactionList.Add(trans);
 
@@ -76,17 +78,40 @@ namespace Fanex.NAP.FPS.Renovation.RawTransaction.Service
                     _capturingDataService.InsertTransaction(_transactionList);
 
                     _transactionList.Clear();
-
-                    Console.WriteLine(DateTime.Now);
                 }
             }
             catch (Exception ex)
             {
-                var logMessage = new LogMessage(ex.Message)                   
+                var logMessage = new LogMessage(ex.Message)
                     .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
 
                 LogService.Error(logMessage);
             }
+        }
+
+        private string TransformMessageQueueToString(MessageQueue message)
+        {
+            var result = new StringBuilder();
+
+            result.Append(message.Account);
+            result.Append("|");
+            result.Append(message.Action);
+            result.Append("|");
+            result.Append(message.ActionResult);
+            result.Append("|");
+            result.Append(message.Device);
+            result.Append("|");
+            result.Append(message.IP);
+            result.Append("|");
+            result.Append(message.Subscriber);
+            result.Append("|");
+            result.Append(message.SubscriberDate);
+            result.Append("|");
+            result.Append(message.Token);
+            result.Append("|");
+            result.Append(message.TransDate);
+
+            return result.ToString();
         }
 
         private RawTransactionModel TransformRawTransaction(MessageQueue message)

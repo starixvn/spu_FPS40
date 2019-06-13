@@ -40,12 +40,5 @@ namespace Fanex.NAP.FPS.Renovation.PresentData.API.Controllers
 
             return BadRequest("Invalid Request");
         }
-
-        [AllowAnonymous]
-        [HttpGet, Route("request")]
-        public IActionResult RequestToken()
-        {
-            return Ok("testing");
-        }
     }
 }

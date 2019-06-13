@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Fanex.NAP.FPS.Renovation.Model;
 using Fanex.NAP.FPS.Renovation.PresentData.API.Services.Implement;
 using Fanex.NAP.FPS.Renovation.PresentData.API.Services.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -35,6 +36,12 @@ namespace Fanex.NAP.FPS.Renovation.PresentData.API.Controllers
             var data = fraudSensorService.GetAssociationByCustomers(custIds);
 
             return new JsonResult(data);
-        }       
+        }
+
+        [Authorize]
+        public string Testing()
+        {
+            return "testing";
+        }
     }
 }

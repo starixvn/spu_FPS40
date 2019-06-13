@@ -8,13 +8,15 @@
     using System.Xml;
     using System.Xml.Serialization;
     using System.Linq;
+    using System.IO;
+
     public static class Utilities
     {
         public static string GetURLFromDeviceCode(string di)
         {
             if (string.IsNullOrWhiteSpace(di)) return string.Empty;
 
-            var requestData = di.Split(new[] {"###"}, StringSplitOptions.None);
+            var requestData = di.Split(new[] { "###" }, StringSplitOptions.None);
 
             var url = requestData.Length >= 8 ? requestData[7] : string.Empty;
 
@@ -99,6 +101,21 @@
                 .Select((v, i) => new { v, groupIndex = i / chunkSize })
                 .GroupBy(x => x.groupIndex)
                 .Select(g => g.Select(x => x.v));
+        }
+
+        public static void WriteLog(string filename, string content)
+        {
+            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filename);
+
+            File.AppendAllText(filePath, string.Format("{0}{1}", content, System.Environment.NewLine));
+        }
+
+        public static void WriteLogAllLine(string filename, string[] content)
+        {
+            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filename);
+
+            File.WriteAllLines(filePath, content);
+
         }
     }
 }
