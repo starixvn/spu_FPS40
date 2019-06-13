@@ -64,6 +64,8 @@ namespace Fanex.NAP.FPS.Renovation.DataImported.Service
                         }
                     }
                 }
+
+                Console.WriteLine(Path.GetFileName(file));
             }
 
             

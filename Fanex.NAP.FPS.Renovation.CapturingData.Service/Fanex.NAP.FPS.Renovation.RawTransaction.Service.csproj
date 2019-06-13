@@ -72,8 +72,8 @@
     <Reference Include="Fanex.Logging.Extensions, Version=1.0.6.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.Logging.Extensions.1.0.6\lib\net461\Fanex.Logging.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.Logging.Extensions.Database, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.Logging.Extensions.Database.1.0.5\lib\net461\Fanex.Logging.Extensions.Database.dll</HintPath>
+    <Reference Include="Fanex.Logging.Extensions.Database, Version=1.0.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.Logging.Extensions.Database.1.0.6-beta1\lib\net461\Fanex.Logging.Extensions.Database.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Logging.Sentry.RavenClient, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.Logging.Sentry.RavenClient.1.0.1\lib\net461\Fanex.Logging.Sentry.RavenClient.dll</HintPath>
@@ -145,6 +145,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <Content Include="Fanex.NAP.FPS.Renovation.RawTransaction.Service.exe.PRO.config">
+      <DependentUpon>App.config</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fanex.NAP.FPS.Renovation.RawTransaction.Service.exe.UAT.config">
+      <DependentUpon>App.config</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fanex.NAP.FPS.Renovation.RawTransaction.Service.exe.LOCAL.config">
+      <DependentUpon>App.config</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

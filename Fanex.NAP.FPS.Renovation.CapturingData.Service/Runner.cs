@@ -1,17 +1,13 @@
-﻿using Org.BouncyCastle.Crypto.Agreement;
-
-namespace Fanex.NAP.FPS.Renovation.RawTransaction.Service
+﻿namespace Fanex.NAP.FPS.Renovation.RawTransaction.Service
 {
     using Fanex.Logging;
     using Fanex.Logging.Extensions;
-    using Fanex.Logging.Extensions.Database;
     using Fanex.NAP.FPS.Renovation.Core;
     using Fanex.NAP.FPS.Renovation.Model;
     using Fanex.NAP.FPS.Renovation.Queue;
     using Fanex.Oneyed.Infrastructure.Models;
     using System;
     using System.Collections.Generic;
-    using System.IO;
     using System.ServiceProcess;
     using System.Text;
 
@@ -82,7 +78,7 @@ namespace Fanex.NAP.FPS.Renovation.RawTransaction.Service
             }
             catch (Exception ex)
             {
-                var logMessage = new LogMessage(ex.Message)
+                var logMessage = new LogMessage(ex.Message)                    
                     .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
 
                 LogService.Error(logMessage);

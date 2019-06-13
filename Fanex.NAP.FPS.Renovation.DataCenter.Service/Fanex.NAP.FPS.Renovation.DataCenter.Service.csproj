@@ -69,6 +69,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <Content Include="Fanex.NAP.FPS.Renovation.DataCenter.Service.exe.LOCAL.config">
+      <DependentUpon>App.config</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fanex.NAP.FPS.Renovation.DataCenter.Service.exe.PRO.config">
+	<DependentUpon>App.config</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fanex.NAP.FPS.Renovation.DataCenter.Service.exe.UAT.config">
+	<DependentUpon>App.config</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.NAP.FPS.Renovation.Core\Fanex.NAP.FPS.Renovation.Core.csproj">

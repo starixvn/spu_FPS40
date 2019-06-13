@@ -65,9 +65,7 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service
                     {
                         if (rawData.Any())
                         {
-                           insertResult = dataTransformService.InsertTransaction(rawData.ToList());
-
-                            Console.WriteLine(DateTime.Now);
+                           insertResult = dataTransformService.InsertTransaction(rawData.ToList());                           
                         }
                     }
                 }                
@@ -82,8 +80,7 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service
 
                 var logMessage = new LogMessage(ex.Message)
                     .AddSection("Data Info", errorHanler)
-                    .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex))
-                    
+                    .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex))                    
                     .ToString();
 
                 LogService.Error(logMessage);
