@@ -31,7 +31,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebAPI", "WebAPI", "{CB3801
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fanex.NAP.FPS.Renovation.PresentData.API", "Fanex.NAP.FPS.Renovation.PresentData.API\Fanex.NAP.FPS.Renovation.PresentData.API.csproj", "{60E8C49E-3734-4DA6-AEEE-783A13D78512}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAP.FPS.Renovation.DataImported.Service", "Fanex.NAP.FPS.Renovation.DataImported.Service\Fanex.NAP.FPS.Renovation.DataImported.Service.csproj", "{7E8903EB-95CA-43C1-A866-BC9AAD9C136F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fanex.NAP.FPS.Renovation.DataImported.Service", "Fanex.NAP.FPS.Renovation.DataImported.Service\Fanex.NAP.FPS.Renovation.DataImported.Service.csproj", "{7E8903EB-95CA-43C1-A866-BC9AAD9C136F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAP.FPS.Renovation.DataCatching.Service", "Fanex.NAP.FPS.Renovation.DataCatching.Service\Fanex.NAP.FPS.Renovation.DataCatching.Service.csproj", "{51C5873C-D40C-4B76-A631-AF183D3D3D0A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,6 +85,10 @@ Global
 		{7E8903EB-95CA-43C1-A866-BC9AAD9C136F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E8903EB-95CA-43C1-A866-BC9AAD9C136F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E8903EB-95CA-43C1-A866-BC9AAD9C136F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51C5873C-D40C-4B76-A631-AF183D3D3D0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51C5873C-D40C-4B76-A631-AF183D3D3D0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51C5873C-D40C-4B76-A631-AF183D3D3D0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51C5873C-D40C-4B76-A631-AF183D3D3D0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -99,6 +105,7 @@ Global
 		{763BB29F-AFBC-4039-BFF7-72F571880A08} = {B6BDC55E-99F2-4170-9042-87B0374F72C1}
 		{60E8C49E-3734-4DA6-AEEE-783A13D78512} = {CB3801AF-986F-4AE4-AB99-75B9F05A3975}
 		{7E8903EB-95CA-43C1-A866-BC9AAD9C136F} = {B6BDC55E-99F2-4170-9042-87B0374F72C1}
+		{51C5873C-D40C-4B76-A631-AF183D3D3D0A} = {B6BDC55E-99F2-4170-9042-87B0374F72C1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9D882FBC-31B6-450C-9F38-878C58354454}
