@@ -19,11 +19,11 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service
         static void Main(string[] args)
         {
             DbSettingProviderManager
-                .StartNewSession()
-                .WithMySql()
-                .UseDefaultDbSettingProvider(resourcePath: AppSettings.AppDataSetting)
-                .UseDefaultConnectionStringProvider()
-                .Run();
+                  .StartNewSession()                  
+                  .WithMySql()
+                  .UseDefaultDbSettingProvider(resourcePath: AppSettings.AppDataSetting)
+                  .UseDefaultConnectionStringProvider()
+                  .Run();
 
             LogManager
                 .SetDefaultLogCategory(AppSettings.FanexLogCategory)
