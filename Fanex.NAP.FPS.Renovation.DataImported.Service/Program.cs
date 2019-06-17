@@ -5,6 +5,7 @@ using Fanex.Oneyed.Infrastructure.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Fanex.NAP.FPS.Renovation.DataImported.Service
 {
@@ -30,6 +31,15 @@ namespace Fanex.NAP.FPS.Renovation.DataImported.Service
 
         }
 
+        private static Random random = new Random();
+
+        static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
         static void ReadDataFromConfig()
         {
             var files = Directory.GetFiles(@"D:\Projects\FPS 4.0\SubscriberTickets");
@@ -47,7 +57,7 @@ namespace Fanex.NAP.FPS.Renovation.DataImported.Service
                         {
                             var objectData = new MessageQueue()
                             {
-                                Account = splitingData[0],
+                                Account = RandomString(10),
                                 Action = splitingData[1],
                                 ActionResult = splitingData[2],
                                 Device = splitingData[3],

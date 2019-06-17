@@ -38,10 +38,11 @@ namespace Fanex.NAP.FPS.Renovation.PresentData.API.Controllers
             return new JsonResult(data);
         }
 
-        [Authorize]
-        public string Testing()
+       // [Authorize]
+       [HttpGet]
+        public JsonResult Testing()
         {
-            return "testing";
+            return new JsonResult("testing");
         }
     }
 }
