@@ -1,21 +1,14 @@
-﻿using Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Interface;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.ServiceProcess;
-using System.Text;
-using System.Threading.Tasks;
-using System.Timers;
+﻿using Fanex.Logging;
+using Fanex.Logging.Extensions;
 using Fanex.NAP.FPS.Renovation.Core;
 using Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Implement;
+using Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Interface;
 using Fanex.NAP.FPS.Renovation.Model;
-using Fanex.Logging.Extensions;
-using Fanex.Logging;
-using Fanex.Logging.Extensions.Database;
-using System.Threading;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.ServiceProcess;
+using System.Timers;
 
 namespace Fanex.NAP.FPS.Renovation.DataTransform.Service
 {

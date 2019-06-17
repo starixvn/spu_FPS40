@@ -6,11 +6,8 @@ using Fanex.NAP.FPS.Renovation.Core;
 using Sentry;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.ServiceProcess;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fanex.NAP.FPS.Renovation.DataTransform.Service
 {
