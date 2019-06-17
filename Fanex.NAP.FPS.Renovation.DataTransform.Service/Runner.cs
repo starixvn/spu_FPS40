@@ -15,13 +15,14 @@ using Fanex.NAP.FPS.Renovation.Model;
 using Fanex.Logging.Extensions;
 using Fanex.Logging;
 using Fanex.Logging.Extensions.Database;
+using System.Threading;
 
 namespace Fanex.NAP.FPS.Renovation.DataTransform.Service
 {
     public partial class Runner : ServiceBase
     {
         private static IDataTransformService dataTransformService;
-        private static Timer timer;
+        private static System.Timers.Timer timer;
         private static bool isRunning;
         public Runner()
         {
@@ -33,11 +34,16 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service
 
         protected override void OnStart(string[] args)
         {
-            timer = new Timer();
+            timer = new System.Timers.Timer();            
 
-            timer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
-            timer.Interval = AppSettings.Interval;
-            timer.Enabled = true;
+            ThreadPool.QueueUserWorkItem(new WaitCallback((_) =>
+            {
+                Thread.Sleep(1000 * 10);
+
+                timer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
+                timer.Interval = AppSettings.Interval;
+                timer.Enabled = true;
+            }));
         }
 
         protected override void OnStop()
