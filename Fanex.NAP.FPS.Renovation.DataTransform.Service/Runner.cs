@@ -34,14 +34,14 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service
 
         protected override void OnStart(string[] args)
         {
-            timer = new System.Timers.Timer();            
+            timer = new System.Timers.Timer();
+            timer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
+            timer.Interval = AppSettings.Interval;
 
             ThreadPool.QueueUserWorkItem(new WaitCallback((_) =>
             {
                 Thread.Sleep(1000 * 10);
-
-                timer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
-                timer.Interval = AppSettings.Interval;
+                
                 timer.Enabled = true;
             }));
         }
