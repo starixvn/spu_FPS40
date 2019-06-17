@@ -83,32 +83,7 @@
 
                 LogService.Error(logMessage);
             }
-        }
-
-        private string TransformMessageQueueToString(MessageQueue message)
-        {
-            var result = new StringBuilder();
-
-            result.Append(message.Account);
-            result.Append("|");
-            result.Append(message.Action);
-            result.Append("|");
-            result.Append(message.ActionResult);
-            result.Append("|");
-            result.Append(message.Device);
-            result.Append("|");
-            result.Append(message.IP);
-            result.Append("|");
-            result.Append(message.Subscriber);
-            result.Append("|");
-            result.Append(message.SubscriberDate);
-            result.Append("|");
-            result.Append(message.Token);
-            result.Append("|");
-            result.Append(message.TransDate);
-
-            return result.ToString();
-        }
+        }        
 
         private RawTransactionModel TransformRawTransaction(MessageQueue message)
         {

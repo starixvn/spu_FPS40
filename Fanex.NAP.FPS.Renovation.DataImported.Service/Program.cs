@@ -32,7 +32,7 @@ namespace Fanex.NAP.FPS.Renovation.DataImported.Service
 
         static void ReadDataFromConfig()
         {
-            var files = Directory.GetFiles(@"D:\Projects\FPS 4.0\fps40\Fanex.NAP.FPS.Renovation.DataImported.Service\App_Data");
+            var files = Directory.GetFiles(@"D:\Projects\FPS 4.0\SubscriberTickets");
             
             foreach (var file in files)
             {
