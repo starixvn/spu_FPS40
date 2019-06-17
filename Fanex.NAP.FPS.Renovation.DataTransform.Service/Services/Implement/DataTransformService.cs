@@ -1,15 +1,12 @@
-﻿using Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BrowserNET;
 using Fanex.NAP.FPS.Renovation.Core;
 using Fanex.NAP.FPS.Renovation.DataAccess;
-using StagingRawTransactionModel = Fanex.NAP.FPS.Renovation.Model.StagingRawTransactionModel;
+using Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Interface;
 using Fanex.NAP.FPS.Renovation.Model;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
-using BrowserNET;
+using StagingRawTransactionModel = Fanex.NAP.FPS.Renovation.Model.StagingRawTransactionModel;
 
 namespace Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Implement
 {
