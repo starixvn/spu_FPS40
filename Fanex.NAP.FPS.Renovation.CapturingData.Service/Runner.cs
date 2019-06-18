@@ -38,19 +38,33 @@
 
         protected override void OnStart(string[] args)
         {
-            ConsumerTransactions();
+            try
+            {
+                ConsumerTransactions();
+
+                LogService.Info($"Raw trans service is STARTED at {DateTime.Now}");
+            }
+            catch (Exception ex)
+            {
+                var logMessage = new LogMessage(ex.Message)
+                    .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
+
+                LogService.Error(logMessage);
+            }        
         }
 
         protected override void OnStop()
         {
             _rabbitMQ.Dispose();
+
+            LogService.Info($"Raw trans service is STOPED at {DateTime.Now}");
         }
 
         protected override void OnShutdown()
         {
             _rabbitMQ.Dispose();
 
-            LogService.Info("Capturing data service has been shut down.");
+            LogService.Info($"Raw trans service is STOPED at {DateTime.Now}");
         }
 
         private void ConsumerTransactions()
@@ -63,25 +77,15 @@
 
         private void ProcessMessage(MessageQueue message)
         {
-            try
+            var trans = TransformRawTransaction(message);
+
+            _transactionList.Add(trans);
+
+            if (_transactionList.Count >= AppSettings.TransBatch)
             {
-                var trans = TransformRawTransaction(message);                               
+                _capturingDataService.InsertTransaction(_transactionList);
 
-                _transactionList.Add(trans);
-
-                if (_transactionList.Count >= AppSettings.TransBatch)
-                {
-                    _capturingDataService.InsertTransaction(_transactionList);
-
-                    _transactionList.Clear();
-                }
-            }
-            catch (Exception ex)
-            {
-                var logMessage = new LogMessage(ex.Message)                    
-                    .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
-
-                LogService.Error(logMessage);
+                _transactionList.Clear();
             }
         }        
 

@@ -31,18 +31,16 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service
             timer = new System.Timers.Timer();
             timer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
             timer.Interval = AppSettings.Interval;
+            timer.Enabled = true;
 
-            ThreadPool.QueueUserWorkItem(new WaitCallback((_) =>
-            {
-                Thread.Sleep(1000 * 10);
-
-                timer.Enabled = true;
-            }));
+            LogService.Info($"Data Transform service is STARTED at {DateTime.Now}");
         }
 
         protected override void OnStop()
         {
             timer.Dispose();
+
+            LogService.Info($"Data Transform service is STOPED at {DateTime.Now}");
         }
 
         private static void OnTimedEvent(object source, ElapsedEventArgs e)
@@ -55,11 +53,12 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service
 
                 isRunning = true;
 
-                var result = dataTransformService.GetStagingRawTransaction();                
-
+                var result = dataTransformService.GetStagingRawTransaction(AppSettings.TransBatch);
+                
                 if (result != null && result.Any())
                 {
-                    var chunkResult = result.Chunk(100);
+                    var chunkSize = AppSettings.TransBatch / 10;
+                    var chunkResult = result.Chunk(chunkSize);
 
                     foreach (var rawData in chunkResult)
                     {

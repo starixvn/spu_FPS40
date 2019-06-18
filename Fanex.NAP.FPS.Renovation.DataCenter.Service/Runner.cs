@@ -54,13 +54,16 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service
             timer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
             timer.Interval = AppSettings.Interval;
             timer.Enabled = true;
-            
+
+            LogService.Info($"Data Center service is STARTED at {DateTime.Now}");
         }
 
         protected override void OnStop()
         {
             timer.Dispose();
             _rabbitMQ.Dispose();
+
+            LogService.Info($"Data Center service is STOPED at {DateTime.Now}");
         }
 
         private void OnTimedEvent(object source, ElapsedEventArgs e)
@@ -71,7 +74,7 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service
 
                 isRunning = true;
 
-                var newCustomer = dataCenterService.GetNewCustomer();
+                var newCustomer = dataCenterService.GetNewCustomer(AppSettings.TransBatch);
 
                 if (newCustomer != null && newCustomer.Any())
                 {

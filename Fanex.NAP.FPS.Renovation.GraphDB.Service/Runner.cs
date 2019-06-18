@@ -1,4 +1,6 @@
 ﻿using Fanex.Graph.Data;
+using Fanex.Logging;
+using Fanex.Logging.Extensions;
 using Fanex.NAP.FPS.Renovation.Model;
 using Fanex.NAP.FPS.Renovation.Queue;
 using System;
@@ -101,7 +103,11 @@ namespace Fanex.NAP.FPS.Renovation.GraphDB.Service
                     }
                     catch (Exception ex)
                     {
-                        //Log error;
+                        var logMessage = new LogMessage(ex.Message)                         
+                         .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex))
+                         .ToString();
+
+                        LogService.Error(logMessage);
                     }
                 }
             }

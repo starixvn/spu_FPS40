@@ -14,6 +14,9 @@ namespace Fanex.NAP.FPS.Renovation.Criteria
         [SpParam(SqlParamName = "ip_IsProcessed")]
         public int IsProcessed { get; set; }
 
+        [SpParam(SqlParamName = "ip_NoOfTickets")]
+        public int NumberOfTickets { get; set; }
+
         public override string GetSettingKey()
         {
             return "ST_RawTransaction_GetTransactionList";

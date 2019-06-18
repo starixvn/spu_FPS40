@@ -1,5 +1,8 @@
 ﻿using Fanex.Graph.Data;
+using Fanex.Logging;
+using Fanex.Logging.Sentry.RavenClient;
 using Fanex.NAP.FPS.Renovation.GraphDB.Service.Neo4j;
+using SharpRaven;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +27,16 @@ namespace Fanex.NAP.FPS.Renovation.GraphDB.Service
                 .RegisterCommandBuilder(new Neo4jCommandBuilder("~/App_Data/scripts"))
                 .RegisterCommandExecutor(new Neo4jExecutor())
                 .Run();
+
+            LogManager
+                .SetDefaultLogCategory(Core.AppSettings.FanexLogCategory)
+                .Use(new List<ILogEngine>
+                {
+                    new SentryLogging(new SentryEngineOptions
+                    {
+                        Dsn = new Dsn(Core.AppSettings.SentryLogging)
+                    })
+                });
 
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
