@@ -2,11 +2,8 @@
 using Fanex.Data.Repository;
 using Fanex.NAP.FPS.Renovation.Criteria;
 using Fanex.NAP.FPS.Renovation.Model;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fanex.NAP.FPS.Renovation.DataAccess
 {
@@ -39,6 +36,16 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
             using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
                 return db.Query<AssociationByCustomerModel>(criteria).ToList();
+            }
+        }
+
+        public List<CustomerEvidence> GetCustomersEvidences(ICriteria criteria)
+        {
+            var repository = new DynamicRepository();
+
+            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
+            {
+                return db.Query<CustomerEvidence>(criteria).ToList();
             }
         }
     }

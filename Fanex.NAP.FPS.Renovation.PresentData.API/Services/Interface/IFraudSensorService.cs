@@ -1,9 +1,6 @@
-﻿using Fanex.NAP.FPS.Renovation.Model;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using Fanex.Data.Repository;
+using Fanex.NAP.FPS.Renovation.Model;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Fanex.NAP.FPS.Renovation.PresentData.API.Services.Interface
 {
@@ -12,5 +9,7 @@ namespace Fanex.NAP.FPS.Renovation.PresentData.API.Services.Interface
         List<TotalAssociationByCustomerModel> GetTotalAssociationByCustomer(string custIds);
 
         List<AssociationByCustomerModel> GetAssociationByCustomers(string custIds);
+
+        List<CustomerEvidence> GetCustomersEvidences(ICriteria criteria);
     }
 }

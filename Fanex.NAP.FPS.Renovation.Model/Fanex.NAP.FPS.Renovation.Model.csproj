@@ -108,6 +108,7 @@
     <Compile Include="AssociationModel.cs" />
     <Compile Include="AssociationByCustomerModel.cs" />
     <Compile Include="BrowserPluginModel.cs" />
+    <Compile Include="CustomerEvidence.cs" />
     <Compile Include="CustomerInfoModel.cs" />
     <Compile Include="DataResult.cs" />
     <Compile Include="DeviceInfoModel.cs" />

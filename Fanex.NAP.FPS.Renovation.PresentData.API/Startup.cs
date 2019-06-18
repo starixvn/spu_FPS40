@@ -88,6 +88,7 @@ namespace Fanex.NAP.FPS.Renovation.PresentData.API
             //app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             //app.UseAuthentication();
             //app.UseHttpsRedirection();
+
             app.UseMvc();
         }
     }

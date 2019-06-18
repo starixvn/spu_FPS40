@@ -4,5 +4,6 @@
   <Function Name="Fraud Sensor">
     <Setting Key="DC_GetTotalAssociationByCustomers" SpName="DC_GetTotalAssociationByCustomers" DbName="MySQL.FPS_DataCenter"/>
     <Setting Key="DC_GetAssociationByCustomers" SpName="DC_GetAssociationByCustomers" DbName="MySQL.FPS_DataCenter"/>
+    <Setting Key="DC_GetEvidencesByCustomers" SpName="DC_GetEvidencesByCustomers" DbName="MySQL.FPS_DataCenter"/>
   </Function>
 </Functions>
