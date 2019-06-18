@@ -2,9 +2,9 @@
 using Fanex.Data.MySql;
 using Fanex.Data.SqlServer;
 using Fanex.Logging;
-using Fanex.Logging.Sentry;
+using Fanex.Logging.Sentry.RavenClient;
 using Fanex.NAP.FPS.Renovation.Core;
-using Sentry;
+using SharpRaven;
 using System;
 using System.Collections.Generic;
 using System.Reflection;

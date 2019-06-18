@@ -74,11 +74,11 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Fanex.NAP.FPS.Renovation.DataCenter.Service.exe.PRO.config">
-	<DependentUpon>App.config</DependentUpon>
+      <DependentUpon>App.config</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Fanex.NAP.FPS.Renovation.DataCenter.Service.exe.UAT.config">
-	<DependentUpon>App.config</DependentUpon>
+      <DependentUpon>App.config</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -108,20 +108,29 @@
     <PackageReference Include="EasyNetQ">
       <Version>3.5.1</Version>
     </PackageReference>
+    <PackageReference Include="Fanex.Data">
+      <Version>4.0.1</Version>
+    </PackageReference>
     <PackageReference Include="Fanex.Data.MySql">
-      <Version>4.0.0-beta2</Version>
+      <Version>4.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Fanex.Data.Repository">
+      <Version>4.0.1</Version>
     </PackageReference>
     <PackageReference Include="Fanex.Data.SqlServer">
-      <Version>4.0.0-beta2</Version>
+      <Version>4.0.1</Version>
     </PackageReference>
     <PackageReference Include="Fanex.Logging">
       <Version>2.0.1</Version>
     </PackageReference>
-    <PackageReference Include="Fanex.Logging.Extensions.Database">
-      <Version>1.0.5</Version>
-    </PackageReference>
-    <PackageReference Include="Fanex.Logging.Sentry">
+    <PackageReference Include="Fanex.Logging.Extensions">
       <Version>1.0.6</Version>
+    </PackageReference>
+    <PackageReference Include="Fanex.Logging.Extensions.Database">
+      <Version>1.0.6-beta1</Version>
+    </PackageReference>
+    <PackageReference Include="Fanex.Logging.Sentry.RavenClient">
+      <Version>1.0.1</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.2</Version>
