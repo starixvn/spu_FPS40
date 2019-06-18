@@ -16,17 +16,17 @@ namespace Fanex.NAP.FPS.Renovation.PresentData.API.Services.Implement
 
         public List<TotalAssociationByCustomerModel> GetTotalAssociationByCustomer(ICriteria criteria)
         {
-            return associationDataAccess.GetTotalAssociationByCustomer(criteria);
+            return associationDataAccess.GetData<TotalAssociationByCustomerModel>(criteria);
         }
 
         public List<AssociationByCustomerModel> GetAssociationByCustomers(ICriteria criteria)
         {
-            return associationDataAccess.GetAssociationByCustomer(criteria);
+            return associationDataAccess.GetData<AssociationByCustomerModel>(criteria);
         }             
 
         public List<CustomerEvidence> GetCustomersEvidences(ICriteria criteria)
         {
-            return associationDataAccess.GetCustomersEvidences(criteria);
+            return associationDataAccess.GetData<CustomerEvidence>(criteria);
         }
     }
 }
