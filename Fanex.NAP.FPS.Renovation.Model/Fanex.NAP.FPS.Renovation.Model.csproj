@@ -123,6 +123,7 @@
     <Compile Include="TotalAssociationByCustomerModel.cs" />
     <Compile Include="TransactionModel.cs" />
     <Compile Include="StagingRawTransactionModel.cs" />
+    <Compile Include="UserModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

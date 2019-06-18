@@ -7,6 +7,7 @@ using Fanex.Data;
 using Fanex.Data.MySql;
 using Fanex.NAP.FPS.Renovation.Core;
 using Fanex.NAP.FPS.Renovation.Model;
+using Fanex.NAP.FPS.Renovation.PresentData.API.Auth;
 using Fanex.NAP.FPS.Renovation.PresentData.API.Services.Implement;
 using Fanex.NAP.FPS.Renovation.PresentData.API.Services.Interface;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -35,6 +36,8 @@ namespace Fanex.NAP.FPS.Renovation.PresentData.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddJwt(Configuration);
+            //services.AddUserService(Configuration);
 
             var connections = Configuration.GetSection("ConnectionStrings").GetChildren();
             var connectionString = connections.ToDictionary(x => x.Key, x => new ConnectionConfiguration(x.Key, x.GetSection("ConnectionString").Value, x.GetSection("ProviderName").Value));
@@ -89,6 +92,7 @@ namespace Fanex.NAP.FPS.Renovation.PresentData.API
             //app.UseAuthentication();
             //app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseMvc();
         }
     }
