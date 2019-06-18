@@ -6,9 +6,9 @@ namespace Fanex.NAP.FPS.Renovation.PresentData.API.Services.Interface
 {
     public interface IFraudSensorService
     {
-        List<TotalAssociationByCustomerModel> GetTotalAssociationByCustomer(string custIds);
+        List<TotalAssociationByCustomerModel> GetTotalAssociationByCustomer(ICriteria criteria);
 
-        List<AssociationByCustomerModel> GetAssociationByCustomers(string custIds);
+        List<AssociationByCustomerModel> GetAssociationByCustomers(ICriteria criteria);
 
         List<CustomerEvidence> GetCustomersEvidences(ICriteria criteria);
     }

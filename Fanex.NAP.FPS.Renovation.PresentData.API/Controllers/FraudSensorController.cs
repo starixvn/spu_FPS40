@@ -17,23 +17,23 @@ namespace Fanex.NAP.FPS.Renovation.PresentData.API.Controllers
         }
 
         [HttpPost]
-        public JsonResult GetTotalAssociationByCustomer([FromBody] string custIds)
+        public JsonResult GetTotalAssociationByCustomer([FromBody]GetTotalAssociationByCustomerCriteria criteria)
         {
-            var data = fraudSensorService.GetTotalAssociationByCustomer(custIds);
+            var data = fraudSensorService.GetTotalAssociationByCustomer(criteria);
 
             return new JsonResult(data);
         }
 
         [HttpPost]
-        public JsonResult GetAssociationByCustomer([FromBody] string custIds)
+        public JsonResult GetAssociationByCustomer([FromBody]GetAssociationByCustomerCriteria criteria)
         {
-            var data = fraudSensorService.GetAssociationByCustomers(custIds);
+            var data = fraudSensorService.GetAssociationByCustomers(criteria);
 
             return new JsonResult(data);
         }
 
         [HttpPost]      
-        public JsonResult GetEvidencesByCustomers(GetCustomersEvidencesCriteria criteria)
+        public JsonResult GetEvidencesByCustomers([FromBody]GetCustomersEvidencesCriteria criteria)
         {
             var data = fraudSensorService.GetCustomersEvidences(criteria);
 

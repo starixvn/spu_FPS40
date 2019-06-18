@@ -4,9 +4,9 @@ namespace Fanex.NAP.FPS.Renovation.Criteria
 {
     public class GetCustomersEvidencesCriteria : CriteriaBase
     {
-        public string custIds { get; set; }
+        public string CustIds { get; set; }
 
-        public string evidences { get; set; }
+        public string Evidences { get; set; }
 
         public override string GetSettingKey()
         {

@@ -11,6 +11,8 @@ namespace Fanex.NAP.FPS.Renovation.Criteria
     {
         public string CustIds { get; set; }
 
+        public int RoleId { get; set; }
+
         public override string GetSettingKey()
         {
             return "DC_GetAssociationByCustomers";

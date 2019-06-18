@@ -14,15 +14,15 @@ namespace Fanex.NAP.FPS.Renovation.PresentData.API.Services.Implement
             associationDataAccess = new AssociationDataAccess();
         }
 
-        public List<AssociationByCustomerModel> GetAssociationByCustomers(string custIds)
+        public List<TotalAssociationByCustomerModel> GetTotalAssociationByCustomer(ICriteria criteria)
         {
-            return associationDataAccess.GetAssociationByCustomer(custIds);
-        }      
-
-        public List<TotalAssociationByCustomerModel> GetTotalAssociationByCustomer(string custIds)
-        {
-            return associationDataAccess.GetTotalAssociationByCustomer(custIds);
+            return associationDataAccess.GetTotalAssociationByCustomer(criteria);
         }
+
+        public List<AssociationByCustomerModel> GetAssociationByCustomers(ICriteria criteria)
+        {
+            return associationDataAccess.GetAssociationByCustomer(criteria);
+        }             
 
         public List<CustomerEvidence> GetCustomersEvidences(ICriteria criteria)
         {

@@ -9,14 +9,9 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
 {
     public class AssociationDataAccess
     {
-        public List<TotalAssociationByCustomerModel> GetTotalAssociationByCustomer(string custIds)
+        public List<TotalAssociationByCustomerModel> GetTotalAssociationByCustomer(ICriteria criteria)
         {
             var repository = new DynamicRepository();
-
-            var criteria = new GetTotalAssociationByCustomerCriteria()
-            {
-              CustIds = custIds
-            };
 
             using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
@@ -24,14 +19,9 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
             }
         }
 
-        public List<AssociationByCustomerModel> GetAssociationByCustomer(string custIds)
+        public List<AssociationByCustomerModel> GetAssociationByCustomer(ICriteria criteria)
         {
             var repository = new DynamicRepository();
-
-            var criteria = new GetAssociationByCustomerCriteria()
-            {
-                CustIds = custIds
-            };
 
             using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
