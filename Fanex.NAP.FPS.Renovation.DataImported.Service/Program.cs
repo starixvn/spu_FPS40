@@ -49,7 +49,7 @@ namespace Fanex.NAP.FPS.Renovation.DataImported.Service
                 var fileName = Path.GetFileName(file);
                 if (fileName == "IBO.txt")
                 {
-
+                    Utilities.DeleteLog(fileName);
 
                     var dataLog = File.ReadAllLines(file);
 
@@ -60,9 +60,13 @@ namespace Fanex.NAP.FPS.Renovation.DataImported.Service
                             var splitingData = log.Split('|');
                             if (splitingData.Length >= 9)
                             {
+                                splitingData[0] = RandomString(10);
+                                
+                                Utilities.WriteLog(fileName, string.Join("|", splitingData));
+
                                 var objectData = new MessageQueue()
                                 {
-                                    Account = RandomString(10),
+                                    Account = splitingData[0],
                                     Action = splitingData[1],
                                     ActionResult = splitingData[2],
                                     Device = splitingData[3],
@@ -76,6 +80,10 @@ namespace Fanex.NAP.FPS.Renovation.DataImported.Service
                                 var message = new Message<MessageQueue>(objectData, new MessageProperties { DeliveryMode = 2, Priority = 9 });
 
                                 _rabbitMQ.AdvanceBus.PublishAsync(_rabbitMQ.Exchange, _rabbitMQ.RoutingKey, false, message);
+                            }
+                            else
+                            {
+                                Console.WriteLine(log);
                             }
                         }
                     }

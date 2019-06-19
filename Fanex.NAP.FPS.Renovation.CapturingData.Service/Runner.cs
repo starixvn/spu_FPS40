@@ -10,12 +10,15 @@
     using System.Collections.Generic;
     using System.ServiceProcess;
     using System.Text;
+    using System.Timers;
 
     public partial class Runner : ServiceBase
     {
         private static EasyNetQConnector _rabbitMQ;
         private ICapturingDataService _capturingDataService;
         private static List<RawTransactionModel> _transactionList;
+        private static Timer _timer;
+        private static DateTime _lastInsertTrans;
         public Runner()
         {
             InitializeComponent();
@@ -33,7 +36,11 @@
                      .DeclareRoutingKey(AppSettings.RoutingKey)
                      .Bind();
 
-            _transactionList = new List<RawTransactionModel>();           
+            _transactionList = new List<RawTransactionModel>();
+
+            _timer = new System.Timers.Timer();
+            _timer.Elapsed += InsertTransactionByTimer;
+            _timer.Interval = 60000;
         }
 
         protected override void OnStart(string[] args)
@@ -41,6 +48,11 @@
             try
             {
                 ConsumerTransactions();
+
+                if (!_timer.Enabled)
+                {
+                    _timer.Start();
+                }
 
                 LogService.Info($"Raw trans service is STARTED at {DateTime.Now}");
             }
@@ -50,7 +62,7 @@
                     .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
 
                 LogService.Error(logMessage);
-            }        
+            }
         }
 
         protected override void OnStop()
@@ -83,11 +95,18 @@
 
             if (_transactionList.Count >= AppSettings.TransBatch)
             {
-                _capturingDataService.InsertTransaction(_transactionList);
-
-                _transactionList.Clear();
+                InsertTransaction();
             }
-        }        
+        }
+
+        private void InsertTransaction()
+        {
+            _capturingDataService.InsertTransaction(_transactionList);
+
+            _lastInsertTrans = DateTime.Now;
+
+            _transactionList.Clear();
+        }
 
         private RawTransactionModel TransformRawTransaction(MessageQueue message)
         {
@@ -108,6 +127,17 @@
                 UserAgent = deviceInfo.UserAgent,
                 CapturedData = message.Device,
             };
+        }
+
+        private void InsertTransactionByTimer(object sender, ElapsedEventArgs e)
+        {
+            if ((DateTime.Now - _lastInsertTrans).Minutes >= 1)
+            {
+                if (_transactionList.Count != 0)
+                {
+                    InsertTransaction();
+                }
+            }
         }
     }
 }

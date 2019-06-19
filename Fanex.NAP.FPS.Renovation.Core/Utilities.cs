@@ -105,9 +105,17 @@
 
         public static void WriteLog(string filename, string content)
         {
-            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filename);
+            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filename);                      
 
             File.AppendAllText(filePath, string.Format("{0}{1}", content, System.Environment.NewLine));
+        }
+
+        public static void DeleteLog(string fileName)
+        {
+            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
+
+            if (File.Exists(filePath))
+                File.Delete(filePath);
         }
 
         public static void WriteLogAllLine(string filename, string[] content)
