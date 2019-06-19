@@ -25,15 +25,15 @@
                  .UseDefaultConnectionStringProvider()
                  .Run();
 
-             LogManager
-                .SetDefaultLogCategory(AppSettings.FanexLogCategory)
-                .Use(new List<ILogEngine>
-                {
+            LogManager
+               .SetDefaultLogCategory(AppSettings.FanexLogCategory)
+               .Use(new List<ILogEngine>
+               {
                     new SentryLogging(new SentryEngineOptions
                     {
                         Dsn = new Dsn(AppSettings.SentryLogging)
                     })
-                });
+               });
 
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
