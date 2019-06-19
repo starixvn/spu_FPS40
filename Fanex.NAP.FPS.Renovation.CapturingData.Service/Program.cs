@@ -1,6 +1,4 @@
-﻿using Fanex.Data.SqlServer;
-
-namespace Fanex.NAP.FPS.Renovation.RawTransaction.Service
+﻿namespace Fanex.NAP.FPS.Renovation.RawTransaction.Service
 {
     using Fanex.Data;
     using Fanex.Data.MySql;
@@ -21,8 +19,7 @@ namespace Fanex.NAP.FPS.Renovation.RawTransaction.Service
         public static void Main(string[] args)
         {
              DbSettingProviderManager
-                 .StartNewSession()
-                 .WithSqlServer()
+                 .StartNewSession()                 
                  .WithMySql() 
                  .UseDefaultDbSettingProvider(resourcePath: AppSettings.AppDataSetting)
                  .UseDefaultConnectionStringProvider()

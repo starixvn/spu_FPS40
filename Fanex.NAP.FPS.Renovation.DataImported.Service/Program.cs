@@ -43,42 +43,48 @@ namespace Fanex.NAP.FPS.Renovation.DataImported.Service
         static void ReadDataFromConfig()
         {
             var files = Directory.GetFiles(@"D:\Projects\FPS 4.0\SubscriberTickets");
-            
+
             foreach (var file in files)
             {
-                var dataLog = File.ReadAllLines(file);
-
-                if (dataLog.Length > 0)
+                var fileName = Path.GetFileName(file);
+                if (fileName == "IBO.txt")
                 {
-                    foreach (var log in dataLog)
+
+
+                    var dataLog = File.ReadAllLines(file);
+
+                    if (dataLog.Length > 0)
                     {
-                        var splitingData = log.Split('|');
-                        if (splitingData.Length >= 9)
+                        foreach (var log in dataLog)
                         {
-                            var objectData = new MessageQueue()
+                            var splitingData = log.Split('|');
+                            if (splitingData.Length >= 9)
                             {
-                                Account = RandomString(10),
-                                Action = splitingData[1],
-                                ActionResult = splitingData[2],
-                                Device = splitingData[3],
-                                IP = splitingData[4],
-                                Subscriber = splitingData[5],
-                                SubscriberDate = Convert.ToDateTime(splitingData[6]),
-                                Token = splitingData[7],
-                                TransDate = Convert.ToDateTime(splitingData[8]),
-                            };
+                                var objectData = new MessageQueue()
+                                {
+                                    Account = RandomString(10),
+                                    Action = splitingData[1],
+                                    ActionResult = splitingData[2],
+                                    Device = splitingData[3],
+                                    IP = splitingData[4],
+                                    Subscriber = splitingData[5],
+                                    SubscriberDate = Convert.ToDateTime(splitingData[6]),
+                                    Token = splitingData[7],
+                                    TransDate = Convert.ToDateTime(splitingData[8]),
+                                };
 
-                            var message = new Message<MessageQueue>(objectData, new MessageProperties { DeliveryMode = 2, Priority = 9 });
+                                var message = new Message<MessageQueue>(objectData, new MessageProperties { DeliveryMode = 2, Priority = 9 });
 
-                            _rabbitMQ.AdvanceBus.PublishAsync(_rabbitMQ.Exchange, _rabbitMQ.RoutingKey, false, message);
+                                _rabbitMQ.AdvanceBus.PublishAsync(_rabbitMQ.Exchange, _rabbitMQ.RoutingKey, false, message);
+                            }
                         }
                     }
-                }
 
-                Console.WriteLine(Path.GetFileName(file));
+                    Console.WriteLine(Path.GetFileName(file));
+                }
             }
 
-            
+
         }
     }
 }
