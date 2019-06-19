@@ -20,7 +20,7 @@ namespace Fanex.NAP.FPS.Renovation.PresentData.API.Repositories
 
         private UserModel GetUser()
         {
-            return new UserModel("test@test.com", "secret");
+            return new UserModel("user1@email.com", "secret");
         }
     }
 }
