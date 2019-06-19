@@ -108,11 +108,13 @@
     <Compile Include="AssociationModel.cs" />
     <Compile Include="AssociationByCustomerModel.cs" />
     <Compile Include="AuthenticateUserModel.cs" />
+    <Compile Include="Auth\Interface\IUserRepository.cs" />
     <Compile Include="BrowserPluginModel.cs" />
     <Compile Include="CustomerEvidence.cs" />
     <Compile Include="CustomerInfoModel.cs" />
     <Compile Include="DataResult.cs" />
     <Compile Include="DeviceInfoModel.cs" />
+    <Compile Include="Auth\Interface\IEncrypter.cs" />
     <Compile Include="IpInfoModel.cs" />
     <Compile Include="NewCustomerModel.cs" />
     <Compile Include="NewCustomerInfo.cs" />
@@ -124,7 +126,7 @@
     <Compile Include="TotalAssociationByCustomerModel.cs" />
     <Compile Include="TransactionModel.cs" />
     <Compile Include="StagingRawTransactionModel.cs" />
-    <Compile Include="UserModel.cs" />
+    <Compile Include="Auth\UserModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

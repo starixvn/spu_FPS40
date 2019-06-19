@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Fanex.NAP.FPS.Renovation.Model;
+using Fanex.NAP.FPS.Renovation.Model.Auth;
 
 namespace Fanex.NAP.FPS.Renovation.PresentData.API.Repositories
 {
@@ -10,11 +10,15 @@ namespace Fanex.NAP.FPS.Renovation.PresentData.API.Repositories
 
         public async Task AddAsync(UserModel user)
         {
-            throw new NotImplementedException();
+            // To Do: insert user to database
+            // ...           
         }     
 
         public async Task<UserModel> GetAsync(string email)
         {
+            // To Do: return user from database
+            // ...
+
             return GetUser();
         }
 

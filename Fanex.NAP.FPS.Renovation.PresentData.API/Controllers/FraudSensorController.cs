@@ -1,14 +1,11 @@
 ﻿using Fanex.NAP.FPS.Renovation.Criteria;
 using Fanex.NAP.FPS.Renovation.PresentData.API.Services.Implement;
 using Fanex.NAP.FPS.Renovation.PresentData.API.Services.Interface;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Fanex.NAP.FPS.Renovation.PresentData.API.Controllers
 {   
-    [Route("api/[controller]/[action]")]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Route("api/[controller]/[action]")]    
     [ApiController]
     public class FraudSensorController : ControllerBase
     {
@@ -41,7 +38,7 @@ namespace Fanex.NAP.FPS.Renovation.PresentData.API.Controllers
             var data = fraudSensorService.GetCustomersEvidences(criteria);
 
             return new JsonResult(data);
-        }
+        }     
 
         // [Authorize]
         [HttpGet]

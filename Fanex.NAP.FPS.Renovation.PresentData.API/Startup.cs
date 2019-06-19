@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Fanex.Data;
 using Fanex.Data.MySql;
+using Fanex.NAP.FPS.Renovation.Model.Auth;
 using Fanex.NAP.FPS.Renovation.PresentData.API.Auth;
 using Fanex.NAP.FPS.Renovation.PresentData.API.Repositories;
 using Fanex.NAP.FPS.Renovation.PresentData.API.Services.Implement;
@@ -29,6 +30,7 @@ namespace Fanex.NAP.FPS.Renovation.PresentData.API
             services.AddJwt(Configuration);
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
+            services.AddSingleton<IEncrypter, Encrypter>();
 
             var connections = Configuration.GetSection("ConnectionStrings").GetChildren();
             var connectionString = connections.ToDictionary(x => x.Key, x => new ConnectionConfiguration(x.Key, x.GetSection("ConnectionString").Value, x.GetSection("ProviderName").Value));
