@@ -179,8 +179,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RawTransactionModel.cs" />
     <Compile Include="ScreenInfoModel.cs" />
-    <Compile Include="TokenManagement.cs" />
-    <Compile Include="TokenRequest.cs" />
     <Compile Include="TotalAssociationByCustomerModel.cs" />
     <Compile Include="TransactionModel.cs" />
     <Compile Include="StagingRawTransactionModel.cs" />
