@@ -15,9 +15,9 @@ namespace Fanex.NAP.FPS.Renovation.PresentData.API.Auth
         private readonly JwtHeader _jwtHeader;
         private readonly TokenValidationParameters _tokenValidationParameters;
 
-        public JwtHandler(JwtOptions options)
+        public JwtHandler(IOptions<JwtOptions> options)
         {
-            _options = options;
+            _options = options.Value;
             _issuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.SecretKey));
             _signingCredentials = new SigningCredentials(_issuerSigningKey, SecurityAlgorithms.HmacSha256);
             _jwtHeader = new JwtHeader(_signingCredentials);

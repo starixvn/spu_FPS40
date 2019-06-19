@@ -1,25 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Fanex.Data;
 using Fanex.Data.MySql;
-using Fanex.NAP.FPS.Renovation.Core;
-using Fanex.NAP.FPS.Renovation.Model;
 using Fanex.NAP.FPS.Renovation.PresentData.API.Auth;
+using Fanex.NAP.FPS.Renovation.PresentData.API.Repositories;
 using Fanex.NAP.FPS.Renovation.PresentData.API.Services.Implement;
 using Fanex.NAP.FPS.Renovation.PresentData.API.Services.Interface;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
 
 namespace Fanex.NAP.FPS.Renovation.PresentData.API
 {
@@ -37,7 +27,8 @@ namespace Fanex.NAP.FPS.Renovation.PresentData.API
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddJwt(Configuration);
-            //services.AddUserService(Configuration);
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
 
             var connections = Configuration.GetSection("ConnectionStrings").GetChildren();
             var connectionString = connections.ToDictionary(x => x.Key, x => new ConnectionConfiguration(x.Key, x.GetSection("ConnectionString").Value, x.GetSection("ProviderName").Value));

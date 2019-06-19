@@ -107,6 +107,7 @@
     <Compile Include="AccountModel.cs" />
     <Compile Include="AssociationModel.cs" />
     <Compile Include="AssociationByCustomerModel.cs" />
+    <Compile Include="AuthenticateUserModel.cs" />
     <Compile Include="BrowserPluginModel.cs" />
     <Compile Include="CustomerEvidence.cs" />
     <Compile Include="CustomerInfoModel.cs" />
