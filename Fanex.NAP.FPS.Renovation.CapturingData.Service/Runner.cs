@@ -37,7 +37,7 @@
 
             _transactionList = new List<RawTransactionModel>();
 
-            _timer = new System.Timers.Timer();
+            _timer = new Timer();
             _timer.Elapsed += InsertTransactionByTimer;
             _timer.Interval = 60000;
         }
