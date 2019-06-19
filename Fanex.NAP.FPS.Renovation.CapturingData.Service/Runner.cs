@@ -9,7 +9,6 @@
     using System;
     using System.Collections.Generic;
     using System.ServiceProcess;
-    using System.Text;
     using System.Timers;
 
     public partial class Runner : ServiceBase
