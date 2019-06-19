@@ -21,9 +21,9 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Implement
             dataCenter = new DataCenterDataAccess();
         }
 
-        public List<StagingRawTransactionModel> GetStagingRawTransaction(int numberOfTicket)
+        public List<StagingRawTransactionModel> GetStagingRawTransaction(int isProcessed, int numberOfTicket)
         {
-            return stagingRawTransaction.GetStagingRawTrans(numberOfTicket);
+            return stagingRawTransaction.GetStagingRawTrans(isProcessed, numberOfTicket);
         }
 
         public DataResult InsertTransaction(List<StagingRawTransactionModel> model)

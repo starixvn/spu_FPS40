@@ -53,7 +53,7 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service
 
                 isRunning = true;
 
-                var result = dataTransformService.GetStagingRawTransaction(AppSettings.TransBatch);
+                var result = dataTransformService.GetStagingRawTransaction(0, AppSettings.TransBatch);
                 
                 if (result != null && result.Any())
                 {
