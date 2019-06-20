@@ -58,7 +58,7 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Implement
                 SubscriberName = model.SubscriberName,
                 TransDate = model.TransDate,
                 CreatedDate = model.CreatedDate,
-                IP = IPAddress.Parse(model.IP).GetHashCode(),
+                IP = Utilities.ConvertIpAddressToInt(model.IP),
                 PluginID = model.PluginID,
                 DeviceStatus = model.DeviceStatus,
                 URL = model.URL,

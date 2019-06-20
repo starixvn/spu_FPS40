@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 
 namespace Fanex.NAP.FPS.Renovation.DataImported.Service
 {
@@ -28,16 +29,6 @@ namespace Fanex.NAP.FPS.Renovation.DataImported.Service
                     .Bind();
 
             ReadDataFromConfig();
-
-        }
-
-        private static Random random = new Random();
-
-        static string RandomString(int length)
-        {
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            return new string(Enumerable.Repeat(chars, length)
-              .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
         static void ReadDataFromConfig()
@@ -47,7 +38,10 @@ namespace Fanex.NAP.FPS.Renovation.DataImported.Service
             foreach (var file in files)
             {
                 var fileName = Path.GetFileName(file);
-                if (fileName == "IBO.txt")
+                var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(file);
+                var counter = 0;
+
+                if (fileNameWithoutExtension == "IBO")
                 {
                     Utilities.DeleteLog(fileName);
 
@@ -58,10 +52,13 @@ namespace Fanex.NAP.FPS.Renovation.DataImported.Service
                         foreach (var log in dataLog)
                         {
                             var splitingData = log.Split('|');
+
                             if (splitingData.Length >= 9)
                             {
-                                splitingData[0] = RandomString(10);
-                                
+                                counter++;
+
+                                splitingData[0] = fileNameWithoutExtension + "_" + counter;
+
                                 Utilities.WriteLog(fileName, string.Join("|", splitingData));
 
                                 var objectData = new MessageQueue()

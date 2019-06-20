@@ -125,5 +125,22 @@
             File.WriteAllLines(filePath, content);
 
         }
+
+        public static int ConvertIpAddressToInt(string ipAddress)
+        {
+            var ipCode = IPAddress.Parse(ipAddress);
+
+            var bytes = ipCode.GetAddressBytes();
+
+            return BitConverter.ToInt32(bytes, 0);
+        }
+
+        public static string ConvertIntToIpAddress(int ipCode)
+        {
+            var getBytes = BitConverter.GetBytes(ipCode);
+            var ipAddress = new IPAddress(getBytes);
+
+            return ipAddress.ToString();
+        }
     }
 }
