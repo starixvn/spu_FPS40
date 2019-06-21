@@ -8,8 +8,12 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service
 {
     public interface ISchedule
     {
-        void Run();
+        ISchedule Create();
 
-        void Shutdown();
+        ISchedule Shutdown();
+
+        ISchedule Start();
+
+        ISchedule Pause();
     }
 }

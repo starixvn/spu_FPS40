@@ -9,7 +9,14 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Jobs.UpdateCustomerInfo
     {
         private IScheduler scheduler;
 
-        public virtual void Run()
+        public ISchedule Pause()
+        {
+            scheduler.PauseAll();
+
+            return this;
+        }
+
+        public ISchedule Create()
         {
             NameValueCollection props = new NameValueCollection
                 {
@@ -34,12 +41,23 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Jobs.UpdateCustomerInfo
                     .RepeatForever())
                 .Build();
 
-            scheduler.ScheduleJob(job, trigger);            
+            scheduler.ScheduleJob(job, trigger);
+
+            return this;
         }
 
-        public void Shutdown()
+        public ISchedule Shutdown()
         {
             scheduler.Shutdown(true);
+
+            return this;
+        }
+
+        public ISchedule Start()
+        {
+            scheduler.Start();
+
+            return this;
         }
     }
 }

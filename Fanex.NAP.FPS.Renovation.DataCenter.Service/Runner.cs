@@ -25,27 +25,10 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service
 {
     public partial class Runner : ServiceBase
     {
-        //private static IDataCenterService dataCenterService;
-        //private static Timer timer;
-        //private static bool isRunning;
-        //private static EasyNetQConnector _rabbitMQ;
         private static List<ISchedule> schedulers;
+
         public Runner()
         {
-            //dataCenterService = new DataCenterService();
-
-            //_rabbitMQ = new EasyNetQConnector(AppSettings.Host + ":" + AppSettings.Post,
-            //    AppSettings.VirtualHost,
-            //    AppSettings.PrefetchCount,
-            //    AppSettings.UserName,
-            //    AppSettings.Password);
-
-            //_rabbitMQ.CreateBus()
-            //    .DeclareExchange(AppSettings.Exchange)
-            //    .DeclareQueue(AppSettings.QueueName)
-            //    .DeclareRoutingKey(AppSettings.RoutingKey)
-            //    .Bind();
-
             InitializeComponent();
         }
 
@@ -54,7 +37,7 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service
             schedulers = new List<ISchedule>();
 
             var assembly = typeof(Program).GetTypeInfo().Assembly;
-            var types = assembly.GetTypes();            
+            var types = assembly.GetTypes();
 
             foreach (Type type in types)
             {
@@ -62,7 +45,7 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service
                 {
                     var scheduler = ObjectUtils.InstantiateType<ISchedule>(type);
 
-                    scheduler.Run();
+                    scheduler.Create().Start();
 
                     schedulers.Add(scheduler);
                 }
@@ -78,62 +61,9 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service
             LogService.Info($"Data Center service is STOPED at {DateTime.Now}");
         }
 
-        //private void OnTimedEvent(object source, ElapsedEventArgs e)
-        //{
-        //    try
-        //    {
-        //        if (isRunning) return;
-
-        //        isRunning = true;
-
-        //        var newCustomer = dataCenterService.GetNewCustomer(AppSettings.TransBatch);
-
-        //        if (newCustomer != null && newCustomer.Any())
-        //        {
-        //            var customerInfo = dataCenterService.GetCustomerInfo(newCustomer);
-
-        //            if (customerInfo != null && customerInfo.Any())
-        //            {
-        //                var result = dataCenterService.UpdateCustomerInfo(customerInfo);
-
-        //                //if (result.ErrorCode == 0)
-        //                //{
-        //                //    foreach (var customer in customerInfo)
-        //                //    {
-        //                //        var associationCustomer = TransformCustomerInfo(customer);
-
-        //                //        var messageQueue = new Message<AssociationModel>(associationCustomer, new MessageProperties() { DeliveryMode = 2, Priority = 9 });
-
-        //                //        _rabbitMQ.AdvanceBus.PublishAsync(_rabbitMQ.Exchange, _rabbitMQ.RoutingKey, false, messageQueue);
-        //                //    }
-        //                //}
-        //            }
-        //        }
-
-        //        isRunning = false;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        var logMessage = new LogMessage(ex.Message)                    
-        //            .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
-
-        //        LogService.Error(logMessage);
-
-        //        isRunning = false;
-        //    }
-        //}
-
-        //private AssociationModel TransformCustomerInfo(CustomerInfoModel customerInfo)
-        //{
-        //    return new AssociationModel()
-        //    {
-        //        CreatedDate = customerInfo.CreatedDate.ToString("yyyy-MM-dd hh:mm:ss"),
-        //        CustId = customerInfo.CustId,
-        //        Username2 = customerInfo.Username2,
-        //        Username = customerInfo.Username,
-        //        RoleId = customerInfo.RoleId,
-        //        DeviceId = 0
-        //    };
-        //}
+        protected override void OnShutdown()
+        {
+            schedulers.ForEach(x => x.Shutdown());
+        }
     }
 }

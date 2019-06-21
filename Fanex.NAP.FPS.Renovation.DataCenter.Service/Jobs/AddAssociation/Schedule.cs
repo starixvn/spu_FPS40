@@ -13,7 +13,14 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Jobs.AddAssociation
     {
         private IScheduler scheduler;
 
-        public virtual void Run()
+        public ISchedule Pause()
+        {
+            scheduler.PauseAll();
+
+            return this;
+        }
+
+        public ISchedule Create()
         {
             var props = new NameValueCollection
                 {
@@ -37,12 +44,21 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Jobs.AddAssociation
 
             scheduler.ScheduleJob(job, trigger);
 
-            scheduler.Start();           
+            return this;
         }
 
-        public void Shutdown()
+        public ISchedule Shutdown()
         {
             scheduler.Shutdown(true);
+
+            return this;
+        }
+
+        public ISchedule Start()
+        {
+            scheduler.Start();
+
+            return this;
         }
     }
 }
