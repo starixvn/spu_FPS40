@@ -15,6 +15,11 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface
             dataCenter = new DataCenterDataAccess();
         }
 
+        public List<AssociationModel> GetAssociationForGrapDB(int isSync, int size)
+        {
+            return dataCenter.GetAssociation(isSync, size);
+        }
+
         public List<CustomerInfoModel> GetCustomerInfo(List<NewCustomerModel> newCustomers)
         {
             if (newCustomers != null && newCustomers.Any())

@@ -56,6 +56,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ISchedule.cs" />
+    <Compile Include="Jobs\AddAssociation\Job.cs" />
+    <Compile Include="Jobs\AddAssociation\Schedule.cs" />
+    <Compile Include="Jobs\UpdateCustomerInfo\Job.cs" />
+    <Compile Include="Jobs\UpdateCustomerInfo\Schedule.cs" />
     <Compile Include="Runner.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -134,6 +139,9 @@
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="Quartz">
+      <Version>3.0.7</Version>
     </PackageReference>
     <PackageReference Include="System.ValueTuple">
       <Version>4.5.0</Version>

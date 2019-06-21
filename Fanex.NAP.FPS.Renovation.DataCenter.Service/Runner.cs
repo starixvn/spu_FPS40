@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.ServiceProcess;
 using System.Text;
@@ -18,110 +19,121 @@ using Fanex.NAP.FPS.Renovation.Core;
 using Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface;
 using Fanex.NAP.FPS.Renovation.Model;
 using Fanex.NAP.FPS.Renovation.Queue;
+using Quartz.Util;
 
 namespace Fanex.NAP.FPS.Renovation.DataCenter.Service
 {
     public partial class Runner : ServiceBase
     {
-        private static IDataCenterService dataCenterService;
-        private static Timer timer;
-        private static bool isRunning;
-        private static EasyNetQConnector _rabbitMQ;
-
+        //private static IDataCenterService dataCenterService;
+        //private static Timer timer;
+        //private static bool isRunning;
+        //private static EasyNetQConnector _rabbitMQ;
+        private static List<ISchedule> schedulers;
         public Runner()
         {
-            dataCenterService = new DataCenterService();
+            //dataCenterService = new DataCenterService();
 
-            _rabbitMQ = new EasyNetQConnector(AppSettings.Host + ":" + AppSettings.Post,
-                AppSettings.VirtualHost,
-                AppSettings.PrefetchCount,
-                AppSettings.UserName,
-                AppSettings.Password);
+            //_rabbitMQ = new EasyNetQConnector(AppSettings.Host + ":" + AppSettings.Post,
+            //    AppSettings.VirtualHost,
+            //    AppSettings.PrefetchCount,
+            //    AppSettings.UserName,
+            //    AppSettings.Password);
 
-            _rabbitMQ.CreateBus()
-                .DeclareExchange(AppSettings.Exchange)
-                .DeclareQueue(AppSettings.QueueName)
-                .DeclareRoutingKey(AppSettings.RoutingKey)
-                .Bind();
+            //_rabbitMQ.CreateBus()
+            //    .DeclareExchange(AppSettings.Exchange)
+            //    .DeclareQueue(AppSettings.QueueName)
+            //    .DeclareRoutingKey(AppSettings.RoutingKey)
+            //    .Bind();
 
             InitializeComponent();
         }
 
         protected override void OnStart(string[] args)
         {
-            timer = new Timer();
+            schedulers = new List<ISchedule>();
 
-            timer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
-            timer.Interval = AppSettings.Interval;
-            timer.Enabled = true;
+            var assembly = typeof(Program).GetTypeInfo().Assembly;
+            var types = assembly.GetTypes();            
+
+            foreach (Type type in types)
+            {
+                if (new List<Type>(type.GetInterfaces()).Contains(typeof(ISchedule)))
+                {
+                    var scheduler = ObjectUtils.InstantiateType<ISchedule>(type);
+
+                    scheduler.Run();
+
+                    schedulers.Add(scheduler);
+                }
+            }
 
             LogService.Info($"Data Center service is STARTED at {DateTime.Now}");
         }
 
         protected override void OnStop()
         {
-            timer.Dispose();
-            _rabbitMQ.Dispose();
+            schedulers.ForEach(x => x.Shutdown());
 
             LogService.Info($"Data Center service is STOPED at {DateTime.Now}");
         }
 
-        private void OnTimedEvent(object source, ElapsedEventArgs e)
-        {
-            try
-            {
-                if (isRunning) return;
+        //private void OnTimedEvent(object source, ElapsedEventArgs e)
+        //{
+        //    try
+        //    {
+        //        if (isRunning) return;
 
-                isRunning = true;
+        //        isRunning = true;
 
-                var newCustomer = dataCenterService.GetNewCustomer(AppSettings.TransBatch);
+        //        var newCustomer = dataCenterService.GetNewCustomer(AppSettings.TransBatch);
 
-                if (newCustomer != null && newCustomer.Any())
-                {
-                    var customerInfo = dataCenterService.GetCustomerInfo(newCustomer);
+        //        if (newCustomer != null && newCustomer.Any())
+        //        {
+        //            var customerInfo = dataCenterService.GetCustomerInfo(newCustomer);
 
-                    if (customerInfo != null && customerInfo.Any())
-                    {
-                        var result = dataCenterService.UpdateCustomerInfo(customerInfo);
+        //            if (customerInfo != null && customerInfo.Any())
+        //            {
+        //                var result = dataCenterService.UpdateCustomerInfo(customerInfo);
 
-                        if (result.ErrorCode == 0)
-                        {
-                            foreach (var customer in customerInfo)
-                            {
-                                var associationCustomer = TransformCustomerInfo(customer);
+        //                //if (result.ErrorCode == 0)
+        //                //{
+        //                //    foreach (var customer in customerInfo)
+        //                //    {
+        //                //        var associationCustomer = TransformCustomerInfo(customer);
 
-                                var messageQueue = new Message<AssociationModel>(associationCustomer, new MessageProperties() { DeliveryMode = 2, Priority = 9 });
+        //                //        var messageQueue = new Message<AssociationModel>(associationCustomer, new MessageProperties() { DeliveryMode = 2, Priority = 9 });
 
-                                _rabbitMQ.AdvanceBus.PublishAsync(_rabbitMQ.Exchange, _rabbitMQ.RoutingKey, false, messageQueue);
-                            }
-                        }
-                    }
-                }
+        //                //        _rabbitMQ.AdvanceBus.PublishAsync(_rabbitMQ.Exchange, _rabbitMQ.RoutingKey, false, messageQueue);
+        //                //    }
+        //                //}
+        //            }
+        //        }
 
-                isRunning = false;
-            }
-            catch (Exception ex)
-            {
-                var logMessage = new LogMessage(ex.Message)                    
-                    .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
+        //        isRunning = false;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        var logMessage = new LogMessage(ex.Message)                    
+        //            .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
 
-                LogService.Error(logMessage);
+        //        LogService.Error(logMessage);
 
-                isRunning = false;
-            }
-        }
+        //        isRunning = false;
+        //    }
+        //}
 
-        private AssociationModel TransformCustomerInfo(CustomerInfoModel customerInfo)
-        {
-            return new AssociationModel()
-            {
-                CreatedDate = customerInfo.CreatedDate.ToString("yyyy-MM-dd hh:mm:ss"),
-                CustId = customerInfo.CustId,
-                Username2 = customerInfo.Username2,
-                Username = customerInfo.Username,
-                RoleId = customerInfo.RoleId,
-                DeviceId = 0
-            };
-        }
+        //private AssociationModel TransformCustomerInfo(CustomerInfoModel customerInfo)
+        //{
+        //    return new AssociationModel()
+        //    {
+        //        CreatedDate = customerInfo.CreatedDate.ToString("yyyy-MM-dd hh:mm:ss"),
+        //        CustId = customerInfo.CustId,
+        //        Username2 = customerInfo.Username2,
+        //        Username = customerInfo.Username,
+        //        RoleId = customerInfo.RoleId,
+        //        DeviceId = 0
+        //    };
+        //}
     }
 }

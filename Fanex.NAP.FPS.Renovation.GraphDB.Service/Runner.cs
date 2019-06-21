@@ -1,9 +1,12 @@
 ﻿using Fanex.Graph.Data;
 using Fanex.Logging;
 using Fanex.Logging.Extensions;
+using Fanex.NAP.FPS.Renovation.GraphDB.Service.Services.Implement;
+using Fanex.NAP.FPS.Renovation.GraphDB.Service.Services.Interface;
 using Fanex.NAP.FPS.Renovation.Model;
 using Fanex.NAP.FPS.Renovation.Queue;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.ServiceProcess;
 
@@ -12,10 +15,15 @@ namespace Fanex.NAP.FPS.Renovation.GraphDB.Service
     public partial class Runner : ServiceBase
     {
         private EasyNetQConnector easyNetQService;
-
+        private IDataCenterService dataCenterService;
+        private List<IsSynAssociationModel> associations;
         public Runner()
         {
             InitializeComponent();
+
+            dataCenterService = new DataCenterService();
+
+            associations = new List<IsSynAssociationModel>();
         }
 
         protected override void OnStart(string[] args)
@@ -25,6 +33,7 @@ namespace Fanex.NAP.FPS.Renovation.GraphDB.Service
                 Convert.ToInt32(AppSettings.RabbitMQ_PrefetchCount),
                 AppSettings.RabbitMQ_Username,
                 AppSettings.RabbitMQ_Password).CreateBus();
+
             easyNetQService.DeclareQueue(AppSettings.RabbitMQ_Queue)
                             .DeclareExchange(AppSettings.RabbitMQ_Exchange)
                             .DeclareRoutingKey(AppSettings.RabbitMQ_RoutingKey)
@@ -47,29 +56,55 @@ namespace Fanex.NAP.FPS.Renovation.GraphDB.Service
                 }));
         }
 
+        private void UpdateData(string key, AssociationModel criteria)
+        {
+            var result = DbSessionFactory.Execute(key, criteria);
+
+            if (result != null)
+            {
+                if(associations.Count < Core.AppSettings.TransBatch)
+                {
+                    associations.Add(new IsSynAssociationModel
+                    {
+                        AssociationID = criteria.AssociationID,
+                        SyncGraphDB = 1
+                    });
+                }
+                else
+                {
+                    var xmlData = Core.Utilities.XMLConvert(associations);
+
+                    dataCenterService.UpdateIsSyncByAssociationId(xmlData);
+
+                    associations.Clear();
+                }                
+            }
+        }
+
         private void InsertCustomer(AssociationModel criteria)
         {
             // ko luu SMA, chi luu member, roleid = 1
-            if (criteria.RoleId == 1)
+            if (criteria.RoleID == 1)
             {
                 // remove test account
                 if (!criteria.Username.Contains("test") || criteria.Username2 == null || !criteria.Username2.Contains("test"))
                 {
                     try
                     {
-                        var custId = DbSessionFactory.Query<int>(FPS.GetCustomerById, new { criteria.CustId });
-                        var deviceId = DbSessionFactory.Query<int>(FPS.GetDeviceById, new { criteria.DeviceId });
-                        var association = DbSessionFactory.Query<int>(FPS.CheckExistedAssociation, new { criteria.CustId, criteria.DeviceId });
-                        if (criteria.DeviceId == 0)
+                        var custId = DbSessionFactory.Query<int>(FPS.GetCustomerById, new { criteria.CustID });
+                        var deviceId = DbSessionFactory.Query<int>(FPS.GetDeviceById, new { criteria.DeviceID });
+                        var association = DbSessionFactory.Query<int>(FPS.CheckExistedAssociation, new { criteria.CustID, criteria.DeviceID });
+
+                        if (criteria.DeviceID == 0)
                         {
                             if (!custId.Any())
                             {
-                                DbSessionFactory.Execute(FPS.AddNewCustomer, criteria);
+                                UpdateData(FPS.AddNewCustomer, criteria);
                             }
                         }
                         else
                         {
-                            DbSessionFactory.Execute(FPS.AddAssociation, criteria);
+                            UpdateData(FPS.AddAssociation, criteria);
 
                             if (custId.Any())
                             {
@@ -78,11 +113,11 @@ namespace Fanex.NAP.FPS.Renovation.GraphDB.Service
                                     // case acc cu, device cu
                                     if (association.Any())
                                     {
-                                        DbSessionFactory.Execute(FPS.UpdateCustomerUsername2, new { criteria.CustId, criteria.Username2 });
+                                        UpdateData(FPS.UpdateCustomerUsername2, criteria);
                                     }
                                     else
                                     {
-                                        DbSessionFactory.Execute(FPS.MergeGroup, new { criteria.CustId, criteria.DeviceId });
+                                        UpdateData(FPS.MergeGroup, criteria);
                                     }
                                 }
                             }
@@ -91,19 +126,19 @@ namespace Fanex.NAP.FPS.Renovation.GraphDB.Service
                                 if (deviceId.Any())
                                 {
                                     // case acc moi, device cu
-                                    DbSessionFactory.Execute(FPS.AddCustomerGroupRelationship, new { criteria.CustId, criteria.DeviceId });
+                                    UpdateData(FPS.AddCustomerGroupRelationship, criteria);
                                 }
                                 else
                                 {
                                     // case acc moi, device moi
-                                    DbSessionFactory.Execute(FPS.CreateNewGroup, new { criteria.CustId });
+                                    UpdateData(FPS.CreateNewGroup, criteria);
                                 }
                             }
                         }
                     }
                     catch (Exception ex)
                     {
-                        var logMessage = new LogMessage(ex.Message)                         
+                        var logMessage = new LogMessage(ex.Message)
                          .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex))
                          .ToString();
 

@@ -1,0 +1,68 @@
+﻿namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Jobs.AddAssociation
+{
+    using EasyNetQ;
+    using Fanex.Logging;
+    using Fanex.Logging.Extensions;
+    using Fanex.NAP.FPS.Renovation.Core;
+    using Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface;
+    using Fanex.NAP.FPS.Renovation.Model;
+    using Fanex.NAP.FPS.Renovation.Queue;
+    using Quartz;
+    using System;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
+
+    [DisallowConcurrentExecution]
+    public class Job : IJob
+    {
+        private static IDataCenterService dataCenterService;
+        private static EasyNetQConnector _rabbitMQ;
+
+        public Job()
+        {
+            dataCenterService = new DataCenterService();
+
+            _rabbitMQ = new EasyNetQConnector(AppSettings.Host + ":" + AppSettings.Post,
+                AppSettings.VirtualHost,
+                AppSettings.PrefetchCount,
+                AppSettings.UserName,
+                AppSettings.Password);
+
+            _rabbitMQ.CreateBus()
+                .DeclareExchange(AppSettings.Exchange)
+                .DeclareQueue(AppSettings.QueueName)
+                .DeclareRoutingKey(AppSettings.RoutingKey)
+                .Bind();
+        }
+
+        public Task Execute(IJobExecutionContext context)
+        {
+            try
+            {
+                var associations = dataCenterService.GetAssociationForGrapDB(0, AppSettings.TransBatch);
+
+                if (associations != null && associations.Any())
+                {
+                    foreach(var association in associations)
+                    {
+                        var messageQueue = new Message<AssociationModel>(association, new MessageProperties() { DeliveryMode = 2, Priority = 9 });
+
+                        _rabbitMQ.AdvanceBus.PublishAsync(_rabbitMQ.Exchange, _rabbitMQ.RoutingKey, false, messageQueue);
+                    }                   
+                }
+            }
+            catch (Exception ex)
+            {
+                var logMessage = new LogMessage(ex.Message)
+                    .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
+
+                LogService.Error(logMessage);
+            }
+
+            Console.WriteLine($"Association is updated at {DateTime.Now}");
+
+            return Task.FromResult(true);            
+        }
+    }
+}

@@ -1,4 +1,6 @@
-﻿using Fanex.Graph.Data;
+﻿using Fanex.Data;
+using Fanex.Data.MySql;
+using Fanex.Graph.Data;
 using Fanex.Logging;
 using Fanex.Logging.Sentry.RavenClient;
 using Fanex.NAP.FPS.Renovation.GraphDB.Service.Neo4j;
@@ -37,6 +39,13 @@ namespace Fanex.NAP.FPS.Renovation.GraphDB.Service
                         Dsn = new Dsn(Core.AppSettings.SentryLogging)
                     })
                 });
+
+            DbSettingProviderManager
+                .StartNewSession()                
+                .WithMySql()
+                .UseDefaultDbSettingProvider(resourcePath: Core.AppSettings.AppDataSetting)
+                .UseDefaultConnectionStringProvider()
+                .Run();
 
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]

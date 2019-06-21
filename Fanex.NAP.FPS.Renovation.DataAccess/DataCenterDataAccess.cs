@@ -75,5 +75,38 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
                 return db.Query<CustomerInfoModel>(criteria).ToList();
             }
         }
+
+        public List<Model.AssociationModel> GetAssociation(int isSysnGraphDB, int size)
+        {
+            var repository = new DynamicRepository();
+
+            var criteria = new GetAssociationForGraphDBCriteria()
+            {
+                SyncGraphDB = isSysnGraphDB,
+                Size = size
+            };
+
+            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
+            {
+                return db.Query<AssociationModel>(criteria).ToList();
+            }
+        }
+
+        public DataResult UpdateIsSyncGraphDBByAssociationId(string associationXml)
+        {
+            var repository = new DynamicRepository();
+
+            var criteria = new UpdateIsSyncGraphDBByAssociationIdCriteria()
+            {
+                AssociationXml = associationXml
+            };
+
+            var errCode = repository.Execute(criteria);
+
+            return new DataResult()
+            {
+                ErrorCode = errCode
+            };
+        }
     }
 }

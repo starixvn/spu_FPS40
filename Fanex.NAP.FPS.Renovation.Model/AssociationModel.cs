@@ -2,28 +2,26 @@
 {
     public class AssociationModel
     {
-        private string username2;
-        private int? roleId;
+        public int AssociationID { get; set; }
 
-        public int DeviceId { get; set; }
+        public int DeviceID { get; set; }
 
-        public int CustId { get; set; }
+        public int SubscriberID { get; set; }
+
+        public string SubscriberName { get; set; }
+
+        public int IsDeposit { get; set; }
+
+        public int CustID { get; set; }
 
         public string Username { get; set; }
 
-        public string Username2
-        {
-            get => username2 == string.Empty ? null : username2;
-            set { username2 = value; }
-        }
+        public string Username2 { get; set; }
 
-        public int? RoleId
-        {
-            get => roleId == 0 ? null : roleId;
+        public int RoleID { get; set; }
 
-            set { roleId = value; }
-        }
+        public int CurrencyID { get; set; }
 
-        public string CreatedDate { get; set; }
+        public string CurrencyName { get; set; }
     }
 }

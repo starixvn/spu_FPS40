@@ -15,5 +15,7 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface
         DataResult UpdateCustomerInfo(List<CustomerInfoModel> customerInfo);
 
         List<CustomerInfoModel> GetCustomerInfo(List<NewCustomerModel> newCustomers);
+
+        List<AssociationModel> GetAssociationForGrapDB(int isSync, int size);
     }
 }
