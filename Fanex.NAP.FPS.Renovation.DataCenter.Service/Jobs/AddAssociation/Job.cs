@@ -16,8 +16,8 @@
     [DisallowConcurrentExecution]
     public class Job : IJob
     {
-        private static IDataCenterService dataCenterService;
-        private static EasyNetQConnector _rabbitMQ;
+        private readonly IDataCenterService dataCenterService;
+        private readonly EasyNetQConnector _rabbitMQ;
 
         public Job()
         {
@@ -46,7 +46,7 @@
                 {
                     foreach(var association in associations)
                     {
-                        var messageQueue = new Message<AssociationModel>(association, new MessageProperties() { DeliveryMode = 2, Priority = 9 });
+                        var messageQueue = new Message<AssociationModel>(association, new MessageProperties { DeliveryMode = 2, Priority = 9 });
 
                         _rabbitMQ.AdvanceBus.PublishAsync(_rabbitMQ.Exchange, _rabbitMQ.RoutingKey, false, messageQueue);
                     }                   

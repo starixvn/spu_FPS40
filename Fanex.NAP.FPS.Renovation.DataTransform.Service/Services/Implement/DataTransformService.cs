@@ -38,7 +38,7 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Implement
 
             }
 
-            return new DataResult()
+            return new DataResult
             {
                 ErrorCode = -1,
                 ErrorMessage = "Cannot insert transaction."
@@ -51,7 +51,7 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Implement
 
             var clientInfo = uaParser.Parse(model.UserAgent);
 
-            return new TransactionModel()
+            return new TransactionModel
             {
                 DeviceCode = model.DeviceCode,
                 LoginName = model.LoginName,

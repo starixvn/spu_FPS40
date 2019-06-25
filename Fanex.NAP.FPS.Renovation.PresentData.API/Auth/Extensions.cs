@@ -15,15 +15,13 @@ namespace Fanex.NAP.FPS.Renovation.PresentData.API.Auth
             section.Bind(options);
 
             services.Configure<JwtOptions>(configuration.GetSection("jwt"));
-            services.AddSingleton<IJwtHandler, JwtHandler>();
-
-            var tokens = Encoding.UTF8.GetBytes(options.SecretKey);
+            services.AddSingleton<IJwtHandler, JwtHandler>();            
 
             services.AddAuthentication().AddJwtBearer(cfg =>
             {
                 cfg.RequireHttpsMetadata = false;
                 cfg.SaveToken = true;
-                cfg.TokenValidationParameters = new TokenValidationParameters()
+                cfg.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateAudience = false,
                     ValidIssuer = options.Issuer,

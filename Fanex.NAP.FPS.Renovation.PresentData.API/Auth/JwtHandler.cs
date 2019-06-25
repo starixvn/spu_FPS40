@@ -9,24 +9,15 @@ namespace Fanex.NAP.FPS.Renovation.PresentData.API.Auth
     public class JwtHandler : IJwtHandler
     {
         private readonly JwtSecurityTokenHandler _jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
-        private readonly JwtOptions _options;
-        private readonly SecurityKey _issuerSigningKey;
-        private readonly SigningCredentials _signingCredentials;
-        private readonly JwtHeader _jwtHeader;
-        private readonly TokenValidationParameters _tokenValidationParameters;
+        private readonly JwtOptions _options;      
+        private readonly JwtHeader _jwtHeader;       
 
         public JwtHandler(IOptions<JwtOptions> options)
         {
             _options = options.Value;
-            _issuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.SecretKey));
-            _signingCredentials = new SigningCredentials(_issuerSigningKey, SecurityAlgorithms.HmacSha256);
-            _jwtHeader = new JwtHeader(_signingCredentials);
-            _tokenValidationParameters = new TokenValidationParameters
-            {
-                ValidateAudience = false,
-                ValidIssuer = _options.Issuer,
-                IssuerSigningKey = _issuerSigningKey
-            };
+           var _issuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.SecretKey));
+            var _signingCredentials = new SigningCredentials(_issuerSigningKey, SecurityAlgorithms.HmacSha256);
+            _jwtHeader = new JwtHeader(_signingCredentials);            
         }
 
         public JsonWebToken Create(Guid userId)

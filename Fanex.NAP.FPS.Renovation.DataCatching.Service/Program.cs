@@ -9,15 +9,13 @@ using System.Threading.Tasks;
 
 namespace Fanex.NAP.FPS.Renovation.DataCatching.Service
 {
-    class Program
-    {
-        private static EasyNetQConnector _rabbitMQ;
-
+   static class Program
+    {       
         private static Dictionary<string, int> Subscribers;
 
         static void Main(string[] args)
         {
-            _rabbitMQ = new EasyNetQConnector(AppSettings.Host + ":" + AppSettings.Post,
+            var _rabbitMQ = new EasyNetQConnector(AppSettings.Host + ":" + AppSettings.Post,
                                        AppSettings.VirtualHost,
                                        AppSettings.PrefetchCount,
                                        AppSettings.UserName,
@@ -40,8 +38,6 @@ namespace Fanex.NAP.FPS.Renovation.DataCatching.Service
         {
             try
             {
-                var fileName = string.Empty;
-
                 if(!Subscribers.ContainsKey(message.Subscriber))
                 {
                     Subscribers.Add(message.Subscriber, 0);

@@ -9,6 +9,7 @@ namespace Fanex.NAP.FPS.Renovation.PresentData.API.Services.Implement
     public class FraudSensorService : IFraudSensorService
     {
         private readonly AssociationDataAccess associationDataAccess;
+
         public FraudSensorService()
         {
             associationDataAccess = new AssociationDataAccess();

@@ -15,7 +15,7 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
         {
             var repository = new DynamicRepository();
 
-            var criteria = new CapturingTransactionCriteria()
+            var criteria = new CapturingTransactionCriteria
             {
                 RawTransXml = xmlTrans   
             };

@@ -14,7 +14,7 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
     {
         public IpInfoModel GetIpInfo(string ipAddress)
         {
-            var criteria = new IpInfoCriteria()
+            var criteria = new IpInfoCriteria
             {
                 IpAddress = ipAddress
             };

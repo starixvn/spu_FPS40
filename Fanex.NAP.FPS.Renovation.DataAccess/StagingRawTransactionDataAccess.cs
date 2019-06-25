@@ -14,9 +14,7 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
     {
         public List<Model.StagingRawTransactionModel> GetStagingRawTrans(int isProcessed = 0, int numberOfTicket = 100 )
         {
-            var repository = new DynamicRepository();
-
-            var criteria = new GetRawTransactionCriteria()
+            var criteria = new GetRawTransactionCriteria
             {
                 IsProcessed = isProcessed,
                 NumberOfTickets = numberOfTicket

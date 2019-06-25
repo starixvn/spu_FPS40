@@ -1,31 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.ServiceProcess;
-using System.Text;
-using System.Threading.Tasks;
-using System.Timers;
-using EasyNetQ;
-using Fanex.Data;
-using Fanex.Logging;
-using Fanex.Logging.Extensions;
-using Fanex.Logging.Extensions.Database;
-using Fanex.NAP.FPS.Renovation.Core;
-using Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface;
-using Fanex.NAP.FPS.Renovation.Model;
-using Fanex.NAP.FPS.Renovation.Queue;
-using Quartz.Util;
-
-namespace Fanex.NAP.FPS.Renovation.DataCenter.Service
+﻿namespace Fanex.NAP.FPS.Renovation.DataCenter.Service
 {
+    using Fanex.Logging;
+    using Quartz.Util;
+    using System;
+    using System.Collections.Generic;
+    using System.Reflection;
+    using System.ServiceProcess;
+
     public partial class Runner : ServiceBase
     {
-        private static List<ISchedule> schedulers;
+        private List<ISchedule> schedulers;
 
         public Runner()
         {

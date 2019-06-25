@@ -13,11 +13,11 @@
 
     public partial class Runner : ServiceBase
     {
-        private static EasyNetQConnector _rabbitMQ;
+        private EasyNetQConnector _rabbitMQ;
         private ICapturingDataService _capturingDataService;
-        private static List<RawTransactionModel> _transactionList;
-        private static Timer _timer;
-        private static DateTime _lastInsertTrans;
+        private List<RawTransactionModel> _transactionList;
+        private Timer _timer;
+        private DateTime _lastInsertTrans;
         public Runner()
         {
             InitializeComponent();
@@ -66,14 +66,14 @@
 
         protected override void OnStop()
         {
-            _rabbitMQ.Dispose();
+            _rabbitMQ.Disposed();
 
             LogService.Info($"Raw trans service is STOPED at {DateTime.Now}");
         }
 
         protected override void OnShutdown()
         {
-            _rabbitMQ.Dispose();
+            _rabbitMQ.Disposed();
 
             LogService.Info($"Raw trans service is STOPED at {DateTime.Now}");
         }
@@ -130,12 +130,9 @@
 
         private void InsertTransactionByTimer(object sender, ElapsedEventArgs e)
         {
-            if ((DateTime.Now - _lastInsertTrans).Minutes >= 1)
+            if ((DateTime.Now - _lastInsertTrans).Minutes >= 1 && _transactionList.Count != 0)
             {
-                if (_transactionList.Count != 0)
-                {
-                    InsertTransaction();
-                }
+                InsertTransaction();
             }
         }
     }

@@ -5,7 +5,7 @@
     using System.Configuration;
     using System.Linq;
 
-    public class AppSettings
+    public static class AppSettings
     {
         public static int Environment
         {

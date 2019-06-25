@@ -11,8 +11,6 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
     {
         public List<T> GetData<T>(ICriteria criteria)
         {
-            var repository = new DynamicRepository();
-
             using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
                 return db.Query<T>(criteria).ToList();

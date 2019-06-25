@@ -44,7 +44,7 @@ namespace Fanex.NAP.FPS.Renovation.GraphDB.Service
 
         protected override void OnStop()
         {
-            easyNetQService.Dispose();
+            easyNetQService.Disposed();
         }
 
         public void AddHandlerForGetMassage(Action<AssociationModel> handler)

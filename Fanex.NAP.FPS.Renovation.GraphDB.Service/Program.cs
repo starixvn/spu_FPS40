@@ -60,12 +60,18 @@ namespace Fanex.NAP.FPS.Renovation.GraphDB.Service
                 const BindingFlags Flags = BindingFlags.Instance | BindingFlags.NonPublic;
                 var method = type.GetMethod("OnStart", Flags);
 
-                foreach (var service in ServicesToRun) method.Invoke(service, new object[] { args });
+                foreach (var service in ServicesToRun)
+                {
+                    method.Invoke(service, new object[] { args });
+                }
 
                 Console.WriteLine("Press any key to exit!");
                 Console.ReadLine();
 
-                foreach (var service in ServicesToRun) service.Stop();
+                foreach (var service in ServicesToRun)
+                {
+                    service.Stop();
+                }
             }
             else
             {

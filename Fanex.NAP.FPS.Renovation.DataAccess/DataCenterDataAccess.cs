@@ -30,10 +30,8 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
         }
 
         public List<NewCustomerModel> GetNewCustomer(int size)
-        {
-            var repository = new DynamicRepository();
-
-            var criteria = new GetNewCustomerCriteria()
+        {           
+            var criteria = new GetNewCustomerCriteria
             {
                 Size = size
             };
@@ -63,9 +61,7 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
 
         public List<Model.CustomerInfoModel> GetCustomerInfo(string newCustomers)
         {
-            var repository = new DynamicRepository();
-
-            var criteria = new GetCustomerInfoCriteria()
+            var criteria = new GetCustomerInfoCriteria
             {
                 CustomerList = newCustomers
             };
@@ -78,9 +74,8 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
 
         public List<Model.AssociationModel> GetAssociation(int isSysnGraphDB, int size)
         {
-            var repository = new DynamicRepository();
 
-            var criteria = new GetAssociationForGraphDBCriteria()
+            var criteria = new GetAssociationForGraphDBCriteria
             {
                 SyncGraphDB = isSysnGraphDB,
                 Size = size
@@ -96,14 +91,14 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
         {
             var repository = new DynamicRepository();
 
-            var criteria = new UpdateIsSyncGraphDBByAssociationIdCriteria()
+            var criteria = new UpdateIsSyncGraphDBByAssociationIdCriteria
             {
                 AssociationXml = associationXml
             };
 
             var errCode = repository.Execute(criteria);
 
-            return new DataResult()
+            return new DataResult
             {
                 ErrorCode = errCode
             };

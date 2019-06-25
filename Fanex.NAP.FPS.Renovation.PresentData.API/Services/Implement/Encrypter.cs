@@ -1,17 +1,16 @@
-﻿using Fanex.NAP.FPS.Renovation.Model.Auth;
-using System;
-using System.Security.Cryptography;
-
-namespace Fanex.NAP.FPS.Renovation.PresentData.API.Services.Implement
+﻿namespace Fanex.NAP.FPS.Renovation.PresentData.API.Services.Implement
 {
+    using Fanex.NAP.FPS.Renovation.Model.Auth;
+    using System;
+    using System.Security.Cryptography;
+
     public class Encrypter : IEncrypter
     {
-        private static readonly int SaltSize = 40;
-        private static readonly int DeriveBytesIterationsCount = 10000;
+        private const int SaltSize = 40;
+        private const int DeriveBytesIterationsCount = 10000;
 
         public string GetSalt()
         {
-            var random = new Random();
             var saltBytes = new byte[SaltSize];
             var rng = RandomNumberGenerator.Create();
             rng.GetBytes(saltBytes);

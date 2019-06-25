@@ -10,7 +10,7 @@ using System.Net;
 
 namespace Fanex.NAP.FPS.Renovation.DataImported.Service
 {
-    class Program
+   static class Program
     {
         private static EasyNetQConnector _rabbitMQ;
 
@@ -39,7 +39,7 @@ namespace Fanex.NAP.FPS.Renovation.DataImported.Service
             {
                 var fileName = Path.GetFileName(file);
                 var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(file);
-                var counter = 0;
+               
 
                 if (fileNameWithoutExtension == "IBO")
                 {
@@ -49,47 +49,52 @@ namespace Fanex.NAP.FPS.Renovation.DataImported.Service
 
                     if (dataLog.Length > 0)
                     {
-                        foreach (var log in dataLog)
-                        {
-                            var splitingData = log.Split('|');
-
-                            if (splitingData.Length >= 9)
-                            {
-                                counter++;
-
-                                splitingData[0] = fileNameWithoutExtension + "_" + counter;
-
-                                Utilities.WriteLog(fileName, string.Join("|", splitingData));
-
-                                var objectData = new MessageQueue()
-                                {
-                                    Account = splitingData[0],
-                                    Action = splitingData[1],
-                                    ActionResult = splitingData[2],
-                                    Device = splitingData[3],
-                                    IP = splitingData[4],
-                                    Subscriber = splitingData[5],
-                                    SubscriberDate = Convert.ToDateTime(splitingData[6]),
-                                    Token = splitingData[7],
-                                    TransDate = Convert.ToDateTime(splitingData[8]),
-                                };
-
-                                var message = new Message<MessageQueue>(objectData, new MessageProperties { DeliveryMode = 2, Priority = 9 });
-
-                                _rabbitMQ.AdvanceBus.PublishAsync(_rabbitMQ.Exchange, _rabbitMQ.RoutingKey, false, message);
-                            }
-                            else
-                            {
-                                Console.WriteLine(log);
-                            }
-                        }
+                        Executing(fileName, fileNameWithoutExtension, dataLog);
                     }
 
                     Console.WriteLine(Path.GetFileName(file));
                 }
             }
+        }
 
+        private static void Executing(string fileName, string fileNameWithoutExtension,  string[] dataLog)
+        {
+            var counter = 0;
 
+            foreach (var log in dataLog)
+            {
+                var splitingData = log.Split('|');
+
+                if (splitingData.Length >= 9)
+                {
+                    counter++;
+
+                    splitingData[0] = fileNameWithoutExtension + "_" + counter;
+
+                    Utilities.WriteLog(fileName, string.Join("|", splitingData));
+
+                    var objectData = new MessageQueue
+                    {
+                        Account = splitingData[0],
+                        Action = splitingData[1],
+                        ActionResult = splitingData[2],
+                        Device = splitingData[3],
+                        IP = splitingData[4],
+                        Subscriber = splitingData[5],
+                        SubscriberDate = Convert.ToDateTime(splitingData[6]),
+                        Token = splitingData[7],
+                        TransDate = Convert.ToDateTime(splitingData[8]),
+                    };
+
+                    var message = new Message<MessageQueue>(objectData, new MessageProperties { DeliveryMode = 2, Priority = 9 });
+
+                    _rabbitMQ.AdvanceBus.PublishAsync(_rabbitMQ.Exchange, _rabbitMQ.RoutingKey, false, message);
+                }
+                else
+                {
+                    Console.WriteLine(log);
+                }
+            }            
         }
     }
 }

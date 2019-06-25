@@ -62,7 +62,11 @@ namespace Fanex.NAP.FPS.Renovation.Queue
 
         public EasyNetQConnector DeclareExchange(string exchangeName)
         {
-            if (string.IsNullOrWhiteSpace(exchangeName)) return this;
+            if (string.IsNullOrWhiteSpace(exchangeName))
+            {
+                return this;
+            }
+
             Exchange = AdvanceBus.ExchangeDeclare(exchangeName, ExchangeType.Direct);
 
             if (Exchange != null)
@@ -82,7 +86,11 @@ namespace Fanex.NAP.FPS.Renovation.Queue
 
         public EasyNetQConnector DeclareQueue(string queueName)
         {
-            if (string.IsNullOrWhiteSpace(queueName)) return this;
+            if (string.IsNullOrWhiteSpace(queueName))
+            {
+                return this;
+            }
+
             this.Queue = AdvanceBus.QueueDeclare(queueName);
 
             if (this.Queue != null)
@@ -100,7 +108,7 @@ namespace Fanex.NAP.FPS.Renovation.Queue
             return this;
         }
 
-        public void Dispose()
+        public void Disposed()
         {
             this.Bus.Dispose();
             this.AdvanceBus.Dispose();

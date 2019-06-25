@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Fanex.NAP.FPS.Renovation.Core
 {
-    public class Environment
+    public static class Environment
     {
         public static int LOCAL { get; set; }
         public static int UAT { get; set; }

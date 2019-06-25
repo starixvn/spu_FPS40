@@ -1,23 +1,22 @@
-﻿using Fanex.Logging;
-using Fanex.Logging.Extensions;
-using Fanex.NAP.FPS.Renovation.Core;
-using Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Implement;
-using Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Interface;
-using Fanex.NAP.FPS.Renovation.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.ServiceProcess;
-using System.Threading;
-using System.Timers;
-
-namespace Fanex.NAP.FPS.Renovation.DataTransform.Service
+﻿namespace Fanex.NAP.FPS.Renovation.DataTransform.Service
 {
+    using Fanex.Logging;
+    using Fanex.Logging.Extensions;
+    using Fanex.NAP.FPS.Renovation.Core;
+    using Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Implement;
+    using Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Interface;
+    using Fanex.NAP.FPS.Renovation.Model;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.ServiceProcess;
+    using System.Timers;
+
     public partial class Runner : ServiceBase
     {
-        private static IDataTransformService dataTransformService;
-        private static System.Timers.Timer timer;
-        private static bool isRunning;
+        private readonly IDataTransformService dataTransformService;
+        private System.Timers.Timer timer;
+        private bool isRunning;
         public Runner()
         {
             dataTransformService = new DataTransformService();
@@ -29,7 +28,7 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service
         protected override void OnStart(string[] args)
         {
             timer = new System.Timers.Timer();
-            timer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
+            timer.Elapsed += OnTimedEvent;
             timer.Interval = AppSettings.Interval;
             timer.Enabled = true;
 
@@ -43,13 +42,16 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service
             LogService.Info($"Data Transform service is STOPED at {DateTime.Now}");
         }
 
-        private static void OnTimedEvent(object source, ElapsedEventArgs e)
+        private void OnTimedEvent(object source, ElapsedEventArgs e)
         {
             var insertResult = new DataResult();
 
             try
             {
-                if (isRunning) return;
+                if (isRunning)
+                {
+                    return;
+                }
 
                 isRunning = true;
 

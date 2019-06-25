@@ -14,7 +14,10 @@
     {
         public static string GetURLFromDeviceCode(string di)
         {
-            if (string.IsNullOrWhiteSpace(di)) return string.Empty;
+            if (string.IsNullOrWhiteSpace(di))
+            {
+                return string.Empty;
+            }
 
             var requestData = di.Split(new[] { "###" }, StringSplitOptions.None);
 
@@ -25,7 +28,10 @@
 
         public static string GetUserAgentFromDeviceCode(string di)
         {
-            if (string.IsNullOrWhiteSpace(di)) return string.Empty;
+            if (string.IsNullOrWhiteSpace(di))
+            {
+                return string.Empty;
+            }
 
             var deviceSplited = di.Split(new[] { "###" }, StringSplitOptions.None);
 
@@ -80,17 +86,18 @@
 
         public static string Encode(string original)
         {
-            if (string.IsNullOrWhiteSpace(original)) return string.Empty;
-
-            byte[] encodedBytes;
-
-            using (var md5 = new MD5CryptoServiceProvider())
+            using(SHA256 sha256Hash = SHA256.Create())
             {
-                var originalBytes = Encoding.Default.GetBytes(original);
-                encodedBytes = md5.ComputeHash(originalBytes);
-            }
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(original));
 
-            return Convert.ToBase64String(encodedBytes);
+                StringBuilder builder = new StringBuilder();
+
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }                      
         }
 
         public static IEnumerable<IEnumerable<TValue>> Chunk<TValue>(
@@ -115,7 +122,9 @@
             var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
 
             if (File.Exists(filePath))
+            {
                 File.Delete(filePath);
+            }
         }
 
         public static void WriteLogAllLine(string filename, string[] content)

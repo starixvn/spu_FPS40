@@ -48,7 +48,7 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface
 
         private NewCustomerInfo TransformCustomerInfo(CustomerInfoModel customerInfo)
         {
-            return new NewCustomerInfo()
+            return new NewCustomerInfo
             {
                 CurrencyID = customerInfo.CurrencyId,
                 CurrencyName = customerInfo.CurrencyName,

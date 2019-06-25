@@ -13,24 +13,12 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Jobs.UpdateCustomerInfo
     [DisallowConcurrentExecution]
     public class Job : IJob
     {
-        private static IDataCenterService dataCenterService;
-        private static EasyNetQConnector _rabbitMQ;
+        private readonly IDataCenterService dataCenterService;
+        
 
         public Job()
         {
-            dataCenterService = new DataCenterService();
-
-            _rabbitMQ = new EasyNetQConnector(AppSettings.Host + ":" + AppSettings.Post,
-                AppSettings.VirtualHost,
-                AppSettings.PrefetchCount,
-                AppSettings.UserName,
-                AppSettings.Password);
-
-            _rabbitMQ.CreateBus()
-                .DeclareExchange(AppSettings.Exchange)
-                .DeclareQueue(AppSettings.QueueName)
-                .DeclareRoutingKey(AppSettings.RoutingKey)
-                .Bind();
+            dataCenterService = new DataCenterService();           
         }
 
         public Task Execute(IJobExecutionContext context)
