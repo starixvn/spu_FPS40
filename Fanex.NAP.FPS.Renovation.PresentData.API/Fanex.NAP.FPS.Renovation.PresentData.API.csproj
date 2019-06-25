@@ -6,6 +6,14 @@
     <UserSecretsId>b6f78edf-de7a-4eab-8994-a45da0e47003</UserSecretsId>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <CodeAnalysisRuleSet>Fanex.NAP.FPS.Renovation.PresentData.API.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <CodeAnalysisRuleSet>Fanex.NAP.FPS.Renovation.PresentData.API.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Remove="App_Data\NAPFPSNames.LOCAL.xml" />
     <None Remove="App_Data\NAPFPSNames.PRO.xml" />
