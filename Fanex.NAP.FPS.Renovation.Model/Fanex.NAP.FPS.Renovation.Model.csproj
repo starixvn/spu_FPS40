@@ -176,6 +176,7 @@
     <Compile Include="DeviceInfoModel.cs" />
     <Compile Include="Auth\Interface\IEncrypter.cs" />
     <Compile Include="IpInfoModel.cs" />
+    <Compile Include="IpModel.cs" />
     <Compile Include="IsSynAssociationModel.cs" />
     <Compile Include="NewCustomerModel.cs" />
     <Compile Include="NewCustomerInfo.cs" />

@@ -28,8 +28,47 @@ namespace Fanex.NAP.FPS.Renovation.DataImported.Service
                     .DeclareRoutingKey(AppSettings.RoutingKey)
                     .Bind();
 
-            ReadDataFromConfig();
+             ReadDataFromConfig();
+
+            //var ipfrom = Utilities.long2ip(281470698564864);
+            //var ipto = Utilities.IPToLong("::ffff:100:0");
+            
+
+            //Console.WriteLine(ipfrom);
+            //Console.WriteLine(ipto);
+
+            // codefrom = Utilities.ConvertIntToIpAddress(16779264);
+           // var codeto = Utilities.ConvertIpAddressToInt(ipto);
+
+           // var ipfrom = Utilities.ConvertIpAddressToInt(codefrom);
+
+            //Console.WriteLine(codefrom);
+            // Console.WriteLine(ipfrom);
+
+
+            //var strIPv6 = "::ffff:100:0".Ip2Long();
+
+            //var strIPv4 = "1.0.8.0".Ip2Long();
+
+
+            //Console.WriteLine(strIPv6.IpNumber + " - " + strIPv6.IsIpV6);
+            //Console.WriteLine(strIPv4.IpNumber + " - " + strIPv4.IsIpV6);
+
+            //Console.WriteLine(ipv4Addr.ToUncompressedString());
+            //byte[] octets = ipv6Addr.GetAddressBytes();
+
+            //string text = String.Join(",", octets.Select(x => string.Format("0x{0:X2}", x)));
+
+            //var aa = IPAddress.Parse(text);
+
+            //Console.WriteLine(text);
+
+
+
+            Console.ReadKey();
         }
+
+
 
         static void ReadDataFromConfig()
         {
@@ -71,7 +110,7 @@ namespace Fanex.NAP.FPS.Renovation.DataImported.Service
 
                     splitingData[0] = fileNameWithoutExtension + "_" + counter;
 
-                    Utilities.WriteLog(fileName, string.Join("|", splitingData));
+                    Utilities.WriteLog(fileName, string.Join("|", splitingData));                                        
 
                     var objectData = new MessageQueue
                     {

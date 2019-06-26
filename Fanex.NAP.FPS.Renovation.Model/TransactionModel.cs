@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
@@ -29,7 +30,7 @@ namespace Fanex.NAP.FPS.Renovation.Model
         public DateTime CreatedDate { get; set; }
 
         [XmlAttribute]
-        public int IP { get; set; }
+        public BigInteger IP { get; set; }
 
         [XmlAttribute]
         public int PluginID { get; set; }

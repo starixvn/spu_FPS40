@@ -9,6 +9,9 @@
     using System.Xml.Serialization;
     using System.Linq;
     using System.IO;
+    using System.Net.Sockets;
+    using System.Numerics;
+    using Fanex.NAP.FPS.Renovation.Model;
 
     public static class Utilities
     {
@@ -64,29 +67,9 @@
             }
         }
 
-        public static bool IsIPv4(string ip)
-        {
-            IPAddress address;
-
-            if (IPAddress.TryParse(ip, out address))
-            {
-                switch (address.AddressFamily)
-                {
-                    case System.Net.Sockets.AddressFamily.InterNetwork:
-                        return true;
-                    case System.Net.Sockets.AddressFamily.InterNetworkV6:
-                        return false;
-                    default:
-                        return false;
-                }
-            }
-
-            return false;
-        }
-
         public static string Encode(string original)
         {
-            using(SHA256 sha256Hash = SHA256.Create())
+            using (SHA256 sha256Hash = SHA256.Create())
             {
                 byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(original));
 
@@ -97,7 +80,7 @@
                     builder.Append(bytes[i].ToString("x2"));
                 }
                 return builder.ToString();
-            }                      
+            }
         }
 
         public static IEnumerable<IEnumerable<TValue>> Chunk<TValue>(
@@ -112,7 +95,7 @@
 
         public static void WriteLog(string filename, string content)
         {
-            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filename);                      
+            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filename);
 
             File.AppendAllText(filePath, string.Format("{0}{1}", content, System.Environment.NewLine));
         }
@@ -135,21 +118,72 @@
 
         }
 
-        public static int ConvertIpAddressToInt(string ipAddress)
+        public static IpModel Ip2Long(this string ipAddress)
         {
-            var ipCode = IPAddress.Parse(ipAddress);
+            var ipAd = IPAddress.Parse(ipAddress);
 
-            var bytes = ipCode.GetAddressBytes();
+            BigInteger ipnum = 0;
 
-            return BitConverter.ToInt32(bytes, 0);
+            byte[] addrBytes = ipAd.GetAddressBytes();
+
+            if (BitConverter.IsLittleEndian)
+            {
+                var byteList = new List<byte>(addrBytes);
+                byteList.Reverse();
+                addrBytes = byteList.ToArray();
+            }
+
+            if (addrBytes.Length > 8)
+            {
+                //IPv6
+                ipnum = BitConverter.ToUInt64(addrBytes, 8);
+                ipnum <<= 64;
+                ipnum += BitConverter.ToUInt64(addrBytes, 0);
+
+                return new IpModel
+                {
+                    IpNumber = ipnum,
+                    IsIpV6 = true
+                };
+            }
+            else
+            {
+                //IPv4
+                ipnum = BitConverter.ToUInt32(addrBytes, 0);
+
+                return new IpModel
+                {
+                    IpNumber = ipnum,
+                    IsIpV6 = false
+                };
+            }
+
+
         }
 
-        public static string ConvertIntToIpAddress(int ipCode)
+        public static string ToUncompressedString(this IPAddress ipAddress)
         {
-            var getBytes = BitConverter.GetBytes(ipCode);
-            var ipAddress = new IPAddress(getBytes);
+            if (ipAddress.AddressFamily == AddressFamily.InterNetwork)  // IPv4
+            {
+                var strings = ipAddress.GetAddressBytes()
+                    .Select(b => string.Format("{0:D3}", b));   // format bytes with padded 0s
 
-            return ipAddress.ToString();
+                return string.Join(".", strings);   // join padded strings with '.' character
+            }
+
+            if (ipAddress.AddressFamily == AddressFamily.InterNetworkV6)    // IPv6
+            {
+
+                var strings = Enumerable.Range(0, 8)    // create index
+                                        .Select(i => ipAddress.GetAddressBytes().ToList().GetRange(i * 2, 2))       // get 8 chunks of bytes
+                                        .Select(selector: i => { i.Reverse(); return i; })    // reverse bytes for endianness
+                                        .Select(bytes => BitConverter.ToInt16(bytes.ToArray(), 0))  // convert bytes to 16 bit int
+                                        .Select(int16 => string.Format("{0:X4}", int16).ToUpper()); // format int as a 4 digit hex 
+
+                return string.Join(":", strings);   // join hex ints with ':'
+            }
+
+            return ipAddress.ToString();    // all else treat as to string
         }
     }
 }

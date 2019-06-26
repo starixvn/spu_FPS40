@@ -13,10 +13,10 @@
 
     public partial class Runner : ServiceBase
     {
-        private EasyNetQConnector _rabbitMQ;
-        private ICapturingDataService _capturingDataService;
-        private List<RawTransactionModel> _transactionList;
-        private Timer _timer;
+        private readonly EasyNetQConnector _rabbitMQ;
+        private readonly ICapturingDataService _capturingDataService;
+        private readonly List<RawTransactionModel> _transactionList;
+        private readonly Timer _timer;
         private DateTime _lastInsertTrans;
         public Runner()
         {
@@ -39,7 +39,7 @@
 
             _timer = new Timer();
             _timer.Elapsed += InsertTransactionByTimer;
-            _timer.Interval = 60000;
+            _timer.Interval = AppSettings.Interval;
         }
 
         protected override void OnStart(string[] args)
@@ -112,7 +112,7 @@
             var deviceCode = Utilities.GetDeviceCodeFromCapturedData(message.Device);
             var deviceInfo = _capturingDataService.GetDeviceInfo(deviceCode);
 
-            return new RawTransactionModel()
+            return new RawTransactionModel
             {
                 DeviceCode = deviceInfo.DeviceNo,
                 LoginName = message.Account,
