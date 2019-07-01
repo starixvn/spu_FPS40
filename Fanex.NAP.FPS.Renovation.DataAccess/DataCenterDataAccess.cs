@@ -123,7 +123,7 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
 
         public List<IpRangeModel> GetIpV4Range()
         {
-            var criteria = new GetIpV4RangeCriteria();           
+            var criteria = new GetIpV4RangeCriteria();
 
             using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {

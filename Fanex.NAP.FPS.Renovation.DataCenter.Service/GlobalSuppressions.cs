@@ -4,7 +4,11 @@
 // Project-level suppressions either have no target or are given 
 // a specific target and scoped to a namespace, type, member, etc.
 
+#pragma warning disable S103 // Lines should not be too long
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Blocker Code Smell", "S4462:Calls to \"async\" methods should not be blocking", Justification = "<Pending>", Scope = "member", Target = "~M:Fanex.NAP.FPS.Renovation.DataCenter.Service.Jobs.AddAssociation.Schedule.Create~Fanex.NAP.FPS.Renovation.DataCenter.Service.ISchedule")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Blocker Code Smell", "S4462:Calls to \"async\" methods should not be blocking", Justification = "<Pending>", Scope = "member", Target = "~M:Fanex.NAP.FPS.Renovation.DataCenter.Service.Jobs.UpdateCustomerInfo.Schedule.Create~Fanex.NAP.FPS.Renovation.DataCenter.Service.ISchedule")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Blocker Code Smell", "S4462:Calls to \"async\" methods should not be blocking", Justification = "<Pending>", Scope = "member", Target = "~M:Fanex.NAP.FPS.Renovation.DataCenter.Service.Jobs.UpdateIPRange.Schedule.Create~Fanex.NAP.FPS.Renovation.DataCenter.Service.ISchedule")]
-
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Blocker Code Smell", "S4462:Calls to \"async\" methods should not be blocking", Justification = "<Pending>", Scope = "member", Target = "~M:Fanex.NAP.FPS.Renovation.DataCenter.Service.Jobs.AddAssociation.Schedule.Create~Fanex.NAP.FPS.Renovation.DataCenter.Service.ISchedule")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Blocker Code Smell", "S4462:Calls to \"async\" methods should not be blocking", Justification = "<Pending>", Scope = "member", Target = "~M:Fanex.NAP.FPS.Renovation.DataCenter.Service.Jobs.UpdateCustomerInfo.Schedule.Create~Fanex.NAP.FPS.Renovation.DataCenter.Service.ISchedule")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Blocker Code Smell", "S4462:Calls to \"async\" methods should not be blocking", Justification = "<Pending>", Scope = "member", Target = "~M:Fanex.NAP.FPS.Renovation.DataCenter.Service.Jobs.UpdateIPRange.Schedule.Create~Fanex.NAP.FPS.Renovation.DataCenter.Service.ISchedule")]
+#pragma warning restore S103 // Lines should not be too long

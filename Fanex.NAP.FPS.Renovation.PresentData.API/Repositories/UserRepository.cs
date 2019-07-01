@@ -6,7 +6,6 @@ namespace Fanex.NAP.FPS.Renovation.PresentData.API.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        public UserRepository() { }
 
         public async Task AddAsync(UserModel user)
         {
