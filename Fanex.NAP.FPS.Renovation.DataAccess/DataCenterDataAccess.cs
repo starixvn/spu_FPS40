@@ -16,14 +16,14 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
         {
             var repository = new DynamicRepository();
 
-            var criteria = new InsertDataCenterTransactionCriteria()
+            var criteria = new InsertDataCenterTransactionCriteria
             {
                 StagingTransXml = xmlTrans
             };
 
             var errCode = repository.Execute(criteria);
 
-            return new DataResult()
+            return new DataResult
             {
                 ErrorCode = errCode
             };
@@ -46,14 +46,14 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
         {
             var repository = new DynamicRepository();
 
-            var criteria = new UpdateCustomerInfoCriteria()
+            var criteria = new UpdateCustomerInfoCriteria
             {
                 CustDataXml = custDataXml
             };
 
             var errCode = repository.Execute(criteria);
 
-            return new DataResult()
+            return new DataResult
             {
                 ErrorCode = errCode
             };
@@ -94,6 +94,73 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
             var criteria = new UpdateIsSyncGraphDBByAssociationIdCriteria
             {
                 AssociationXml = associationXml
+            };
+
+            var errCode = repository.Execute(criteria);
+
+            return new DataResult
+            {
+                ErrorCode = errCode
+            };
+        }
+
+        public DataResult UpdateIPRange(string ipRangeXml)
+        {
+            var repository = new DynamicRepository();
+
+            var criteria = new UpdateIpRangeCriteria
+            {
+                IPRangeLocationXml = ipRangeXml
+            };
+
+            var errCode = repository.Execute(criteria);
+
+            return new DataResult
+            {
+                ErrorCode = errCode
+            };
+        }
+
+        public List<IpRangeModel> GetIpV4Range()
+        {
+            var criteria = new GetIpV4RangeCriteria();           
+
+            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
+            {
+                return db.Query<IpRangeModel>(criteria).ToList();
+            }
+        }
+
+        public List<IpRangeModel> GetIpV6Range()
+        {
+            var criteria = new GetIpV6RangeCriteria();
+
+            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
+            {
+                return db.Query<IpRangeModel>(criteria).ToList();
+            }
+        }
+
+        public NewIPTableUpdatedModel GetNewIPTableUpdatedLog(int ipType)
+        {
+            var criteria = new GetNewIPTableUpdatedLogCriteria
+            {
+                IpType = ipType
+            };
+
+            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
+            {
+                return db.QueryEntity<NewIPTableUpdatedModel>(criteria);
+            }
+        }
+
+        public DataResult UpdateIpTableLog(int ipType)
+        {
+            var repository = new DynamicRepository();
+
+            var criteria = new UpdateIPTableLogCriteria
+            {
+                IPType = ipType
             };
 
             var errCode = repository.Execute(criteria);

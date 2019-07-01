@@ -32,9 +32,24 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface
             return new List<CustomerInfoModel>();
         }
 
+        public List<IpRangeModel> GetIpV4Range() => dataCenter.GetIpV4Range().Select(selector: x => {
+            x.IPType = 0;
+            return x;
+        }).ToList();
+
+        public List<IpRangeModel> GetIpV6Range() => dataCenter.GetIpV6Range().Select(x => {
+            x.IPType = 1;
+            return x;
+        }).ToList();
+
         public List<NewCustomerModel> GetNewCustomer(int size)
         {
             return dataCenter.GetNewCustomer(size);
+        }
+
+        public NewIPTableUpdatedModel GetNewIPTableUpdatedLog(int ipType)
+        {
+            return dataCenter.GetNewIPTableUpdatedLog(ipType);
         }
 
         public DataResult UpdateCustomerInfo(List<CustomerInfoModel> customerInfo)
@@ -44,6 +59,18 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface
             var newXmlCustomerInfo = Utilities.XMLConvert(newCustomerInfo);
 
             return dataCenter.UpdateCustomerInfo(newXmlCustomerInfo);
+        }
+
+        public DataResult UpdateIpRange(List<IpRangeModel> IpRanges)
+        {
+            var ipRangeXml = Utilities.XMLConvert(IpRanges);
+
+            return dataCenter.UpdateIPRange(ipRangeXml: ipRangeXml);
+        }
+
+        public DataResult UpdateIpTableLog(int ipType)
+        {
+            return dataCenter.UpdateIpTableLog(ipType);
         }
 
         private NewCustomerInfo TransformCustomerInfo(CustomerInfoModel customerInfo)

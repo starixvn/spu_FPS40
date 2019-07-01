@@ -6,5 +6,11 @@
     <Setting Key="DC_UpdateCustomerInfo" SpName="DC_UpdateCustomerInfo" DbName="MySQL.FPS_DataCenter"/>
     <Setting Key="DC_GetAssociationForGraphDB" SpName="DC_GetAssociationForGraphDB" DbName="MySQL.FPS_DataCenter"/>
     <Setting Key="FPS_GetCustomerInfo40" SpName="FPS_GetCustomerInfo40" DbName="SQL.FPS_bodb02"/>
+    
+    <Setting Key="IP_GetAllIP2Location" SpName="IP_GetAllIP2Location" DbName="SQL.IPDB"/>
+    <Setting Key="IP_GetAllIPv6Location" SpName="IP_GetAllIPv6Location" DbName="SQL.IPDB"/>
+    <Setting Key="GetIPTableLogNew" SpName="GetIPTableLogNew" DbName="SQL.IPDB"/>
+
+    <Setting Key="DC_UpdateIPTableLog" SpName="DC_UpdateIPTableLog" DbName="MySQL.FPS_DataCenter"/>
   </Function>
 </Functions>
