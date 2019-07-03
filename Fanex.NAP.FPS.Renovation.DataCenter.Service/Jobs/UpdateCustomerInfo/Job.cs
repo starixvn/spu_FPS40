@@ -1,15 +1,14 @@
-﻿using Fanex.Logging;
-using Fanex.Logging.Extensions;
-using Fanex.NAP.FPS.Renovation.Core;
-using Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface;
-using Fanex.NAP.FPS.Renovation.Queue;
-using Quartz;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Jobs.UpdateCustomerInfo
+﻿namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Jobs.UpdateCustomerInfo
 {
+    using Fanex.Logging;
+    using Fanex.Logging.Extensions;
+    using Fanex.NAP.FPS.Renovation.Core;
+    using Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface;
+    using Quartz;
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+
     [DisallowConcurrentExecution]
     public class Job : IJob
     {

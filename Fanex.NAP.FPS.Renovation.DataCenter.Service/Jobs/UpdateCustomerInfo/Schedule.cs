@@ -1,10 +1,10 @@
-﻿using Quartz;
-using Quartz.Impl;
-using System.Collections.Specialized;
-using System.Threading.Tasks;
-
-namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Jobs.UpdateCustomerInfo
+﻿namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Jobs.UpdateCustomerInfo
 {
+    using Quartz;
+    using Quartz.Impl;
+    using System.Collections.Specialized;
+    using System.Threading.Tasks;
+
     public class Schedule : ISchedule
     {
         private IScheduler scheduler;

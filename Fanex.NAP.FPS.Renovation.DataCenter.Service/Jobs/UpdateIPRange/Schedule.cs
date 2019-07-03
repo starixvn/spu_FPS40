@@ -1,14 +1,9 @@
-﻿using Quartz;
-using Quartz.Impl;
-using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Jobs.UpdateIPRange
+﻿namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Jobs.UpdateIPRange
 {
+    using Quartz;
+    using Quartz.Impl;
+    using System.Collections.Specialized;
+
     public class Schedule : ISchedule
     {
         private IScheduler scheduler;

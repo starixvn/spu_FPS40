@@ -1,15 +1,11 @@
-﻿using Fanex.NAP.FPS.Renovation.Core;
-using Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface;
-using Fanex.NAP.FPS.Renovation.Model;
-using Quartz;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Jobs.UpdateIPRange
+﻿namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Jobs.UpdateIPRange
 {
+    using Fanex.NAP.FPS.Renovation.Core;
+    using Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface;
+    using Quartz;
+    using System.Linq;
+    using System.Threading.Tasks;
+
     [DisallowConcurrentExecution]
     public class Job : IJob
     {
