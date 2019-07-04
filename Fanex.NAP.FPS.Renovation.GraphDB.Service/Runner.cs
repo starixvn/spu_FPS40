@@ -66,7 +66,7 @@ namespace Fanex.NAP.FPS.Renovation.GraphDB.Service
                 {
                     associations.Add(new IsSynAssociationModel
                     {
-                        AssociationID = criteria.AssociationID,
+                        AssociationID = criteria.AssociationId,
                         SyncGraphDB = 1
                     });
                 }
@@ -84,18 +84,18 @@ namespace Fanex.NAP.FPS.Renovation.GraphDB.Service
         private void InsertCustomer(AssociationModel criteria)
         {
             // ko luu SMA, chi luu member, roleid = 1
-            if (criteria.RoleID == 1)
+            if (criteria.RoleId == 1)
             {
                 // remove test account
                 if (!criteria.Username.Contains("test") || criteria.Username2 == null || !criteria.Username2.Contains("test"))
                 {
                     try
                     {
-                        var custId = DbSessionFactory.Query<int>(FPS.GetCustomerById, new { criteria.CustID });
-                        var deviceId = DbSessionFactory.Query<int>(FPS.GetDeviceById, new { criteria.DeviceID });
-                        var association = DbSessionFactory.Query<int>(FPS.CheckExistedAssociation, new { criteria.CustID, criteria.DeviceID });
+                        var custId = DbSessionFactory.Query<int>(FPS.GetCustomerById, new { criteria.CustId });
+                        var deviceId = DbSessionFactory.Query<int>(FPS.GetDeviceById, new { criteria.DeviceId });
+                        var association = DbSessionFactory.Query<int>(FPS.CheckExistedAssociation, new { criteria.CustId, criteria.DeviceId });
 
-                        if (criteria.DeviceID == 0)
+                        if (criteria.DeviceId == 0)
                         {
                             if (!custId.Any())
                             {
