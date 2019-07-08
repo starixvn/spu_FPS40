@@ -11,7 +11,7 @@ namespace Fanex.NAP.FPS.Renovation.Criteria
     {
         public override string GetSettingKey()
         {
-            return "IP_GetAllIP2Location";
+            return "GetAllIP2Location";
         }
 
         public override bool IsValid()

@@ -7,13 +7,11 @@ using System.Threading.Tasks;
 
 namespace Fanex.NAP.FPS.Renovation.Criteria
 {
-    public class GetNewIPTableUpdatedLogCriteria : CriteriaBase
+    public class GetIPTableLogLatestUpdatedDateCriteria : CriteriaBase
     {
-        public int IpType { get; set; }
-
         public override string GetSettingKey()
         {
-            return "GetIPTableLogNew";
+            return "DC_IPTableLog_GetLatestUpdatedDate";
         }
 
         public override bool IsValid()

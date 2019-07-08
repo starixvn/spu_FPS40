@@ -1,72 +1,68 @@
 ﻿namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Jobs.UpdateIPRange
 {
     using Fanex.NAP.FPS.Renovation.Core;
+    using Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Implement;
     using Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface;
     using Quartz;
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
 
     [DisallowConcurrentExecution]
     public class Job : IJob
     {
-        private readonly IDataCenterService dataCenterService;
+        private readonly IIPRangeService iPRangeService;
 
         public Job()
         {
-            dataCenterService = new DataCenterService();
+            iPRangeService = new IPRangeService();
         }
 
         public Task Execute(IJobExecutionContext context)
         {
-            UpdateIpTableV4();         
+            var ipDBVersion = iPRangeService.GetIPDBVersion();
+            var ipLatestIPDBLog = iPRangeService.GetLatestUpdatedDateIPTableLog();
 
-            UpdateIpTableV6();
+            if (ipDBVersion.CompareTo(ipLatestIPDBLog) >= 0)
+            {
+                UpdateIpTableV4();
+
+                UpdateIpTableV6();
+
+                iPRangeService.InsertNewTableLog(DateTime.Now);
+            }
 
             return Task.FromResult(true);
         }
 
         private void UpdateIpTableV4()
         {
-            var detectIpTableV4Updated = dataCenterService.GetNewIPTableUpdatedLog(0);
+            var ipV4Ranges = iPRangeService.GetIpV4Range();
 
-            if(detectIpTableV4Updated.IsNewUpdate)
+            if (ipV4Ranges.Any())
             {
-                var ipV4Ranges = dataCenterService.GetIpV4Range();
+                var chunkIpV4Range = ipV4Ranges.Chunk(100);
 
-                if (ipV4Ranges.Any())
+                foreach (var range in chunkIpV4Range)
                 {
-                    var chunkIpV4Range = ipV4Ranges.Chunk(1000);
-
-                    foreach (var range in chunkIpV4Range)
-                    {
-                        dataCenterService.UpdateIpRange(range.ToList());
-                    }
-
-                    dataCenterService.UpdateIpTableLog(0);
+                    iPRangeService.UpdateIpRange(range, 0);
                 }
-            }            
+            }
         }
 
         private void UpdateIpTableV6()
         {
-            var detectIpTableV6Updated = dataCenterService.GetNewIPTableUpdatedLog(1);
+            var ipV6Ranges = iPRangeService.GetIpV6Range();
 
-            if(detectIpTableV6Updated.IsNewUpdate)
+            if (ipV6Ranges.Any())
             {
-                var ipV6Ranges = dataCenterService.GetIpV6Range();
+                var chunkIpV6Range = ipV6Ranges.Chunk(1000);
 
-                if (ipV6Ranges.Any())
+                foreach (var range in chunkIpV6Range)
                 {
-                    var chunkIpV6Range = ipV6Ranges.Chunk(1000);
-
-                    foreach (var range in chunkIpV6Range)
-                    {
-                        dataCenterService.UpdateIpRange(range.ToList());
-                    }
-
-                    dataCenterService.UpdateIpTableLog(1);
+                    iPRangeService.UpdateIpRange(range, 1);
                 }
-            }           
+            }
         }
     }
 }

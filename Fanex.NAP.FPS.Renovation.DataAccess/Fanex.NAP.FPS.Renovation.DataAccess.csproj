@@ -166,6 +166,7 @@
   <ItemGroup>
     <Compile Include="AssociationDataAccess.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="IPRangeDataAccess.cs" />
     <Compile Include="RawTransactionDataAccess.cs" />
     <Compile Include="CommonDataAccess.cs" />
     <Compile Include="DataCenterDataAccess.cs" />

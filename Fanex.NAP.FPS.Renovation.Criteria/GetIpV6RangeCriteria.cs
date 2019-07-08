@@ -11,7 +11,7 @@ namespace Fanex.NAP.FPS.Renovation.Criteria
     {
         public override string GetSettingKey()
         {
-            return "IP_GetAllIPv6Location";
+            return "GetAllIPv62Location";
         }
 
         public override bool IsValid()

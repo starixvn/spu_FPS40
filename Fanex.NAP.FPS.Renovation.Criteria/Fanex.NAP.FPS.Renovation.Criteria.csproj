@@ -164,14 +164,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InsertIPTableLogCriteria.cs" />
     <Compile Include="GetAssociationByCustomerCriteria.cs" />
     <Compile Include="GetAssociationForGraphDBCriteria.cs" />
     <Compile Include="GetCustomerInfoCriteria.cs" />
     <Compile Include="GetCustomersEvidencesCriteria.cs" />
+    <Compile Include="GetIPTableLogLatestUpdatedDateCriteria.cs" />
     <Compile Include="GetIpV4RangeCriteria.cs" />
     <Compile Include="GetIpV6RangeCriteria.cs" />
     <Compile Include="GetNewCustomerCriteria.cs" />
-    <Compile Include="GetNewIPTableUpdatedLogCriteria.cs" />
+    <Compile Include="GetIPDBVersionCriteria.cs" />
     <Compile Include="GetTotalAssociationByCustomerCriteria.cs" />
     <Compile Include="InsertDataCenterTransactionCriteria.cs" />
     <Compile Include="CapturingTransactionCriteria.cs" />

@@ -18,14 +18,5 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface
 
         List<AssociationModel> GetAssociationForGrapDB(int isSync, int size);
 
-        DataResult UpdateIpRange(List<IpRangeModel> IpRanges);
-
-        List<IpRangeModel> GetIpV4Range();
-
-        List<IpRangeModel> GetIpV6Range();
-
-        NewIPTableUpdatedModel GetNewIPTableUpdatedLog(int ipType);
-
-        DataResult UpdateIpTableLog(int ipType);
     }
 }

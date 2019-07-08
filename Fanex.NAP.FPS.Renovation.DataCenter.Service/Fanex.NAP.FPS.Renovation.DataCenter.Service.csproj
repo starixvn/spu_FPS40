@@ -75,7 +75,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Implement\DataCenterService.cs" />
+    <Compile Include="Services\Implement\IPRangeService.cs" />
     <Compile Include="Services\Interface\IDataCenterService.cs" />
+    <Compile Include="Services\Interface\IIPRangeService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
