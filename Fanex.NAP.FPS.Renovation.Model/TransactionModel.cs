@@ -24,19 +24,16 @@ namespace Fanex.NAP.FPS.Renovation.Model
         public string SubscriberName { get; set; }
 
         [XmlAttribute]
-        public DateTime TransDate { get; set; }
+        public Int32 TransDate { get; set; }      
 
         [XmlAttribute]
-        public DateTime CreatedDate { get; set; }
-
-        [XmlAttribute]
-        public BigInteger IP { get; set; }
+        public decimal IP { get; set; }
 
         [XmlAttribute]
         public int PluginID { get; set; }
 
         [XmlAttribute]
-        public int DeviceStatus { get; set; }
+        public int DeviceCodeStatus { get; set; }
 
         [XmlAttribute]
         public string URL { get; set; }
@@ -45,7 +42,19 @@ namespace Fanex.NAP.FPS.Renovation.Model
         public string ActionResult { get; set; }
 
         [XmlAttribute]
-        public string UserAgent { get; set; }
+        public string UserAgent { get; set; }     
+        
+        [XmlAttribute]
+        public string FingeringCode { get; set; }
+
+        [XmlAttribute]
+        public string FingeringMoreInfo { get; set; }
+
+        [XmlAttribute]
+        public Int32 CreatedDate { get; set; }
+
+        [XmlAttribute]
+        public int IPType { get; set; }
 
         [XmlAttribute]
         public string UserAgentCode { get; set; }

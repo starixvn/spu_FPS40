@@ -100,11 +100,21 @@
 
         private void InsertTransaction()
         {
-            _capturingDataService.InsertTransaction(_transactionList);
+            try
+            {
+                _capturingDataService.InsertTransaction(_transactionList);
 
-            _lastInsertTrans = DateTime.Now;
+                _lastInsertTrans = DateTime.Now;
 
-            _transactionList.Clear();
+                _transactionList.Clear();
+            }
+            catch (Exception ex)
+            {
+                var logMessage = new LogMessage(ex.Message)
+                   .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
+
+                LogService.Error(logMessage);
+            }
         }
 
         private RawTransactionModel TransformRawTransaction(MessageQueue message)
@@ -120,11 +130,13 @@
                 TransDate = Convert.ToDateTime(message.TransDate.ToString("yyyy-MM-dd hh:mm:ss")),
                 IP = message.IP,
                 PluginID = 0,
-                DeviceStatus = 0,
+                DeviceCodeStatus = 0,
                 URL = deviceInfo.HRef,
                 ActionResult = message.ActionResult,
                 UserAgent = deviceInfo.UserAgent,
-                CapturedData = message.Device,
+                FingeringCode = deviceInfo.DeviceFPCode,
+                FingeringMoreInfo = EncodeCapturedData(deviceInfo),
+                
             };
         }
 
@@ -134,6 +146,17 @@
             {
                 InsertTransaction();
             }
+        }
+
+        private static string EncodeCapturedData(DeviceInfoModel deviceInfo)
+        {
+            return Cipher.Encrypt(string.Format("{0}#{1}#{2}#{3}#{4}#{5}",               
+                deviceInfo.Battery, 
+                deviceInfo.CapturedDate, 
+                deviceInfo.OSName, 
+                deviceInfo.Screen, 
+                deviceInfo.TimeZone,
+                deviceInfo.LocalIps));
         }
     }
 }

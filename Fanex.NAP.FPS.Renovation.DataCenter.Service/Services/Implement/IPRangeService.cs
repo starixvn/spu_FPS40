@@ -45,7 +45,7 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Implement
 
         private static string EncodeIPAttribute(IpRangeModel ipRangeModel)
         {
-            return Utilities.Encode(string.Format("{0}{1}{2}{3}{4}{5}{6}{7}", 
+            return Cipher.Hashing(string.Format("{0}{1}{2}{3}{4}{5}{6}{7}", 
                 ipRangeModel.IPType,
                 ipRangeModel.FromIP,
                 ipRangeModel.ToIP, 

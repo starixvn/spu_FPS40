@@ -2,6 +2,7 @@
 using Fanex.NAP.FPS.Renovation.DataAccess;
 using Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Interface;
 using Fanex.NAP.FPS.Renovation.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -51,24 +52,29 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Implement
 
             var clientInfo = uaParser.Parse(model.UserAgent);
 
+            var ipInfo = model.IP.Ip2Long();
+
             return new TransactionModel
             {
+                StagingTransID = model.StagingTransId,
                 DeviceCode = model.DeviceCode,
+                DeviceCodeStatus = model.DeviceCodeStatus,
+                FingeringCode = model.FingeringCode,
+                FingeringMoreInfo = model.FingeringMoreInfo,
                 LoginName = model.LoginName,
                 SubscriberName = model.SubscriberName,
-                TransDate = model.TransDate,
+                TransDate = model.TransDate,  
                 CreatedDate = model.CreatedDate,
-                IP = model.IP.Ip2Long().IpNumber,
-                PluginID = model.PluginID,
-                DeviceStatus = model.DeviceStatus,
+                IP = (decimal)ipInfo.IpNumber,
+                IPType = ipInfo.IsIpV6 ? 1 : 0,
+                PluginID = model.PluginID,                
                 URL = model.URL,
                 ActionResult = model.ActionResult,
-                UserAgent = model.UserAgent,
-                UserAgentCode = Utilities.Encode(model.UserAgent),
+                UserAgent = model.UserAgent,             
+                UserAgentCode = Cipher.Hashing(model.UserAgent),
                 BrowserName = clientInfo.UA.Family,
                 OSName = clientInfo.OS.Family,
-                Flagged = 0,
-                StagingTransID = model.StagingTransId
+                Flagged = 0                
             };
         }
     }

@@ -14,7 +14,7 @@
     using Fanex.NAP.FPS.Renovation.Model;
 
     public static class Utilities
-    {
+    {       
         public static string GetURLFromDeviceCode(string di)
         {
             if (string.IsNullOrWhiteSpace(di))
@@ -65,24 +65,8 @@
                     return stringWriter.ToString();
                 }
             }
-        }
-
-        public static string Encode(string original)
-        {
-            using (SHA256 sha256Hash = SHA256.Create())
-            {
-                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(original));
-
-                StringBuilder builder = new StringBuilder();
-
-                for (int i = 0; i < bytes.Length; i++)
-                {
-                    builder.Append(bytes[i].ToString("x2"));
-                }
-                return builder.ToString();
-            }
-        }
-
+        }                
+        
         public static IEnumerable<IEnumerable<TValue>> Chunk<TValue>(
             this IEnumerable<TValue> values,
             Int32 chunkSize)
