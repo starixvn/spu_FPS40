@@ -165,7 +165,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountModel.cs" />
-    <Compile Include="DTO\Action.cs" />
     <Compile Include="AssociationModel.cs" />
     <Compile Include="AssociationByCustomerModel.cs" />
     <Compile Include="AuthenticateUserModel.cs" />
@@ -173,10 +172,9 @@
     <Compile Include="BrowserPluginModel.cs" />
     <Compile Include="CustomerEvidence.cs" />
     <Compile Include="CustomerInfoModel.cs" />
-    <Compile Include="DTO\DataResult.cs" />
+    <Compile Include="DataResult.cs" />
     <Compile Include="DeviceInfoModel.cs" />
     <Compile Include="Auth\Interface\IEncrypter.cs" />
-    <Compile Include="FraudCaseMessage.cs" />
     <Compile Include="IpInfoModel.cs" />
     <Compile Include="IpModel.cs" />
     <Compile Include="IpRangeModel.cs" />
