@@ -1,0 +1,18 @@
+﻿@using Microsoft.AspNet.Identity
+<div class="header-info">
+    <div id="notification-icon" class="notification-container">
+        <div class="notification-icon">
+            <div class="icon-bell"></div>
+            <span id="noti-unread-msg" class="circle"></span>
+        </div>
+        <div id="notificationContainer" class="notification-list"></div>
+    </div>
+    <div class="username">
+        @User.Identity.GetUserName()
+        <ul class="sub-menu -small">
+            <li class="sub-menu-item">
+                <a href="~/UserLogin/Login/Logout" class="link"><span class="icon icon-logout"></span>Log out</a>
+            </li>
+        </ul>
+    </div>
+</div>
