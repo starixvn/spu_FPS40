@@ -52,10 +52,7 @@ namespace Fanex.NAP.FPS.Renovation.Model
 
         [XmlAttribute]
         public DateTime CreatedDate { get; set; }
-
-        [XmlAttribute]
-        public int IPType { get; set; }
-
+     
         [XmlAttribute]
         public string UserAgentCode { get; set; }
 

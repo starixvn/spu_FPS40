@@ -135,8 +135,7 @@
                 ActionResult = message.ActionResult,
                 UserAgent = deviceInfo.UserAgent,
                 FingeringCode = deviceInfo.DeviceFPCode,
-                FingeringMoreInfo = EncodeCapturedData(deviceInfo),
-                
+                FingeringMoreInfo = EncodeCapturedData(deviceInfo)                
             };
         }
 

@@ -36,7 +36,6 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Implement
                 var xmlTrans = Utilities.XMLConvert(transformData);
 
                 return dataCenter.InsertTransaction(xmlTrans);
-
             }
 
             return new DataResult
@@ -67,8 +66,7 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Implement
                 SubscriberName = model.SubscriberName,
                 TransDate = model.TransDate,  
                 CreatedDate = model.CreatedDate,
-                IP = ipInfo.IsIpV6 ? ipNumber : ipNumber + 281470681743360,
-                IPType = ipInfo.IsIpV6 ? 1 : 0,
+                IP = ipInfo.IsIpV6 ? ipNumber : ipNumber + 281470681743360,                
                 PluginID = model.PluginID,                
                 URL = model.URL,
                 ActionResult = model.ActionResult,

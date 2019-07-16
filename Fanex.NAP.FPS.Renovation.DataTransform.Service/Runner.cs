@@ -56,32 +56,32 @@
                 isRunning = true;
 
                 var result = dataTransformService.GetStagingRawTransaction(0, AppSettings.TransBatch);
-                
+
                 if (result != null && result.Any())
                 {
                     var chunkSize = AppSettings.TransBatch / 10;
-                    var chunkResult = result.Chunk(chunkSize);
+                    var chunkResult = result.OrderBy(x => x.StagingTransId).Chunk(chunkSize);
 
                     foreach (var rawData in chunkResult)
                     {
                         if (rawData.Any())
                         {
-                           insertResult = dataTransformService.InsertTransaction(rawData.ToList());                           
+                            insertResult = dataTransformService.InsertTransaction(rawData.ToList());
                         }
                     }
-                }                
+                }
 
                 isRunning = false;
             }
             catch (Exception ex)
-            {                
+            {
                 var errorHanler = new Dictionary<string, object>();
                 errorHanler.Add("ErrorCode", insertResult.ErrorCode);
                 errorHanler.Add("ErrorMsg", insertResult.ErrorMessage);
 
                 var logMessage = new LogMessage(ex.Message)
                     .AddSection("Data Info", errorHanler)
-                    .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex))                    
+                    .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex))
                     .ToString();
 
                 LogService.Error(logMessage);
