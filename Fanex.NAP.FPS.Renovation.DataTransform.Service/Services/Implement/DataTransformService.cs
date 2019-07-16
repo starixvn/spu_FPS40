@@ -54,6 +54,8 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Implement
 
             var ipInfo = model.IP.Ip2Long();
 
+            var ipNumber = (decimal)ipInfo.IpNumber;
+
             return new TransactionModel
             {
                 StagingTransID = model.StagingTransId,
@@ -65,7 +67,7 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Implement
                 SubscriberName = model.SubscriberName,
                 TransDate = model.TransDate,  
                 CreatedDate = model.CreatedDate,
-                IP = (decimal)ipInfo.IpNumber,
+                IP = ipInfo.IsIpV6 ? ipNumber : ipNumber + 281470681743360,
                 IPType = ipInfo.IsIpV6 ? 1 : 0,
                 PluginID = model.PluginID,                
                 URL = model.URL,

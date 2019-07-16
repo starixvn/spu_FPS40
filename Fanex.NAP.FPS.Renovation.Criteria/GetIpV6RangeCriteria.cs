@@ -9,6 +9,10 @@ namespace Fanex.NAP.FPS.Renovation.Criteria
 {
     public class GetIpV6RangeCriteria : CriteriaBase
     {
+        public int FromId { get; set; }
+
+        public int ToId { get; set; }
+
         public override string GetSettingKey()
         {
             return "GetAllIPv62Location";

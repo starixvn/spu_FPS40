@@ -127,7 +127,7 @@
                 DeviceCode = deviceInfo.DeviceNo,
                 LoginName = message.Account,
                 SubscriberName = message.Subscriber,
-                TransDate = Convert.ToInt32(message.TransDate),
+                TransDate = message.TransDate,
                 IP = message.IP,
                 PluginID = 0,
                 DeviceCodeStatus = 0,

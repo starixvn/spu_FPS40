@@ -24,7 +24,7 @@ namespace Fanex.NAP.FPS.Renovation.Model
         public string SubscriberName { get; set; }
 
         [XmlAttribute]
-        public Int32 TransDate { get; set; }      
+        public DateTime TransDate { get; set; }      
 
         [XmlAttribute]
         public decimal IP { get; set; }
@@ -51,7 +51,7 @@ namespace Fanex.NAP.FPS.Renovation.Model
         public string FingeringMoreInfo { get; set; }
 
         [XmlAttribute]
-        public Int32 CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         [XmlAttribute]
         public int IPType { get; set; }

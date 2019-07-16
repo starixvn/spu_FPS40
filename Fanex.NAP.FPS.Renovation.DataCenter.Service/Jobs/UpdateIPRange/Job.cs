@@ -13,6 +13,8 @@
     {
         private readonly IIPRangeService iPRangeService;
 
+        private readonly int batchSize = 10000;
+
         public Job()
         {
             iPRangeService = new IPRangeService();
@@ -20,48 +22,36 @@
 
         public Task Execute(IJobExecutionContext context)
         {
-            var ipDBVersion = iPRangeService.GetIPDBVersion();
-            var ipLatestIPDBLog = iPRangeService.GetLatestUpdatedDateIPTableLog();
+            var ipDBVersionDate = iPRangeService.GetIPDBVersion();
+            var ipLatestIPDBLogDate = iPRangeService.GetLatestUpdatedDateIPTableLog();
 
-            if (ipDBVersion.CompareTo(ipLatestIPDBLog) >= 0)
+            if (ipDBVersionDate.CompareTo(ipLatestIPDBLogDate) >= 0)
             {
-                UpdateIpTableV4();
+                UpdateIpTableV6(ipDBVersionDate, 0, batchSize);
 
-                UpdateIpTableV6();
-
-                iPRangeService.InsertNewTableLog(DateTime.Now);
+                iPRangeService.InsertNewTableLog(ipDBVersionDate);
             }
 
             return Task.FromResult(true);
         }
 
-        private void UpdateIpTableV4()
+        private void UpdateIpTableV6(DateTime updatedDate, int fromId, int toId)
         {
-            var ipV4Ranges = iPRangeService.GetIpV4Range();
+            var ipV6Ranges = iPRangeService.GetIpV6Range(fromId, toId);
 
-            if (ipV4Ranges.Any())
-            {
-                var chunkIpV4Range = ipV4Ranges.Chunk(100);
-
-                foreach (var range in chunkIpV4Range)
-                {
-                    iPRangeService.UpdateIpRange(range, 0);
-                }
-            }
-        }
-
-        private void UpdateIpTableV6()
-        {
-            var ipV6Ranges = iPRangeService.GetIpV6Range();
-
-            if (ipV6Ranges.Any())
+            if (ipV6Ranges != null && ipV6Ranges.Any())
             {
                 var chunkIpV6Range = ipV6Ranges.Chunk(1000);
 
-                foreach (var range in chunkIpV6Range)
+                Parallel.ForEach(chunkIpV6Range, new ParallelOptions { MaxDegreeOfParallelism = 2 }, x =>
                 {
-                    iPRangeService.UpdateIpRange(range, 1);
-                }
+                    iPRangeService.UpdateIpRange(x, updatedDate);
+                });
+
+                fromId = (toId + 1);
+                toId += batchSize;
+
+                UpdateIpTableV6(updatedDate, fromId, toId);
             }
         }
     }

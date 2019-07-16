@@ -13,9 +13,12 @@ namespace Fanex.NAP.FPS.Renovation.Criteria
         [SpParam(SqlParamName = "ip_IPRangeLocationXml")]
         public string IPRangeLocationXml { get; set; }
 
+        [SpParam(SqlParamName = "ip_UpdatedDate")]
+        public DateTime UpdatedDate { get; set; }
+
         public override string GetSettingKey()
         {
-            return "DC_UpdateIPRangeLocationByXML";
+            return "DC_IPRangeLocation_UpdateByXML";
         }
 
         public override bool IsValid()

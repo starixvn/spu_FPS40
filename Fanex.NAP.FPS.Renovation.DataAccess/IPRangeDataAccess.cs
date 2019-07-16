@@ -12,13 +12,14 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
 {
    public class IPRangeDataAccess
     {
-        public DataResult UpdateIPRange(string ipRangeXml)
+        public DataResult UpdateIPRange(string ipRangeXml, DateTime updatedDate)
         {
             var repository = new DynamicRepository();
 
             var criteria = new UpdateIpRangeCriteria
             {
-                IPRangeLocationXml = ipRangeXml
+                IPRangeLocationXml = ipRangeXml,
+                UpdatedDate = updatedDate
             };
 
             var errCode = repository.Execute(criteria);
@@ -27,21 +28,15 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
             {
                 ErrorCode = errCode
             };
-        }
+        }        
 
-        public List<IpRangeModel> GetIpV4Range()
+        public List<IpRangeModel> GetIpV6Range(int fromId, int toId)
         {
-            var criteria = new GetIpV4RangeCriteria();
-
-            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
+            var criteria = new GetIpV6RangeCriteria
             {
-                return db.Query<IpRangeModel>(criteria).ToList();
-            }
-        }
-
-        public List<IpRangeModel> GetIpV6Range()
-        {
-            var criteria = new GetIpV6RangeCriteria();
+                FromId = fromId,
+                ToId = toId
+            };
 
             using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
@@ -67,24 +62,7 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
             {
                 return db.QueryEntity<DateTime>(criteria);
             }
-        }
-
-        public DataResult UpdateIpTableLog(int ipType)
-        {
-            var repository = new DynamicRepository();
-
-            var criteria = new UpdateIPTableLogCriteria
-            {
-                IPType = ipType
-            };
-
-            var errCode = repository.Execute(criteria);
-
-            return new DataResult
-            {
-                ErrorCode = errCode
-            };
-        }
+        }       
 
         public DataResult InsertNewTableLog(DateTime updatedDate)
         {

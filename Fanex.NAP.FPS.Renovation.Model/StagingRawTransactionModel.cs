@@ -11,6 +11,6 @@ namespace Fanex.NAP.FPS.Renovation.Model
     {
         public int StagingTransId { get; set; }
 
-        public Int32 CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; }
     }
 }
