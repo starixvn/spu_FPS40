@@ -11,13 +11,13 @@
     [DisallowConcurrentExecution]
     public class Job : IJob
     {
-        private readonly IIPRangeService iPRangeService;
+        private readonly Services.Interface.IPRangeService iPRangeService;
 
         private readonly int batchSize = 10000;
 
         public Job()
         {
-            iPRangeService = new IPRangeService();
+            iPRangeService = new Services.Implement.IPRangeService();
         }
 
         public Task Execute(IJobExecutionContext context)

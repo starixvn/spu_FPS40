@@ -2,13 +2,12 @@
 {
     using Fanex.NAP.FPS.Renovation.Core;
     using Fanex.NAP.FPS.Renovation.DataAccess;
-    using Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface;
     using Fanex.NAP.FPS.Renovation.Model;
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
-    public class IPRangeService : IIPRangeService
+    public class IPRangeService : Interface.IPRangeService
     {
         private readonly DataAccess.IPRangeDataAccess ipRangeDataAccess;
 

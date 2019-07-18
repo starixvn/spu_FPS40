@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface
 {
-    interface IIPRangeService
+    interface IPRangeService
     {
         DataResult UpdateIpRange(IEnumerable<IpRangeModel> IpRanges, DateTime updatedDate);
 
