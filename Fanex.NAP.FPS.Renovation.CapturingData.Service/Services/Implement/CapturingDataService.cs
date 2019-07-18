@@ -14,11 +14,11 @@
             capturingData = new DataAccess.RawTransactionDataAccess();           
         }
 
-        public void InsertTransaction(List<RawTransactionModel> rawTrans)
+        public int InsertTransaction(List<RawTransactionModel> rawTrans)
         {
             var model = Utilities.XMLConvert(rawTrans);
 
-            capturingData.InsertTransaction(model);
+           return capturingData.InsertTransaction(model);
         }
 
         public DeviceInfoModel GetDeviceInfo(string deviceCode)

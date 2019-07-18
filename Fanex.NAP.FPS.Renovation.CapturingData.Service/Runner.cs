@@ -102,11 +102,14 @@
         {
             try
             {
-                _capturingDataService.InsertTransaction(_transactionList);
+                var result = _capturingDataService.InsertTransaction(_transactionList);
 
-                _lastInsertTrans = DateTime.Now;
+                if (result != 0)
+                {
+                    _lastInsertTrans = DateTime.Now;
 
-                _transactionList.Clear();
+                    _transactionList.Clear();
+                }
             }
             catch (Exception ex)
             {
@@ -124,18 +127,18 @@
 
             return new RawTransactionModel
             {
-                DeviceCode = deviceInfo.DeviceNo,
+                DeviceCode = deviceInfo.DeviceNo != "N/A" ? deviceInfo.DeviceNo  : string.Empty,
                 LoginName = message.Account,
                 SubscriberName = message.Subscriber,
                 TransDate = message.TransDate,
                 IP = message.IP,
                 PluginID = 0,
                 DeviceCodeStatus = 0,
-                URL = deviceInfo.HRef,
+                URL = deviceInfo.HRef != "N/A" ? deviceInfo.HRef : string.Empty,
                 ActionResult = message.ActionResult,
-                UserAgent = deviceInfo.UserAgent,
-                FingeringCode = deviceInfo.DeviceFPCode,
-                FingeringMoreInfo = EncodeCapturedData(deviceInfo)                
+                UserAgent = deviceInfo.UserAgent != "N/A" ? deviceInfo.UserAgent : string.Empty,
+                FingeringCode = deviceInfo.DeviceFPCode != "N/A" ? deviceInfo.DeviceFPCode : string.Empty,
+                FingeringMoreInfo = EncodeCapturedData(deviceInfo)
             };
         }
 
@@ -149,11 +152,11 @@
 
         private static string EncodeCapturedData(DeviceInfoModel deviceInfo)
         {
-            return Cipher.Encrypt(string.Format("{0}#{1}#{2}#{3}#{4}#{5}",               
-                deviceInfo.Battery, 
-                deviceInfo.CapturedDate, 
-                deviceInfo.OSName, 
-                deviceInfo.Screen, 
+            return Cipher.Encrypt(string.Format("{0}#{1}#{2}#{3}#{4}#{5}",
+                deviceInfo.Battery,
+                deviceInfo.CapturedDate,
+                deviceInfo.OSName,
+                deviceInfo.Screen,
                 deviceInfo.TimeZone,
                 deviceInfo.LocalIps));
         }

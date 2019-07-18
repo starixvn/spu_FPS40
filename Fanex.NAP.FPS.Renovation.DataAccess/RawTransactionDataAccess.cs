@@ -11,7 +11,7 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
 {
     public class RawTransactionDataAccess
     {
-        public void InsertTransaction(string xmlTrans)
+        public int InsertTransaction(string xmlTrans)
         {
             var repository = new DynamicRepository();
 
@@ -20,7 +20,7 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
                 RawTransXml = xmlTrans   
             };
 
-            repository.Execute(criteria);
+           return repository.Execute(criteria);
         }
     }
 }

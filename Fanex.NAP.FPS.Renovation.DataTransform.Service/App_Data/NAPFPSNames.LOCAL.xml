@@ -7,7 +7,7 @@
   </Function>
 
   <Function Name="DataCenter">
-    <Setting Key="FPS_DC_DataCenter_ProcessTransaction" SpName="FPS_DC_DataCenter_ProcessTransaction" DbName="MySQL.FPS_DataCenter">
+    <Setting Key="FPS_DC_DataCenter_ProcessTransaction" SpName="FPS_DC_DataCenter_ProcessTransaction" DbName="MySQL.FPS_DataCenter" Timeout="600">
     </Setting>
   </Function>
 </Functions>
