@@ -11,7 +11,7 @@ namespace Fanex.NAP.FPS.Renovation.Criteria
     {
         public override string GetSettingKey()
         {
-            return "DC_IPTableLog_GetLatestUpdatedDate";
+            return "FPS_DC_IPTableLog_GetLatestUpdatedDate";
         }
 
         public override bool IsValid()

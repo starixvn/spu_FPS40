@@ -9,7 +9,7 @@
         [SpParam(SqlParamName = "ip_TransXml")]
         public string StagingTransXml { get; set; }       
 
-        public override string GetSettingKey() => "DC_DataCenter_ProcessTransaction";
+        public override string GetSettingKey() => "FPS_DC_DataCenter_ProcessTransaction";
 
         public override bool IsValid() => true;
     }

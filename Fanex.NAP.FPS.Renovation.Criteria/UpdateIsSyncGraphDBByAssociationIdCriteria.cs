@@ -15,7 +15,7 @@ namespace Fanex.NAP.FPS.Renovation.Criteria
 
         public override string GetSettingKey()
         {
-            return "DC_UpdateAssociation";
+            return "FPS_DC_UpdateIsSyncGraphDBByAssociationID";
         }
 
         public override bool IsValid()

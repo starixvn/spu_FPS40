@@ -9,7 +9,7 @@
         [SpParam(SqlParamName = "ip_RawTransXml")]
         public string RawTransXml { get; set; }
 
-        public override string GetSettingKey() => "RT_RawTrans_InsertByXML";
+        public override string GetSettingKey() => "FPS_RT_RawTrans_InsertByXML";
 
         public override bool IsValid() => true;
     }

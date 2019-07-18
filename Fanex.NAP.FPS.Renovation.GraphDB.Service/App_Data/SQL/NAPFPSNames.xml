@@ -2,6 +2,6 @@
 
 <Functions>
   <Function Name="Data Center">
-    <Setting Key="DC_UpdateAssociationSyncGraphDBStatusByAssoociationID" SpName="DC_UpdateAssociationSyncGraphDBStatusByAssoociationID" DbName="MySQL.FPS_DataCenter"/>    
+    <Setting Key="FPS_DC_UpdateIsSyncGraphDBByAssociationID" SpName="FPS_DC_UpdateIsSyncGraphDBByAssociationID" DbName="MySQL.FPS_DataCenter"/>    
   </Function>
 </Functions>

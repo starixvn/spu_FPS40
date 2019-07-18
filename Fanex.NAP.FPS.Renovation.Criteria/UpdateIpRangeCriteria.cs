@@ -18,7 +18,7 @@ namespace Fanex.NAP.FPS.Renovation.Criteria
 
         public override string GetSettingKey()
         {
-            return "DC_IPRangeLocation_UpdateByXML";
+            return "FPS_DC_IPRangeLocation_UpdateByXML";
         }
 
         public override bool IsValid()

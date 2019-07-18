@@ -15,7 +15,7 @@ namespace Fanex.NAP.FPS.Renovation.Criteria
 
         public override string GetSettingKey()
         {
-            return "DC_UpdateCustomerInfo";
+            return "FPS_DC_UpdateCustomerInfo";
         }
 
         public override bool IsValid()

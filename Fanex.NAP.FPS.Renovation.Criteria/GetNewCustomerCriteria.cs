@@ -9,7 +9,7 @@
 
         public override string GetSettingKey()
         {
-            return "DC_GetNewCustomer";
+            return "FPS_DC_GetNewCustomer";
         }
 
         public override bool IsValid()
