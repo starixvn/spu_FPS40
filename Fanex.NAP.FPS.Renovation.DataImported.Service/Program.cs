@@ -78,21 +78,23 @@ namespace Fanex.NAP.FPS.Renovation.DataImported.Service
             {
                 var fileName = Path.GetFileName(file);
                 var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(file);
-               
 
-                if (fileNameWithoutExtension == "IBO")
+
+                //if (fileNameWithoutExtension == "IBO")
+                //{
+
+                //}
+
+                Utilities.DeleteLog(fileName);
+
+                var dataLog = File.ReadAllLines(file);
+
+                if (dataLog.Length > 0)
                 {
-                    Utilities.DeleteLog(fileName);
-
-                    var dataLog = File.ReadAllLines(file);
-
-                    if (dataLog.Length > 0)
-                    {
-                        Executing(fileName, fileNameWithoutExtension, dataLog);
-                    }
-
-                    Console.WriteLine(Path.GetFileName(file));
+                    Executing(fileName, fileNameWithoutExtension, dataLog);
                 }
+
+                Console.WriteLine(Path.GetFileName(file));
             }
         }
 
