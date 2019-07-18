@@ -25,7 +25,7 @@
 
             var ipRangeXml = Utilities.XMLConvert(ipRangeEncode);
 
-            return ipRangeDataAccess.UpdateIPRange(ipRangeXml: ipRangeXml, updatedDate);
+            return ipRangeDataAccess.UpdateIPRange(ipRangeXml, updatedDate);
         }        
 
         public DateTime GetIPDBVersion() => ipRangeDataAccess.GetIPDBVersion();        
