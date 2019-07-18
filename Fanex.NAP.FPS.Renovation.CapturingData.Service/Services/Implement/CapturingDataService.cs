@@ -8,12 +8,10 @@
     public class CapturingDataService : ICapturingDataService
     {
         private readonly DataAccess.RawTransactionDataAccess capturingData;
-        private readonly DataAccess.CommonDataAccess common;
-        private const string _EMPTY = "-";
+              
         public CapturingDataService()
         {
-            capturingData = new DataAccess.RawTransactionDataAccess();
-            common = new DataAccess.CommonDataAccess();
+            capturingData = new DataAccess.RawTransactionDataAccess();           
         }
 
         public void InsertTransaction(List<RawTransactionModel> rawTrans)
@@ -44,20 +42,20 @@
         {
             return new DeviceInfoModel
             {
-                AppVersion = "N/A",
+                AppVersion = string.Empty,
                 CapturedDate = 0,
-                DeviceFPCode = "N/A",
-                DeviceNo = "N/A",
-                HRef = "N/A",
-                NA = "N/A",
+                DeviceFPCode = string.Empty,
+                DeviceNo = string.Empty,
+                HRef = string.Empty,
+                NA = string.Empty,
                 Screen = new ScreenInfoModel
                 {
                     ColorDepth = 0,
                     Height = 0,
                     Width = 0
                 },
-                TimeZone = "N/A",
-                UserAgent = "N/A"
+                TimeZone = string.Empty,
+                UserAgent = string.Empty
             };
         }
 
