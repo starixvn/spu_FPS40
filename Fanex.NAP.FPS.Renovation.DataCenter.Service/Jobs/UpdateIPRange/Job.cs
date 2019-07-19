@@ -1,5 +1,7 @@
 ﻿namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Jobs.UpdateIPRange
 {
+    using Fanex.Logging;
+    using Fanex.Logging.Extensions;
     using Fanex.NAP.FPS.Renovation.Core;
     using Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Implement;
     using Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface;
@@ -22,14 +24,24 @@
 
         public Task Execute(IJobExecutionContext context)
         {
-            var ipDBVersionDate = iPRangeService.GetIPDBVersion();
-            var ipLatestIPDBLogDate = iPRangeService.GetLatestUpdatedDateIPTableLog();
-
-            if (ipDBVersionDate.CompareTo(ipLatestIPDBLogDate) >= 0)
+            try
             {
-                UpdateIpTableV6(ipDBVersionDate, 0, batchSize);
+                var ipDBVersionDate = iPRangeService.GetIPDBVersion();
+                var ipLatestIPDBLogDate = iPRangeService.GetLatestUpdatedDateIPTableLog();
 
-                iPRangeService.InsertNewTableLog(ipDBVersionDate);
+                if (ipDBVersionDate.CompareTo(ipLatestIPDBLogDate) >= 0)
+                {
+                    UpdateIpTableV6(ipDBVersionDate, 0, batchSize);
+
+                    iPRangeService.InsertNewTableLog(ipDBVersionDate);
+                }
+            }
+            catch (Exception ex)
+            {
+                var logMessage = new LogMessage(ex.Message)
+                    .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
+
+                LogService.Error(logMessage);
             }
 
             return Task.FromResult(true);
