@@ -45,10 +45,7 @@
         protected override void OnStart(string[] args)
         {
             try
-            {
-                var data = Cipher.Decrypt("icKlzTGsTBb0TcNtzKk5LdRF2QFuOYOEx5G7kOebBUehYdEwOG89g5kDr7MWEJNs4BHPTFFeX3viw+R1nggrBg==");
-                Console.WriteLine(data);
-
+            {              
                 ConsumerTransactions();
 
                 if (!_timer.Enabled)
@@ -133,10 +130,9 @@
                 DeviceCode = deviceInfo.DeviceNo != "N/A" ? deviceInfo.DeviceNo  : string.Empty,
                 LoginName = message.Account,
                 SubscriberName = message.Subscriber,
-                TransDate = message.TransDate,
+                TransDate = Convert.ToDateTime(message.TransDate.ToString("yyyy-MM-dd HH:mm:ss")),
                 IP = message.IP,
-                PluginID = 0,
-                DeviceCodeStatus = 0,
+                PluginID = 0,                
                 URL = deviceInfo.HRef != "N/A" ? deviceInfo.HRef : string.Empty,
                 ActionResult = message.ActionResult,
                 UserAgent = deviceInfo.UserAgent != "N/A" ? deviceInfo.UserAgent : string.Empty,

@@ -59,22 +59,21 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Implement
             {
                 StagingTransID = model.StagingTransId,
                 DeviceCode = model.DeviceCode,
-                DeviceCodeStatus = model.DeviceCodeStatus,
                 FingeringCode = model.FingeringCode,
                 FingeringMoreInfo = model.FingeringMoreInfo,
                 LoginName = model.LoginName,
                 SubscriberName = model.SubscriberName,
-                TransDate = model.TransDate,  
+                TransDate = model.TransDate,
                 CreatedDate = model.CreatedDate,
-                IP = ipInfo.IsIpV6 ? ipNumber : ipNumber + 281470681743360,                
-                PluginID = model.PluginID,                
+                IP = ipInfo.IsIpV6 ? ipNumber : ipNumber + 281470681743360,
+                PluginID = model.PluginID,
                 URL = model.URL,
                 ActionResult = model.ActionResult,
-                UserAgent = model.UserAgent,             
+                UserAgent = model.UserAgent,
                 UserAgentCode = Cipher.Hashing(model.UserAgent),
                 BrowserName = clientInfo.UA.Family,
                 OSName = clientInfo.OS.Family,
-                Flagged = 0                
+                Flagged = 0
             };
         }
     }

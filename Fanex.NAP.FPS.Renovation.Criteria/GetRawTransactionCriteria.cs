@@ -19,7 +19,7 @@ namespace Fanex.NAP.FPS.Renovation.Criteria
 
         public override string GetSettingKey()
         {
-            return "FPS_ST_RawTransaction_GetTransactionList";
+            return "FPS_RT_RawTransaction_GetTransactionList";
         }
 
         public override bool IsValid()

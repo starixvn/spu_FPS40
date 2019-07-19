@@ -2,7 +2,7 @@
 
 <Functions>
   <Function Name="CapturingTransaction">
-    <Setting Key="FPS_ST_RawTransaction_GetTransactionList" SpName="FPS_ST_RawTransaction_GetTransactionList" DbName="MySQL.FPS_StagingRawTrans">
+    <Setting Key="FPS_RT_RawTransaction_GetTransactionList" SpName="FPS_RT_RawTransaction_GetTransactionList" DbName="MySQL.FPS_RawTransaction">
     </Setting>
   </Function>
 

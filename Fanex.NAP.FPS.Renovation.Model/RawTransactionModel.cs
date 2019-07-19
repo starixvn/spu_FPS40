@@ -26,10 +26,7 @@ namespace Fanex.NAP.FPS.Renovation.Model
         public string IP { get; set; }
 
         [XmlAttribute]
-        public int PluginID { get; set; }
-
-        [XmlAttribute]
-        public int DeviceCodeStatus { get; set; }
+        public int PluginID { get; set; }      
 
         [XmlAttribute]
         public string URL { get; set; }
