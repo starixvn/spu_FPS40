@@ -46,6 +46,9 @@
         {
             try
             {
+                var data = Cipher.Decrypt("icKlzTGsTBb0TcNtzKk5LdRF2QFuOYOEx5G7kOebBUehYdEwOG89g5kDr7MWEJNs4BHPTFFeX3viw+R1nggrBg==");
+                Console.WriteLine(data);
+
                 ConsumerTransactions();
 
                 if (!_timer.Enabled)
@@ -138,7 +141,7 @@
                 ActionResult = message.ActionResult,
                 UserAgent = deviceInfo.UserAgent != "N/A" ? deviceInfo.UserAgent : string.Empty,
                 FingeringCode = deviceInfo.DeviceFPCode != "N/A" ? deviceInfo.DeviceFPCode : string.Empty,
-                FingeringMoreInfo = EncodeCapturedData(deviceInfo)
+                FingeringMoreInfo = deviceInfo.DeviceFPCode != "N/A" ? EncodeCapturedData(deviceInfo) : string.Empty
             };
         }
 
@@ -152,11 +155,10 @@
 
         private static string EncodeCapturedData(DeviceInfoModel deviceInfo)
         {
-            return Cipher.Encrypt(string.Format("{0}#{1}#{2}#{3}#{4}#{5}",
+            return Cipher.Encrypt(string.Format("{0}#{1}#{2}#{3}#{4}",
                 deviceInfo.Battery,
                 deviceInfo.CapturedDate,
-                deviceInfo.OSName,
-                deviceInfo.Screen,
+                deviceInfo.OSName,               
                 deviceInfo.TimeZone,
                 deviceInfo.LocalIps));
         }
