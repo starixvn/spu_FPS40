@@ -67,7 +67,7 @@ namespace Fanex.NAP.FPS.Renovation.GraphDB.Service
                     associations.Add(new IsSynAssociationModel
                     {
                         AssociationID = criteria.AssociationId,
-                        SyncGraphDB = 1
+                        SyncGraphDB = 2
                     });
                 }
                 else

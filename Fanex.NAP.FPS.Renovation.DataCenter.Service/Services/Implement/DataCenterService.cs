@@ -44,7 +44,12 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface
             var newXmlCustomerInfo = Utilities.XMLConvert(newCustomerInfo);
 
             return dataCenter.UpdateCustomerInfo(newXmlCustomerInfo);
-        }       
+        }
+
+        public DataResult UpdateIsSyncByAssociationId(string associationXml)
+        {
+            return dataCenter.UpdateIsSyncGraphDBByAssociationId(associationXml);
+        }
 
         private NewCustomerInfo TransformCustomerInfo(CustomerInfoModel customerInfo)
         {

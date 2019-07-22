@@ -9,6 +9,7 @@
     using Fanex.NAP.FPS.Renovation.Queue;
     using Quartz;
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
@@ -49,7 +50,16 @@
                         var messageQueue = new Message<AssociationModel>(association, new MessageProperties { DeliveryMode = 2, Priority = 9 });
 
                         _rabbitMQ.AdvanceBus.PublishAsync(_rabbitMQ.Exchange, _rabbitMQ.RoutingKey, false, messageQueue);
-                    }                   
+                    }                                         
+
+                    var isSynAssociation = associations.Select(x => new IsSynAssociationModel {
+                        AssociationID = x.AssociationId,
+                        SyncGraphDB = 1
+                    }).ToList();
+
+                    var xmlData = Core.Utilities.XMLConvert(isSynAssociation);
+
+                    dataCenterService.UpdateIsSyncByAssociationId(xmlData);
                 }
             }
             catch (Exception ex)
