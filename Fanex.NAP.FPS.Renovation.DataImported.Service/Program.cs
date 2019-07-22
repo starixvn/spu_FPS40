@@ -68,7 +68,22 @@ namespace Fanex.NAP.FPS.Renovation.DataImported.Service
             Console.ReadKey();
         }
 
+        static List<string> loadCsvFile(string filePath)
+        {
+            var reader = new StreamReader(File.OpenRead(filePath));
+            List<string> searchList = new List<string>();
+            while (!reader.EndOfStream)
+            {
+                var line = reader.ReadLine();
+                var lines = line.Split(',');
+                if(lines.Any())
+                {
+                    searchList.Add(lines[1]);
+                }                
+            }
 
+            return searchList;
+        }
 
         static void ReadDataFromConfig()
         {
@@ -77,18 +92,20 @@ namespace Fanex.NAP.FPS.Renovation.DataImported.Service
             foreach (var file in files)
             {
                 var fileName = Path.GetFileName(file);
-                var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(file);
+                var fileNameWithoutExtension = Path.GetFileName(file);
                
 
-                if (fileNameWithoutExtension == "12BET")
+                if (fileNameWithoutExtension == "12BET.txt")
                 {
                     Utilities.DeleteLog(fileName);
 
                     var dataLog = File.ReadAllLines(file);
-
+                    
                     if (dataLog.Length > 0)
                     {
-                        Executing(fileName, fileNameWithoutExtension, dataLog);
+                        var usernames = loadCsvFile(@"D:\Projects\FPS 4.0\SubscriberTickets\12BET.csv");
+
+                        Executing(fileName, fileNameWithoutExtension, dataLog, usernames);
                     }
 
                     Console.WriteLine(Path.GetFileName(file));
@@ -96,9 +113,10 @@ namespace Fanex.NAP.FPS.Renovation.DataImported.Service
             }
         }
 
-        private static void Executing(string fileName, string fileNameWithoutExtension,  string[] dataLog)
+        private static void Executing(string fileName, string fileNameWithoutExtension,  string[] dataLog, List<string> usernames)
         {
             var counter = 0;
+            var random = new Random();
 
             foreach (var log in dataLog)
             {
@@ -108,7 +126,9 @@ namespace Fanex.NAP.FPS.Renovation.DataImported.Service
                 {
                     counter++;
 
-                    splitingData[0] = fileNameWithoutExtension + "_" + counter;
+                    int indexUsername = random.Next(usernames.Count);
+
+                    splitingData[0] = usernames[indexUsername];
 
                     Utilities.WriteLog(fileName, string.Join("|", splitingData));                                        
 
