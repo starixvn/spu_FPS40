@@ -13,6 +13,6 @@
 
     <Setting Key="FPS_DC_IPTableLog_AddNewLog" SpName="FPS_DC_IPTableLog_AddNewLog" DbName="MySQL.FPS_DataCenter"/>
     <Setting Key="FPS_DC_IPTableLog_GetLatestUpdatedDate" SpName="FPS_DC_IPTableLog_GetLatestUpdatedDate" DbName="MySQL.FPS_DataCenter"/>
-    <Setting Key="FPS_DC_IPRangeLocation_UpdateByXML" SpName="FPS_DC_IPRangeLocation_UpdateByXML" DbName="MySQL.FPS_DataCenter"/>
+    <Setting Key="FPS_DC_IPRangeLocation_UpdateByXML" SpName="FPS_DC_IPRangeLocation_UpdateByXML" DbName="MySQL.FPS_DataCenter" TimeOut="3600"/>
   </Function>
 </Functions>
