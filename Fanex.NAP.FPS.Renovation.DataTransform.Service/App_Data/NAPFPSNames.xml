@@ -9,5 +9,7 @@
   <Function Name="DataCenter">
     <Setting Key="FPS_DC_DataCenter_ProcessTransaction" SpName="FPS_DC_DataCenter_ProcessTransaction" DbName="MySQL.FPS_DataCenter" Timeout="600">
     </Setting>
+
+    <Setting Key="FPS_DC_UpdateIsSyncGraphDBByAssociationID" SpName="FPS_DC_UpdateIsSyncGraphDBByAssociationID" DbName="MySQL.FPS_DataCenter" Timeout="600"/>
   </Function>
 </Functions>
