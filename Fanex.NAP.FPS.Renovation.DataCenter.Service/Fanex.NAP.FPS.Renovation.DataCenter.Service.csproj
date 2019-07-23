@@ -116,6 +116,18 @@
       <Project>{fa790109-f8c1-44b7-9246-05b5f1a32696}</Project>
       <Name>Fanex.NAP.FPS.Renovation.Queue</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Quartz.Plugins.RecentHistory\Quartz.Plugins.RecentHistory.csproj">
+      <Project>{a5e6bf02-23cc-43b7-8426-3fcac768a8d5}</Project>
+      <Name>Quartz.Plugins.RecentHistory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Quartzmin.SelfHost\Quartzmin.SelfHost.csproj">
+      <Project>{64701482-4585-4109-be7a-9509c28b0528}</Project>
+      <Name>Quartzmin.SelfHost</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Quartzmin\Quartzmin.csproj">
+      <Project>{3d918515-0348-47b2-bb4b-24717b4438a0}</Project>
+      <Name>Quartzmin</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="EasyNetQ">
@@ -147,9 +159,6 @@
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.2</Version>
-    </PackageReference>
-    <PackageReference Include="Quartz">
-      <Version>3.0.7</Version>
     </PackageReference>
     <PackageReference Include="System.ValueTuple">
       <Version>4.5.0</Version>

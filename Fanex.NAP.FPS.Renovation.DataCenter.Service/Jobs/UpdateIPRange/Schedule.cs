@@ -17,16 +17,15 @@
 
         public ISchedule Create()
         {
-            NameValueCollection props = new NameValueCollection
-                {
-                    { "quartz.serializer.type", "binary" }
-                };
+            //NameValueCollection props = new NameValueCollection
+            //    {
+            //        { "quartz.serializer.type", "binary" }
+            //    };
 
-            var sf = new StdSchedulerFactory(props);
+            //var sf = new StdSchedulerFactory(props);
 
-            scheduler = sf.GetScheduler().Result;
-
-            scheduler.Start();
+            //scheduler = sf.GetScheduler().Result;
+            scheduler = StdSchedulerFactory.GetDefaultScheduler().Result;                        
 
             var job = JobBuilder.Create<Job>()
                 .WithIdentity("UpdateIPRangeJob", "MainDBGroup")

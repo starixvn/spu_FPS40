@@ -18,16 +18,16 @@
 
         public ISchedule Create()
         {
-            NameValueCollection props = new NameValueCollection
-                {
-                    { "quartz.serializer.type", "binary" }
-                };
+            //NameValueCollection props = new NameValueCollection
+            //    {
+            //        { "quartz.serializer.type", "binary" }
+            //    };
 
-            var sf = new StdSchedulerFactory(props);
+            //var sf = new StdSchedulerFactory(props);
 
-            scheduler = sf.GetScheduler().Result;
+            //scheduler = sf.GetScheduler().Result;
 
-            scheduler.Start();
+            scheduler = StdSchedulerFactory.GetDefaultScheduler().Result;           
 
             var job = JobBuilder.Create<Job>()
                 .WithIdentity("UpdateCustomerInfoJob", "MainDBGroup")
@@ -55,7 +55,7 @@
 
         public ISchedule Start()
         {
-           // scheduler.Start();
+            scheduler.Start();
 
             return this;
         }

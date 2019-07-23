@@ -17,13 +17,15 @@
 
         public ISchedule Create()
         {
-            var props = new NameValueCollection
-                {
-                    { "quartz.serializer.type", "binary" }
-                };
-            var sf = new StdSchedulerFactory(props);
+            //var props = new NameValueCollection
+            //    {
+            //        { "quartz.serializer.type", "binary" }
+            //    };
+            //var sf = new StdSchedulerFactory(props);
 
-            scheduler = sf.GetScheduler().Result;           
+            //scheduler = sf.GetScheduler().Result;           
+
+            scheduler = StdSchedulerFactory.GetDefaultScheduler().Result;
 
             var job = JobBuilder.Create<Job>()
                 .WithIdentity("AddAssociationJob", "MainDBGroup")
@@ -51,7 +53,7 @@
 
         public ISchedule Start()
         {
-            //scheduler.Start();
+            scheduler.Start();
 
             return this;
         }

@@ -35,6 +35,8 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Implement
             {
                 var xmlTrans = Utilities.XMLConvert(transformData);
 
+                Utilities.WriteLog($"Log{DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")}.txt", xmlTrans);
+
                 return dataCenter.InsertTransaction(xmlTrans);
             }
 
