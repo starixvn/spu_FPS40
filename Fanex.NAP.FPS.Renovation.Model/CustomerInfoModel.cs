@@ -1,31 +1,47 @@
 ﻿using System;
+using System.Xml.Serialization;
 
 namespace Fanex.NAP.FPS.Renovation.Model
 {
     public class CustomerInfoModel
     {
-        public int AccountId { get; set; }
+        [XmlAttribute]
+        public int AccountID { get; set; }
 
-        public int SubscriberId { get; set; }
+        [XmlAttribute]
+        public int SubscriberID { get; set; }
 
-        public int CustId { get; set; }
-
+        [XmlAttribute]
+        public int CustID { get; set; }
+                
         public int SubAccId { get; set; }
 
+        [XmlAttribute]
         public string Username { get; set; }
 
+        [XmlAttribute]
         public string Username2 { get; set; }
 
-        public int RoleId { get; set; }
+        [XmlAttribute]
+        public int RoleID { get; set; }
 
         public string Site { get; set; }
 
         public int IsDeposit { get; set; }
 
-        public int CurrencyId { get; set; }
+        [XmlAttribute]
+        public int CurrencyID { get; set; }
 
+        [XmlAttribute]
         public string CurrencyName { get; set; }
 
+        [XmlAttribute]
         public DateTime CreatedDate { get; set; }
+
+        [XmlAttribute]
+        public string LoginName { get; set; }
+
+        [XmlAttribute]
+        public string SubscriberName { get; set; }
     }
 }

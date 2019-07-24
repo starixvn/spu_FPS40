@@ -1,16 +1,15 @@
-﻿using Fanex.NAP.FPS.Renovation.Core;
-using Fanex.NAP.FPS.Renovation.DataAccess;
-using Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Interface;
-using Fanex.NAP.FPS.Renovation.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using UAParser;
-using StagingRawTransactionModel = Fanex.NAP.FPS.Renovation.Model.StagingRawTransactionModel;
-
-namespace Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Implement
+﻿namespace Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Implement
 {
+    using Fanex.NAP.FPS.Renovation.Core;
+    using Fanex.NAP.FPS.Renovation.DataAccess;
+    using Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Interface;
+    using Fanex.NAP.FPS.Renovation.Model;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using UAParser;
+
     class DataTransformService : IDataTransformService
     {
         private readonly DataAccess.StagingRawTransactionDataAccess stagingRawTransaction;
@@ -22,32 +21,150 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Implement
             dataCenter = new DataCenterDataAccess();
         }
 
+        public List<AccountExistingModel> GetAccountExist(List<TransactionModel> model)
+        {
+            var accountExistList = model.Select(x => TransformAccountExist(x)).ToList();
+
+            if (accountExistList.Any())
+            {
+                var xmlAccount = Utilities.XMLConvert(accountExistList);
+
+                return stagingRawTransaction.GetAccountExist(xmlAccount);
+            }
+
+            return new List<AccountExistingModel>();
+        }
+
         public List<StagingRawTransactionModel> GetStagingRawTransaction(int isProcessed, int numberOfTicket)
         {
             return stagingRawTransaction.GetStagingRawTrans(isProcessed, numberOfTicket);
         }
 
-        public DataResult InsertTransaction(List<StagingRawTransactionModel> model)
+        public void InsertTransaction(List<StagingRawTransactionModel> model)
         {
-            var transformData = model.Select(x => TransformTranction(x)).ToList();
+            var transformData = model.Select(x => TransformTransaction(x)).ToList();
 
             if (transformData.Any())
             {
-                var xmlTrans = Utilities.XMLConvert(transformData);
+                var existingAccounts = GetAccountExist(transformData);
 
-                Utilities.WriteLog($"Log{DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")}.txt", xmlTrans);
+                if (existingAccounts.Any())
+                {
+                    var existedAccounts = existingAccounts.GroupBy(p => p.IsExisted, (key, group) => new
+                    {
+                        Existed = key,
+                        AccountList = group.ToList()
+                    });
 
-                return dataCenter.InsertTransaction(xmlTrans);
+                    _ = Parallel.ForEach(existedAccounts, x =>
+                      {
+                          var transactions = transformData
+                          .Where(trans => x.AccountList.Any(acc =>
+                              CompareStringData(acc.LoginName, trans.LoginName) &&
+                              CompareStringData(acc.SubscriberName, trans.SubscriberName)))
+                          .ToList();
+
+                          if (x.Existed)
+                          {                              
+                              UpdateTransaction(transactions, existingAccounts);
+                          }
+                          else
+                          {
+                              UpdateCustomerInfo(transactions, x.AccountList);                             
+                          }
+                      });
+                }
             }
+        }
 
-            return new DataResult
+        private void UpdateTransaction(List<TransactionModel> transactions, List<AccountExistingModel> accountList)
+        {
+            var transactionUpdated = transactions.Select(trans =>
             {
-                ErrorCode = -1,
-                ErrorMessage = "Cannot insert transaction."
+                var customerInfo = accountList.FirstOrDefault(c =>
+                    CompareStringData(c.SubscriberName, trans.SubscriberName) &&
+                    CompareStringData(c.LoginName, trans.LoginName));
+
+                trans.SubscriberID = customerInfo.SubscriberID;
+
+                return trans;
+            }).ToList();
+
+            AddTransaction(transactionUpdated);
+        }
+
+        private void UpdateCustomerInfo(List<TransactionModel> transactions, List<AccountExistingModel> accountList)
+        {
+            var getNewCustomer = accountList.Select(acc => TransformCustomerInfo(acc)).ToList();
+
+            if (getNewCustomer.Any())
+            {
+                var accountListXml = Utilities.XMLConvert(getNewCustomer);
+
+                var getCustomerInfo = dataCenter.GetCustomerInfo(accountListXml);
+
+                if (transactions.Any())
+                {
+                    var transactionUpdated = transactions.Select(trans =>
+                    {
+                        var customerInfo = getCustomerInfo.FirstOrDefault(c =>
+                            CompareStringData(c.SubscriberName, trans.SubscriberName) &&
+                            CompareStringData(c.LoginName, trans.LoginName));
+
+                        if(customerInfo != null)
+                        {
+                            trans.AccountID = customerInfo.AccountID;
+                            trans.CustID = customerInfo.CustID;
+                            trans.CurrencyID = customerInfo.CurrencyID;
+                            trans.CurrencyName = customerInfo.CurrencyName;
+                            trans.Username = customerInfo.Username;
+                            trans.Username2 = customerInfo.Username2;
+                            trans.RoleID = customerInfo.RoleID;
+                            trans.SubscriberID = customerInfo.SubscriberID;                            
+                        }
+
+                        return trans;
+
+                    }).ToList();
+
+                    AddTransaction(transactionUpdated);
+                }
+            }
+        }
+      
+        private void AddTransaction(List<TransactionModel> transactions)
+        {           
+            var xmlTrans = Utilities.XMLConvert(transactions);
+
+            dataCenter.InsertTransaction(xmlTrans);           
+        }
+
+        private NewCustomerModel TransformCustomerInfo(AccountExistingModel model)
+        {
+            return new NewCustomerModel
+            {
+                AccountID = model.AccountID,
+                LoginName = model.LoginName,
+                SubscriberID = model.SubscriberID,
+                SubscriberName = model.SubscriberName,
+                LoginNameWithPrefix = model.LoginNameWithPrefix
             };
         }
 
-        private TransactionModel TransformTranction(StagingRawTransactionModel model)
+
+        private AccountExistingModel TransformAccountExist(TransactionModel model)
+        {
+            return new AccountExistingModel
+            {
+                LoginName = model.LoginName,
+                SubscriberName = model.SubscriberName,
+                IsExisted = false,
+                SubscriberID = 0,
+                AccountID = 0
+            };
+        }
+
+        private TransactionModel TransformTransaction(StagingRawTransactionModel model)
         {
             var uaParser = Parser.GetDefault();
 
@@ -75,8 +192,17 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Implement
                 UserAgentCode = Cipher.Hashing(model.UserAgent),
                 BrowserName = clientInfo.UA.Family,
                 OSName = clientInfo.OS.Family,
-                Flagged = 0
+                Flagged = 0,
+                CustID = 0,
+                AccountID = 0,
+                CurrencyID = 0,
+                CurrencyName = string.Empty,                
+                RoleID = 0,
+                Username = string.Empty,
+                Username2 = String.Empty
             };
         }
+
+        private static Boolean CompareStringData(string a, string b) => string.Compare(a, b, true) == 0;
     }
 }

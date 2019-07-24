@@ -9,19 +9,13 @@ using System.Xml.Serialization;
 namespace Fanex.NAP.FPS.Renovation.Model
 {
     [XmlType(TypeName = "transaction")]
-    public class TransactionModel
+    public class TransactionModel: CustomerInfoModel
     {
         [XmlAttribute]
         public int StagingTransID { get; set; }
 
         [XmlAttribute]
         public string DeviceCode { get; set; }
-
-        [XmlAttribute]
-        public string LoginName { get; set; }
-
-        [XmlAttribute]
-        public string SubscriberName { get; set; }
 
         [XmlAttribute]
         public DateTime TransDate { get; set; }      
@@ -31,9 +25,6 @@ namespace Fanex.NAP.FPS.Renovation.Model
 
         [XmlAttribute]
         public int PluginID { get; set; }
-
-        [XmlAttribute]
-        public int DeviceCodeStatus { get; set; }
 
         [XmlAttribute]
         public string URL { get; set; }
@@ -49,9 +40,6 @@ namespace Fanex.NAP.FPS.Renovation.Model
 
         [XmlAttribute]
         public string FingeringMoreInfo { get; set; }
-
-        [XmlAttribute]
-        public DateTime CreatedDate { get; set; }
      
         [XmlAttribute]
         public string UserAgentCode { get; set; }
@@ -63,6 +51,6 @@ namespace Fanex.NAP.FPS.Renovation.Model
         public string OSName { get; set; }
 
         [XmlAttribute]
-        public int Flagged { get; set; }
+        public int Flagged { get; set; }        
     }
 }

@@ -1,4 +1,5 @@
-﻿using Fanex.Data.Repository;
+﻿using Fanex.Data;
+using Fanex.Data.Repository;
 using Fanex.NAP.FPS.Renovation.Criteria;
 using Fanex.NAP.FPS.Renovation.Model;
 using System;
@@ -21,6 +22,6 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
             };
 
            return repository.Execute(criteria);
-        }
+        }  
     }
 }

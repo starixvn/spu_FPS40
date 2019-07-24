@@ -55,16 +55,16 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface
         {
             return new NewCustomerInfo
             {
-                CurrencyID = customerInfo.CurrencyId,
+                CurrencyID = customerInfo.CurrencyID,
                 CurrencyName = customerInfo.CurrencyName,
-                CustID = customerInfo.SubAccId != 0 ? customerInfo.SubAccId : customerInfo.CustId,
+                CustID = customerInfo.SubAccId != 0 ? customerInfo.SubAccId : customerInfo.CustID,
                 IsDeposit = customerInfo.IsDeposit,
-                RoleID = customerInfo.RoleId,
+                RoleID = customerInfo.RoleID,
                 Username = customerInfo.Username,
                 Username2 = customerInfo.Username2,
                 CreatedDate = customerInfo.CreatedDate,
-                AccountID = customerInfo.AccountId,
-                SubscriberID = customerInfo.SubscriberId
+                AccountID = customerInfo.AccountID,
+                SubscriberID = customerInfo.SubscriberID
             };
         }
     }

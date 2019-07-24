@@ -164,6 +164,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountExistingModel.cs" />
     <Compile Include="AccountModel.cs" />
     <Compile Include="AssociationModel.cs" />
     <Compile Include="AssociationByCustomerModel.cs" />

@@ -17,6 +17,12 @@ namespace Fanex.NAP.FPS.Renovation.Model
         public int SubscriberID { get; set; }
 
         [XmlAttribute]
+        public string SubscriberName { get; set; }
+
+        [XmlAttribute]
         public string LoginName { get; set; }
+
+        [XmlAttribute]
+        public string LoginNameWithPrefix { get; set; }
     }
 }

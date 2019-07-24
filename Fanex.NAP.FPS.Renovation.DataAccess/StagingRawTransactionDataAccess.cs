@@ -12,7 +12,7 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
 {
     public class StagingRawTransactionDataAccess
     {
-        public List<Model.StagingRawTransactionModel> GetStagingRawTrans(int isProcessed = 0, int numberOfTicket = 100 )
+        public List<StagingRawTransactionModel> GetStagingRawTrans(int isProcessed = 0, int numberOfTicket = 100 )
         {
             var criteria = new GetRawTransactionCriteria
             {
@@ -22,7 +22,20 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
 
             using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                return db.Query<Model.StagingRawTransactionModel>(criteria).ToList();
+                return db.Query<StagingRawTransactionModel>(criteria).ToList();
+            }
+        }
+
+        public List<AccountExistingModel> GetAccountExist(string accountListXML)
+        {
+            var criteria = new GetExistingAccount
+            {
+                AccountListXML = accountListXML
+            };
+
+            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
+            {
+                return db.Query<AccountExistingModel>(criteria).ToList();
             }
         }
     }

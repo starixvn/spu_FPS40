@@ -66,7 +66,7 @@
                     {
                         if (rawData.Any())
                         {
-                            insertResult = dataTransformService.InsertTransaction(rawData.ToList());
+                            dataTransformService.InsertTransaction(rawData.ToList());
                         }
                     }
                 }

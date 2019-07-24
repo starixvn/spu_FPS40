@@ -164,6 +164,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GetExistingAccount.cs" />
     <Compile Include="InsertIPTableLogCriteria.cs" />
     <Compile Include="GetAssociationByCustomerCriteria.cs" />
     <Compile Include="GetAssociationForGraphDBCriteria.cs" />

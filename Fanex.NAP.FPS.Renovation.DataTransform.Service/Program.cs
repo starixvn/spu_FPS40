@@ -1,5 +1,6 @@
 ﻿using Fanex.Data;
 using Fanex.Data.MySql;
+using Fanex.Data.SqlServer;
 using Fanex.Logging;
 using Fanex.Logging.Sentry.RavenClient;
 using Fanex.NAP.FPS.Renovation.Core;
@@ -19,8 +20,9 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service
         static void Main(string[] args)
         {
             DbSettingProviderManager
-                  .StartNewSession()                  
-                  .WithMySql()
+                  .StartNewSession()
+                  .WithSqlServer()
+                  .WithMySql()  
                   .UseDefaultDbSettingProvider(resourcePath: AppSettings.AppDataSetting)
                   .UseDefaultConnectionStringProvider()
                   .Run();

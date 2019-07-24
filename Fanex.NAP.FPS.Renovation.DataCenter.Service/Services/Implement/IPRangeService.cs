@@ -16,7 +16,7 @@
             ipRangeDataAccess = new IPRangeDataAccess();
         }
 
-        public DataResult UpdateIpRange(IEnumerable<IpRangeModel> IpRanges, DateTime updatedDate)
+        public int UpdateIpRange(IEnumerable<IpRangeModel> IpRanges, DateTime updatedDate)
         {
             var ipRangeEncode = IpRanges.Select(x => {
                 x.IPRangeLocationCode = EncodeIPAttribute(x);               
@@ -25,7 +25,9 @@
 
             var ipRangeXml = Utilities.XMLConvert(ipRangeEncode);
 
-            return ipRangeDataAccess.UpdateIPRange(ipRangeXml, updatedDate);
+            var result = ipRangeDataAccess.UpdateIPRange(ipRangeXml, updatedDate);
+
+            return result;
         }        
 
         public DateTime GetIPDBVersion() => ipRangeDataAccess.GetIPDBVersion();        

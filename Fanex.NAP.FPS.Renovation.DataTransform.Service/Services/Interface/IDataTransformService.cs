@@ -7,6 +7,8 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Interface
     {
         List<StagingRawTransactionModel> GetStagingRawTransaction(int isProcessed, int numberOfTicket);
 
-        DataResult InsertTransaction(List<StagingRawTransactionModel> model);
+        void InsertTransaction(List<StagingRawTransactionModel> model);
+
+        List<AccountExistingModel> GetAccountExist(List<TransactionModel> model);
     }
 }

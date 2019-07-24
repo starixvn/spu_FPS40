@@ -12,7 +12,7 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
 {
    public class IPRangeDataAccess
     {
-        public DataResult UpdateIPRange(string ipRangeXml, DateTime updatedDate)
+        public int UpdateIPRange(string ipRangeXml, DateTime updatedDate)
         {
             var repository = new DynamicRepository();
 
@@ -22,12 +22,7 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
                 UpdatedDate = updatedDate
             };
 
-            var errCode = repository.Execute(criteria);
-
-            return new DataResult
-            {
-                ErrorCode = errCode
-            };
+            return repository.Execute(criteria);           
         }        
 
         public List<IpRangeModel> GetIpV6Range(int fromId, int toId)

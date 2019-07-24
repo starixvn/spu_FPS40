@@ -9,7 +9,7 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface
 {
     interface IPRangeService
     {
-        DataResult UpdateIpRange(IEnumerable<IpRangeModel> IpRanges, DateTime updatedDate);
+        int UpdateIpRange(IEnumerable<IpRangeModel> IpRanges, DateTime updatedDate);
 
         List<IpRangeModel> GetIpV6Range(int fromId, int toId);
 
