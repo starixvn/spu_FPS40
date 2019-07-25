@@ -62,7 +62,7 @@
                     var chunkSize = AppSettings.TransBatch / 10;
                     var chunkResult = result.OrderBy(x => x.StagingTransId).Chunk(chunkSize);
 
-                   foreach (var rawData in chunkResult)
+                    foreach (var rawData in chunkResult)
                     {
                         if (rawData.Any())
                         {

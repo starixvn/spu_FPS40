@@ -13,27 +13,27 @@
     [DisallowConcurrentExecution]
     public class Job : IJob
     {
-        private readonly Services.Interface.IPRangeService iPRangeService;
+        private readonly Services.Interface.IPRangeService ipRangeService;
 
         private readonly int batchSize = 10000;
 
         public Job()
         {
-            iPRangeService = new Services.Implement.IPRangeService();
+            ipRangeService = new Services.Implement.IPRangeService();
         }
 
         public Task Execute(IJobExecutionContext context)
         {
             try
             {
-                var ipDBVersionDate = iPRangeService.GetIPDBVersion();
-                var ipLatestIPDBLogDate = iPRangeService.GetLatestUpdatedDateIPTableLog();
+                var ipDBVersionDate = ipRangeService.GetIPDBVersion();
+                var ipLatestIPDBLogDate = ipRangeService.GetLatestUpdatedDateIPTableLog();
 
                 if (ipDBVersionDate.CompareTo(ipLatestIPDBLogDate) >= 0)
                 {
                     UpdateIpTableV6(ipDBVersionDate, 0, batchSize);
 
-                    iPRangeService.InsertNewTableLog(ipDBVersionDate);
+                    ipRangeService.InsertNewTableLog(ipDBVersionDate);
                 }
             }
             catch (Exception ex)
@@ -49,16 +49,16 @@
 
         private void UpdateIpTableV6(DateTime updatedDate, int fromId, int toId)
         {
-            var ipV6Ranges = iPRangeService.GetIpV6Range(fromId, toId);
+            var ipV6Ranges = ipRangeService.GetIpV6Range(fromId, toId);
 
             if (ipV6Ranges != null && ipV6Ranges.Any())
             {
                 var chunkIpV6Range = ipV6Ranges.Chunk(1000);
 
-                Parallel.ForEach(chunkIpV6Range, new ParallelOptions { MaxDegreeOfParallelism = 2 }, x =>
+                foreach(var ipRange in chunkIpV6Range)
                 {
-                    iPRangeService.UpdateIpRange(x, updatedDate);
-                });
+                    ipRangeService.UpdateIpRange(ipRange, updatedDate);
+                }               
 
                 fromId = (toId + 1);
                 toId += batchSize;

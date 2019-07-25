@@ -19,7 +19,9 @@
         public int UpdateIpRange(IEnumerable<IpRangeModel> IpRanges, DateTime updatedDate)
         {
             var ipRangeEncode = IpRanges.Select(x => {
-                x.IPRangeLocationCode = EncodeIPAttribute(x);               
+                x.IPRangeLocationCode = EncodeIPAttribute(x);
+                x.FromIP = x.FromIP.Trim();
+                x.ToIP = x.ToIP.Trim();
                 return x;
             }).ToList();
 

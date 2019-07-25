@@ -54,89 +54,113 @@
                     {
                         Existed = key,
                         AccountList = group.ToList()
-                    });
+                    });                                        
+
+                    var resultCustomerInfo = new List<TransactionModel>();
+
+                    var resultAccountExist = new List<TransactionModel>();
 
                     _ = Parallel.ForEach(existedAccounts, x =>
                       {
-                          var transactions = transformData
+                         var transactions = transformData
                           .Where(trans => x.AccountList.Any(acc =>
                               CompareStringData(acc.LoginName, trans.LoginName) &&
                               CompareStringData(acc.SubscriberName, trans.SubscriberName)))
                           .ToList();
 
                           if (x.Existed)
-                          {                              
-                              UpdateTransaction(transactions, existingAccounts);
+                          {
+                              resultAccountExist = UpdateTransaction(transactions, existingAccounts);
                           }
                           else
                           {
-                              UpdateCustomerInfo(transactions, x.AccountList);                             
+                              resultCustomerInfo = UpdateCustomerInfo(transactions, x.AccountList);
                           }
                       });
+
+                   var resultTransaction = resultCustomerInfo
+                        .Union(resultAccountExist)
+                        .OrderBy(x => x.StagingTransID)
+                        .ToList();
+
+                    AddTransaction(resultTransaction);
                 }
             }
         }
 
-        private void UpdateTransaction(List<TransactionModel> transactions, List<AccountExistingModel> accountList)
+        private List<TransactionModel> UpdateTransaction(List<TransactionModel> transactions, List<AccountExistingModel> accountList)
         {
-            var transactionUpdated = transactions.Select(trans =>
+            if (transactions.Any() && accountList.Any())
             {
-                var customerInfo = accountList.FirstOrDefault(c =>
-                    CompareStringData(c.SubscriberName, trans.SubscriberName) &&
-                    CompareStringData(c.LoginName, trans.LoginName));
-
-                trans.SubscriberID = customerInfo.SubscriberID;
-
-                return trans;
-            }).ToList();
-
-            AddTransaction(transactionUpdated);
-        }
-
-        private void UpdateCustomerInfo(List<TransactionModel> transactions, List<AccountExistingModel> accountList)
-        {
-            var getNewCustomer = accountList.Select(acc => TransformCustomerInfo(acc)).ToList();
-
-            if (getNewCustomer.Any())
-            {
-                var accountListXml = Utilities.XMLConvert(getNewCustomer);
-
-                var getCustomerInfo = dataCenter.GetCustomerInfo(accountListXml);
-
-                if (transactions.Any())
+                var result = transactions.Select(trans =>
                 {
-                    var transactionUpdated = transactions.Select(trans =>
+                    var customerInfo = accountList.FirstOrDefault(c =>
+                        CompareStringData(c.SubscriberName, trans.SubscriberName) &&
+                        CompareStringData(c.LoginName, trans.LoginName));
+
+                    trans.SubscriberID = customerInfo.SubscriberID;
+
+                    return trans;
+                });
+
+                return result.ToList();
+            }
+
+            return new List<TransactionModel>();
+        }
+
+        private List<TransactionModel> UpdateCustomerInfo(List<TransactionModel> transactions, List<AccountExistingModel> accountList)
+        {
+            if (transactions.Any() && accountList.Any())
+            {
+                var getNewCustomer = accountList.Select(acc => TransformCustomerInfo(acc)).ToList();
+
+                if (getNewCustomer.Any())
+                {
+                    var accountListXml = Utilities.XMLConvert(getNewCustomer);
+
+                    var getCustomerInfo = dataCenter.GetCustomerInfo(accountListXml);
+
+                    if (transactions.Any())
                     {
-                        var customerInfo = getCustomerInfo.FirstOrDefault(c =>
-                            CompareStringData(c.SubscriberName, trans.SubscriberName) &&
-                            CompareStringData(c.LoginName, trans.LoginName));
+                        var result = transactions.Select(trans =>
+                          {
+                              var customerInfo = getCustomerInfo.FirstOrDefault(c =>
+                                  CompareStringData(c.SubscriberName, trans.SubscriberName) &&
+                                  CompareStringData(c.LoginName, trans.LoginName));
 
-                        if(customerInfo != null)
-                        {
-                            trans.AccountID = customerInfo.AccountID;
-                            trans.CustID = customerInfo.CustID;
-                            trans.CurrencyID = customerInfo.CurrencyID;
-                            trans.CurrencyName = customerInfo.CurrencyName;
-                            trans.Username = customerInfo.Username;
-                            trans.Username2 = customerInfo.Username2;
-                            trans.RoleID = customerInfo.RoleID;
-                            trans.SubscriberID = customerInfo.SubscriberID;                            
-                        }
+                              if (customerInfo != null)
+                              {
+                                  trans.AccountID = customerInfo.AccountID;
+                                  trans.CustID = customerInfo.CustID;
+                                  trans.CurrencyID = customerInfo.CurrencyID;
+                                  trans.CurrencyName = customerInfo.CurrencyName;
+                                  trans.Username = customerInfo.Username;
+                                  trans.Username2 = customerInfo.Username2;
+                                  trans.RoleID = customerInfo.RoleID;
+                                  trans.SubscriberID = customerInfo.SubscriberID;
+                              }
 
-                        return trans;
+                              return trans;
 
-                    }).ToList();
+                          });
 
-                    AddTransaction(transactionUpdated);
+                        return result.ToList();
+                    }
                 }
             }
-        }
-      
-        private void AddTransaction(List<TransactionModel> transactions)
-        {           
-            var xmlTrans = Utilities.XMLConvert(transactions);
 
-            dataCenter.InsertTransaction(xmlTrans);           
+            return new List<TransactionModel>();
+        }
+
+        private void AddTransaction(List<TransactionModel> transactions)
+        {
+            if (transactions.Any())
+            {
+                var xmlTrans = Utilities.XMLConvert(transactions);
+
+                dataCenter.InsertTransaction(xmlTrans);
+            }
         }
 
         private NewCustomerModel TransformCustomerInfo(AccountExistingModel model)
@@ -196,7 +220,7 @@
                 CustID = 0,
                 AccountID = 0,
                 CurrencyID = 0,
-                CurrencyName = string.Empty,                
+                CurrencyName = string.Empty,
                 RoleID = 0,
                 Username = string.Empty,
                 Username2 = String.Empty
