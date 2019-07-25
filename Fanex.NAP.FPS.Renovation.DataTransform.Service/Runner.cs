@@ -2,6 +2,7 @@
 {
     using Fanex.Logging;
     using Fanex.Logging.Extensions;
+    using Fanex.Logging.Extensions.Database;
     using Fanex.NAP.FPS.Renovation.Core;
     using Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Implement;
     using Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Interface;
@@ -75,12 +76,8 @@
             }
             catch (Exception ex)
             {
-                var errorHanler = new Dictionary<string, object>();
-                errorHanler.Add("ErrorCode", insertResult.ErrorCode);
-                errorHanler.Add("ErrorMsg", insertResult.ErrorMessage);
-
                 var logMessage = new LogMessage(ex.Message)
-                    .AddSection("Data Info", errorHanler)
+                    .AddSection("Data Info", DatabaseInfoGetters.GetDbExceptionInfo(ex))
                     .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex))
                     .ToString();
 

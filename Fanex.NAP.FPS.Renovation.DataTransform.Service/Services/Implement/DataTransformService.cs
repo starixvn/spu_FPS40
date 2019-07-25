@@ -63,6 +63,15 @@
                     _ = Parallel.ForEach(existedAccounts, x =>
                       {
                          var transactions = transformData
+                          .Select(newTrans=> {
+                              var account = x.AccountList.FirstOrDefault(acc => 
+                              CompareStringData(acc.LoginName, newTrans.LoginName) &&
+                              CompareStringData(acc.SubscriberName, newTrans.SubscriberName));
+
+                              newTrans.IsDeposit = account != null ? account.IsDeposit : 0;
+
+                              return newTrans;
+                          })
                           .Where(trans => x.AccountList.Any(acc =>
                               CompareStringData(acc.LoginName, trans.LoginName) &&
                               CompareStringData(acc.SubscriberName, trans.SubscriberName)))
@@ -98,7 +107,7 @@
                         CompareStringData(c.SubscriberName, trans.SubscriberName) &&
                         CompareStringData(c.LoginName, trans.LoginName));
 
-                    trans.SubscriberID = customerInfo.SubscriberID;
+                    trans.SubscriberID = customerInfo.SubscriberID;                   
 
                     return trans;
                 });

@@ -27,6 +27,7 @@ namespace Fanex.NAP.FPS.Renovation.Model
 
         public string Site { get; set; }
 
+        [XmlAttribute]
         public int IsDeposit { get; set; }
 
         [XmlAttribute]

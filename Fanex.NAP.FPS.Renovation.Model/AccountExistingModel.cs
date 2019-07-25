@@ -23,5 +23,7 @@ namespace Fanex.NAP.FPS.Renovation.Model
         public int AccountID { get; set; }
 
         public bool IsExisted { get; set; }
+
+        public int IsDeposit { get; set; }
     }
 }
