@@ -96,28 +96,7 @@
                     AddTransaction(resultTransaction);
                 }
             }
-        }
-
-        //private List<TransactionModel> UpdateTransaction(List<TransactionModel> transactions, List<AccountExistingModel> accountList)
-        //{
-        //    if (transactions.Any() && accountList.Any())
-        //    {
-        //        var result = transactions.Select(trans =>
-        //        {
-        //            var customerInfo = accountList.FirstOrDefault(c =>
-        //                CompareStringData(c.SubscriberName, trans.SubscriberName) &&
-        //                CompareStringData(c.LoginName, trans.LoginName));
-
-        //            trans.SubscriberID = customerInfo.SubscriberID;                   
-
-        //            return trans;
-        //        });
-
-        //        return result.ToList();
-        //    }
-
-        //    return new List<TransactionModel>();
-        //}
+        }     
 
         private List<TransactionModel> UpdateCustomerInfo(List<TransactionModel> transactions, List<AccountExistingModel> accountList)
         {
