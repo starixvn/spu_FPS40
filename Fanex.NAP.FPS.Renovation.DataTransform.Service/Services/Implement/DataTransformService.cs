@@ -69,6 +69,7 @@
                               CompareStringData(acc.SubscriberName, newTrans.SubscriberName));
 
                               newTrans.IsDeposit = account != null ? account.IsDeposit : 0;
+                              newTrans.SubscriberID = account != null ? account.SubscriberID : 0;
 
                               return newTrans;
                           })
@@ -79,7 +80,7 @@
 
                           if (x.Existed)
                           {
-                              resultAccountExist = UpdateTransaction(transactions, existingAccounts);
+                              resultAccountExist = transactions;
                           }
                           else
                           {
@@ -97,26 +98,26 @@
             }
         }
 
-        private List<TransactionModel> UpdateTransaction(List<TransactionModel> transactions, List<AccountExistingModel> accountList)
-        {
-            if (transactions.Any() && accountList.Any())
-            {
-                var result = transactions.Select(trans =>
-                {
-                    var customerInfo = accountList.FirstOrDefault(c =>
-                        CompareStringData(c.SubscriberName, trans.SubscriberName) &&
-                        CompareStringData(c.LoginName, trans.LoginName));
+        //private List<TransactionModel> UpdateTransaction(List<TransactionModel> transactions, List<AccountExistingModel> accountList)
+        //{
+        //    if (transactions.Any() && accountList.Any())
+        //    {
+        //        var result = transactions.Select(trans =>
+        //        {
+        //            var customerInfo = accountList.FirstOrDefault(c =>
+        //                CompareStringData(c.SubscriberName, trans.SubscriberName) &&
+        //                CompareStringData(c.LoginName, trans.LoginName));
 
-                    trans.SubscriberID = customerInfo.SubscriberID;                   
+        //            trans.SubscriberID = customerInfo.SubscriberID;                   
 
-                    return trans;
-                });
+        //            return trans;
+        //        });
 
-                return result.ToList();
-            }
+        //        return result.ToList();
+        //    }
 
-            return new List<TransactionModel>();
-        }
+        //    return new List<TransactionModel>();
+        //}
 
         private List<TransactionModel> UpdateCustomerInfo(List<TransactionModel> transactions, List<AccountExistingModel> accountList)
         {
@@ -130,7 +131,7 @@
 
                     var getCustomerInfo = dataCenter.GetCustomerInfo(accountListXml);
 
-                    if (transactions.Any())
+                    if (getCustomerInfo.Any() && transactions.Any())
                     {
                         var result = transactions.Select(trans =>
                           {
@@ -146,8 +147,7 @@
                                   trans.CurrencyName = customerInfo.CurrencyName;
                                   trans.Username = customerInfo.Username;
                                   trans.Username2 = customerInfo.Username2;
-                                  trans.RoleID = customerInfo.RoleID;
-                                  trans.SubscriberID = customerInfo.SubscriberID;
+                                  trans.RoleID = customerInfo.RoleID;                                  
                               }
 
                               return trans;
@@ -156,6 +156,8 @@
 
                         return result.ToList();
                     }
+
+                    return transactions;
                 }
             }
 
