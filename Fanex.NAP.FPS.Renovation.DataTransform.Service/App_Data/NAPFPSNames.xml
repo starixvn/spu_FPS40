@@ -7,9 +7,8 @@
   </Function>
 
   <Function Name="DataCenter">
-    <Setting Key="FPS_DC_DataCenter_ProcessTransaction" SpName="FPS_DC_DataCenter_ProcessTransaction" DbName="MySQL.FPS_DataCenter" Timeout="600">
-    </Setting>
-    <Setting Key="FPS_DC_CheckAccountExist" SpName="FPS_DC_CheckAccountExist" DbName="MySQL.FPS_DataCenter" Timeout="600"/>
+    <Setting Key="FPS_DC_DataCenter_ProcessTransaction" SpName="FPS_DC_DataCenter_ProcessTransaction" DbName="MySQL.FPS_DataCenter" Timeout="600" />    
+    <Setting Key="FPS_DC_CheckAccountExist" SpName="FPS_DC_CheckAccountExist" DbName="MySQL.FPS_DataCenter" />
     <Setting Key="FPS_GetCustomerInfo40" SpName="FPS_GetCustomerInfo40" DbName="SQL.FPS_bodb02"/>
   </Function>
 </Functions>

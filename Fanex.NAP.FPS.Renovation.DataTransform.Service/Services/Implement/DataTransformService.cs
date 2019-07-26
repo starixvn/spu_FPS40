@@ -21,18 +21,22 @@
             dataCenter = new DataCenterDataAccess();
         }
 
-        public List<AccountExistingModel> GetAccountExist(List<TransactionModel> model)
+        public List<AccountExistedModel> GetAccountExist(List<TransactionModel> model)
         {
             var accountExistList = model.Select(x => TransformAccountExist(x)).ToList();
 
             if (accountExistList.Any())
             {
-                var xmlAccount = Utilities.XMLConvert(accountExistList);
+                var distintAccountList = accountExistList.GroupBy(n => new { n.LoginName, n.SubscriberName })
+                    .Select(g => g.FirstOrDefault())
+                    .ToList();
+
+                var xmlAccount = Utilities.XMLConvert(distintAccountList);
 
                 return stagingRawTransaction.GetAccountExist(xmlAccount);
             }
 
-            return new List<AccountExistingModel>();
+            return new List<AccountExistedModel>();
         }
 
         public List<StagingRawTransactionModel> GetStagingRawTransaction(int isProcessed, int numberOfTicket)
@@ -50,57 +54,47 @@
 
                 if (existingAccounts.Any())
                 {
-                    var existedAccounts = existingAccounts.GroupBy(p => p.IsExisted, (key, group) => new
+                    var existedAccountGroups = existingAccounts.GroupBy(p => p.IsExisted, (key, group) => new
                     {
                         Existed = key,
                         AccountList = group.ToList()
-                    });                                        
+                    });
 
-                    var resultCustomerInfo = new List<TransactionModel>();
+                    var resultTransaction = new List<TransactionModel>();
 
-                    var resultAccountExist = new List<TransactionModel>();
-
-                    _ = Parallel.ForEach(existedAccounts, x =>
-                      {
-                         var transactions = transformData
-                          .Select(newTrans=> {
-                              var account = x.AccountList.FirstOrDefault(acc => 
+                    foreach (var accountGroup in existedAccountGroups)
+                    {
+                        var transactions = transformData                          
+                          .Where(trans => accountGroup.AccountList.Any(acc =>
+                              CompareStringData(acc.LoginName, trans.LoginName) &&
+                              CompareStringData(acc.SubscriberName, trans.SubscriberName)))
+                          .Select(newTrans =>
+                          {
+                              var account = accountGroup.AccountList.FirstOrDefault(acc =>
                               CompareStringData(acc.LoginName, newTrans.LoginName) &&
                               CompareStringData(acc.SubscriberName, newTrans.SubscriberName));
 
-                              newTrans.IsDeposit = account != null ? account.IsDeposit : 0;
-                              newTrans.SubscriberID = account != null ? account.SubscriberID : 0;
+                              if (account != null)
+                              {
+                                  newTrans.IsDeposit = account.IsDeposit;
+                                  newTrans.SubscriberID = account.SubscriberID;
+                              }                              
 
                               return newTrans;
                           })
-                          .Where(trans => x.AccountList.Any(acc =>
-                              CompareStringData(acc.LoginName, trans.LoginName) &&
-                              CompareStringData(acc.SubscriberName, trans.SubscriberName)))
                           .ToList();
 
-                          if (x.Existed)
-                          {
-                              resultAccountExist = transactions;
-                          }
-                          else
-                          {
-                              resultCustomerInfo = UpdateCustomerInfo(transactions, x.AccountList);
-                          }
-                      });
+                        resultTransaction.AddRange(accountGroup.Existed ? transactions : UpdateCustomerInfo(transactions, accountGroup.AccountList));
+                    }                                       
 
-                   var resultTransaction = resultCustomerInfo
-                        .Union(resultAccountExist)
-                        .OrderBy(x => x.StagingTransID)
-                        .ToList();
-
-                    AddTransaction(resultTransaction);
+                    AddTransaction(resultTransaction.OrderBy(x => x.StagingTransID).ToList());
                 }
             }
-        }     
+        }
 
-        private List<TransactionModel> UpdateCustomerInfo(List<TransactionModel> transactions, List<AccountExistingModel> accountList)
+        private List<TransactionModel> UpdateCustomerInfo(List<TransactionModel> transactions, List<AccountExistedModel> accountList)
         {
-            if (transactions.Any() && accountList.Any())
+            if (accountList != null && accountList.Any())
             {
                 var getNewCustomer = accountList.Select(acc => TransformCustomerInfo(acc)).ToList();
 
@@ -110,7 +104,7 @@
 
                     var getCustomerInfo = dataCenter.GetCustomerInfo(accountListXml);
 
-                    if (getCustomerInfo.Any() && transactions.Any())
+                    if (getCustomerInfo.Any())
                     {
                         var result = transactions.Select(trans =>
                           {
@@ -126,7 +120,7 @@
                                   trans.CurrencyName = customerInfo.CurrencyName;
                                   trans.Username = customerInfo.Username;
                                   trans.Username2 = customerInfo.Username2;
-                                  trans.RoleID = customerInfo.RoleID;                                  
+                                  trans.RoleID = customerInfo.RoleID;
                               }
 
                               return trans;
@@ -140,7 +134,7 @@
                 }
             }
 
-            return new List<TransactionModel>();
+            return transactions;
         }
 
         private void AddTransaction(List<TransactionModel> transactions)
@@ -153,7 +147,7 @@
             }
         }
 
-        private NewCustomerModel TransformCustomerInfo(AccountExistingModel model)
+        private NewCustomerModel TransformCustomerInfo(AccountExistedModel model)
         {
             return new NewCustomerModel
             {
@@ -166,15 +160,12 @@
         }
 
 
-        private AccountExistingModel TransformAccountExist(TransactionModel model)
+        private ExistingAccountModel TransformAccountExist(TransactionModel model)
         {
-            return new AccountExistingModel
+            return new ExistingAccountModel
             {
                 LoginName = model.LoginName,
-                SubscriberName = model.SubscriberName,
-                IsExisted = false,
-                SubscriberID = 0,
-                AccountID = 0
+                SubscriberName = model.SubscriberName               
             };
         }
 

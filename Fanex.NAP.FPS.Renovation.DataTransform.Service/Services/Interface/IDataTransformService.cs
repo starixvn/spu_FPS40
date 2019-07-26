@@ -9,6 +9,6 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Interface
 
         void InsertTransaction(List<StagingRawTransactionModel> model);
 
-        List<AccountExistingModel> GetAccountExist(List<TransactionModel> model);
+        List<AccountExistedModel> GetAccountExist(List<TransactionModel> model);
     }
 }

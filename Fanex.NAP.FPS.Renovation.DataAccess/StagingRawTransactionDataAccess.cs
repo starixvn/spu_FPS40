@@ -26,7 +26,7 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
             }
         }
 
-        public List<AccountExistingModel> GetAccountExist(string accountListXML)
+        public List<AccountExistedModel> GetAccountExist(string accountListXML)
         {
             var criteria = new GetExistingAccount
             {
@@ -35,7 +35,7 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
 
             using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                return db.Query<AccountExistingModel>(criteria).ToList();
+                return db.Query<AccountExistedModel>(criteria).ToList();
             }
         }
     }
