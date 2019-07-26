@@ -12,7 +12,7 @@ namespace Fanex.NAP.FPS.Renovation.Model
     public class IpRangeModel
     {
         [XmlAttribute]
-        public string IPRangeLocationCode { get; set; }       
+        public int IPRangeLocationCode { get; set; }       
 
         [XmlAttribute]
         public string FromIP { get; set; }

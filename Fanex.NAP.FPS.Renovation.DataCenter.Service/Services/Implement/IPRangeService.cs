@@ -41,15 +41,15 @@
             return ipRangeDataAccess.InsertNewTableLog(updatedDate);
         }
 
-        private static string EncodeIPAttribute(IpRangeModel ipRangeModel)
-        {
-            return Cipher.Hashing(string.Format("{0}{1}{2}{3}{4}{5}{6}",                 
+        private static int EncodeIPAttribute(IpRangeModel ipRangeModel)
+        {            
+            return Cipher.Hashing2Int(string.Format("{0}{1}{2}{3}{4}{5}{6}",
                 ipRangeModel.FromIP,
-                ipRangeModel.ToIP, 
-                ipRangeModel.CountryCode, 
-                ipRangeModel.CountryName, 
-                ipRangeModel.Region, 
-                ipRangeModel.City, 
+                ipRangeModel.ToIP,
+                ipRangeModel.CountryCode,
+                ipRangeModel.CountryName,
+                ipRangeModel.Region,
+                ipRangeModel.City,
                 ipRangeModel.ISPName));
         }
 

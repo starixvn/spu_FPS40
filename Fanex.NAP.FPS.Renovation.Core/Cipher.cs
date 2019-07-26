@@ -61,6 +61,16 @@
             }
         }
 
+        public static int Hashing2Int(string original)
+        {
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(original));
+
+                return BitConverter.ToInt32(bytes, 0);
+            }
+        }
+
         private static byte[] Encrypt(byte[] bytesToBeEncrypted, byte[] passwordBytes)
         {
             byte[] encryptedBytes = null;
