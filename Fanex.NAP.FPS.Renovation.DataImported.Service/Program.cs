@@ -92,8 +92,7 @@ namespace Fanex.NAP.FPS.Renovation.DataImported.Service
             foreach (var file in files)
             {
                 var fileName = Path.GetFileName(file);
-                var fileNameWithoutExtension = Path.GetFileName(file);
-               
+                var fileNameWithoutExtension = Path.GetFileName(file);               
 
                 if (fileNameWithoutExtension == "12BET.txt")
                 {

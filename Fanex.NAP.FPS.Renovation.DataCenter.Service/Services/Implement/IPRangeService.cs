@@ -5,6 +5,7 @@
     using Fanex.NAP.FPS.Renovation.Model;
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
 
     public class IPRangeService : Interface.IPRangeService
@@ -23,7 +24,7 @@
                 x.FromIP = x.FromIP.Trim();
                 x.ToIP = x.ToIP.Trim();
                 return x;
-            }).ToList();
+            }).ToList();            
 
             var ipRangeXml = Utilities.XMLConvert(ipRangeEncode);
 
@@ -56,6 +57,27 @@
         public List<IpRangeModel> GetIpV6Range(int fromId, int toId)
         {
             return ipRangeDataAccess.GetIpV6Range(fromId, toId);
+        }
+
+        public void SaveCSV(IEnumerable<IpRangeModel> IpRanges, DateTime updatedDate, string filePath)
+        {
+            var ipRangeEncode = IpRanges.Select(x => {
+                x.IPRangeLocationCode = EncodeIPAttribute(x);
+                x.FromIP = x.FromIP.Trim();
+                x.ToIP = x.ToIP.Trim();
+                return x;
+            }).ToList();           
+
+            foreach (var s in ipRangeEncode)
+            {
+                var ipRangeResult = string.Format("{0}|{1}|{2}|{3}|{4}|{5}|{6}|{7}|{8}|{9}",
+                   s.IPRangeLocationCode, s.FromIP, s.ToIP, s.CountryCode, s.CountryName, s.Region, s.City, s.ISPName,0, updatedDate.ToString("yyyy-MM-dd HH:mm:ss"));
+
+                using (StreamWriter sw = File.AppendText(filePath))
+                {                  
+                    sw.WriteLine(ipRangeResult);                    
+                }
+            }
         }
     }
 }

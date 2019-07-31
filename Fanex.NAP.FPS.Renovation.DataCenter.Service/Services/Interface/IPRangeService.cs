@@ -11,6 +11,8 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface
     {
         int UpdateIpRange(IEnumerable<IpRangeModel> IpRanges, DateTime updatedDate);
 
+        void SaveCSV(IEnumerable<IpRangeModel> IpRanges, DateTime updatedDate, string filePath);
+
         List<IpRangeModel> GetIpV6Range(int fromId, int toId);
 
         DateTime GetIPDBVersion();
