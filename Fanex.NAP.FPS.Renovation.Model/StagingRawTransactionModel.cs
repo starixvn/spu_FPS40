@@ -7,10 +7,10 @@ using System.Xml.Serialization;
 
 namespace Fanex.NAP.FPS.Renovation.Model
 {
-    public class StagingRawTransactionModel : RawTransactionModel
+    public class StagingRawTransactionModel
     {
-        public int StagingTransId { get; set; }
+        public int MinStagingTransId { get; set; }
 
-        public DateTime CreatedDate { get; set; }
+        public int MaxStagingTransId { get; set; }
     }
 }

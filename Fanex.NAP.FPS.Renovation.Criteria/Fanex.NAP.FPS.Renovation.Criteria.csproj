@@ -178,8 +178,10 @@
     <Compile Include="InsertDataCenterTransactionCriteria.cs" />
     <Compile Include="CapturingTransactionCriteria.cs" />
     <Compile Include="GetRawTransactionCriteria.cs" />
+    <Compile Include="InsertRawAccountCriteria.cs" />
     <Compile Include="IpInfoCriteria.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RawTransProcessAccountCriteria.cs" />
     <Compile Include="UpdateCustomerInfoCriteria.cs" />
     <Compile Include="UpdateIpRangeCriteria.cs" />
     <Compile Include="UpdateIsSyncGraphDBByAssociationIdCriteria.cs" />

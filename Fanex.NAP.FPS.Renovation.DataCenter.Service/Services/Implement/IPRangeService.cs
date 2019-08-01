@@ -17,18 +17,9 @@
             ipRangeDataAccess = new IPRangeDataAccess();
         }
 
-        public int UpdateIpRange(IEnumerable<IpRangeModel> IpRanges, DateTime updatedDate)
-        {
-            var ipRangeEncode = IpRanges.Select(x => {
-                x.IPRangeLocationCode = EncodeIPAttribute(x);
-                x.FromIP = x.FromIP.Trim();
-                x.ToIP = x.ToIP.Trim();
-                return x;
-            }).ToList();            
-
-            var ipRangeXml = Utilities.XMLConvert(ipRangeEncode);
-
-            var result = ipRangeDataAccess.UpdateIPRange(ipRangeXml, updatedDate);
+        public int UpdateIpRange(DateTime updatedDate, int isInitial)
+        {          
+            var result = ipRangeDataAccess.UpdateIPRange(updatedDate, isInitial);
 
             return result;
         }        

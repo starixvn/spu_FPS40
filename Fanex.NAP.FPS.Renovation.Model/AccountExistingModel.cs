@@ -18,5 +18,7 @@ namespace Fanex.NAP.FPS.Renovation.Model
         public bool IsExisted { get; set; }
 
         public int IsDeposit { get; set; }
+
+        public DateTime CreatedDate { get; set; }
     }
 }

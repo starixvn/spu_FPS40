@@ -11,6 +11,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.ServiceProcess;
+    using System.Threading.Tasks;
     using System.Timers;
 
     public partial class Runner : ServiceBase
@@ -56,20 +57,28 @@
 
                 isRunning = true;
 
-                var result = dataTransformService.GetStagingRawTransaction(0, AppSettings.TransBatch);
+                var stagingTranId = dataTransformService.GetStagingRawTransaction(0, AppSettings.TransBatch);
 
-                if (result != null && result.Any())
+                if (stagingTranId != null)
                 {
                     var chunkSize = AppSettings.TransBatch / 10;
-                    var chunkResult = result.OrderBy(x => x.StagingTransId).Chunk(chunkSize);
 
-                    foreach (var rawData in chunkResult)
+                    var tranIds = Enumerable.Range(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId).ToList();                    
+
+                    var chunkTransIds = tranIds.OrderBy(x => x).Chunk(chunkSize);
+
+                    var option = new ParallelOptions
                     {
-                        if (rawData.Any())
-                        {
-                            dataTransformService.InsertTransaction(rawData.ToList());
-                        }
-                    }
+                        MaxDegreeOfParallelism = 5
+                    };
+
+                    Parallel.ForEach(chunkTransIds, option, transId => {
+
+                        var min = transId.Min();
+                        var max = transId.Max();
+
+                        dataTransformService.InsertAccounts(min, max);                         
+                    });
                 }
 
                 isRunning = false;

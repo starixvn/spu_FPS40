@@ -24,6 +24,8 @@
 
         private readonly string originalPath;
 
+        private int isInitial = 1;
+
         public Job()
         {
             ipRangeService = new Services.Implement.IPRangeService();
@@ -51,7 +53,9 @@
 
                     UpdateIpTableV6(ipDBVersionDate, 0, batchSize, filePath);
 
-                    ipRangeService.InsertNewTableLog(ipDBVersionDate);                    
+                    ipRangeService.InsertNewTableLog(ipDBVersionDate);
+
+                    isInitial = 0;
                 }
             }
             catch (Exception ex)
@@ -71,25 +75,25 @@
 
             if (ipV6Ranges != null && ipV6Ranges.Any())
             {
-                var chunkIpV6Range = ipV6Ranges.Chunk(1000);
-
-                foreach(var ipRange in chunkIpV6Range)
-                {                    
-                    ipRangeService.SaveCSV(ipRange, updatedDate, filePath);
-                }               
-
-                fromId = (toId + 1);
-                toId += batchSize;
-
+                ipRangeService.SaveCSV(ipV6Ranges, updatedDate, filePath);            
+       
                 var getFileName = Path.GetFileName(filePath);
 
                 SaveACopyfileToServer(filePath, @"\\10.18.200.72\fps40\" + $"{updatedDate.ToString("yyyyMMddHHmmss")}" + @"\" + getFileName);
 
-                var fileNameFormated = string.Format(fileName, toId);
+                var result = ipRangeService.UpdateIpRange(updatedDate, isInitial);
 
-                var nexFilePath = Path.Combine(originalPath, fileNameFormated);
+                if(result == 0)
+                {
+                    fromId = (toId + 1);
+                    toId += batchSize;
 
-                UpdateIpTableV6(updatedDate, fromId, toId, nexFilePath);
+                    var fileNameFormated = string.Format(fileName, toId);
+
+                    var nexFilePath = Path.Combine(originalPath, fileNameFormated);
+
+                    UpdateIpTableV6(updatedDate, fromId, toId, nexFilePath);
+                }                
             }
         }
 
@@ -135,14 +139,16 @@
                 }
 
                 Directory.CreateDirectory(directory);
+            }                       
+
+            var destinationDirInfo = new DirectoryInfo(directory);
+
+            foreach (FileInfo file in destinationDirInfo.GetFiles())
+            {
+                file.Delete();
             }
 
             var destinationFilePath = directory + filenameToSave;
-
-            if (File.Exists(destinationFilePath))
-            {
-                File.Delete(destinationFilePath);
-            }
 
             File.Copy(filePath, destinationFilePath);
 

@@ -5,10 +5,8 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Interface
 {
     interface IDataTransformService
     {
-        List<StagingRawTransactionModel> GetStagingRawTransaction(int isProcessed, int numberOfTicket);
+        StagingRawTransactionModel GetStagingRawTransaction(int isProcessed, int numberOfTicket);
 
-        void InsertTransaction(List<StagingRawTransactionModel> model);
-
-        List<AccountExistedModel> GetAccountExist(List<TransactionModel> model);
+        void InsertAccounts(int fromId , int toId);
     }
 }

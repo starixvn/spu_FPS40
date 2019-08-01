@@ -12,14 +12,14 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
 {
    public class IPRangeDataAccess
     {
-        public int UpdateIPRange(string ipRangeXml, DateTime updatedDate)
+        public int UpdateIPRange(DateTime updatedDate, int isInitial)
         {
             var repository = new DynamicRepository();
 
             var criteria = new UpdateIpRangeCriteria
-            {
-                IPRangeLocationXml = ipRangeXml,
-                UpdatedDate = updatedDate
+            {                
+                UpdatedDate = updatedDate,
+                IsInitial = isInitial
             };
 
             return repository.Execute(criteria);           

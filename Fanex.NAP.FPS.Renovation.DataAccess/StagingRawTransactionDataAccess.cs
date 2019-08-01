@@ -12,7 +12,7 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
 {
     public class StagingRawTransactionDataAccess
     {
-        public List<StagingRawTransactionModel> GetStagingRawTrans(int isProcessed = 0, int numberOfTicket = 100 )
+        public StagingRawTransactionModel GetStagingRawTrans(int isProcessed = 0, int numberOfTicket = 100 )
         {
             var criteria = new GetRawTransactionCriteria
             {
@@ -22,21 +22,39 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
 
             using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                return db.Query<StagingRawTransactionModel>(criteria).ToList();
+                return db.QueryEntity<StagingRawTransactionModel>(criteria);
             }
         }
 
-        public List<AccountExistedModel> GetAccountExist(string accountListXML)
+        public List<AccountExistedModel> AccountProcess(int fromId, int toId)
         {
-            var criteria = new GetExistingAccount
+            var criteria = new RawTransProcessAccountCriteria
             {
-                AccountListXML = accountListXML
+               FromStagingTransId = fromId,
+               ToStagingTransId = toId
             };
 
             using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
                 return db.Query<AccountExistedModel>(criteria).ToList();
             }
+        }
+
+        public DataResult InsertRawAccount(string xmlAccounts)
+        {
+            var repository = new DynamicRepository();
+
+            var criteria = new InsertRawAccountCriteria
+            {
+                AccountXml = xmlAccounts
+            };
+
+            var errCode = repository.Execute(criteria);
+
+            return new DataResult
+            {
+                ErrorCode = errCode
+            };
         }
     }
 }

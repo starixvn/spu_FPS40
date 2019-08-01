@@ -3,8 +3,10 @@ using System.Xml.Serialization;
 
 namespace Fanex.NAP.FPS.Renovation.Model
 {
+    [XmlType(TypeName = "account")]
     public class CustomerInfoModel
     {
+        private int custId;
         [XmlAttribute]
         public int AccountID { get; set; }
 
@@ -12,9 +14,13 @@ namespace Fanex.NAP.FPS.Renovation.Model
         public int SubscriberID { get; set; }
 
         [XmlAttribute]
-        public int CustID { get; set; }
-                
-        public int SubAccId { get; set; }
+        public int CustID
+        {
+            get { return SubAccId != 0 ? 0 - SubAccId : custId;  }
+            set { custId = value; }
+        }
+
+        public int SubAccId { get; set; }        
 
         [XmlAttribute]
         public string Username { get; set; }
@@ -41,6 +47,9 @@ namespace Fanex.NAP.FPS.Renovation.Model
 
         [XmlAttribute]
         public string LoginName { get; set; }
+
+        [XmlAttribute]
+        public string LoginNameWithPrefix { get; set; }
 
         [XmlAttribute]
         public string SubscriberName { get; set; }

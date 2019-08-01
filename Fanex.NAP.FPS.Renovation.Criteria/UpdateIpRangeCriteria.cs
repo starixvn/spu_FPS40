@@ -10,15 +10,15 @@ namespace Fanex.NAP.FPS.Renovation.Criteria
 {
     public class UpdateIpRangeCriteria : NonQueryCommand
     {
-        [SpParam(SqlParamName = "ip_IPRangeLocationXml")]
-        public string IPRangeLocationXml { get; set; }
-
         [SpParam(SqlParamName = "ip_UpdatedDate")]
         public DateTime UpdatedDate { get; set; }
 
+        [SpParam(SqlParamName = "ip_IsInitial")]
+        public int IsInitial { get; set; }
+
         public override string GetSettingKey()
         {
-            return "FPS_DC_IPRangeLocation_UpdateByXML";
+            return "FPS_DC_IPRangeLocation_AddNew";
         }
 
         public override bool IsValid()
