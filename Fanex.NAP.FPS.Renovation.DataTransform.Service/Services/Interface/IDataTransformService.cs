@@ -8,5 +8,9 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Interface
         StagingRawTransactionModel GetStagingRawTransaction(int isProcessed, int numberOfTicket);
 
         void InsertAccounts(int fromId , int toId);
+
+        void UserAgentProcessing(int fromId, int toId);
+
+        void TransactionProcessing(int fromId, int toId);
     }
 }

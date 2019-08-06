@@ -24,37 +24,6 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
             {
                 return db.QueryEntity<StagingRawTransactionModel>(criteria);
             }
-        }
-
-        public List<AccountExistedModel> AccountProcess(int fromId, int toId)
-        {
-            var criteria = new RawTransProcessAccountCriteria
-            {
-               FromStagingTransId = fromId,
-               ToStagingTransId = toId
-            };
-
-            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
-            {
-                return db.Query<AccountExistedModel>(criteria).ToList();
-            }
-        }
-
-        public DataResult InsertRawAccount(string xmlAccounts)
-        {
-            var repository = new DynamicRepository();
-
-            var criteria = new InsertRawAccountCriteria
-            {
-                AccountXml = xmlAccounts
-            };
-
-            var errCode = repository.Execute(criteria);
-
-            return new DataResult
-            {
-                ErrorCode = errCode
-            };
-        }
+        }        
     }
 }

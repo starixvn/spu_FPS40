@@ -36,7 +36,7 @@
 
                 if(customerInfo != null && customerInfo.Any())
                 {
-                    InsertRawAccount(customerInfo);
+                    InsertRawAccount(customerInfo);                    
                 }               
             }
         }
@@ -108,14 +108,24 @@
 
         private List<AccountExistedModel> AccountProcessing(int fromId, int toId)
         {
-            return stagingRawTransaction.AccountProcess(fromId, toId);
+            return dataCenter.AccountProcess(fromId, toId);
         }
 
         private void InsertRawAccount(List<CustomerInfoModel> accounts)
         {
             var accountListXml = Utilities.XMLConvert(accounts);
 
-            stagingRawTransaction.InsertRawAccount(accountListXml);
+            dataCenter.InsertRawAccount(accountListXml);
+        }
+
+        public void UserAgentProcessing(int fromId, int toId)
+        {
+            dataCenter.UserAgentProcess(fromId, toId);
+        }
+
+        public void TransactionProcessing(int fromId, int toId)
+        {
+            dataCenter.TransactionProcess(fromId, toId);
         }
     }
 }

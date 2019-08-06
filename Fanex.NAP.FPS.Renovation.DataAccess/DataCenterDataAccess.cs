@@ -99,6 +99,73 @@
             {
                 ErrorCode = errCode
             };
-        }       
+        }
+
+        public List<AccountExistedModel> AccountProcess(int fromId, int toId)
+        {
+            var criteria = new ProcessAccountCriteria
+            {
+                FromStagingTransId = fromId,
+                ToStagingTransId = toId
+            };
+
+            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
+            {
+                return db.Query<AccountExistedModel>(criteria).ToList();
+            }
+        }
+
+        public DataResult InsertRawAccount(string xmlAccounts)
+        {
+            var repository = new DynamicRepository();
+
+            var criteria = new InsertRawAccountCriteria
+            {
+                AccountXml = xmlAccounts
+            };
+
+            var errCode = repository.Execute(criteria);
+
+            return new DataResult
+            {
+                ErrorCode = errCode
+            };
+        }
+
+        public DataResult UserAgentProcess(int fromId, int toId)
+        {
+            var repository = new DynamicRepository();
+
+            var criteria = new ProcessUserAgentCriteria
+            {
+                fromStagingTransId = fromId,
+                toStagingTransId = toId
+            };
+
+            var errCode = repository.Execute(criteria);
+
+            return new DataResult
+            {
+                ErrorCode = errCode
+            };
+        }
+
+        public DataResult TransactionProcess(int fromId, int toId)
+        {
+            var repository = new DynamicRepository();
+
+            var criteria = new ProcessTransactionCriteria
+            {
+                fromStagingTransId = fromId,
+                toStagingTransId = toId
+            };
+
+            var errCode = repository.Execute(criteria);
+
+            return new DataResult
+            {
+                ErrorCode = errCode
+            };
+        }
     }
 }
