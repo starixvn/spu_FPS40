@@ -58,42 +58,21 @@
 
                 if (stagingTranId != null)
                 {
-                    var chunkSize = AppSettings.TransBatch / 10;
+                    dataTransformService.UnhandleSubscriberAccountProcessing(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId);
 
-                    var tranIds = Enumerable.Range(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId).ToList();
+                    dataTransformService.AccountProcessing(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId);
 
-                    var chunkTransIds = tranIds.OrderBy(x => x).Chunk(chunkSize);
+                    dataTransformService.UserAgentProcessing(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId);
 
-                    var option = new ParallelOptions
-                    {
-                        MaxDegreeOfParallelism = 5
-                    };
+                    //Parallel.Invoke(() =>
+                    //{
+                    //    dataTransformService.AccountProcessing(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId);
+                    //}, () =>
+                    //{
+                    //    dataTransformService.UserAgentProcessing(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId);
+                    //});
 
-                    Parallel.ForEach(chunkTransIds, option, transId =>
-                    {
-
-                        var min = transId.Min();
-                        var max = transId.Max();
-
-                        List<Task> tasks = new List<Task>();
-
-                        var taskAccount = Task.Run(() => {
-                            dataTransformService.InsertAccounts(min, max);
-                        });
-
-                        tasks.Add(taskAccount);
-
-                        var taskUserAgent = Task.Run(() => {
-                            dataTransformService.UserAgentProcessing(min, max);
-                        });
-
-                        tasks.Add(taskUserAgent);                        
-
-                        Task.WhenAll(tasks);
-                        
-                        dataTransformService.TransactionProcessing(min, max);
-
-                    });
+                    dataTransformService.TransactionProcessing(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId);
                 }
 
                 isRunning = false;

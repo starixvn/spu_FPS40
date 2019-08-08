@@ -26,9 +26,9 @@
             return stagingRawTransaction.GetStagingRawTrans(isProcessed, numberOfTicket);
         }
 
-        public void InsertAccounts(int fromId, int toId)
+        public void AccountProcessing(int fromId, int toId)
         {
-            var existingAccounts = AccountProcessing(fromId, toId);
+            var existingAccounts = AccountProcess(fromId, toId);
 
             if (existingAccounts.Any())
             {
@@ -106,7 +106,7 @@
         //    };
         //}
 
-        private List<AccountExistedModel> AccountProcessing(int fromId, int toId)
+        private List<AccountExistedModel> AccountProcess(int fromId, int toId)
         {
             return dataCenter.AccountProcess(fromId, toId);
         }
@@ -126,6 +126,11 @@
         public void TransactionProcessing(int fromId, int toId)
         {
             dataCenter.TransactionProcess(fromId, toId);
+        }
+
+        public void UnhandleSubscriberAccountProcessing(int fromId, int toId)
+        {
+            dataCenter.UnhandleSubscriberActionProcess(fromId, toId);
         }
     }
 }

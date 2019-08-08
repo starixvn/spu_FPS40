@@ -181,6 +181,7 @@
     <Compile Include="InsertRawAccountCriteria.cs" />
     <Compile Include="IpInfoCriteria.cs" />
     <Compile Include="ProcessTransactionCriteria.cs" />
+    <Compile Include="ProcessUnhandleSubscriberActionCriteria.cs" />
     <Compile Include="ProcessUserAgentCriteria.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProcessAccountCriteria.cs" />

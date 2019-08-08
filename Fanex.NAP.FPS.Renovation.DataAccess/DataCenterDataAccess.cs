@@ -167,5 +167,23 @@
                 ErrorCode = errCode
             };
         }
+
+        public DataResult UnhandleSubscriberActionProcess(int fromId, int toId)
+        {
+            var repository = new DynamicRepository();
+
+            var criteria = new ProcessUnhandleSubscriberActionCriteria
+            {
+                fromStagingTransId = fromId,
+                toStagingTransId = toId
+            };
+
+            var errCode = repository.Execute(criteria);
+
+            return new DataResult
+            {
+                ErrorCode = errCode
+            };
+        }
     }
 }
