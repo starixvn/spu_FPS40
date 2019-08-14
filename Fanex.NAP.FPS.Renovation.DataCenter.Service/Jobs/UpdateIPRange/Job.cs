@@ -40,31 +40,31 @@
 
         public Task Execute(IJobExecutionContext context)
         {
-            try
-            {
-                var ipDBVersionDate = ipRangeService.GetIPDBVersion();
-                var ipLatestIPDBLogDate = ipRangeService.GetLatestUpdatedDateIPTableLog();
+            //try
+            //{
+            //    var ipDBVersionDate = ipRangeService.GetIPDBVersion();
+            //    var ipLatestIPDBLogDate = ipRangeService.GetLatestUpdatedDateIPTableLog();
 
-                if (ipDBVersionDate.CompareTo(ipLatestIPDBLogDate) != 0)
-                {
-                    var fileNameFormated = string.Format(fileName, batchSize);
+            //    if (ipDBVersionDate.CompareTo(ipLatestIPDBLogDate) != 0)
+            //    {
+            //        var fileNameFormated = string.Format(fileName, batchSize);
 
-                    var filePath = Path.Combine(originalPath, fileNameFormated);                   
+            //        var filePath = Path.Combine(originalPath, fileNameFormated);                   
 
-                    UpdateIpTableV6(ipDBVersionDate, 0, batchSize, filePath);
+            //        UpdateIpTableV6(ipDBVersionDate, 0, batchSize, filePath);
 
-                    ipRangeService.InsertNewTableLog(ipDBVersionDate);
+            //        ipRangeService.InsertNewTableLog(ipDBVersionDate);
 
-                    isInitial = 0;
-                }
-            }
-            catch (Exception ex)
-            {
-                var logMessage = new LogMessage(ex.Message)
-                    .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
+            //        isInitial = 0;
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    var logMessage = new LogMessage(ex.Message)
+            //        .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
 
-                LogService.Error(logMessage);
-            }
+            //    LogService.Error(logMessage);
+            //}
 
             return Task.FromResult(true);
         }

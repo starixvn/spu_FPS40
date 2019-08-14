@@ -185,5 +185,18 @@
                 ErrorCode = errCode
             };
         }
+
+        public List<UserAgentModel> GetUserAgent(int size)
+        {
+            var criteria = new GetUserAgentCriteria
+            {
+               Size = size
+            };
+
+            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
+            {
+                return db.Query<UserAgentModel>(criteria).ToList();
+            }
+        }
     }
 }

@@ -66,6 +66,8 @@
     <Compile Include="Jobs\UpdateCustomerInfo\Schedule.cs" />
     <Compile Include="Jobs\UpdateIPRange\Job.cs" />
     <Compile Include="Jobs\UpdateIPRange\Schedule.cs" />
+    <Compile Include="Jobs\UserAgent\Job.cs" />
+    <Compile Include="Jobs\UserAgent\Schedule.cs" />
     <Compile Include="Runner.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -76,8 +78,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Implement\DataCenterService.cs" />
     <Compile Include="Services\Implement\IPRangeService.cs" />
+    <Compile Include="Services\Implement\UserAgent.cs" />
     <Compile Include="Services\Interface\IDataCenterService.cs" />
     <Compile Include="Services\Interface\IPRangeService.cs" />
+    <Compile Include="Services\Interface\IUserAgent.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

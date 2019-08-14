@@ -4,11 +4,8 @@
     using Fanex.NAP.FPS.Renovation.DataAccess;
     using Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Interface;
     using Fanex.NAP.FPS.Renovation.Model;
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
-    using UAParser;
 
     class DataTransformService : IDataTransformService
     {
