@@ -18,5 +18,10 @@
     <Setting Key="FPS_DC_UpdateIsSyncGraphDBByAssociationID" SpName="FPS_DC_UpdateIsSyncGraphDBByAssociationID" DbName="MySQL.FPS_DataCenter" Timeout="600"/>
 
     <Setting Key="FPS_DC_GetUserAgent" SpName="FPS_DC_GetUserAgent" DbName="MySQL.FPS_DataCenter"/>
+    <Setting Key="FPS_DC_CheckBrowserExist" SpName="FPS_DC_CheckBrowserExist" DbName="MySQL.FPS_DataCenter"/>
+    <Setting Key="FPS_DC_CheckOSExist" SpName="FPS_DC_CheckOSExist" DbName="MySQL.FPS_DataCenter"/>
+    <Setting Key="FPS_DC_InsertBrowser" SpName="FPS_DC_InsertBrowser" DbName="MySQL.FPS_DataCenter"/>
+    <Setting Key="FPS_DC_InsertOS" SpName="FPS_DC_InsertOS" DbName="MySQL.FPS_DataCenter"/>
+    <Setting Key="FPS_DC_UpdateUserAgent" SpName="FPS_DC_UpdateUserAgent" DbName="MySQL.FPS_DataCenter"/>
   </Function>
 </Functions>

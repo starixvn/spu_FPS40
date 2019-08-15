@@ -167,6 +167,7 @@
     <Compile Include="AssociationByCustomerModel.cs" />
     <Compile Include="AuthenticateUserModel.cs" />
     <Compile Include="Auth\Interface\IUserRepository.cs" />
+    <Compile Include="BrowserModel.cs" />
     <Compile Include="BrowserPluginModel.cs" />
     <Compile Include="CustomerEvidence.cs" />
     <Compile Include="CustomerInfoModel.cs" />
@@ -181,6 +182,7 @@
     <Compile Include="NewCustomerModel.cs" />
     <Compile Include="NewCustomerInfo.cs" />
     <Compile Include="NewIPTableUpdatedModel.cs" />
+    <Compile Include="OSModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RawTransactionModel.cs" />
     <Compile Include="ScreenInfoModel.cs" />

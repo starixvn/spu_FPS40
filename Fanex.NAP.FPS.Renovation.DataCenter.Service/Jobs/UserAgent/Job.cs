@@ -23,9 +23,11 @@
         {
             try
             {
-                var drawUserAgent = userAgent.GetUserAgent(10);
+                var drawUserAgent = userAgent.GetUserAgent(100);
 
                 var xmlUserAgent = Core.Utilities.XMLConvert(drawUserAgent);
+
+                userAgent.UpdateUserAgent(xmlUserAgent);
 
             }
             catch (Exception ex)

@@ -198,5 +198,78 @@
                 return db.Query<UserAgentModel>(criteria).ToList();
             }
         }
+
+        public List<BrowserModel> GetExistingBrowser(string browserXML)
+        {
+            var criteria = new GetExistingBrowserCriteria
+            {
+                BrowserXML = browserXML
+            };
+
+            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
+            {
+                return db.Query<BrowserModel>(criteria).ToList();
+            }
+        }
+
+        public List<OSModel> GetExistingOS(string osXML)
+        {
+            var criteria = new GetExistingOSCriteria
+            {
+                OSXML = osXML
+            };
+
+            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
+            {
+                return db.Query<OSModel>(criteria).ToList();
+            }
+        }
+
+        public int InsertBrowser( string browserName)
+        {
+            var repository = new DynamicRepository();
+
+            var criteria = new InsertBrowserCriteria
+            {
+                BrowserId = 0,
+                BrowserName = browserName
+            };
+
+            repository.Execute(criteria);
+
+            return criteria.BrowserId;
+        }
+
+        public int InsertOS(string osName)
+        {
+            var repository = new DynamicRepository();
+
+            var criteria = new InsertOSCriteria
+            {
+                OSId = 0,
+                OSName = osName
+            };
+
+            repository.Execute(criteria);
+
+            return criteria.OSId;
+        }
+
+        public DataResult UpdateUserAgent(string userAgentXML)
+        {
+            var repository = new DynamicRepository();
+
+            var criteria = new UpdateUserAgentCriteria
+            {
+                UserAgentXML = userAgentXML
+            };
+
+            var errCode = repository.Execute(criteria);
+
+            return new DataResult
+            {
+                ErrorCode = errCode
+            };
+        }
     }
 }

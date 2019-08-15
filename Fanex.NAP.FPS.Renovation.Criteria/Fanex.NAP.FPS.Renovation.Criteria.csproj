@@ -161,8 +161,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GetExistingAccount.cs" />
+    <Compile Include="GetExistingAccountCriteria.cs" />
+    <Compile Include="GetExistingBrowserCriteria.cs" />
+    <Compile Include="GetExistingOSCriteria.cs" />
     <Compile Include="GetUserAgentCriteria.cs" />
+    <Compile Include="InsertBrowserCriteria.cs" />
     <Compile Include="InsertIPTableLogCriteria.cs" />
     <Compile Include="GetAssociationByCustomerCriteria.cs" />
     <Compile Include="GetAssociationForGraphDBCriteria.cs" />
@@ -176,6 +179,7 @@
     <Compile Include="InsertDataCenterTransactionCriteria.cs" />
     <Compile Include="CapturingTransactionCriteria.cs" />
     <Compile Include="GetRawTransactionCriteria.cs" />
+    <Compile Include="InsertOSCriteria.cs" />
     <Compile Include="InsertRawAccountCriteria.cs" />
     <Compile Include="IpInfoCriteria.cs" />
     <Compile Include="ProcessTransactionCriteria.cs" />
@@ -186,6 +190,7 @@
     <Compile Include="UpdateCustomerInfoCriteria.cs" />
     <Compile Include="UpdateIpRangeCriteria.cs" />
     <Compile Include="UpdateIsSyncGraphDBByAssociationIdCriteria.cs" />
+    <Compile Include="UpdateUserAgentCriteria.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
