@@ -10,10 +10,10 @@ namespace Fanex.NAP.FPS.Renovation.Criteria
 {
     public class InsertOSCriteria : NonQueryCommand
     {
-        [SpParam(SqlParamName = "in_OS")]
+        [SpParam(SqlParamName = "ip_OS")]
         public string OSName { get; set; }
 
-        [SpParam(SqlParamName = "out_OSID")]
+        [SpParam(SqlParamName = "op_OSID")]
         public int OSId { get; set; }
 
         public override string GetSettingKey()

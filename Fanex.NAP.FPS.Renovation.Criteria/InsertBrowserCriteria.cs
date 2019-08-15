@@ -10,10 +10,10 @@ namespace Fanex.NAP.FPS.Renovation.Criteria
 {
     public class InsertBrowserCriteria : NonQueryCommand
     {
-        [SpParam(SqlParamName = "in_Browser")]
+        [SpParam(SqlParamName = "ip_Browser")]
         public string BrowserName { get; set; }
 
-        [SpParam(SqlParamName = "out_BrowserID")]
+        [SpParam(SqlParamName = "op_BrowserID")]
         public int BrowserId { get; set; }
 
         public override string GetSettingKey()
