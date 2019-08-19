@@ -64,9 +64,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Neo4j\Neo4jCommandBuilder.cs" />
-    <Compile Include="Neo4j\Neo4jDriverFactory.cs" />
-    <Compile Include="Neo4j\Neo4jExecutor.cs" />
     <Compile Include="Runner.cs">
       <SubType>Component</SubType>
     </Compile>

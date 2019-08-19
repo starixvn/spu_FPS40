@@ -62,4 +62,13 @@
     <ProjectReference Include="..\Fanex.NAP.FPS.Renovation.Model\Fanex.NAP.FPS.Renovation.Model.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Fanex.Graph.Data">
+      <HintPath>..\Fanex.NAP.FPS.Renovation.GraphDB.Service\GraphDBLib\Fanex.Graph.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Neo4j.Driver">
+      <HintPath>..\Fanex.NAP.FPS.Renovation.GraphDB.Service\GraphDBLib\Neo4j.Driver.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

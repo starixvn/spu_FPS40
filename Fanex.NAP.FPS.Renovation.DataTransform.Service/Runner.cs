@@ -8,6 +8,7 @@
     using Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Interface;
     using System;
     using System.Collections.Generic;
+    using System.Configuration;
     using System.Linq;
     using System.ServiceProcess;
     using System.Threading.Tasks;
@@ -60,17 +61,13 @@
                 {
                     dataTransformService.UnhandleSubscriberAccountProcessing(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId);
 
-                    dataTransformService.AccountProcessing(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId);
-
-                    dataTransformService.UserAgentProcessing(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId);
-
-                    //Parallel.Invoke(() =>
-                    //{
-                    //    dataTransformService.AccountProcessing(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId);
-                    //}, () =>
-                    //{
-                    //    dataTransformService.UserAgentProcessing(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId);
-                    //});
+                    Parallel.Invoke(new ParallelOptions() { MaxDegreeOfParallelism = 2 },() =>
+                    {
+                        dataTransformService.AccountProcessing(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId);
+                    }, () =>
+                    {
+                        dataTransformService.UserAgentProcessing(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId);
+                    });
 
                     dataTransformService.TransactionProcessing(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId);
                 }

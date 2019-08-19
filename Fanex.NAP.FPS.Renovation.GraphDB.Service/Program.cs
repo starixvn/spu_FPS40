@@ -3,15 +3,12 @@ using Fanex.Data.MySql;
 using Fanex.Graph.Data;
 using Fanex.Logging;
 using Fanex.Logging.Sentry.RavenClient;
-using Fanex.NAP.FPS.Renovation.GraphDB.Service.Neo4j;
+using Fanex.NAP.FPS.Renovation.Core.Neo4j;
 using SharpRaven;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.ServiceProcess;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fanex.NAP.FPS.Renovation.GraphDB.Service
 {

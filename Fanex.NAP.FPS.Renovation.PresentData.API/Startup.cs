@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using Fanex.Data;
 using Fanex.Data.MySql;
+using Fanex.Graph.Data;
+using Fanex.NAP.FPS.Renovation.Core.Neo4j;
 using Fanex.NAP.FPS.Renovation.Model.Auth;
 using Fanex.NAP.FPS.Renovation.PresentData.API.Auth;
 using Fanex.NAP.FPS.Renovation.PresentData.API.Repositories;
@@ -42,7 +44,15 @@ namespace Fanex.NAP.FPS.Renovation.PresentData.API
                 .WithMySql()
                 .Use(connectionString)
                 .UseDefaultDbSettingProvider(resourcePath: appData)
-                .Run();         
+                .Run();
+
+            DbSessionFactory.Init()
+                .RegisterConfigs("DB.MiddleService")
+                .RegisterXmlFile("~/App_Data")
+                .RegisterDriverFactory(new Neo4jDriverFactory())
+                .RegisterCommandBuilder(new Neo4jCommandBuilder("~/App_Data_Graph/scripts"))
+                .RegisterCommandExecutor(new Neo4jExecutor())
+                .Run();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

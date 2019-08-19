@@ -87,7 +87,7 @@ namespace Fanex.NAP.FPS.Renovation.DataImported.Service
 
         static void ReadDataFromConfig()
         {
-            var files = Directory.GetFiles(@"D:\Projects\FPS 4.0\SubscriberTickets");
+            var files = Directory.GetFiles(@"D:\Work\FPS\FPS40");
 
             foreach (var file in files)
             {
@@ -102,7 +102,7 @@ namespace Fanex.NAP.FPS.Renovation.DataImported.Service
                     
                     if (dataLog.Length > 0)
                     {
-                        var usernames = loadCsvFile(@"D:\Projects\FPS 4.0\SubscriberTickets\12BET.csv");
+                        var usernames = loadCsvFile(@"D:\Work\FPS\FPS40\12BET.csv");
 
                         Executing(fileName, fileNameWithoutExtension, dataLog, usernames);
                     }

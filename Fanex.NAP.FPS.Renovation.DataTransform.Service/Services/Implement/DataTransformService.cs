@@ -117,7 +117,7 @@
 
         public void UserAgentProcessing(int fromId, int toId)
         {
-            dataCenter.UserAgentProcess(fromId, toId);
+            var a = dataCenter.UserAgentProcess(fromId, toId);
         }
 
         public void TransactionProcessing(int fromId, int toId)
