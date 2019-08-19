@@ -44,7 +44,7 @@
                 LogService.Error(logMessage);
             }
 
-            //Console.WriteLine($"Customer is updated at {DateTime.Now}");
+            Console.WriteLine($"Customer is updated at {DateTime.Now}");
 
             return Task.FromResult(true);
         }

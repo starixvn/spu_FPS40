@@ -38,6 +38,8 @@
                 LogService.Error(logMessage);
             }
 
+            Console.WriteLine($"User Agent is updated at {DateTime.Now}");
+
             return Task.FromResult(true);
         }
         

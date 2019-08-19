@@ -13,12 +13,9 @@ namespace Fanex.NAP.FPS.Renovation.Criteria
         [SpParam(SqlParamName = "ip_UpdatedDate")]
         public DateTime UpdatedDate { get; set; }
 
-        [SpParam(SqlParamName = "ip_IsInitial")]
-        public int IsInitial { get; set; }
-
         public override string GetSettingKey()
         {
-            return "FPS_DC_IPRangeLocation_AddNew";
+            return "FPS_DC_UpdateIPRangeLocation";
         }
 
         public override bool IsValid()

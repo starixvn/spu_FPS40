@@ -11,9 +11,9 @@
     <Setting Key="GetAllIPv62Location" SpName="GetAllIPv62Location" DbName="SQL.IPDB" TimeOut="3600"/>
     <Setting Key="GetIPDBVersion" SpName="GetIPDBVersion" DbName="SQL.IPDB"/>
 
-    <Setting Key="FPS_DC_IPTableLog_AddNewLog" SpName="FPS_DC_IPTableLog_AddNewLog" DbName="MySQL.FPS_DataCenter"/>
-    <Setting Key="FPS_DC_IPTableLog_GetLatestUpdatedDate" SpName="FPS_DC_IPTableLog_GetLatestUpdatedDate" DbName="MySQL.FPS_DataCenter"/>
-    <Setting Key="FPS_DC_IPRangeLocation_AddNew" SpName="FPS_DC_IPRangeLocation_AddNew" DbName="MySQL.FPS_DataCenter" TimeOut="3600"/>
+    <Setting Key="FPS_DC_UpdateIPTableLog" SpName="FPS_DC_UpdateIPTableLog" DbName="MySQL.FPS_DataCenter"/>
+    <Setting Key="FPS_DC_GetLatestUpdatedDate_IPRange" SpName="FPS_DC_GetLatestUpdatedDate_IPRange" DbName="MySQL.FPS_DataCenter"/>
+    <Setting Key="FPS_DC_UpdateIPRangeLocation" SpName="FPS_DC_UpdateIPRangeLocation" DbName="MySQL.FPS_DataCenter" TimeOut="3600"/>
 
     <Setting Key="FPS_DC_UpdateIsSyncGraphDBByAssociationID" SpName="FPS_DC_UpdateIsSyncGraphDBByAssociationID" DbName="MySQL.FPS_DataCenter" Timeout="600"/>
 

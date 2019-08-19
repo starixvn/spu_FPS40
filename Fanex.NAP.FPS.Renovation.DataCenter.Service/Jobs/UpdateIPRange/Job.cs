@@ -6,6 +6,7 @@
     using Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Implement;
     using Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface;
     using Quartz;
+    using Renci.SshNet;
     using System;
     using System.Diagnostics;
     using System.IO;
@@ -19,12 +20,28 @@
         private readonly Services.Interface.IPRangeService ipRangeService;
 
         private readonly int batchSize = 10000;
- 
-        private readonly string fileName = "IpRange{0}.csv";
 
-        private readonly string originalPath;
+        private readonly string rangeIpCSVFileName = "IpRanges.csv";
 
-        private int isInitial = 1;
+        private readonly string rangeIPTXTFileName = "IpRanges.txt";
+
+        private readonly string originalPath;        
+
+        private readonly PasswordAuthenticationMethod authMethod;
+
+        private readonly ConnectionInfo connectionInfo;
+
+        private readonly string sshUser = "root";
+        private readonly string sshPassword = "1234@qwer";
+        private readonly string sshHost = "10.18.200.72";
+        private readonly int sshPort = 22;
+        private readonly string sshFolderPath = @"\\10.18.200.72\fps40\";
+        private readonly string sshScript = "sh /etc/init.d/fps40_mysql_initial_ip_range.sh";
+
+        private readonly int timeout = 5000;
+
+        private int fromId;
+        private int toId;
 
         public Job()
         {
@@ -36,68 +53,84 @@
             {
                 Directory.CreateDirectory(originalPath);
             }
+
+            authMethod = new PasswordAuthenticationMethod(sshUser, sshPassword);
+
+            connectionInfo = new ConnectionInfo(sshHost, sshPort, sshUser, authMethod);
         }
 
         public Task Execute(IJobExecutionContext context)
-        {
-            //try
-            //{
-            //    var ipDBVersionDate = ipRangeService.GetIPDBVersion();
-            //    var ipLatestIPDBLogDate = ipRangeService.GetLatestUpdatedDateIPTableLog();
+        {           
+            try
+            {
+                var ipDBVersionDate = ipRangeService.GetIPDBVersion();
+                var ipLatestIPDBLogDate = ipRangeService.GetLatestUpdatedDateIPTableLog();
 
-            //    if (ipDBVersionDate.CompareTo(ipLatestIPDBLogDate) != 0)
-            //    {
-            //        var fileNameFormated = string.Format(fileName, batchSize);
+                if (ipDBVersionDate.CompareTo(ipLatestIPDBLogDate) != 0)
+                {                  
+                    var filePath = Path.Combine(originalPath, rangeIpCSVFileName);
 
-            //        var filePath = Path.Combine(originalPath, fileNameFormated);                   
+                    UpdateIpTableV6(ipDBVersionDate, filePath);                                        
+                }
+            }
+            catch (Exception ex)
+            {
+                var logMessage = new LogMessage(ex.Message)
+                    .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
 
-            //        UpdateIpTableV6(ipDBVersionDate, 0, batchSize, filePath);
-
-            //        ipRangeService.InsertNewTableLog(ipDBVersionDate);
-
-            //        isInitial = 0;
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    var logMessage = new LogMessage(ex.Message)
-            //        .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
-
-            //    LogService.Error(logMessage);
-            //}
+                LogService.Error(logMessage);
+            }
 
             return Task.FromResult(true);
         }
 
-        private void UpdateIpTableV6(DateTime updatedDate, int fromId, int toId, string filePath)
-        {           
+        private void UpdateIpTableV6(DateTime updatedDate, string filePath)
+        {
+            var rangeIpUpdatedPath = Path.Combine(originalPath, rangeIPTXTFileName);
+
+            ipRangeService.GetRangeIpId(ref fromId, ref toId, batchSize, rangeIpUpdatedPath);
+
             var ipV6Ranges = ipRangeService.GetIpV6Range(fromId, toId);
 
             if (ipV6Ranges != null && ipV6Ranges.Any())
             {
                 ipRangeService.SaveCSV(ipV6Ranges, updatedDate, filePath);            
-       
-                var getFileName = Path.GetFileName(filePath);
+                       
+                SaveACopyfileToServer(filePath, Path.Combine(sshFolderPath, rangeIpCSVFileName));
 
-                SaveACopyfileToServer(filePath, @"\\10.18.200.72\fps40\" + $"{updatedDate.ToString("yyyyMMddHHmmss")}" + @"\" + getFileName);
-
-                var result = ipRangeService.UpdateIpRange(updatedDate, isInitial);
-
-                if(result == 0)
+                using (var client = new SshClient(connectionInfo))
                 {
-                    fromId = (toId + 1);
-                    toId += batchSize;
+                    client.Connect();
 
-                    var fileNameFormated = string.Format(fileName, toId);
+                    var sshCommand = client.RunCommand(sshScript);
 
-                    var nexFilePath = Path.Combine(originalPath, fileNameFormated);
+                    if (string.IsNullOrWhiteSpace(sshCommand.Error))
+                    {
+                        var result = ipRangeService.UpdateIpRange(updatedDate);
 
-                    UpdateIpTableV6(updatedDate, fromId, toId, nexFilePath);
-                }                
+                        if (result >= 0)
+                        {
+                            Console.WriteLine($"IP Range is updated at {DateTime.Now} - {toId}");                           
+
+                            fromId = (toId + 1);
+                            toId += batchSize;
+
+                            ipRangeService.SaveRangeIpId(fromId, toId, rangeIpUpdatedPath);
+                        }
+                    }
+                }                              
+            }
+            else
+            {
+                ipRangeService.InsertNewTableLog(updatedDate);
+
+                fromId = toId = 0;
+
+                ipRangeService.SaveRangeIpId(fromId, toId, rangeIpUpdatedPath);
             }
         }
 
-        private static int ExecuteCommand(string command, int timeout)
+        private void ExecuteCommand(string command, int timeout)
         {
             var processInfo = new ProcessStartInfo("cmd.exe", "/C " + command)
             {
@@ -108,26 +141,24 @@
 
             var process = Process.Start(processInfo);
             process.WaitForExit(timeout);
-            var exitCode = process.ExitCode;
-            process.Close();
-            return exitCode;
+           
+            process.Close();           
         }
 
-        private static void SaveACopyfileToServer(string filePath, string savePath)
+        private void SaveACopyfileToServer(string filePath, string savePath)
         {
             var directory = Path.GetDirectoryName(savePath).Trim();
-            var username = "root";
-            var password = "1234@qwer";
+
             var filenameToSave = Path.GetFileName(savePath);
 
             if (!directory.EndsWith("\\"))
                 filenameToSave = "\\" + filenameToSave;
 
             var command = "NET USE " + directory + " /delete";
-            ExecuteCommand(command, 5000);
+            ExecuteCommand(command, timeout);
 
-            command = "NET USE " + directory + " /user:" + username + " " + password;
-            ExecuteCommand(command, 5000);
+            command = "NET USE " + directory + " /user:" + sshUser + " " + sshPassword;
+            ExecuteCommand(command, timeout);
 
             if(!Directory.Exists(directory))
             {

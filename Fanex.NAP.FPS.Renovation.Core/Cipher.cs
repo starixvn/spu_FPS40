@@ -61,13 +61,13 @@
             }
         }
 
-        public static int Hashing2Int(string original)
+        public static Int64 Hashing2Int(string original)
         {
             using (SHA256 sha256Hash = SHA256.Create())
             {
                 byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(original));
 
-                return BitConverter.ToInt32(bytes, 0);
+                return BitConverter.ToInt64(bytes, 0);
             }
         }
 

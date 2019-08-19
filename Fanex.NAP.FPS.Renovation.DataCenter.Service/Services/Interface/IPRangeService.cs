@@ -9,9 +9,13 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface
 {
     interface IPRangeService
     {
-        int UpdateIpRange(DateTime updatedDate, int isInitial);
+        int UpdateIpRange(DateTime updatedDate);
 
         void SaveCSV(IEnumerable<IpRangeModel> IpRanges, DateTime updatedDate, string filePath);
+
+        void SaveRangeIpId(int fromId, int toId, string filePath);
+
+        void GetRangeIpId(ref int fromId, ref int toId, int size, string filePath);
 
         List<IpRangeModel> GetIpV6Range(int fromId, int toId);
 
