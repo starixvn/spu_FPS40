@@ -138,8 +138,8 @@
 
             var criteria = new ProcessUserAgentCriteria
             {
-                fromStagingTransId = fromId,
-                toStagingTransId = toId
+                FromStagingTransId = fromId,
+                ToStagingTransId = toId
             };
 
             var errCode = repository.Execute(criteria);
@@ -156,8 +156,26 @@
 
             var criteria = new ProcessTransactionCriteria
             {
-                fromStagingTransId = fromId,
-                toStagingTransId = toId
+                FromStagingTransId = fromId,
+                ToStagingTransId = toId
+            };
+
+            var errCode = repository.Execute(criteria);
+
+            return new DataResult
+            {
+                ErrorCode = errCode
+            };
+        }
+
+        public DataResult DeviceProcess(int fromId, int toId)
+        {
+            var repository = new DynamicRepository();
+
+            var criteria = new ProcessDeviceCriteria
+            {
+                FromStagingTransId = fromId,
+                ToStagingTransId = toId
             };
 
             var errCode = repository.Execute(criteria);
@@ -174,8 +192,8 @@
 
             var criteria = new ProcessUnhandleSubscriberActionCriteria
             {
-                fromStagingTransId = fromId,
-                toStagingTransId = toId
+                FromStagingTransId = fromId,
+                ToStagingTransId = toId
             };
 
             var errCode = repository.Execute(criteria);

@@ -182,6 +182,7 @@
     <Compile Include="InsertOSCriteria.cs" />
     <Compile Include="InsertRawAccountCriteria.cs" />
     <Compile Include="IpInfoCriteria.cs" />
+    <Compile Include="ProcessDeviceCriteria.cs" />
     <Compile Include="ProcessTransactionCriteria.cs" />
     <Compile Include="ProcessUnhandleSubscriberActionCriteria.cs" />
     <Compile Include="ProcessUserAgentCriteria.cs" />

@@ -74,8 +74,13 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Implement
 
             return userAgents.Select(x => {
 
-                x.OSId = osListUpdated.FirstOrDefault(os => os.UserAgentId == x.UserAgentID).OSId;
-                x.BrowserId = browserListUpdated.FirstOrDefault(br => br.UserAgentId == x.UserAgentID).BrowserId;
+                var browserUpdated = browserListUpdated.FirstOrDefault(br => br.UserAgentId == x.UserAgentID);
+                var osUpdated = osListUpdated.FirstOrDefault(os => os.UserAgentId == x.UserAgentID);
+
+                x.OSId = osUpdated.OSId;
+                x.BrowserId = browserUpdated.BrowserId;
+                x.OSName = osUpdated.OSName;
+                x.BrowserName = browserUpdated.BrowserName;
 
                 return x;
 

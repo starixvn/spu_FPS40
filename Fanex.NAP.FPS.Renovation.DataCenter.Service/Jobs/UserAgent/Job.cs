@@ -23,7 +23,7 @@
         {
             try
             {
-                var drawUserAgent = userAgent.GetUserAgent(100);
+                var drawUserAgent = userAgent.GetUserAgent(1000);
 
                 var xmlUserAgent = Core.Utilities.XMLConvert(drawUserAgent);
 

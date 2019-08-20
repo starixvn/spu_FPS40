@@ -129,5 +129,10 @@
         {
             dataCenter.UnhandleSubscriberActionProcess(fromId, toId);
         }
+
+        public void DeviceProcessing(int fromId, int toId)
+        {
+            dataCenter.DeviceProcess(fromId, toId);
+        }
     }
 }

@@ -9,6 +9,7 @@
   <Function Name="DataCenter">
     <Setting Key="FPS_DC_DataCenter_Process_Account_Insert" SpName="FPS_DC_DataCenter_Process_Account_Insert" DbName="MySQL.FPS_DataCenter" Timeout="600" />
     <Setting Key="FPS_DC_DataCenter_Process_Account" SpName="FPS_DC_DataCenter_Process_Account" DbName="MySQL.FPS_DataCenter" Timeout="600" />
+    <Setting Key="FPS_DC_DataCenter_Process_Device" SpName="FPS_DC_DataCenter_Process_Device" DbName="MySQL.FPS_DataCenter" Timeout="600" />
     <Setting Key="FPS_DC_DataCenter_Process_UserAgent" SpName="FPS_DC_DataCenter_Process_UserAgent" DbName="MySQL.FPS_DataCenter" Timeout="600" />
     <Setting Key="FPS_DC_DataCenter_Process_Transaction" SpName="FPS_DC_DataCenter_Process_Transaction" DbName="MySQL.FPS_DataCenter" />
 
