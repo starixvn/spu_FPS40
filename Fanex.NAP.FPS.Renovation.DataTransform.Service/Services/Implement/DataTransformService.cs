@@ -20,18 +20,22 @@
 
         public StagingRawTransactionModel GetStagingRawTransaction(int isProcessed, int numberOfTicket)
         {
+            System.Console.WriteLine("1.Get Raw Transaction");
+
             return stagingRawTransaction.GetStagingRawTrans(isProcessed, numberOfTicket);
         }
 
         public void AccountProcessing(int fromId, int toId)
         {
-            var existingAccounts = AccountProcess(fromId, toId);
+            System.Console.WriteLine("3.Account Process");
+
+            var existingAccounts = AccountProcess(fromId, toId);            
 
             if (existingAccounts.Any())
             {
-                var customerInfo = UpdateCustomerInfo(existingAccounts);
+                var customerInfo = UpdateCustomerInfo(existingAccounts);               
 
-                if(customerInfo != null && customerInfo.Any())
+                if (customerInfo != null && customerInfo.Any())
                 {
                     InsertRawAccount(customerInfo);                    
                 }               
@@ -40,6 +44,8 @@
 
         private List<CustomerInfoModel> UpdateCustomerInfo(List<AccountExistedModel> accountList)
         {
+            System.Console.WriteLine("3.2.Update Customer Info");
+
             var getNewCustomer = accountList.Select(acc => TransformCustomerInfo(acc)).ToList();
 
             if (getNewCustomer.Any())
@@ -105,11 +111,15 @@
 
         private List<AccountExistedModel> AccountProcess(int fromId, int toId)
         {
+            System.Console.WriteLine("3.1.Get Existing Account");
+
             return dataCenter.AccountProcess(fromId, toId);
         }
 
         private void InsertRawAccount(List<CustomerInfoModel> accounts)
         {
+            System.Console.WriteLine("3.3.Insert Raw Account");
+
             var accountListXml = Utilities.XMLConvert(accounts);
 
             dataCenter.InsertRawAccount(accountListXml);
@@ -117,22 +127,30 @@
 
         public void UserAgentProcessing(int fromId, int toId)
         {
-            var a = dataCenter.UserAgentProcess(fromId, toId);
+            dataCenter.UserAgentProcess(fromId, toId);
+
+            System.Console.WriteLine("4.UserAgent Process");
         }
 
         public void TransactionProcessing(int fromId, int toId)
         {
             dataCenter.TransactionProcess(fromId, toId);
+
+            System.Console.WriteLine("6.Transaction Process");
         }
 
         public void UnhandleSubscriberAccountProcessing(int fromId, int toId)
         {
+            System.Console.WriteLine("2.UnhandleSubscriberActionProcess");
+
             dataCenter.UnhandleSubscriberActionProcess(fromId, toId);
         }
 
         public void DeviceProcessing(int fromId, int toId)
         {
             dataCenter.DeviceProcess(fromId, toId);
+
+            System.Console.WriteLine("5.Device Process");
         }
     }
 }

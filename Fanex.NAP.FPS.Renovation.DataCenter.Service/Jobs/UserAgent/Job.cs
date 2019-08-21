@@ -2,6 +2,7 @@
 {
     using Fanex.Logging;
     using Fanex.Logging.Extensions;
+    using Fanex.NAP.FPS.Renovation.Core;
     using Quartz;
     using System;
     using System.Diagnostics;
@@ -23,12 +24,14 @@
         {
             try
             {
-                var drawUserAgent = userAgent.GetUserAgent(1000);
+                var drawUserAgent = userAgent.GetUserAgent(AppSettings.TransBatch);
 
                 var xmlUserAgent = Core.Utilities.XMLConvert(drawUserAgent);
 
-                userAgent.UpdateUserAgent(xmlUserAgent);
-
+                if(!String.IsNullOrWhiteSpace(xmlUserAgent))
+                {
+                    userAgent.UpdateUserAgent(xmlUserAgent);
+                }              
             }
             catch (Exception ex)
             {

@@ -16,15 +16,7 @@
         }
 
         public ISchedule Create()
-        {
-            //var props = new NameValueCollection
-            //    {
-            //        { "quartz.serializer.type", "binary" }
-            //    };
-            //var sf = new StdSchedulerFactory(props);
-
-            //scheduler = sf.GetScheduler().Result;           
-
+        {    
             scheduler = StdSchedulerFactory.GetDefaultScheduler().Result;
 
             var job = JobBuilder.Create<Job>()

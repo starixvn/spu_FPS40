@@ -7,9 +7,6 @@
     using Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Implement;
     using Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Interface;
     using System;
-    using System.Collections.Generic;
-    using System.Configuration;
-    using System.Linq;
     using System.ServiceProcess;
     using System.Threading.Tasks;
     using System.Timers;
@@ -29,6 +26,8 @@
 
         protected override void OnStart(string[] args)
         {
+            Core.Utilities.WriteLog("RawTrans2DataCenter.txt", "Start - " +  DateTime.Now.ToString());
+
             timer = new System.Timers.Timer();
             timer.Elapsed += OnTimedEvent;
             timer.Interval = AppSettings.Interval;
@@ -55,23 +54,29 @@
 
                 isRunning = true;
 
-                //var stagingTranId = dataTransformService.GetStagingRawTransaction(0, AppSettings.TransBatch);
-                var stagingTranId = dataTransformService.GetStagingRawTransaction(0, 100);
+                var stagingTranId = dataTransformService.GetStagingRawTransaction(0, AppSettings.TransBatch);               
 
-                if (stagingTranId != null)
+                if (stagingTranId.MinStagingTransId  != 0 && stagingTranId.MaxStagingTransId != 0)
                 {
                     dataTransformService.UnhandleSubscriberAccountProcessing(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId);
 
                     Parallel.Invoke(new ParallelOptions { MaxDegreeOfParallelism = 3 },() =>
                     {
-                        dataTransformService.AccountProcessing(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId);
-                        dataTransformService.DeviceProcessing(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId);
+                        dataTransformService.AccountProcessing(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId);                        
                     }, () =>
                     {
                         dataTransformService.UserAgentProcessing(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId);
                     });
 
+                    dataTransformService.DeviceProcessing(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId);
+
                     dataTransformService.TransactionProcessing(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId);
+                }
+                else
+                {
+                    Core.Utilities.WriteLog("RawTrans2DataCenter.txt", "End - " + DateTime.Now.ToString());
+
+                    timer.Stop();
                 }
 
                 isRunning = false;

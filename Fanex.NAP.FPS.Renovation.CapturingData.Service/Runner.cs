@@ -102,7 +102,11 @@
         {
             try
             {
+                Core.Utilities.WriteLog("Q2RawTrans.txt", "Start - " + DateTime.Now.ToString());
+
                 var result = _capturingDataService.InsertTransaction(_transactionList);
+
+                Core.Utilities.WriteLog("Q2RawTrans.txt", "End - " +  DateTime.Now.ToString() + $" -> {_transactionList.Count}");
 
                 if (result != 0)
                 {
