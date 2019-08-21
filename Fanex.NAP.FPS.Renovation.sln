@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28803.452
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.645
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAP.FPS.Renovation.Core", "Fanex.NAP.FPS.Renovation.Core\Fanex.NAP.FPS.Renovation.Core.csproj", "{91543A37-F0A0-4A4F-8C1D-DBB0BCC75699}"
 EndProject
@@ -29,7 +29,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAP.FPS.Renovation.Da
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebAPI", "WebAPI", "{CB3801AF-986F-4AE4-AB99-75B9F05A3975}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fanex.NAP.FPS.Renovation.PresentData.API", "Fanex.NAP.FPS.Renovation.PresentData.API\Fanex.NAP.FPS.Renovation.PresentData.API.csproj", "{60E8C49E-3734-4DA6-AEEE-783A13D78512}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fanex.NAP.FPS.Renovation.DataPortal.API", "Fanex.NAP.FPS.Renovation.DataPortal.API\Fanex.NAP.FPS.Renovation.DataPortal.API.csproj", "{60E8C49E-3734-4DA6-AEEE-783A13D78512}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fanex.NAP.FPS.Renovation.DataImported.Service", "Fanex.NAP.FPS.Renovation.DataImported.Service\Fanex.NAP.FPS.Renovation.DataImported.Service.csproj", "{7E8903EB-95CA-43C1-A866-BC9AAD9C136F}"
 EndProject
