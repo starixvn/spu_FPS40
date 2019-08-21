@@ -3,7 +3,6 @@ using Fanex.Data.MySql;
 using Fanex.Graph.Data;
 using Fanex.Logging;
 using Fanex.Logging.Sentry.RavenClient;
-using Fanex.NAP.FPS.Renovation.Core.Neo4j;
 using SharpRaven;
 using System;
 using System.Collections.Generic;
@@ -21,7 +20,7 @@ namespace Fanex.NAP.FPS.Renovation.GraphDB.Service
         {
             DbSessionFactory.Init()
                 .RegisterConfigs("DB.MiddleService")
-                .RegisterXmlFile("~/App_Data",true)
+                .RegisterXmlFile("~/App_Data")
                 .RegisterDriverFactory(new Neo4jDriverFactory())
                 .RegisterCommandBuilder(new Neo4jCommandBuilder("~/App_Data/scripts"))
                 .RegisterCommandExecutor(new Neo4jExecutor())

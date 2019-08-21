@@ -1,20 +1,18 @@
 ﻿using Fanex.Graph.Data;
 using Fanex.NAP.FPS.Renovation.Model;
-using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using System.Web.Http.Results;
 
-namespace Fanex.NAP.FPS.Renovation.PresentData.API.Controllers
+
+namespace Fanex.NAP.FPS.Renovation.DataPortal.API.Controllers
 {
-    [Route("api/[controller]/[action]")]
-    [ApiController]
-    public class GraphDBController : Controller
+    public class GraphDBController : ApiController
     {
-        public JsonResult Testing()
-        {
-            return new JsonResult("testing");
-        }
-
         public List<Customer> GetAssociationOneLevel(int custid)
         {
             return DbSessionFactory.Execute<Customer>("GetAssociationOneLevelByCustId", new { CustId = custid }).Data.ToList();
@@ -24,5 +22,6 @@ namespace Fanex.NAP.FPS.Renovation.PresentData.API.Controllers
         {
             return DbSessionFactory.Execute<Customer>("GetAssociationNLevelByCustId", new { CustId = custid }).Data.ToList();
         }
+
     }
 }

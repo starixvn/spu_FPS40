@@ -55,13 +55,14 @@
 
                 isRunning = true;
 
-                var stagingTranId = dataTransformService.GetStagingRawTransaction(0, AppSettings.TransBatch);               
+                //var stagingTranId = dataTransformService.GetStagingRawTransaction(0, AppSettings.TransBatch);
+                var stagingTranId = dataTransformService.GetStagingRawTransaction(0, 100);
 
                 if (stagingTranId != null)
                 {
                     dataTransformService.UnhandleSubscriberAccountProcessing(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId);
 
-                    Parallel.Invoke(new ParallelOptions { MaxDegreeOfParallelism = 2 },() =>
+                    Parallel.Invoke(new ParallelOptions { MaxDegreeOfParallelism = 3 },() =>
                     {
                         dataTransformService.AccountProcessing(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId);
                         dataTransformService.DeviceProcessing(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId);
