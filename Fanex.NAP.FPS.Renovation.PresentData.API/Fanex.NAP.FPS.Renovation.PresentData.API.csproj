@@ -19,6 +19,7 @@
     <None Remove="App_Data\NAPFPSNames.PRO.xml" />
     <None Remove="App_Data\NAPFPSNames.UAT.xml" />
     <None Remove="App_Data\NAPFPSNames.xml" />
+    <None Remove="App_Data_Graph\Script.xml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +34,9 @@
     </Content>
     <Content Include="App_Data\NAPFPSNames.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data_Graph\Script.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
@@ -69,6 +73,15 @@
     <Reference Include="Neo4j.Driver">
       <HintPath>..\Fanex.NAP.FPS.Renovation.GraphDB.Service\GraphDBLib\Neo4j.Driver.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="App_Data_Graph\scripts\GetAssociationNLevelByCustId.scrypt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="App_Data_Graph\scripts\GetAssociationOneLevelByCustId.scrypt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

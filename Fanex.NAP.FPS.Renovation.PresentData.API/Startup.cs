@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Fanex.Data;
+﻿using Fanex.Data;
 using Fanex.Data.MySql;
 using Fanex.Graph.Data;
 using Fanex.NAP.FPS.Renovation.Core.Neo4j;
@@ -13,6 +12,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Linq;
 
 namespace Fanex.NAP.FPS.Renovation.PresentData.API
 {
@@ -46,9 +46,14 @@ namespace Fanex.NAP.FPS.Renovation.PresentData.API
                 .UseDefaultDbSettingProvider(resourcePath: appData)
                 .Run();
 
+
+            var graphDbConnections = Configuration.GetSection("AppSettings").GetChildren()
+                                        .Where(c => c.Key == "GraphDB")
+                                        .ToDictionary(x => x.Key, x => x.Value);
+
             DbSessionFactory.Init()
-                .RegisterConfigs("DB.MiddleService")
-                .RegisterXmlFile("~/App_Data")
+                .RegisterConfigs(graphDbConnections)
+                .RegisterXmlFile("~/App_Data_Graph", true)
                 .RegisterDriverFactory(new Neo4jDriverFactory())
                 .RegisterCommandBuilder(new Neo4jCommandBuilder("~/App_Data_Graph/scripts"))
                 .RegisterCommandExecutor(new Neo4jExecutor())

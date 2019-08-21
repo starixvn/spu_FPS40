@@ -14,7 +14,7 @@ namespace Fanex.NAP.FPS.Renovation.Core.Neo4j
         public Neo4jCommandBuilder(string scriptDir, string extension = "scrypt")
         {
             spDict =
-                Directory.GetFiles(Graph.Data.Utilities.ResolvePath(scriptDir), $"*.{extension}", SearchOption.AllDirectories)
+                Directory.GetFiles(Graph.Data.Utilities.ResolvePath(scriptDir, true), $"*.{extension}", SearchOption.AllDirectories)
                 .Select(f => new FileInfo(f))
                 .ToDictionary(f => f.Name.Replace($".{extension}", ""), f =>
                 {

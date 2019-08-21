@@ -169,6 +169,7 @@
     <Compile Include="Auth\Interface\IUserRepository.cs" />
     <Compile Include="BrowserModel.cs" />
     <Compile Include="BrowserPluginModel.cs" />
+    <Compile Include="Customer.cs" />
     <Compile Include="CustomerEvidence.cs" />
     <Compile Include="CustomerInfoModel.cs" />
     <Compile Include="DataResult.cs" />
