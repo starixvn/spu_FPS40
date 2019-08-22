@@ -60,7 +60,7 @@
                 {
                     dataTransformService.UnhandleSubscriberAccountProcessing(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId);
 
-                    Parallel.Invoke(new ParallelOptions { MaxDegreeOfParallelism = 3 },() =>
+                    Parallel.Invoke(new ParallelOptions { MaxDegreeOfParallelism = 2 },() =>
                     {
                         dataTransformService.AccountProcessing(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId);                        
                     }, () =>
