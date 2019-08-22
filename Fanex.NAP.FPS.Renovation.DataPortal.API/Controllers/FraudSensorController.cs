@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.Results;
 
 namespace Fanex.NAP.FPS.Renovation.DataPortal.API.Controllers
 {
