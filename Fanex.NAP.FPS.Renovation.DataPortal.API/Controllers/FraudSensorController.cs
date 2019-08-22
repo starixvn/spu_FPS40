@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Fanex.NAP.FPS.Renovation.DataPortal.API.Services.Implement;
+using Fanex.NAP.FPS.Renovation.DataPortal.API.Services.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -10,12 +12,12 @@ namespace Fanex.NAP.FPS.Renovation.DataPortal.API.Controllers
 {
     public class FraudSensorController : ApiController
     {
-        //private readonly IFraudSensorService fraudSensorService;
+        private readonly IFraudSensorService fraudSensorService;
 
-        //public FraudSensorController()
-        //{
-        //    fraudSensorService = new FraudSensorService();
-        //}
+        public FraudSensorController()
+        {
+            fraudSensorService = new FraudSensorService();
+        }
 
         //[HttpPost]
         //public JsonResult GetTotalAssociationByCustomer([FromBody]GetTotalAssociationByCustomerCriteria criteria)
