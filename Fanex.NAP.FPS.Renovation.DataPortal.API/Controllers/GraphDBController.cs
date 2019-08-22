@@ -16,6 +16,7 @@ namespace Fanex.NAP.FPS.Renovation.DataPortal.API.Controllers
         public List<Customer> GetAssociationOneLevel(int custid)
         {
             return DbSessionFactory.Execute<Customer>("GetAssociationOneLevelByCustId", new { CustId = custid }).Data.ToList();
+            
         }
 
         public List<Customer> GetAssociationNLevel(int custid)
