@@ -6,24 +6,23 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.Results;
 
 
 namespace Fanex.NAP.FPS.Renovation.DataPortal.API.Controllers
 {
+
     public class GraphDBController : ApiController
     {
         [HttpPost]
-        public List<Customer> GetAssociationOneLevel(int custid)
+        public List<Customer> GetAssociationOneLevel([FromBody]int custId)
         {
-            return DbSessionFactory.Execute<Customer>("GetAssociationOneLevelByCustId", new { CustId = custid }).Data.ToList();
-            
+            return DbSessionFactory.Execute<Customer>("GetAssociationOneLevelByCustId", new { CustId = custId }).Data.ToList();
         }
 
         [HttpPost]
-        public List<Customer> GetAssociationNLevel(int custid)
+        public List<Customer> GetAssociationNLevel([FromBody]int custId)
         {
-            return DbSessionFactory.Execute<Customer>("GetAssociationNLevelByCustId", new { CustId = custid }).Data.ToList();
+            return DbSessionFactory.Execute<Customer>("GetAssociationNLevelByCustId", new { CustId = custId }).Data.ToList();
         }
 
     }
