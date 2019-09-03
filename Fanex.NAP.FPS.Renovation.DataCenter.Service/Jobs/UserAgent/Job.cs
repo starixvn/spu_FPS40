@@ -3,6 +3,7 @@
     using Fanex.Logging;
     using Fanex.Logging.Extensions;
     using Fanex.NAP.FPS.Renovation.Core;
+    using Newtonsoft.Json;
     using Quartz;
     using System;
     using System.Diagnostics;
@@ -26,12 +27,12 @@
             {
                 var drawUserAgent = userAgent.GetUserAgent(AppSettings.TransBatch);
 
-                var xmlUserAgent = Core.Utilities.XMLConvert(drawUserAgent);
-
-                if(!String.IsNullOrWhiteSpace(xmlUserAgent))
+                if(drawUserAgent.Any())
                 {
-                    userAgent.UpdateUserAgent(xmlUserAgent);
-                }              
+                    var userAgentJson = JsonConvert.SerializeObject(drawUserAgent);
+
+                    userAgent.UpdateUserAgent(userAgentJson);
+                }           
             }
             catch (Exception ex)
             {

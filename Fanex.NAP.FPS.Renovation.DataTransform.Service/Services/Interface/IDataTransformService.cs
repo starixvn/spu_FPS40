@@ -16,5 +16,11 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Interface
         void TransactionProcessing(int fromId, int toId);
 
         void UnhandleSubscriberAccountProcessing(int fromId, int toId);
+
+        void CompleteProcessing(int fromId, int toId);
+
+        void UpdateTransactionDevice(int fromId, int toId);
+
+        void UpdateTransactionAccount(int fromId, int toId);
     }
 }

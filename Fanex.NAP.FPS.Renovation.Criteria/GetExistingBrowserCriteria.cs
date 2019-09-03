@@ -10,8 +10,8 @@ namespace Fanex.NAP.FPS.Renovation.Criteria
 {
     public class GetExistingBrowserCriteria : CriteriaBase
     {
-        [SpParam(SqlParamName = "ip_BrowserXML")]
-        public string BrowserXML { get; set; }
+        [SpParam(SqlParamName = "ip_BrowserJson")]
+        public string BrowserJson { get; set; }
 
         public override string GetSettingKey()
         {

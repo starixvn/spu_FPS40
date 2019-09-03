@@ -12,6 +12,7 @@
     <Setting Key="FPS_DC_DataCenter_Process_Device" SpName="FPS_DC_DataCenter_Process_Device" DbName="MySQL.FPS_DataCenter" Timeout="600" />
     <Setting Key="FPS_DC_DataCenter_Process_UserAgent" SpName="FPS_DC_DataCenter_Process_UserAgent" DbName="MySQL.FPS_DataCenter" Timeout="600" />
     <Setting Key="FPS_DC_DataCenter_Process_Transaction" SpName="FPS_DC_DataCenter_Process_Transaction" DbName="MySQL.FPS_DataCenter" />
+    <Setting Key="FPS_DC_DataCenter_Process_Completed" SpName="FPSA_DC_DataCenter_Process_Completed" DbName="MySQL.FPS_DataCenter" />
 
     <Setting Key="FPS_DC_DataCenter_Process_UnhandleSubscriberAction" SpName="FPS_DC_DataCenter_Process_UnhandleSubscriberAction" DbName="MySQL.FPS_DataCenter" Timeout="600" />
 

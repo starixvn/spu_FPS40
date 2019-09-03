@@ -10,8 +10,8 @@ namespace Fanex.NAP.FPS.Renovation.Criteria
 {
     public class InsertRawAccountCriteria : NonQueryCommand
     {
-        [SpParam(SqlParamName = "ip_AccountXml")]
-        public string AccountXml { get; set; }
+        [SpParam(SqlParamName = "ip_AccountJson")]
+        public string AccountJson { get; set; }
 
         public override string GetSettingKey()
         {

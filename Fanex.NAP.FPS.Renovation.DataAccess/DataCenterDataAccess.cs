@@ -115,13 +115,13 @@
             }
         }
 
-        public DataResult InsertRawAccount(string xmlAccounts)
+        public DataResult InsertRawAccount(string jsonAccounts)
         {
             var repository = new DynamicRepository();
 
             var criteria = new InsertRawAccountCriteria
             {
-                AccountXml = xmlAccounts
+                AccountJson = jsonAccounts
             };
 
             var errCode = repository.Execute(criteria);
@@ -155,6 +155,61 @@
             var repository = new DynamicRepository();
 
             var criteria = new ProcessTransactionCriteria
+            {
+                FromStagingTransId = fromId,
+                ToStagingTransId = toId
+            };
+
+            var errCode = repository.Execute(criteria);
+
+            return new DataResult
+            {
+                ErrorCode = errCode
+            };
+        }
+
+        public DataResult CompleteProcess(int fromId, int toId)
+        {
+            var repository = new DynamicRepository();
+
+            var criteria = new ProcessCompletedCriteria
+            {
+                FromStagingTransId = fromId,
+                ToStagingTransId = toId
+            };
+
+            var errCode = repository.Execute(criteria);
+
+            return new DataResult
+            {
+                ErrorCode = errCode
+            };
+        }
+
+
+        public DataResult UpdateTransactionDevice(int fromId, int toId)
+        {
+            var repository = new DynamicRepository();
+
+            var criteria = new UpdateTransactionDeviceCriteria
+            {
+                FromStagingTransId = fromId,
+                ToStagingTransId = toId
+            };
+
+            var errCode = repository.Execute(criteria);
+
+            return new DataResult
+            {
+                ErrorCode = errCode
+            };
+        }
+
+        public DataResult UpdateTransactionAccount(int fromId, int toId)
+        {
+            var repository = new DynamicRepository();
+
+            var criteria = new UpdateTransactionAccountCriteria
             {
                 FromStagingTransId = fromId,
                 ToStagingTransId = toId
@@ -221,7 +276,7 @@
         {
             var criteria = new GetExistingBrowserCriteria
             {
-                BrowserXML = browserXML
+                BrowserJson = browserXML
             };
 
             using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
@@ -234,7 +289,7 @@
         {
             var criteria = new GetExistingOSCriteria
             {
-                OSXML = osXML
+                OSJson = osXML
             };
 
             using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
@@ -279,7 +334,7 @@
 
             var criteria = new UpdateUserAgentCriteria
             {
-                UserAgentXML = userAgentXML
+                UserAgentJson = userAgentXML
             };
 
             var errCode = repository.Execute(criteria);

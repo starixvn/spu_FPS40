@@ -44,11 +44,8 @@
     <Reference Include="EasyNetQ, Version=3.5.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\EasyNetQ.3.5.1\lib\net451\EasyNetQ.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.Data, Version=4.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.Data.4.0.1\lib\net461\Fanex.Data.dll</HintPath>
-    </Reference>
-    <Reference Include="Fanex.Data.MySql, Version=4.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.Data.MySql.4.0.1\lib\net461\Fanex.Data.MySql.dll</HintPath>
+    <Reference Include="Fanex.Data, Version=4.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.Data.4.0.2\lib\net461\Fanex.Data.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Data.Repository, Version=4.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.Data.Repository.4.0.1\lib\net461\Fanex.Data.Repository.dll</HintPath>
@@ -60,7 +57,7 @@
       <HintPath>..\packages\Fanex.Logging.Extensions.1.0.6\lib\net461\Fanex.Logging.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Logging.Extensions.Database, Version=1.0.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.Logging.Extensions.Database.1.0.7-beta1\lib\net461\Fanex.Logging.Extensions.Database.dll</HintPath>
+      <HintPath>..\packages\Fanex.Logging.Extensions.Database.1.0.7\lib\net461\Fanex.Logging.Extensions.Database.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Logging.Sentry.RavenClient, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.Logging.Sentry.RavenClient.1.0.1\lib\net461\Fanex.Logging.Sentry.RavenClient.dll</HintPath>

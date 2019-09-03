@@ -4,6 +4,7 @@
     using Fanex.NAP.FPS.Renovation.DataAccess;
     using Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Interface;
     using Fanex.NAP.FPS.Renovation.Model;
+    using Newtonsoft.Json;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -44,7 +45,7 @@
 
         private List<CustomerInfoModel> UpdateCustomerInfo(List<AccountExistedModel> accountList)
         {
-            System.Console.WriteLine("3.2.Update Customer Info");
+            System.Console.WriteLine("=> 3.2.Update Customer Info");
 
             var getNewCustomer = accountList.Select(acc => TransformCustomerInfo(acc)).ToList();
 
@@ -68,61 +69,22 @@
                 SubscriberName = model.SubscriberName,
                 LoginNameWithPrefix = model.LoginNameWithPrefix
             };
-        }
-
-        //private TransactionModel TransformTransaction(StagingRawTransactionModel model)
-        //{
-        //    var uaParser = Parser.GetDefault();
-
-        //    var clientInfo = uaParser.Parse(model.UserAgent);
-
-        //    var ipInfo = model.IP.Ip2Long();
-
-        //    var ipNumber = (decimal)ipInfo.IpNumber;
-
-        //    return new TransactionModel
-        //    {
-        //        StagingTransID = model.StagingTransId,
-        //        DeviceCode = model.DeviceCode,
-        //        FingeringCode = model.FingeringCode,
-        //        FingeringMoreInfo = model.FingeringMoreInfo,
-        //        LoginName = model.LoginName,
-        //        SubscriberName = model.SubscriberName,
-        //        TransDate = model.TransDate,
-        //        CreatedDate = model.CreatedDate,
-        //        IP = ipInfo.IsIpV6 ? ipNumber : ipNumber + 281470681743360,
-        //        PluginID = model.PluginID,
-        //        URL = model.URL,
-        //        ActionResult = model.ActionResult,
-        //        UserAgent = model.UserAgent,
-        //        UserAgentCode = Cipher.Hashing(model.UserAgent),
-        //        BrowserName = clientInfo.UA.Family,
-        //        OSName = clientInfo.OS.Family,
-        //        Flagged = 0,
-        //        CustID = 0,
-        //        AccountID = 0,
-        //        CurrencyID = 0,
-        //        CurrencyName = string.Empty,
-        //        RoleID = 0,
-        //        Username = string.Empty,
-        //        Username2 = String.Empty
-        //    };
-        //}
+        }               
 
         private List<AccountExistedModel> AccountProcess(int fromId, int toId)
         {
-            System.Console.WriteLine("3.1.Get Existing Account");
+            System.Console.WriteLine("=> 3.1.Get Existing Account");
 
             return dataCenter.AccountProcess(fromId, toId);
         }
 
         private void InsertRawAccount(List<CustomerInfoModel> accounts)
         {
-            System.Console.WriteLine("3.3.Insert Raw Account");
+            System.Console.WriteLine("=> 3.3.Insert Raw Account");
 
-            var accountListXml = Utilities.XMLConvert(accounts);
+            var accountListJson = JsonConvert.SerializeObject(accounts);
 
-            dataCenter.InsertRawAccount(accountListXml);
+            dataCenter.InsertRawAccount(accountListJson);
         }
 
         public void UserAgentProcessing(int fromId, int toId)
@@ -151,6 +113,27 @@
             dataCenter.DeviceProcess(fromId, toId);
 
             System.Console.WriteLine("5.Device Process");
+        }
+
+        public void CompleteProcessing(int fromId, int toId)
+        {
+            dataCenter.CompleteProcess(fromId, toId);
+
+            System.Console.WriteLine("7.Completed Process");
+        }
+
+        public void UpdateTransactionDevice(int fromId, int toId)
+        {
+            dataCenter.UpdateTransactionDevice(fromId, toId);
+
+            System.Console.WriteLine("8.Update Transaction Device");
+        }
+
+        public void UpdateTransactionAccount(int fromId, int toId)
+        {
+            dataCenter.UpdateTransactionAccount(fromId, toId);
+
+            System.Console.WriteLine("9.Update Transaction Account");
         }
     }
 }

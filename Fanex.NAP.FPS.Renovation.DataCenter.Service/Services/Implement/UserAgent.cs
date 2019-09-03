@@ -1,6 +1,7 @@
 ﻿using Fanex.NAP.FPS.Renovation.DataAccess;
 using Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface;
 using Fanex.NAP.FPS.Renovation.Model;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +15,6 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Implement
     {
         private readonly DataAccess.DataCenterDataAccess dataCenter;
 
-
-
         public UserAgent()
         {
             dataCenter = new DataCenterDataAccess();
@@ -23,16 +22,16 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Implement
 
         public List<BrowserModel> GetBrowser(List<BrowserModel> browserList)
         {
-            var browserXML = Core.Utilities.XMLConvert(browserList);
+            var browserJson = JsonConvert.SerializeObject(browserList);
 
-            return dataCenter.GetExistingBrowser(browserXML);
+            return dataCenter.GetExistingBrowser(browserJson);
         }
 
         public List<OSModel> GetOS(List<OSModel> osList)
         {
-            var osXML = Core.Utilities.XMLConvert(osList);
+            var osJson = JsonConvert.SerializeObject(osList);
 
-            return dataCenter.GetExistingOS(osXML);
+            return dataCenter.GetExistingOS(osJson);
         }
 
         public List<UserAgentModel> GetUserAgent(int size)
@@ -54,15 +53,15 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Implement
                 browserList.Add(new BrowserModel
                 {
                     BrowserName = browserName,
-                    IsExisting = 0,
-                    UserAgentId = userAgent.UserAgentID
+                    IsExisting = 0,                    
+                    UserAgentCode = userAgent.UserAgentCode
                 });
 
                 osList.Add(new OSModel
                 {
                     OSName = osName,
-                    IsExisting = 0,
-                    UserAgentId = userAgent.UserAgentID
+                    IsExisting = 0,                   
+                    UserAgentCode = userAgent.UserAgentCode
                 });
 
             }
@@ -74,8 +73,8 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Implement
 
             return userAgents.Select(x => {
 
-                var browserUpdated = browserListUpdated.FirstOrDefault(br => br.UserAgentId == x.UserAgentID);
-                var osUpdated = osListUpdated.FirstOrDefault(os => os.UserAgentId == x.UserAgentID);
+                var browserUpdated = browserListUpdated.FirstOrDefault(br => br.UserAgentCode == x.UserAgentCode);
+                var osUpdated = osListUpdated.FirstOrDefault(os => os.UserAgentCode == x.UserAgentCode);
 
                 x.OSId = osUpdated.OSId;
                 x.BrowserId = browserUpdated.BrowserId;

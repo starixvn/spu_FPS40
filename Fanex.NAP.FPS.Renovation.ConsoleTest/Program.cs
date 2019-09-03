@@ -1,4 +1,7 @@
-﻿using Fanex.NAP.FPS.Renovation.Core;
+﻿using Fanex.Data;
+using Fanex.Data.MySql;
+using Fanex.Data.Repository;
+using Fanex.NAP.FPS.Renovation.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +14,24 @@ namespace Fanex.NAP.FPS.Renovation.ConsoleTest
     {
         static void Main(string[] args)
         {
+            DbSettingProviderManager
+                  .StartNewSession()                
+                  .WithMySql()
+                  .UseDefaultDbSettingProvider(resourcePath: "~/App_Data/NAPFPSNames.xml")
+                  .UseDefaultConnectionStringProvider()
+                  .Run();
 
-            var encodeString = Cipher.Hashing("Mozilla/5.0 (iPhone; CPU iPhone OS 12_3_1 like Mac OS X; zh-CN) AppleWebKit/537.51.1 (KHTML, like Gecko) Mobile/16F203 UCBrowser/12.4.7.1178 Mobile  AliApp(TUnionSDK/0.1.20.3)");
+            var repository = new DynamicRepository();
 
-            Console.WriteLine(encodeString);
+            var criteria = new LockTestCriteria();
+
+            Parallel.Invoke(() => {
+                repository.Execute(criteria);
+            },
+            () => {
+                repository.Execute(criteria);
+            });
+
 
             Console.ReadKey();
         }

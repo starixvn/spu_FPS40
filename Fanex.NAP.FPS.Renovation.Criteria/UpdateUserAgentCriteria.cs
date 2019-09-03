@@ -10,8 +10,8 @@ namespace Fanex.NAP.FPS.Renovation.Criteria
 {
     public class UpdateUserAgentCriteria : NonQueryCommand
     {
-        [SpParam(SqlParamName = "ip_UserAgentXML")]
-        public string UserAgentXML { get; set; }
+        [SpParam(SqlParamName = "ip_UserAgentJson")]
+        public string UserAgentJson { get; set; }
 
         public override string GetSettingKey()
         {

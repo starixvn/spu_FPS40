@@ -10,8 +10,8 @@ namespace Fanex.NAP.FPS.Renovation.Criteria
 {
     public class GetExistingOSCriteria : CriteriaBase
     {
-        [SpParam(SqlParamName = "ip_OSXML")]
-        public string OSXML { get; set; }
+        [SpParam(SqlParamName = "ip_OSJson")]
+        public string OSJson { get; set; }
 
         public override string GetSettingKey()
         {
