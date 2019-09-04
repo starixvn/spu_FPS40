@@ -11,14 +11,6 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface
     {
         List<UserAgentModel> GetUserAgent(int size);
 
-        List<BrowserModel> GetBrowser(List<BrowserModel> browserList);
-
-        List<OSModel> GetOS(List<OSModel> osList);
-
-        int InsertBrowser(string browserName);
-
-        int InsertOS(string osName);
-
-        int UpdateUserAgent(string userAgentXML);
+        int UpdateUserAgent(string userAgentJson);
     }
 }

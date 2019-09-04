@@ -57,10 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GetExistingAccountCriteria.cs" />
-    <Compile Include="GetExistingBrowserCriteria.cs" />
-    <Compile Include="GetExistingOSCriteria.cs" />
     <Compile Include="GetUserAgentCriteria.cs" />
-    <Compile Include="InsertBrowserCriteria.cs" />
     <Compile Include="InsertIPTableLogCriteria.cs" />
     <Compile Include="GetAssociationByCustomerCriteria.cs" />
     <Compile Include="GetAssociationForGraphDBCriteria.cs" />
@@ -74,7 +71,6 @@
     <Compile Include="InsertDataCenterTransactionCriteria.cs" />
     <Compile Include="CapturingTransactionCriteria.cs" />
     <Compile Include="GetRawTransactionCriteria.cs" />
-    <Compile Include="InsertOSCriteria.cs" />
     <Compile Include="InsertRawAccountCriteria.cs" />
     <Compile Include="IpInfoCriteria.cs" />
     <Compile Include="ProcessCompletedCriteria.cs" />
