@@ -1,10 +1,11 @@
 ﻿using Fanex.NAP.FPS.Renovation.Core;
 using Fanex.NAP.FPS.Renovation.DataAccess;
+using Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface;
 using Fanex.NAP.FPS.Renovation.Model;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface
+namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Implement
 {
     public class DataCenterService : IDataCenterService
     {
@@ -35,7 +36,22 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface
         public List<NewCustomerModel> GetNewCustomer(int size)
         {
             return dataCenter.GetNewCustomer(size);
-        }       
+        }
+
+        public List<int> GetUpdatedAccount(int size)
+        {
+            return dataCenter.GetUpdatedAccountList(size);
+        }
+
+        public List<int> GetUpdatedDevice(int size)
+        {
+            return dataCenter.GetUpdatedDeviceList(size);
+        }
+
+        public DataResult UpdateAccountId(string accountIdJson)
+        {
+            return dataCenter.UpdateAccountId(accountIdJson);
+        }
 
         public DataResult UpdateCustomerInfo(List<CustomerInfoModel> customerInfo)
         {
@@ -44,6 +60,11 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface
             var newXmlCustomerInfo = Utilities.XMLConvert(newCustomerInfo);
 
             return dataCenter.UpdateCustomerInfo(newXmlCustomerInfo);
+        }
+
+        public DataResult UpdateDeviceId(string deviceIdJson)
+        {
+            return dataCenter.UpdateDeviceId(deviceIdJson);
         }
 
         public DataResult UpdateIsSyncByAssociationId(string associationXml)

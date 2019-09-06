@@ -19,5 +19,11 @@
 
     <Setting Key="FPS_DC_GetUserAgent" SpName="FPSA_DC_GetUserAgent" DbName="MySQL.FPS_DataCenter"/>   
     <Setting Key="FPS_DC_UpdateUserAgent" SpName="FPSA_DC_UpdateUserAgent" DbName="MySQL.FPS_DataCenter"/>
+
+    <Setting Key="FPS_DC_DataCenter_Process_GetNULLAccountIDList" SpName="FPS_DC_DataCenter_Process_GetNULLAccountIDList" DbName="MySQL.FPS_DataCenter"/>
+    <Setting Key="FPS_DC_DataCenter_Process_UpdateAccountID" SpName="FPS_DC_DataCenter_Process_UpdateAccountID" DbName="MySQL.FPS_DataCenter"/>
+
+    <Setting Key="FPS_DC_DataCenter_Process_GetNULLDeviceIDList" SpName="FPS_DC_DataCenter_Process_GetNULLDeviceIDList" DbName="MySQL.FPS_DataCenter"/>
+    <Setting Key="FPS_DC_DataCenter_Process_UpdateDeviceID" SpName="FPS_DC_DataCenter_Process_UpdateDeviceID" DbName="MySQL.FPS_DataCenter"/>
   </Function>
 </Functions>

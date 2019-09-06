@@ -57,6 +57,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GetExistingAccountCriteria.cs" />
+    <Compile Include="GetUpdatedDeviceListCriteria.cs" />
+    <Compile Include="GetUpdatedAccountListCriteria.cs" />
     <Compile Include="GetUserAgentCriteria.cs" />
     <Compile Include="InsertIPTableLogCriteria.cs" />
     <Compile Include="GetAssociationByCustomerCriteria.cs" />
@@ -80,11 +82,11 @@
     <Compile Include="ProcessUserAgentCriteria.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProcessAccountCriteria.cs" />
+    <Compile Include="UpdateDeviceIdCriteria.cs" />
+    <Compile Include="UpdateAccountIdCriteria.cs" />
     <Compile Include="UpdateCustomerInfoCriteria.cs" />
     <Compile Include="UpdateIpRangeCriteria.cs" />
     <Compile Include="UpdateIsSyncGraphDBByAssociationIdCriteria.cs" />
-    <Compile Include="UpdateTransactionAccountCriteria.cs" />
-    <Compile Include="UpdateTransactionDeviceCriteria.cs" />
     <Compile Include="UpdateUserAgentCriteria.cs" />
   </ItemGroup>
   <ItemGroup>

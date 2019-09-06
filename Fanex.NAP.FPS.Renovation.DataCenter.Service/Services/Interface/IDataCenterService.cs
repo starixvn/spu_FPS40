@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface
 {
-    interface IDataCenterService
+    public interface IDataCenterService
     {
         List<NewCustomerModel> GetNewCustomer(int size);
 
@@ -14,5 +14,14 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface
         List<AssociationModel> GetAssociationForGrapDB(int isSync, int size);
 
         DataResult UpdateIsSyncByAssociationId(string associationXml);
+
+
+        List<int> GetUpdatedAccount(int size);
+
+        DataResult UpdateAccountId(string accountIdJson);
+
+        List<int> GetUpdatedDevice(int size);
+
+        DataResult UpdateDeviceId(string deviceIdJson);
     }
 }

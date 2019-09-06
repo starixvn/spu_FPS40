@@ -62,8 +62,12 @@
     <Compile Include="ISchedule.cs" />
     <Compile Include="Jobs\AddAssociation\Job.cs" />
     <Compile Include="Jobs\AddAssociation\Schedule.cs" />
+    <Compile Include="Jobs\UpdateAccountId\Job.cs" />
+    <Compile Include="Jobs\UpdateAccountId\Schedule.cs" />
     <Compile Include="Jobs\UpdateCustomerInfo\Job.cs" />
     <Compile Include="Jobs\UpdateCustomerInfo\Schedule.cs" />
+    <Compile Include="Jobs\UpdateDeviceId\Job.cs" />
+    <Compile Include="Jobs\UpdateDeviceId\Schedule.cs" />
     <Compile Include="Jobs\UpdateIPRange\Job.cs" />
     <Compile Include="Jobs\UpdateIPRange\Schedule.cs" />
     <Compile Include="Jobs\UserAgent\Job.cs" />

@@ -62,24 +62,21 @@
 
                     Parallel.Invoke(new ParallelOptions { MaxDegreeOfParallelism = 3 }, () =>
                      {
-                         dataTransformService.TransactionProcessing(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId);
-
-                         dataTransformService.CompleteProcessing(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId);
-
-                     }, () =>
+                         dataTransformService.UserAgentProcessing(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId);
+                     },
+                     () =>
                      {
                          dataTransformService.AccountProcessing(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId);
-
-                         dataTransformService.DeviceProcessing(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId);
-
-                     }, () =>
+                     },
+                     () =>
                      {
-                         dataTransformService.UserAgentProcessing(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId);
+                         dataTransformService.TransactionProcessing(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId);
+
                      });
 
-                    dataTransformService.UpdateTransactionAccount(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId);
+                    dataTransformService.DeviceProcessing(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId);
 
-                    dataTransformService.UpdateTransactionDevice(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId);
+                    dataTransformService.CompleteProcessing(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId);
 
                     Console.WriteLine("---------------------------");
                 }

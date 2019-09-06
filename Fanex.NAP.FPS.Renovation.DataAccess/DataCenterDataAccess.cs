@@ -184,44 +184,7 @@
             {
                 ErrorCode = errCode
             };
-        }
-
-
-        public DataResult UpdateTransactionDevice(int fromId, int toId)
-        {
-            var repository = new DynamicRepository();
-
-            var criteria = new UpdateTransactionDeviceCriteria
-            {
-                FromStagingTransId = fromId,
-                ToStagingTransId = toId
-            };
-
-            var errCode = repository.Execute(criteria);
-
-            return new DataResult
-            {
-                ErrorCode = errCode
-            };
-        }
-
-        public DataResult UpdateTransactionAccount(int fromId, int toId)
-        {
-            var repository = new DynamicRepository();
-
-            var criteria = new UpdateTransactionAccountCriteria
-            {
-                FromStagingTransId = fromId,
-                ToStagingTransId = toId
-            };
-
-            var errCode = repository.Execute(criteria);
-
-            return new DataResult
-            {
-                ErrorCode = errCode
-            };
-        }
+        }       
 
         public DataResult DeviceProcess(int fromId, int toId)
         {
@@ -279,6 +242,66 @@
             var criteria = new UpdateUserAgentCriteria
             {
                 UserAgentJson = userAgentJson
+            };
+
+            var errCode = repository.Execute(criteria);
+
+            return new DataResult
+            {
+                ErrorCode = errCode
+            };
+        }
+
+        public List<int> GetUpdatedAccountList(int size)
+        {
+            var criteria = new GetUpdatedAccountListCriteria
+            {
+                Size = size
+            };
+
+            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
+            {
+                return db.Query<int>(criteria).ToList();
+            }
+        }
+
+        public DataResult UpdateAccountId(string accountIdJson)
+        {
+            var repository = new DynamicRepository();
+
+            var criteria = new UpdateAccountIdCriteria
+            {
+                AccountIdJson = accountIdJson
+            };
+
+            var errCode = repository.Execute(criteria);
+
+            return new DataResult
+            {
+                ErrorCode = errCode
+            };
+        }
+
+        public List<int> GetUpdatedDeviceList(int size)
+        {
+            var criteria = new GetUpdatedDeviceListCriteria
+            {
+                Size = size
+            };
+
+            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
+            {
+                return db.Query<int>(criteria).ToList();
+            }
+        }
+
+        public DataResult UpdateDeviceId(string deviceIdJson)
+        {
+            var repository = new DynamicRepository();
+
+            var criteria = new UpdateDeviceIdCriteria
+            {
+                DeviceIdJson = deviceIdJson
             };
 
             var errCode = repository.Execute(criteria);

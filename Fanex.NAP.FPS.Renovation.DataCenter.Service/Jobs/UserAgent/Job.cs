@@ -7,8 +7,6 @@
     using Newtonsoft.Json;
     using Quartz;
     using System;
-    using System.Diagnostics;
-    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -28,12 +26,12 @@
             {
                 var drawUserAgent = userAgent.GetUserAgent(AppSettings.TransBatch);
 
-                if(drawUserAgent.Any())
+                if (drawUserAgent.Any())
                 {
                     var userAgentJson = JsonConvert.SerializeObject(drawUserAgent);
 
                     userAgent.UpdateUserAgent(userAgentJson);
-                }           
+                }
             }
             catch (Exception ex)
             {

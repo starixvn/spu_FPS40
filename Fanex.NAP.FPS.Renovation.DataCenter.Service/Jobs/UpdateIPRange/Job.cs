@@ -62,26 +62,26 @@
 
         public Task Execute(IJobExecutionContext context)
         {           
-            try
-            {
-                var ipDBVersionDate = ipRangeService.GetIPDBVersion();
-                var ipLatestIPDBLogDate = ipRangeService.GetLatestUpdatedDateIPTableLog();
+            //try
+            //{
+            //    var ipDBVersionDate = ipRangeService.GetIPDBVersion();
+            //    var ipLatestIPDBLogDate = ipRangeService.GetLatestUpdatedDateIPTableLog();
 
-                if (ipDBVersionDate.CompareTo(ipLatestIPDBLogDate) != 0)
-                {                  
-                    var filePath = Path.Combine(originalPath, rangeIpCSVFileName);
+            //    if (ipDBVersionDate.CompareTo(ipLatestIPDBLogDate) != 0)
+            //    {                  
+            //        var filePath = Path.Combine(originalPath, rangeIpCSVFileName);
 
-                    UpdateIpTableV6(ipDBVersionDate, filePath);                                        
-                }
-            }
-            catch (Exception ex)
-            {
-                var logMessage = new LogMessage(ex.Message)
-                    .AddSection("Data Info", DatabaseInfoGetters.GetDbExceptionInfo(ex))
-                    .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
+            //        UpdateIpTableV6(ipDBVersionDate, filePath);                                        
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    var logMessage = new LogMessage(ex.Message)
+            //        .AddSection("Data Info", DatabaseInfoGetters.GetDbExceptionInfo(ex))
+            //        .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
 
-                LogService.Error(logMessage);
-            }
+            //    LogService.Error(logMessage);
+            //}
 
             return Task.FromResult(true);
         }

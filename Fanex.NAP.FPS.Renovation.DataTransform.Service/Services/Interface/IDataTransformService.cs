@@ -7,7 +7,7 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Interface
     {
         StagingRawTransactionModel GetStagingRawTransaction(int isProcessed, int numberOfTicket);
 
-        void AccountProcessing(int fromId , int toId);
+        void AccountProcessing(int fromId, int toId);
 
         void DeviceProcessing(int fromId, int toId);
 
@@ -18,9 +18,5 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Interface
         void UnhandleSubscriberAccountProcessing(int fromId, int toId);
 
         void CompleteProcessing(int fromId, int toId);
-
-        void UpdateTransactionDevice(int fromId, int toId);
-
-        void UpdateTransactionAccount(int fromId, int toId);
     }
 }

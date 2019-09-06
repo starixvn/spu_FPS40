@@ -20,16 +20,16 @@
         }    
 
         public StagingRawTransactionModel GetStagingRawTransaction(int isProcessed, int numberOfTicket)
-        {
+        {            
+            var result =  stagingRawTransaction.GetStagingRawTrans(isProcessed, numberOfTicket);
+
             System.Console.WriteLine("1.Get Raw Transaction");
 
-            return stagingRawTransaction.GetStagingRawTrans(isProcessed, numberOfTicket);
+            return result;
         }
 
         public void AccountProcessing(int fromId, int toId)
-        {
-            System.Console.WriteLine("3.Account Process");
-
+        {          
             var existingAccounts = AccountProcess(fromId, toId);            
 
             if (existingAccounts.Any())
@@ -41,6 +41,8 @@
                     InsertRawAccount(customerInfo);                    
                 }               
             }
+
+            System.Console.WriteLine("3.Account Process");
         }
 
         private List<CustomerInfoModel> UpdateCustomerInfo(List<AccountExistedModel> accountList)
@@ -80,11 +82,11 @@
 
         private void InsertRawAccount(List<CustomerInfoModel> accounts)
         {
-            System.Console.WriteLine("=> 3.3.Insert Raw Account");
-
             var accountListJson = JsonConvert.SerializeObject(accounts);
 
             dataCenter.InsertRawAccount(accountListJson);
+
+            System.Console.WriteLine("=> 3.3.Insert Raw Account");
         }
 
         public void UserAgentProcessing(int fromId, int toId)
@@ -103,9 +105,9 @@
 
         public void UnhandleSubscriberAccountProcessing(int fromId, int toId)
         {
-            System.Console.WriteLine("2.UnhandleSubscriberActionProcess");
-
             dataCenter.UnhandleSubscriberActionProcess(fromId, toId);
+
+            System.Console.WriteLine("2.UnhandleSubscriberActionProcess");
         }
 
         public void DeviceProcessing(int fromId, int toId)
@@ -120,20 +122,6 @@
             dataCenter.CompleteProcess(fromId, toId);
 
             System.Console.WriteLine("7.Completed Process");
-        }
-
-        public void UpdateTransactionDevice(int fromId, int toId)
-        {
-            dataCenter.UpdateTransactionDevice(fromId, toId);
-
-            System.Console.WriteLine("8.Update Transaction Device");
-        }
-
-        public void UpdateTransactionAccount(int fromId, int toId)
-        {
-            dataCenter.UpdateTransactionAccount(fromId, toId);
-
-            System.Console.WriteLine("9.Update Transaction Account");
-        }
+        }        
     }
 }

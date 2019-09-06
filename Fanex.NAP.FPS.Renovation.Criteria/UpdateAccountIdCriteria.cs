@@ -8,17 +8,14 @@ using System.Threading.Tasks;
 
 namespace Fanex.NAP.FPS.Renovation.Criteria
 {
-    public class UpdateTransactionDeviceCriteria : NonQueryCommand
+    public class UpdateAccountIdCriteria : NonQueryCommand
     {
-        [SpParam(SqlParamName = "ip_FromStagingTransID")]
-        public int FromStagingTransId { get; set; }
-
-        [SpParam(SqlParamName = "ip_ToStagingTransID")]
-        public int ToStagingTransId { get; set; }
+        [SpParam(SqlParamName = "ip_AccountIDJson")]
+        public string AccountIdJson { get; set; }
 
         public override string GetSettingKey()
         {
-            return "FPS_DC_DataCenter_Process_UpdateTransactionDevice";
+            return "FPS_DC_DataCenter_Process_UpdateAccountID";
         }
 
         public override bool IsValid()
