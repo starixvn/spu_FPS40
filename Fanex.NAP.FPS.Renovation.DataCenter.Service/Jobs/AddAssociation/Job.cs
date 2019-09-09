@@ -1,11 +1,17 @@
 ﻿namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Jobs.AddAssociation
 {
+    using EasyNetQ;
+    using Fanex.Logging;
+    using Fanex.Logging.Extensions;
+    using Fanex.Logging.Extensions.Database;
     using Fanex.NAP.FPS.Renovation.Core;
     using Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Implement;
     using Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface;
+    using Fanex.NAP.FPS.Renovation.Model;
     using Fanex.NAP.FPS.Renovation.Queue;
     using Quartz;
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
 
     [DisallowConcurrentExecution]
@@ -13,6 +19,7 @@
     {
         private readonly IDataCenterService dataCenterService;
         private readonly EasyNetQConnector _rabbitMQ;
+        private const int numberOfAssociation = 1000;
 
         public Job()
         {
@@ -35,18 +42,19 @@
         {
             //try
             //{
-            //    var associations = dataCenterService.GetAssociationForGrapDB(0, AppSettings.TransBatch);
+            //    var associations = dataCenterService.GetAssociationForGrapDB(0, numberOfAssociation);
 
             //    if (associations != null && associations.Any())
             //    {
-            //        foreach(var association in associations)
+            //        foreach (var association in associations)
             //        {
             //            var messageQueue = new Message<AssociationModel>(association, new MessageProperties { DeliveryMode = 2, Priority = 9 });
 
             //            _rabbitMQ.AdvanceBus.PublishAsync(_rabbitMQ.Exchange, _rabbitMQ.RoutingKey, false, messageQueue);
-            //        }                                         
+            //        }
 
-            //        var isSynAssociation = associations.Select(x => new IsSynAssociationModel {
+            //        var isSynAssociation = associations.Select(x => new IsSynAssociationModel
+            //        {
             //            AssociationID = x.AssociationId,
             //            SyncGraphDB = 1
             //        }).ToList();

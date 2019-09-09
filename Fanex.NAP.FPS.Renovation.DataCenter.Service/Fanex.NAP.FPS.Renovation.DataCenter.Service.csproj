@@ -62,6 +62,8 @@
     <Compile Include="ISchedule.cs" />
     <Compile Include="Jobs\AddAssociation\Job.cs" />
     <Compile Include="Jobs\AddAssociation\Schedule.cs" />
+    <Compile Include="Jobs\InsertTransaction\Job.cs" />
+    <Compile Include="Jobs\InsertTransaction\Schedule.cs" />
     <Compile Include="Jobs\UpdateAccountId\Job.cs" />
     <Compile Include="Jobs\UpdateAccountId\Schedule.cs" />
     <Compile Include="Jobs\UpdateCustomerInfo\Job.cs" />
@@ -81,9 +83,11 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Implement\DataCenterService.cs" />
+    <Compile Include="Services\Implement\DataTransformService.cs" />
     <Compile Include="Services\Implement\IPRangeService.cs" />
     <Compile Include="Services\Implement\UserAgent.cs" />
     <Compile Include="Services\Interface\IDataCenterService.cs" />
+    <Compile Include="Services\Interface\IDataTransformService.cs" />
     <Compile Include="Services\Interface\IPRangeService.cs" />
     <Compile Include="Services\Interface\IUserAgent.cs" />
   </ItemGroup>

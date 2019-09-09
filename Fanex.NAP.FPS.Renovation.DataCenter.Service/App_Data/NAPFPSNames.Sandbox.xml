@@ -26,4 +26,8 @@
     <Setting Key="FPS_DC_DataCenter_Process_GetNULLDeviceIDList" SpName="FPS_DC_DataCenter_Process_GetNULLDeviceIDList" DbName="MySQL.FPS_DataCenter"/>
     <Setting Key="FPS_DC_DataCenter_Process_UpdateDeviceID" SpName="FPS_DC_DataCenter_Process_UpdateDeviceID" DbName="MySQL.FPS_DataCenter"/>
   </Function>
+  <Function Name="CapturingTransaction">
+    <Setting Key="FPS_RT_RawTransaction_Process_GetPackage" SpName="FPSA_RT_RawTransaction_Process_GetPackage" DbName="MySQL.FPS_RawTransaction">
+    </Setting>
+  </Function>
 </Functions>

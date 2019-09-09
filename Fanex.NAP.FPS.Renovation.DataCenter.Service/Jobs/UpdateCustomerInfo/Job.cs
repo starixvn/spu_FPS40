@@ -1,16 +1,20 @@
 ﻿namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Jobs.UpdateCustomerInfo
 {
+    using Fanex.Logging;
+    using Fanex.Logging.Extensions;
+    using Fanex.Logging.Extensions.Database;
     using Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Implement;
     using Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface;
     using Quartz;
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
 
     [DisallowConcurrentExecution]
     public class Job : IJob
     {
         private readonly IDataCenterService dataCenterService;
-        
+        private const int numberOfCustomer = 1000;        
 
         public Job()
         {
@@ -21,7 +25,7 @@
         {
             //try
             //{
-            //    var newCustomer = dataCenterService.GetNewCustomer(AppSettings.TransBatch);
+            //    var newCustomer = dataCenterService.GetNewCustomer(numberOfCustomer);
 
             //    if (newCustomer != null && newCustomer.Any())
             //    {

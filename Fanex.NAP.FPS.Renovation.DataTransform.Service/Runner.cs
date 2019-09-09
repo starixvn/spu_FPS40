@@ -6,7 +6,11 @@
     using Fanex.NAP.FPS.Renovation.Core;
     using Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Implement;
     using Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Interface;
+    using Microsoft.Owin.Hosting;
     using System;
+    using System.Collections.Generic;
+    using System.Net;
+    using System.Net.Sockets;
     using System.ServiceProcess;
     using System.Threading.Tasks;
     using System.Timers;
@@ -16,6 +20,9 @@
         private readonly IDataTransformService dataTransformService;
         private System.Timers.Timer timer;
         private bool isRunning;
+
+        private IDisposable _webApp;
+
         public Runner()
         {
             dataTransformService = new DataTransformService();
@@ -25,23 +32,30 @@
         }
 
         protected override void OnStart(string[] args)
-        {
-            Core.Utilities.WriteLog("RawTrans2DataCenter.txt", "Start - " + DateTime.Now);
+        {       
+            _webApp = WebApp.Start<Startup>(AppSettings.SelfHostUrl);
+                        
+            //Core.Utilities.WriteLog("RawTrans2DataCenter.txt", "Start - " + DateTime.Now);
 
-            timer = new System.Timers.Timer();
-            timer.Elapsed += OnTimedEvent;
-            timer.Interval = AppSettings.Interval;
-            timer.Enabled = true;
+            //timer = new System.Timers.Timer();
+            //timer.Elapsed += OnTimedEvent;
+            //timer.Interval = AppSettings.Interval;
+            //timer.Enabled = true;
 
-            LogService.Info($"Data Transform service is STARTED at {DateTime.Now}");
+            //LogService.Info($"Data Transform service is STARTED at {DateTime.Now}");
         }
 
         protected override void OnStop()
         {
-            timer.Dispose();
+            // timer.Dispose();
+
+            if(_webApp != null)
+            {
+                _webApp.Dispose();
+            }            
 
             LogService.Info($"Data Transform service is STOPED at {DateTime.Now}");
-        }
+        }       
 
         private void OnTimedEvent(object source, ElapsedEventArgs e)
         {
