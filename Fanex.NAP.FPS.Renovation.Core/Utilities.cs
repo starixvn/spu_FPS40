@@ -142,8 +142,6 @@
                     IsIpV6 = false
                 };
             }
-
-
         }
 
         public static string ToUncompressedString(this IPAddress ipAddress)

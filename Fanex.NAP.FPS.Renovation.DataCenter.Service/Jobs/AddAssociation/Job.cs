@@ -40,38 +40,38 @@
 
         public Task Execute(IJobExecutionContext context)
         {
-            //try
-            //{
-            //    var associations = dataCenterService.GetAssociationForGrapDB(0, numberOfAssociation);
+            try
+            {
+                var associations = dataCenterService.GetAssociationForGrapDB(0, numberOfAssociation);
 
-            //    if (associations != null && associations.Any())
-            //    {
-            //        foreach (var association in associations)
-            //        {
-            //            var messageQueue = new Message<AssociationModel>(association, new MessageProperties { DeliveryMode = 2, Priority = 9 });
+                if (associations != null && associations.Any())
+                {
+                    foreach (var association in associations)
+                    {
+                        var messageQueue = new Message<AssociationModel>(association, new MessageProperties { DeliveryMode = 2, Priority = 9 });
 
-            //            _rabbitMQ.AdvanceBus.PublishAsync(_rabbitMQ.Exchange, _rabbitMQ.RoutingKey, false, messageQueue);
-            //        }
+                        _rabbitMQ.AdvanceBus.PublishAsync(_rabbitMQ.Exchange, _rabbitMQ.RoutingKey, false, messageQueue);
+                    }
 
-            //        var isSynAssociation = associations.Select(x => new IsSynAssociationModel
-            //        {
-            //            AssociationID = x.AssociationId,
-            //            SyncGraphDB = 1
-            //        }).ToList();
+                    var isSynAssociation = associations.Select(x => new IsSynAssociationModel
+                    {
+                        AssociationID = x.AssociationId,
+                        SyncGraphDB = 1
+                    }).ToList();
 
-            //        var xmlData = Core.Utilities.XMLConvert(isSynAssociation);
+                    var xmlData = Core.Utilities.XMLConvert(isSynAssociation);
 
-            //        dataCenterService.UpdateIsSyncByAssociationId(xmlData);
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    var logMessage = new LogMessage(ex.Message)
-            //        .AddSection("Data Info", DatabaseInfoGetters.GetDbExceptionInfo(ex))
-            //        .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
+                    dataCenterService.UpdateIsSyncByAssociationId(xmlData);
+                }
+            }
+            catch (Exception ex)
+            {
+                var logMessage = new LogMessage(ex.Message)
+                    .AddSection("Data Info", DatabaseInfoGetters.GetDbExceptionInfo(ex))
+                    .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
 
-            //    LogService.Error(logMessage);
-            //}
+                LogService.Error(logMessage);
+            }
 
             Console.WriteLine($"Association is updated at {DateTime.Now}");
 

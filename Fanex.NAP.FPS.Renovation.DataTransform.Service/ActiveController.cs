@@ -6,9 +6,6 @@ using Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Interface;
 using Fanex.NAP.FPS.Renovation.Model;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -17,7 +14,7 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service
     public class ActiveController : ApiController
     {
         private readonly IDataTransformService dataTransformService;
-
+        private const int maxDegreeOfParallelism = 3;
         public ActiveController()
         {
             dataTransformService = new DataTransformService();
@@ -26,10 +23,18 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service
         public void Post()
         {
             var requestContent = Request.Content;
-            var jsonContent = requestContent.ReadAsStringAsync();
-            var result = JsonConvert.DeserializeObject<StagingRawTransactionModel>(jsonContent.Result);
+            var jsonContent = requestContent.ReadAsStringAsync().Result;
 
-            Process(result);
+            if (!string.IsNullOrWhiteSpace(jsonContent))
+            {
+                var result = JsonConvert.DeserializeObject<StagingRawTransactionModel>(jsonContent);
+
+                Process(result);
+            }
+            else
+            {
+                LogService.Error("Request content is empty.");
+            }
         }
 
         private void Process(StagingRawTransactionModel model)
@@ -40,19 +45,20 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service
                 {
                     dataTransformService.UnhandleSubscriberAccountProcessing(model.MinStagingTransId, model.MaxStagingTransId);
 
-                    Parallel.Invoke(new ParallelOptions { MaxDegreeOfParallelism = 3 }, () =>
-                    {
-                        dataTransformService.UserAgentProcessing(model.MinStagingTransId, model.MaxStagingTransId);
-                    },
-                     () =>
-                     {
-                         dataTransformService.AccountProcessing(model.MinStagingTransId, model.MaxStagingTransId);
-                     },
-                     () =>
-                     {
-                         dataTransformService.TransactionProcessing(model.MinStagingTransId, model.MaxStagingTransId);
+                    Parallel.Invoke(new ParallelOptions { MaxDegreeOfParallelism = maxDegreeOfParallelism },
+                        () =>
+                        {
+                            dataTransformService.UserAgentProcessing(model.MinStagingTransId, model.MaxStagingTransId);
+                        },
+                        () =>
+                        {
+                            dataTransformService.AccountProcessing(model.MinStagingTransId, model.MaxStagingTransId);
+                        },
+                        () =>
+                        {
+                            dataTransformService.TransactionProcessing(model.MinStagingTransId, model.MaxStagingTransId);
 
-                     });
+                        });
 
                     dataTransformService.DeviceProcessing(model.MinStagingTransId, model.MaxStagingTransId);
 

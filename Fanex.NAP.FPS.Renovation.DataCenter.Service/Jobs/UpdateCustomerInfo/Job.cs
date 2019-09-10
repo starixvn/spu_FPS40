@@ -23,28 +23,28 @@
 
         public Task Execute(IJobExecutionContext context)
         {
-            //try
-            //{
-            //    var newCustomer = dataCenterService.GetNewCustomer(numberOfCustomer);
+            try
+            {
+                var newCustomer = dataCenterService.GetNewCustomer(numberOfCustomer);
 
-            //    if (newCustomer != null && newCustomer.Any())
-            //    {
-            //        var customerInfo = dataCenterService.GetCustomerInfo(newCustomer);
+                if (newCustomer != null && newCustomer.Any())
+                {
+                    var customerInfo = dataCenterService.GetCustomerInfo(newCustomer);
 
-            //        if (customerInfo != null && customerInfo.Any())
-            //        {
-            //            dataCenterService.UpdateCustomerInfo(customerInfo);
-            //        }
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    var logMessage = new LogMessage(ex.Message)
-            //        .AddSection("Data Info", DatabaseInfoGetters.GetDbExceptionInfo(ex))
-            //        .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
+                    if (customerInfo != null && customerInfo.Any())
+                    {
+                        dataCenterService.UpdateCustomerInfo(customerInfo);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                var logMessage = new LogMessage(ex.Message)
+                    .AddSection("Data Info", DatabaseInfoGetters.GetDbExceptionInfo(ex))
+                    .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
 
-            //    LogService.Error(logMessage);
-            //}
+                LogService.Error(logMessage);
+            }
 
             Console.WriteLine($"Customer is updated at {DateTime.Now}");
 

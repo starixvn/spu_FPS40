@@ -136,7 +136,7 @@
                 DeviceCode = deviceInfo.DeviceNo != "N/A" ? deviceInfo.DeviceNo  : string.Empty,
                 LoginName = message.Account,
                 SubscriberName = message.Subscriber,
-                TransDate = Convert.ToDateTime(message.TransDate.ToString("yyyy-MM-dd HH:mm:ss")),
+                TransDate = Convert.ToDateTime(message.TransDate.ToString("yyyy-MM-dd HH:mm:ss.ffff")),
                 IP = message.IP,
                 PluginID = 0,                
                 URL = deviceInfo.HRef != "N/A" ? deviceInfo.HRef : string.Empty,

@@ -23,25 +23,25 @@
 
         public Task Execute(IJobExecutionContext context)
         {
-            //try
-            //{
-            //    var drawUserAgent = userAgent.GetUserAgent(numberOfUserAgent);
+            try
+            {
+                var drawUserAgent = userAgent.GetUserAgent(numberOfUserAgent);
 
-            //    if (drawUserAgent.Any())
-            //    {
-            //        var userAgentJson = JsonConvert.SerializeObject(drawUserAgent);
+                if (drawUserAgent.Any())
+                {
+                    var userAgentJson = JsonConvert.SerializeObject(drawUserAgent);
 
-            //        userAgent.UpdateUserAgent(userAgentJson);
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    var logMessage = new LogMessage(ex.Message)
-            //        .AddSection("Data Info", DatabaseInfoGetters.GetDbExceptionInfo(ex))
-            //        .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
+                    userAgent.UpdateUserAgent(userAgentJson);
+                }
+            }
+            catch (Exception ex)
+            {
+                var logMessage = new LogMessage(ex.Message)
+                    .AddSection("Data Info", DatabaseInfoGetters.GetDbExceptionInfo(ex))
+                    .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
 
-            //    LogService.Error(logMessage);
-            //}
+                LogService.Error(logMessage);
+            }
 
             Console.WriteLine($"User Agent is updated at {DateTime.Now}");
 
