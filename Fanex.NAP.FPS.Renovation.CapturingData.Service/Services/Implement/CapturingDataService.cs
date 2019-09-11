@@ -3,6 +3,7 @@
     using Fanex.DeviceDetector.Factory;
     using Fanex.NAP.FPS.Renovation.Core;
     using Fanex.NAP.FPS.Renovation.Model;
+    using Newtonsoft.Json;
     using System.Collections.Generic;
 
     public class CapturingDataService : ICapturingDataService
@@ -16,7 +17,7 @@
 
         public int InsertTransaction(List<RawTransactionModel> rawTrans)
         {
-            var model = Utilities.XMLConvert(rawTrans);
+            var model = JsonConvert.SerializeObject(rawTrans);
 
            return capturingData.InsertTransaction(model);
         }

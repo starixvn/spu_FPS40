@@ -18,7 +18,7 @@ namespace Fanex.NAP.FPS.Renovation.Criteria
 
         public override string GetSettingKey()
         {
-            return "FPS_DC_DataCenter_Process_UnhandleSubscriberAction";
+            return "FPS_DC_TransformData_UnhandleSubscriberAction";
         }
 
         public override bool IsValid()

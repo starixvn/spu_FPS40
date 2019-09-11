@@ -38,7 +38,16 @@
 
                 if (customerInfo != null && customerInfo.Any())
                 {
-                    InsertRawAccount(customerInfo);                    
+                    var newCustomerInfo = customerInfo.Select(x => {
+                        x.Site = x.Site == "null" ? string.Empty : x.Site;
+                        x.Username = x.Username == "null" ? string.Empty : x.Username;
+                        x.Username2 = x.Site == "null" ? string.Empty : x.Username2;
+                        x.CurrencyName = x.CurrencyName == "null" ? string.Empty : x.CurrencyName;
+
+                        return x;
+                    }).ToList();
+
+                    InsertRawAccount(newCustomerInfo);                    
                 }               
             }
 

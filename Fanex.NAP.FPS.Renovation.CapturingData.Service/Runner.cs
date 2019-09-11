@@ -46,7 +46,7 @@
         protected override void OnStart(string[] args)
         {
             try
-            {              
+            {
                 ConsumerTransactions();
 
                 if (!_timer.Enabled)
@@ -103,11 +103,7 @@
         {
             try
             {
-                Core.Utilities.WriteLog("Q2RawTrans.txt", "Start - " + DateTime.Now.ToString());
-
                 var result = _capturingDataService.InsertTransaction(_transactionList);
-
-                Core.Utilities.WriteLog("Q2RawTrans.txt", "End - " +  DateTime.Now.ToString() + $" -> {_transactionList.Count}");
 
                 if (result != 0)
                 {
@@ -133,17 +129,17 @@
 
             return new RawTransactionModel
             {
-                DeviceCode = deviceInfo.DeviceNo != "N/A" ? deviceInfo.DeviceNo  : string.Empty,
+                DeviceCode = deviceInfo.DeviceNo != "N/A" ? deviceInfo.DeviceNo : string.Empty,
                 LoginName = message.Account,
                 SubscriberName = message.Subscriber,
                 TransDate = Convert.ToDateTime(message.TransDate.ToString("yyyy-MM-dd HH:mm:ss.ffff")),
                 IP = message.IP,
-                PluginID = 0,                
+                PluginID = 0,
                 URL = deviceInfo.HRef != "N/A" ? deviceInfo.HRef : string.Empty,
                 ActionResult = message.ActionResult,
                 UserAgent = deviceInfo.UserAgent != "N/A" ? deviceInfo.UserAgent : string.Empty,
-                FingeringCode = deviceInfo.DeviceFPCode != "N/A" ? deviceInfo.DeviceFPCode : string.Empty,
-                FingeringMoreInfo = deviceInfo.DeviceFPCode != "N/A" ? EncodeCapturedData(deviceInfo) : string.Empty
+                FingerprintCode = deviceInfo.DeviceFPCode != "N/A" ? deviceInfo.DeviceFPCode : string.Empty,
+                FingerprintMoreInfo = deviceInfo.DeviceFPCode != "N/A" ? EncodeCapturedData(deviceInfo) : string.Empty
             };
         }
 
@@ -160,7 +156,7 @@
             return Cipher.Encrypt(string.Format("{0}#{1}#{2}#{3}#{4}",
                 deviceInfo.Battery,
                 deviceInfo.CapturedDate,
-                deviceInfo.OSName,               
+                deviceInfo.OSName,
                 deviceInfo.TimeZone,
                 deviceInfo.LocalIps));
         }

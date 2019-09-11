@@ -15,7 +15,7 @@ namespace Fanex.NAP.FPS.Renovation.Criteria
 
         public override string GetSettingKey()
         {
-            return "FPS_DC_DataCenter_Process_UpdateAccountID";
+            return "FPS_DC_TransformData_Transaction_UpdateAccountID";
         }
 
         public override bool IsValid()

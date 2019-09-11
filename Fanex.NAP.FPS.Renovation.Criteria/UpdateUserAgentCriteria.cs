@@ -15,7 +15,7 @@ namespace Fanex.NAP.FPS.Renovation.Criteria
 
         public override string GetSettingKey()
         {
-            return "FPS_DC_UpdateUserAgent";
+            return "FPS_DC_TransformData_UserAgent_UpdateOSBrowser";
         }
 
         public override bool IsValid()

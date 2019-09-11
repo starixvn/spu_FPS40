@@ -18,7 +18,7 @@ namespace Fanex.NAP.FPS.Renovation.Criteria
 
         public override string GetSettingKey()
         {
-            return "FPS_DC_DataCenter_Process_UserAgent";
+            return "FPS_DC_TransformData_UserAgent_Insert";
         }
 
         public override bool IsValid()

@@ -38,9 +38,9 @@ namespace Fanex.NAP.FPS.Renovation.Model
         public string UserAgent { get; set; }
 
         [XmlAttribute]
-        public string FingeringCode { get; set; }
+        public string FingerprintCode { get; set; }
 
         [XmlAttribute]
-        public string FingeringMoreInfo { get; set; }
+        public string FingerprintMoreInfo { get; set; }
     }
 }

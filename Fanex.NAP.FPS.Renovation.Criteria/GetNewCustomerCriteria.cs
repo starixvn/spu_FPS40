@@ -9,7 +9,7 @@
 
         public override string GetSettingKey()
         {
-            return "FPS_DC_GetAccountForUpdateCustInfo";
+            return "FPS_DC_TransformData_Account_GetForUpdateCustInfo";
         }
 
         public override bool IsValid()

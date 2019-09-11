@@ -56,7 +56,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GetExistingAccountCriteria.cs" />
     <Compile Include="GetUpdatedDeviceListCriteria.cs" />
     <Compile Include="GetUpdatedAccountListCriteria.cs" />
     <Compile Include="GetUserAgentCriteria.cs" />
@@ -70,7 +69,6 @@
     <Compile Include="GetNewCustomerCriteria.cs" />
     <Compile Include="GetIPDBVersionCriteria.cs" />
     <Compile Include="GetTotalAssociationByCustomerCriteria.cs" />
-    <Compile Include="InsertDataCenterTransactionCriteria.cs" />
     <Compile Include="CapturingTransactionCriteria.cs" />
     <Compile Include="GetRawTransactionCriteria.cs" />
     <Compile Include="InsertRawAccountCriteria.cs" />

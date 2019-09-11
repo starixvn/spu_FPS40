@@ -9,22 +9,7 @@
 
     public class DataCenterDataAccess
     {
-        public DataResult InsertTransaction(string xmlTrans)
-        {
-            var repository = new DynamicRepository();
-
-            var criteria = new InsertDataCenterTransactionCriteria
-            {
-                StagingTransXml = xmlTrans
-            };
-
-            var errCode = repository.Execute(criteria);
-
-            return new DataResult
-            {
-                ErrorCode = errCode
-            };
-        }
+        
 
         public List<NewCustomerModel> GetNewCustomer(int size)
         {           

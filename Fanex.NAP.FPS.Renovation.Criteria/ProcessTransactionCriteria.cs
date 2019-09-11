@@ -18,7 +18,7 @@ namespace Fanex.NAP.FPS.Renovation.Criteria
 
         public override string GetSettingKey()
         {
-            return "FPS_DC_DataCenter_Process_Transaction";
+            return "FPSB_DC_TransformData_Transaction_Insert";
         }
 
         public override bool IsValid()

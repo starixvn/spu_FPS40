@@ -61,6 +61,10 @@
       <Project>{91543a37-f0a0-4a4f-8c1d-dbb0bcc75699}</Project>
       <Name>Fanex.NAP.FPS.Renovation.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Fanex.NAP.FPS.Renovation.Model\Fanex.NAP.FPS.Renovation.Model.csproj">
+      <Project>{07F5D4E0-8C77-48A8-BA21-B7F7E0439A64}</Project>
+      <Name>Fanex.NAP.FPS.Renovation.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Fanex.Data">
