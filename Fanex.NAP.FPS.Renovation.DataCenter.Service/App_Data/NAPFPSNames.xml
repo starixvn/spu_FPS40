@@ -2,11 +2,11 @@
 
 <Functions>
   <Function Name="Data Center">
-    <Setting Key="FPS_DC_GetAccountForUpdateCustInfo" SpName="FPS_DC_GetAccountForUpdateCustInfo" DbName="MySQL.FPS_DataCenter"/>
-    <Setting Key="FPS_DC_UpdateCustomerInfo" SpName="FPS_DC_UpdateCustomerInfo" DbName="MySQL.FPS_DataCenter"/>
+    <Setting Key="FPS_DC_TransformData_Account_GetForUpdateCustInfo" SpName="FPS_DC_TransformData_Account_GetForUpdateCustInfo" DbName="MySQL.FPS_DataCenter"/>
+    <Setting Key="FPS_DC_TransformData_Account_UpdateCustomerInfo" SpName="FPS_DC_TransformData_Account_UpdateCustomerInfo" DbName="MySQL.FPS_DataCenter"/>
     <Setting Key="FPS_DC_GetAssociationForGraphDB" SpName="FPS_DC_GetAssociationForGraphDB" DbName="MySQL.FPS_DataCenter"/>
     <Setting Key="FPS_GetCustomerInfo40" SpName="FPS_GetCustomerInfo40" DbName="SQL.FPS_bodb02"/>
-    
+
     <Setting Key="GetAllIP2Location" SpName="GetAllIP2Location" DbName="SQL.IPDB"/>
     <Setting Key="GetAllIPv62Location" SpName="GetAllIPv62Location" DbName="SQL.IPDB" TimeOut="3600"/>
     <Setting Key="GetIPDBVersion" SpName="GetIPDBVersion" DbName="SQL.IPDB"/>
@@ -17,11 +17,17 @@
 
     <Setting Key="FPS_DC_UpdateIsSyncGraphDBByAssociationID" SpName="FPS_DC_UpdateIsSyncGraphDBByAssociationID" DbName="MySQL.FPS_DataCenter" Timeout="600"/>
 
-    <Setting Key="FPS_DC_GetUserAgent" SpName="FPS_DC_GetUserAgent" DbName="MySQL.FPS_DataCenter"/>
-    <Setting Key="FPS_DC_CheckBrowserExist" SpName="FPS_DC_CheckBrowserExist" DbName="MySQL.FPS_DataCenter"/>
-    <Setting Key="FPS_DC_CheckOSExist" SpName="FPS_DC_CheckOSExist" DbName="MySQL.FPS_DataCenter"/>
-    <Setting Key="FPS_DC_InsertBrowser" SpName="FPS_DC_InsertBrowser" DbName="MySQL.FPS_DataCenter"/>
-    <Setting Key="FPS_DC_InsertOS" SpName="FPS_DC_InsertOS" DbName="MySQL.FPS_DataCenter"/>
-    <Setting Key="FPS_DC_UpdateUserAgent" SpName="FPS_DC_UpdateUserAgent" DbName="MySQL.FPS_DataCenter"/>
+    <Setting Key="FPS_DC_TransformData_UserAgent_GetNullBrowserOSList" SpName="FPS_DC_TransformData_UserAgent_GetNullBrowserOSList" DbName="MySQL.FPS_DataCenter"/>
+    <Setting Key="FPS_DC_TransformData_UserAgent_UpdateOSBrowser" SpName="FPS_DC_TransformData_UserAgent_UpdateOSBrowser" DbName="MySQL.FPS_DataCenter"/>
+
+    <Setting Key="FPS_DC_TransformData_Transaction_GetNullAccountIDTransList" SpName="FPS_DC_TransformData_Transaction_GetNullAccountIDTransList" DbName="MySQL.FPS_DataCenter"/>
+    <Setting Key="FPS_DC_TransformData_Transaction_UpdateAccountID" SpName="FPS_DC_TransformData_Transaction_UpdateAccountID" DbName="MySQL.FPS_DataCenter"/>
+
+    <Setting Key="FPS_DC_TransformData_Transaction_GetNullDeviceIDTransList" SpName="FPS_DC_TransformData_Transaction_GetNullDeviceIDTransList" DbName="MySQL.FPS_DataCenter"/>
+    <Setting Key="FPS_DC_TransformData_Transaction_UpdateDeviceID" SpName="FPS_DC_TransformData_Transaction_UpdateDeviceID" DbName="MySQL.FPS_DataCenter"/>
+  </Function>
+  <Function Name="CapturingTransaction">
+    <Setting Key="FPS_RT_TransformData_GetPackage" SpName="FPS_RT_TransformData_GetPackage" DbName="MySQL.FPS_RawTransaction">
+    </Setting>
   </Function>
 </Functions>

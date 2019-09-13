@@ -17,7 +17,7 @@
         private readonly EasyNetQConnector _rabbitMQ;
         private readonly ICapturingDataService _capturingDataService;
         private readonly List<RawTransactionModel> _transactionList;
-        private readonly Timer _timer;
+        private readonly System.Timers.Timer _timer;
         private DateTime _lastInsertTrans;
         public Runner()
         {
@@ -38,7 +38,7 @@
 
             _transactionList = new List<RawTransactionModel>();
 
-            _timer = new Timer();
+            _timer = new System.Timers.Timer();
             _timer.Elapsed += InsertTransactionByTimer;
             _timer.Interval = AppSettings.Interval;
         }
@@ -103,14 +103,10 @@
         {
             try
             {
-                var result = _capturingDataService.InsertTransaction(_transactionList);
+                 _capturingDataService.InsertTransaction(_transactionList);
 
-                if (result != 0)
-                {
-                    _lastInsertTrans = DateTime.Now;
-
-                    _transactionList.Clear();
-                }
+                _lastInsertTrans = DateTime.Now;
+                _transactionList.Clear();
             }
             catch (Exception ex)
             {
@@ -119,6 +115,9 @@
                    .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
 
                 LogService.Error(logMessage);
+
+                _lastInsertTrans = DateTime.Now;
+                _transactionList.Clear();
             }
         }
 
