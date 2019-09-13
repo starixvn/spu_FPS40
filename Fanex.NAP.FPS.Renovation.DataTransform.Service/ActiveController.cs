@@ -46,19 +46,19 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service
                     dataTransformService.UnhandleSubscriberAccountProcessing(model.MinStagingTransId, model.MaxStagingTransId);
 
                     Parallel.Invoke(new ParallelOptions { MaxDegreeOfParallelism = maxDegreeOfParallelism },
-                        () =>
-                        {
-                            dataTransformService.UserAgentProcessing(model.MinStagingTransId, model.MaxStagingTransId);
-                        },
-                        () =>
-                        {
-                            dataTransformService.AccountProcessing(model.MinStagingTransId, model.MaxStagingTransId);
-                        },
-                        () =>
-                        {
-                            dataTransformService.TransactionProcessing(model.MinStagingTransId, model.MaxStagingTransId);
+                    () =>
+                    {
+                        dataTransformService.UserAgentProcessing(model.MinStagingTransId, model.MaxStagingTransId);
+                    },
+                    () =>
+                    {
+                        dataTransformService.AccountProcessing(model.MinStagingTransId, model.MaxStagingTransId);
+                    },
+                    () =>
+                    {
+                        dataTransformService.TransactionProcessing(model.MinStagingTransId, model.MaxStagingTransId);
 
-                        });
+                    });
 
                     dataTransformService.DeviceProcessing(model.MinStagingTransId, model.MaxStagingTransId);
 

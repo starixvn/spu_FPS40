@@ -14,6 +14,6 @@ namespace Fanex.NAP.FPS.Renovation.Model
  
         public string BrowserName { get; set; }
 
-        public string UserAgentCode { get; set; }
+        public long UserAgentId { get; set; }
     }
 }

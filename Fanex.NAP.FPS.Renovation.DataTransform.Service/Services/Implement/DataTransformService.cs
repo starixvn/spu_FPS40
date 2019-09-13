@@ -35,14 +35,14 @@
             if (existingAccounts.Any())
             {
                 var customerInfo = UpdateCustomerInfo(existingAccounts);               
-
+                     
                 if (customerInfo != null && customerInfo.Any())
                 {
                     var newCustomerInfo = customerInfo.Select(x => {
-                        x.Site = x.Site == "null" ? string.Empty : x.Site;
-                        x.Username = x.Username == "null" ? string.Empty : x.Username;
-                        x.Username2 = x.Site == "null" ? string.Empty : x.Username2;
-                        x.CurrencyName = x.CurrencyName == "null" ? string.Empty : x.CurrencyName;
+                        x.Site = x.Site ?? string.Empty;
+                        x.Username = x.Username ?? string.Empty;
+                        x.Username2 = x.Username2 ?? string.Empty;
+                        x.CurrencyName = x.CurrencyName ?? string.Empty;
 
                         return x;
                     }).ToList();

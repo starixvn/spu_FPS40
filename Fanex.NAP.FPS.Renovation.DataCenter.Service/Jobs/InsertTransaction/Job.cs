@@ -38,7 +38,7 @@
 
                 if (stagingTranId.MinStagingTransId != 0 && stagingTranId.MaxStagingTransId != 0)
                 {                   
-                    var stagingTrans = Enumerable.Range(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId).ToList();
+                    var stagingTrans = Enumerable.Range(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId - stagingTranId.MinStagingTransId + 1).ToList();
 
                     var chunkStagingTrans = stagingTrans.Chunk(chunkOfTrans);
 
@@ -56,7 +56,12 @@
 
                           request.AddHeader("Content-type", "application/json");
                           request.AddJsonBody(rangeTrans);
-                          client.Execute(request);
+                          var response = client.Execute(request);
+
+                          if(response.ResponseStatus != ResponseStatus.Completed)
+                          {
+                              LogService.Error(baseUrl + " - " + response.ErrorException.Message);
+                          }
 
                           if (index >= apiUrls.Count)
                           {

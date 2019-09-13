@@ -35,38 +35,49 @@ namespace Fanex.NAP.FPS.Renovation.ConsoleTest
             //    repository.Execute(criteria);
             //});
 
+            var allFiles = Directory.GetFiles(@"D:\IpDB_Data");
 
-            StreamReader sr = new StreamReader(@"D:\ipdb.csv");
-  
-            var ipranges = new List<IpRangeModel>();
-
-            while (!sr.EndOfStream)
+            foreach (var file in allFiles)
             {
-               
-                var strline = sr.ReadLine();
-                var _values = strline.Split(',');
-                Console.WriteLine(_values[0].Trim());
-                if(BigInteger.Parse(_values[0].Trim()) > BigInteger.Parse("55866868554796440974603389092679909376"))
-                {
-                    var rangeIp = new IpRangeModel
-                    {
-                        FromIP = _values[0].Trim(),
-                        ToIP = _values[1].Trim(),
-                        CountryCode = _values[2],
-                        CountryName = _values[3],
-                        Region = _values[4],
-                        City = _values[5],
-                        ISPName = _values[6]
-                    };
+                StreamReader sr = new StreamReader(file);
 
-                    ipranges.Add(rangeIp);                   
+                //var ipranges = new List<IpRangeModel>();
+
+                while (!sr.EndOfStream)
+                {
+
+                    var strline = sr.ReadLine();
+                    var _values = strline.Split('|');
+                    Console.WriteLine(_values[0].Trim());
+                    if (BigInteger.Parse(_values[1].Trim()) == BigInteger.Parse("281473959936872"))
+                    {
+                        //var rangeIp = new IpRangeModel
+                        //{
+                        //    FromIP = _values[0].Trim(),
+                        //    ToIP = _values[1].Trim(),
+                        //    CountryCode = _values[2],
+                        //    CountryName = _values[3],
+                        //    Region = _values[4],
+                        //    City = _values[5],
+                        //    ISPName = _values[6]
+                        //};
+
+                        //ipranges.Add(rangeIp);
+
+                        Console.WriteLine(file);
+                    }
+
                 }
-                
+
+                sr.Close();
+
             }
 
-            SaveCSV(ipranges, DateTime.Now, @"D:\ipdbUpdated129.csv");
 
-            sr.Close();            
+
+            //  SaveCSV(ipranges, DateTime.Now, @"D:\ipdbUpdated129.csv");
+
+
 
             Console.ReadKey();
         }
