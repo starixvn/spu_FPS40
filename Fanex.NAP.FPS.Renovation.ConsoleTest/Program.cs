@@ -17,6 +17,19 @@ namespace Fanex.NAP.FPS.Renovation.ConsoleTest
     {
         static void Main(string[] args)
         {
+
+            var items = new List<int>();
+
+            for (var i= 0; i < 1000; i++)
+            {
+                items.Add(i);
+            }
+
+            
+
+            Console.WriteLine();
+
+
             //DbSettingProviderManager
             //      .StartNewSession()                
             //      .WithMySql()
@@ -35,43 +48,43 @@ namespace Fanex.NAP.FPS.Renovation.ConsoleTest
             //    repository.Execute(criteria);
             //});
 
-            var allFiles = Directory.GetFiles(@"D:\IpDB_Data");
+            //var allFiles = Directory.GetFiles(@"D:\IpDB_Data");
 
-            foreach (var file in allFiles)
-            {
-                StreamReader sr = new StreamReader(file);
+            //foreach (var file in allFiles)
+            //{
+            //    StreamReader sr = new StreamReader(file);
 
-                //var ipranges = new List<IpRangeModel>();
+            //    //var ipranges = new List<IpRangeModel>();
 
-                while (!sr.EndOfStream)
-                {
+            //    while (!sr.EndOfStream)
+            //    {
 
-                    var strline = sr.ReadLine();
-                    var _values = strline.Split('|');
-                    Console.WriteLine(_values[0].Trim());
-                    if (BigInteger.Parse(_values[1].Trim()) == BigInteger.Parse("281473959936872"))
-                    {
-                        //var rangeIp = new IpRangeModel
-                        //{
-                        //    FromIP = _values[0].Trim(),
-                        //    ToIP = _values[1].Trim(),
-                        //    CountryCode = _values[2],
-                        //    CountryName = _values[3],
-                        //    Region = _values[4],
-                        //    City = _values[5],
-                        //    ISPName = _values[6]
-                        //};
+            //        var strline = sr.ReadLine();
+            //        var _values = strline.Split('|');
+            //        Console.WriteLine(_values[0].Trim());
+            //        if (BigInteger.Parse(_values[1].Trim()) == BigInteger.Parse("281473959936872"))
+            //        {
+            //            //var rangeIp = new IpRangeModel
+            //            //{
+            //            //    FromIP = _values[0].Trim(),
+            //            //    ToIP = _values[1].Trim(),
+            //            //    CountryCode = _values[2],
+            //            //    CountryName = _values[3],
+            //            //    Region = _values[4],
+            //            //    City = _values[5],
+            //            //    ISPName = _values[6]
+            //            //};
 
-                        //ipranges.Add(rangeIp);
+            //            //ipranges.Add(rangeIp);
 
-                        Console.WriteLine(file);
-                    }
+            //            Console.WriteLine(file);
+            //        }
 
-                }
+            //    }
 
-                sr.Close();
+            //    sr.Close();
 
-            }
+            //}
 
 
 

@@ -2,19 +2,19 @@
 
 <Functions>
   <Function Name="CapturingTransaction">
-    <Setting Key="FPS_RT_RawTransaction_Process_GetPackage" SpName="FPS_RT_RawTransaction_Process_GetPackage" DbName="MySQL.FPS_RawTransaction">
+    <Setting Key="FPS_RT_TransformData_GetPackage" SpName="FPS_RT_TransformData_GetPackage" DbName="MySQL.FPS_RawTransaction">
     </Setting>
   </Function>
 
   <Function Name="DataCenter">
-    <Setting Key="FPS_DC_DataCenter_Process_Account_Insert" SpName="FPS_DC_DataCenter_Process_Account_Insert" DbName="MySQL.FPS_DataCenter" Timeout="600" />
-    <Setting Key="FPS_DC_DataCenter_Process_Account" SpName="FPS_DC_DataCenter_Process_Account" DbName="MySQL.FPS_DataCenter" Timeout="600" />
-    <Setting Key="FPS_DC_DataCenter_Process_Device" SpName="FPS_DC_DataCenter_Process_Device" DbName="MySQL.FPS_DataCenter" Timeout="600" />
-    <Setting Key="FPS_DC_DataCenter_Process_UserAgent" SpName="FPS_DC_DataCenter_Process_UserAgent" DbName="MySQL.FPS_DataCenter" Timeout="600" />
-    <Setting Key="FPS_DC_DataCenter_Process_Transaction" SpName="FPS_DC_DataCenter_Process_Transaction" DbName="MySQL.FPS_DataCenter" />
-    <Setting Key="FPS_DC_DataCenter_Process_Completed" SpName="FPSA_DC_DataCenter_Process_Completed" DbName="MySQL.FPS_DataCenter" />
+    <Setting Key="FPS_DC_TransformData_Account_Insert" SpName="FPS_DC_TransformData_Account_Insert" DbName="MySQL.FPS_DataCenter" Timeout="600" />
+    <Setting Key="FPS_DC_TransformData_Account_GetFromRawTransaction" SpName="FPS_DC_TransformData_Account_GetFromRawTransaction" DbName="MySQL.FPS_DataCenter" Timeout="600" />
+    <Setting Key="FPS_DC_TransformData_Device" SpName="FPS_DC_TransformData_Device" DbName="MySQL.FPS_DataCenter" Timeout="600" />
+    <Setting Key="FPS_DC_TransformData_UserAgent_Insert" SpName="FPS_DC_TransformData_UserAgent_Insert" DbName="MySQL.FPS_DataCenter" Timeout="600" />
+    <Setting Key="FPS_DC_TransformData_Transaction_Insert" SpName="FPS_DC_TransformData_Transaction_Insert" DbName="MySQL.FPS_DataCenter" />
+    <Setting Key="FPS_RT_TransformData_UpdateCompletedProcess" SpName="FPS_RT_TransformData_UpdateCompletedProcess" DbName="MySQL.FPS_RawTransaction" />
 
-    <Setting Key="FPS_DC_DataCenter_Process_UnhandleSubscriberAction" SpName="FPS_DC_DataCenter_Process_UnhandleSubscriberAction" DbName="MySQL.FPS_DataCenter" Timeout="600" />
+    <Setting Key="FPS_DC_TransformData_UnhandleSubscriberAction" SpName="FPS_DC_TransformData_UnhandleSubscriberAction" DbName="MySQL.FPS_DataCenter" Timeout="600" />
 
     <Setting Key="FPS_DC_CheckAccountExist" SpName="FPS_DC_CheckAccountExist" DbName="MySQL.FPS_DataCenter" />
     <Setting Key="FPS_GetCustomerInfo40" SpName="FPS_GetCustomerInfo40" DbName="SQL.FPS_bodb02"/>

@@ -17,8 +17,8 @@
         }  
 
         public void AccountProcessing(int fromId, int toId)
-        {          
-            var existingAccounts = AccountProcess(fromId, toId);            
+        {
+            var existingAccounts = AccountProcess(fromId, toId);
 
             if (existingAccounts.Any())
             {
@@ -38,7 +38,8 @@
 
                     var customerInfoMapping = existingAccounts
                         .Where(x => !newCustomerInfo.Any(a => a.LoginName == x.LoginName || a.LoginNameWithPrefix == x.LoginNameWithPrefix))
-                        .Select(s => new CustomerInfoModel {
+                        .Select(s => new CustomerInfoModel
+                        {
                             AccountID = s.AccountID,
                             CreatedDate = s.CreatedDate,
                             CurrencyID = 0,
@@ -59,8 +60,8 @@
 
                     var latestCustomerInfo = newCustomerInfo.Union(customerInfoMapping).ToList();
 
-                    InsertRawAccount(latestCustomerInfo);                    
-                }               
+                    InsertRawAccount(latestCustomerInfo);
+                }
             }
 
             System.Console.WriteLine("3.Account Process");
