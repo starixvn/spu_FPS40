@@ -12,5 +12,7 @@ namespace Fanex.NAP.FPS.Renovation.Model
         public int MinStagingTransId { get; set; }
 
         public int MaxStagingTransId { get; set; }
+
+        public string APIUrl { get; set; }
     }
 }

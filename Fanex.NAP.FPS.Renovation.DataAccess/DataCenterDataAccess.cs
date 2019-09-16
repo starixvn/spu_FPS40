@@ -8,9 +8,7 @@
     using System.Linq;
 
     public class DataCenterDataAccess
-    {
-        
-
+    {       
         public List<NewCustomerModel> GetNewCustomer(int size)
         {           
             var criteria = new GetNewCustomerCriteria

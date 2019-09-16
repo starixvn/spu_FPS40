@@ -5,27 +5,20 @@
     using Fanex.Logging.Extensions.Database;
     using Fanex.NAP.FPS.Renovation.Core;
     using Fanex.NAP.FPS.Renovation.Model;
-    using Newtonsoft.Json;
     using Quartz;
     using RestSharp;
     using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Net.Http;
-    using System.Text;
     using System.Threading.Tasks;
 
     [DisallowConcurrentExecution]
     public class Job : IJob
     {
         private readonly Services.Interface.IDataTransformService dataTransformService;
-        private const int numberOfRawTrans = 1000;
-        private const int chunkOfTrans = numberOfRawTrans / 10;
+        private const int numberOfRawTrans = 100;
         public Job()
         {
             dataTransformService = new Services.Implement.DataTransformService();
-
-
         }
 
         public Task Execute(IJobExecutionContext context)
@@ -33,29 +26,29 @@
             try
             {
                 var apiUrls = AppSettings.SelfHostUrl.Split(';').ToList();
-                var index = 0;
-                var stagingTranId = dataTransformService.GetStagingRawTransaction(0, numberOfRawTrans);
 
                 if (stagingTranId.MinStagingTransId != 0 && stagingTranId.MaxStagingTransId != 0)
                 {                   
                     var stagingTrans = Enumerable.Range(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId - stagingTranId.MinStagingTransId + 1).ToList();
+                    {
+                        item.APIUrl = apiUrls[index];
 
-                    var chunkStagingTrans = stagingTrans.Chunk(chunkOfTrans);
+                        return item;
+                    });
 
-                    _ = Parallel.ForEach(chunkStagingTrans, new ParallelOptions { MaxDegreeOfParallelism = apiUrls.Count }, x =>
-                      {
-                          var rangeTrans = new StagingRawTransactionModel
-                          {
-                              MinStagingTransId = x.Min(),
-                              MaxStagingTransId = x.Max()
-                          };
-                          
-                          var baseUrl = apiUrls.ElementAt(index >= apiUrls.Count ? 0 : index);
-                          var client = new RestClient(new Uri(baseUrl));
-                          var request = new RestRequest("api/active", Method.POST);
+                    _ = Parallel.ForEach(stagingTranIdAPI, new ParallelOptions { MaxDegreeOfParallelism = stagingTranIdAPI.Count() }, x =>
+                       {
+                           var rangeTrans = new StagingRawTransactionModel
+                           {
+                               MinStagingTransId = x.MinStagingTransId,
+                               MaxStagingTransId = x.MaxStagingTransId
+                           };
 
-                          request.AddHeader("Content-type", "application/json");
-                          request.AddJsonBody(rangeTrans);
+                           var client = new RestClient(new Uri(x.APIUrl));
+                           var request = new RestRequest("api/active", Method.POST);
+
+                           request.AddHeader("Content-type", "application/json");
+                           request.AddJsonBody(rangeTrans);
                           var response = client.Execute(request);
 
                           if(response.ResponseStatus != ResponseStatus.Completed)
@@ -63,15 +56,13 @@
                               LogService.Error(baseUrl + " - " + response.ErrorException.Message);
                           }
 
-                          if (index >= apiUrls.Count)
-                          {
-                              index = 0;
-                          }
-                          else
-                          {
-                              index++;
-                          }
-                      });
+                           var response = client.Execute(request);
+
+                           if (response.ResponseStatus != ResponseStatus.Completed)
+                           {
+                               LogService.Error(x.APIUrl + " - " + response.ErrorException.Message);
+                           }
+                       });
                 }
             }
             catch (Exception ex)

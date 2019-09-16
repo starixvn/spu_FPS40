@@ -3,9 +3,7 @@
 namespace Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Interface
 {
     interface IDataTransformService
-    {
-        StagingRawTransactionModel GetStagingRawTransaction(int isProcessed, int numberOfTicket);
-
+    {        
         void AccountProcessing(int fromId, int toId);
 
         void DeviceProcessing(int fromId, int toId);

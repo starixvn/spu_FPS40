@@ -14,7 +14,7 @@
     using Fanex.NAP.FPS.Renovation.Model;
 
     public static class Utilities
-    {       
+    {
         public static string GetURLFromDeviceCode(string di)
         {
             if (string.IsNullOrWhiteSpace(di))
@@ -53,7 +53,7 @@
             var emptyNamespaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
 
             var settings = new XmlWriterSettings { Indent = true, OmitXmlDeclaration = true };
-                      
+
 
             var serializer = new XmlSerializer(data.GetType(), new XmlRootAttribute("root"));
 
@@ -66,8 +66,8 @@
                     return stringWriter.ToString();
                 }
             }
-        }                
-        
+        }
+
         public static IEnumerable<IEnumerable<TValue>> Chunk<TValue>(
             this IEnumerable<TValue> values,
             Int32 chunkSize)
@@ -76,7 +76,7 @@
                 .Select((v, i) => new { v, groupIndex = i / chunkSize })
                 .GroupBy(x => x.groupIndex)
                 .Select(g => g.Select(x => x.v));
-        }
+        }        
 
         public static void WriteLog(string filename, string content)
         {

@@ -10,23 +10,11 @@
 
     class DataTransformService : IDataTransformService
     {
-        private readonly DataAccess.StagingRawTransactionDataAccess stagingRawTransaction;
         private readonly DataAccess.DataCenterDataAccess dataCenter;
         public DataTransformService()
         {
-            stagingRawTransaction = new DataAccess.StagingRawTransactionDataAccess();
-
             dataCenter = new DataCenterDataAccess();
-        }    
-
-        public StagingRawTransactionModel GetStagingRawTransaction(int isProcessed, int numberOfTicket)
-        {            
-            var result =  stagingRawTransaction.GetStagingRawTrans(isProcessed, numberOfTicket);
-
-            System.Console.WriteLine("1.Get Raw Transaction");
-
-            return result;
-        }
+        }  
 
         public void AccountProcessing(int fromId, int toId)
         {
@@ -35,7 +23,7 @@
             if (existingAccounts.Any())
             {
                 var customerInfo = UpdateCustomerInfo(existingAccounts);
-
+                                     
                 if (customerInfo != null && customerInfo.Any())
                 {
                     var newCustomerInfo = customerInfo.Select(x =>
