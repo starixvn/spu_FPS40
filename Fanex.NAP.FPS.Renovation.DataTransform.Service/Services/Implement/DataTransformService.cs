@@ -10,23 +10,11 @@
 
     class DataTransformService : IDataTransformService
     {
-        private readonly DataAccess.StagingRawTransactionDataAccess stagingRawTransaction;
         private readonly DataAccess.DataCenterDataAccess dataCenter;
         public DataTransformService()
         {
-            stagingRawTransaction = new DataAccess.StagingRawTransactionDataAccess();
-
             dataCenter = new DataCenterDataAccess();
-        }    
-
-        public StagingRawTransactionModel GetStagingRawTransaction(int isProcessed, int numberOfTicket)
-        {            
-            var result =  stagingRawTransaction.GetStagingRawTrans(isProcessed, numberOfTicket);
-
-            System.Console.WriteLine("1.Get Raw Transaction");
-
-            return result;
-        }
+        }  
 
         public void AccountProcessing(int fromId, int toId)
         {          
@@ -34,11 +22,12 @@
 
             if (existingAccounts.Any())
             {
-                var customerInfo = UpdateCustomerInfo(existingAccounts);               
-                     
+                var customerInfo = UpdateCustomerInfo(existingAccounts);    
+                                     
                 if (customerInfo != null && customerInfo.Any())
                 {
-                    var newCustomerInfo = customerInfo.Select(x => {
+                    var newCustomerInfo = customerInfo.Select(x =>
+                    {
                         x.Site = x.Site ?? string.Empty;
                         x.Username = x.Username ?? string.Empty;
                         x.Username2 = x.Username2 ?? string.Empty;
@@ -47,7 +36,30 @@
                         return x;
                     }).ToList();
 
-                    InsertRawAccount(newCustomerInfo);                    
+                    var customerInfoMapping = existingAccounts
+                        .Where(x => !newCustomerInfo.Any(a => a.LoginName == x.LoginName || a.LoginNameWithPrefix == x.LoginNameWithPrefix))
+                        .Select(s => new CustomerInfoModel {
+                            AccountID = s.AccountID,
+                            CreatedDate = s.CreatedDate,
+                            CurrencyID = 0,
+                            CurrencyName = string.Empty,
+                            CustID = 0,
+                            IsDeposit = s.IsDeposit,
+                            LoginName = s.LoginName,
+                            LoginNameWithPrefix = s.LoginNameWithPrefix,
+                            RoleID = 0,
+                            Site = string.Empty,
+                            SubAccId = 0,
+                            SubscriberID = s.SubscriberID,
+                            SubscriberName = s.SubscriberName,
+                            Username = string.Empty,
+                            Username2 = string.Empty
+                        })
+                        .ToList();
+
+                    var latestCustomerInfo = newCustomerInfo.Union(customerInfoMapping).ToList();
+
+                    InsertRawAccount(latestCustomerInfo);                    
                 }               
             }
 

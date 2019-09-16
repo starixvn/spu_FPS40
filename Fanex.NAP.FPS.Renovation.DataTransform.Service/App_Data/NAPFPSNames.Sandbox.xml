@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <Functions>
-  <Function Name="CapturingTransaction">
-    <Setting Key="FPS_RT_TransformData_GetPackage" SpName="FPSB_RT_TransformData_GetPackage" DbName="MySQL.FPS_RawTransaction">
-    </Setting>
-  </Function>
 
   <Function Name="DataCenter">
     <Setting Key="FPS_DC_TransformData_Account_Insert" SpName="FPSB_DC_TransformData_Account_Insert" DbName="MySQL.FPS_DataCenter" Timeout="600" />
