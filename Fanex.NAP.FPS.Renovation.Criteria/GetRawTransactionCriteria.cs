@@ -17,9 +17,6 @@ namespace Fanex.NAP.FPS.Renovation.Criteria
         [SpParam(SqlParamName = "ip_NoOfTickets")]
         public int NumberOfTickets { get; set; }
 
-        [SpParam(SqlParamName = "ip_NoOfBatch")]
-        public int NumberOfBatch { get; set; }
-
         public override string GetSettingKey()
         {
             return "FPS_RT_TransformData_GetPackage";

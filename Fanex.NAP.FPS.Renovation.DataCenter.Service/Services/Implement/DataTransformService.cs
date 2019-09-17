@@ -13,9 +13,9 @@
             stagingRawTransaction = new DataAccess.StagingRawTransactionDataAccess();
         }
 
-        public List<StagingRawTransactionModel> GetStagingRawTransaction(int isProcessed, int numberOfTicket, int numberOfBatch)
+        public StagingRawTransactionModel GetStagingRawTransaction(int isProcessed, int numberOfTicket)
         {
-            var result = stagingRawTransaction.GetStagingRawTrans(isProcessed, numberOfTicket, numberOfBatch);
+            var result = stagingRawTransaction.GetStagingRawTrans(isProcessed, numberOfTicket);
 
             System.Console.WriteLine("1.Get Raw Transaction");
 

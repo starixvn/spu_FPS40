@@ -15,7 +15,8 @@
     public class Job : IJob
     {
         private readonly Services.Interface.IDataTransformService dataTransformService;
-        private const int numberOfRawTrans = 100;
+        private const int numberOfRawTrans = 1000;
+
         public Job()
         {
             dataTransformService = new Services.Implement.DataTransformService();
@@ -26,43 +27,42 @@
             try
             {
                 var apiUrls = AppSettings.SelfHostUrl.Split(';').ToList();
+                var stagingTranId = dataTransformService.GetStagingRawTransaction(0, numberOfRawTrans);
 
                 if (stagingTranId.MinStagingTransId != 0 && stagingTranId.MaxStagingTransId != 0)
-                {                   
+                {
                     var stagingTrans = Enumerable.Range(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId - stagingTranId.MinStagingTransId + 1).ToList();
-                    {
-                        item.APIUrl = apiUrls[index];
 
-                        return item;
-                    });
+                    var chunkStagingTrans = stagingTrans.Split(apiUrls.Count);
 
-                    _ = Parallel.ForEach(stagingTranIdAPI, new ParallelOptions { MaxDegreeOfParallelism = stagingTranIdAPI.Count() }, x =>
-                       {
-                           var rangeTrans = new StagingRawTransactionModel
-                           {
-                               MinStagingTransId = x.MinStagingTransId,
-                               MaxStagingTransId = x.MaxStagingTransId
-                           };
+                    _ = Parallel.ForEach(chunkStagingTrans, new ParallelOptions { MaxDegreeOfParallelism = apiUrls.Count }, (v, s, i) =>
+                     {
+                         var chunkTrans = v.Chunk(100).ToList();
+                         var baseUrl = apiUrls.ElementAt(Convert.ToInt32(i));
 
-                           var client = new RestClient(new Uri(x.APIUrl));
-                           var request = new RestRequest("api/active", Method.POST);
+                         _ = Parallel.ForEach(chunkTrans, new ParallelOptions { MaxDegreeOfParallelism = 3 }, x =>
+                         {
+                             var rangeTrans = new StagingRawTransactionModel
+                             {
+                                 MinStagingTransId = x.Min(),
+                                 MaxStagingTransId = x.Max()
+                             };
 
-                           request.AddHeader("Content-type", "application/json");
-                           request.AddJsonBody(rangeTrans);
-                          var response = client.Execute(request);
+                             var client = new RestClient(new Uri(baseUrl));
+                             var request = new RestRequest("api/active", Method.POST);
 
-                          if(response.ResponseStatus != ResponseStatus.Completed)
-                          {
-                              LogService.Error(baseUrl + " - " + response.ErrorException.Message);
-                          }
+                             request.AddHeader("Content-type", "application/json");
+                             request.AddJsonBody(rangeTrans);
 
-                           var response = client.Execute(request);
+                             var response = client.Execute(request);
 
-                           if (response.ResponseStatus != ResponseStatus.Completed)
-                           {
-                               LogService.Error(x.APIUrl + " - " + response.ErrorException.Message);
-                           }
-                       });
+                             if (response.ResponseStatus != ResponseStatus.Completed)
+                             {
+                                 LogService.Error(baseUrl + " - " + response.ErrorException.Message);
+                             }
+                         });
+                     }
+                     );
                 }
             }
             catch (Exception ex)

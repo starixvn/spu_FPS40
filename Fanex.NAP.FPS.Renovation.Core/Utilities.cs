@@ -76,7 +76,16 @@
                 .Select((v, i) => new { v, groupIndex = i / chunkSize })
                 .GroupBy(x => x.groupIndex)
                 .Select(g => g.Select(x => x.v));
-        }        
+        }
+
+        public static IEnumerable<IEnumerable<T>> Split<T>(this IEnumerable<T> list, int parts)
+        {
+            int i = 0;
+            var splits = from item in list
+                         group item by i++ % parts into part
+                         select part.AsEnumerable();
+            return splits;
+        }
 
         public static void WriteLog(string filename, string content)
         {

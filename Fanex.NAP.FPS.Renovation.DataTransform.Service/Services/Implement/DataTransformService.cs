@@ -23,45 +23,42 @@
             if (existingAccounts.Any())
             {
                 var customerInfo = UpdateCustomerInfo(existingAccounts);
-                                     
-                if (customerInfo != null && customerInfo.Any())
+
+                var newCustomerInfo = customerInfo.Select(x =>
                 {
-                    var newCustomerInfo = customerInfo.Select(x =>
+                    x.Site = x.Site ?? string.Empty;
+                    x.Username = x.Username ?? string.Empty;
+                    x.Username2 = x.Username2 ?? string.Empty;
+                    x.CurrencyName = x.CurrencyName ?? string.Empty;
+
+                    return x;
+                }).ToList();
+
+                var customerInfoMapping = existingAccounts
+                    .Where(x => !newCustomerInfo.Any(a => a.LoginName == x.LoginName || a.LoginNameWithPrefix == x.LoginNameWithPrefix))
+                    .Select(s => new CustomerInfoModel
                     {
-                        x.Site = x.Site ?? string.Empty;
-                        x.Username = x.Username ?? string.Empty;
-                        x.Username2 = x.Username2 ?? string.Empty;
-                        x.CurrencyName = x.CurrencyName ?? string.Empty;
+                        AccountID = s.AccountID,
+                        CreatedDate = s.CreatedDate,
+                        CurrencyID = 0,
+                        CurrencyName = string.Empty,
+                        CustID = 0,
+                        IsDeposit = s.IsDeposit,
+                        LoginName = s.LoginName,
+                        LoginNameWithPrefix = s.LoginNameWithPrefix,
+                        RoleID = 0,
+                        Site = string.Empty,
+                        SubAccId = 0,
+                        SubscriberID = s.SubscriberID,
+                        SubscriberName = s.SubscriberName,
+                        Username = string.Empty,
+                        Username2 = string.Empty
+                    })
+                    .ToList();
 
-                        return x;
-                    }).ToList();
+                var latestCustomerInfo = newCustomerInfo.Union(customerInfoMapping).ToList();
 
-                    var customerInfoMapping = existingAccounts
-                        .Where(x => !newCustomerInfo.Any(a => a.LoginName == x.LoginName || a.LoginNameWithPrefix == x.LoginNameWithPrefix))
-                        .Select(s => new CustomerInfoModel
-                        {
-                            AccountID = s.AccountID,
-                            CreatedDate = s.CreatedDate,
-                            CurrencyID = 0,
-                            CurrencyName = string.Empty,
-                            CustID = 0,
-                            IsDeposit = s.IsDeposit,
-                            LoginName = s.LoginName,
-                            LoginNameWithPrefix = s.LoginNameWithPrefix,
-                            RoleID = 0,
-                            Site = string.Empty,
-                            SubAccId = 0,
-                            SubscriberID = s.SubscriberID,
-                            SubscriberName = s.SubscriberName,
-                            Username = string.Empty,
-                            Username2 = string.Empty
-                        })
-                        .ToList();
-
-                    var latestCustomerInfo = newCustomerInfo.Union(customerInfoMapping).ToList();
-
-                    InsertRawAccount(latestCustomerInfo);
-                }
+                InsertRawAccount(latestCustomerInfo);
             }
 
             System.Console.WriteLine("3.Account Process");
