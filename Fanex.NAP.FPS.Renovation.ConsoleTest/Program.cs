@@ -22,7 +22,8 @@ namespace Fanex.NAP.FPS.Renovation.ConsoleTest
                          group item by i++ % parts into part
                          select part.AsEnumerable();
             return splits;
-        }
+        }     
+
     }
 
     class Program
@@ -35,9 +36,9 @@ namespace Fanex.NAP.FPS.Renovation.ConsoleTest
             for (var i = 0; i < 10; i++)
             {
                 items.Add(i);
-            }
+            }            
 
-            var result = items.Split(1);
+            var result = items.Partition(3);
 
 
 

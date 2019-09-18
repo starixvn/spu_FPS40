@@ -1,21 +1,12 @@
 ﻿namespace Fanex.NAP.FPS.Renovation.DataTransform.Service
 {
     using Fanex.Logging;
-    using Fanex.Logging.Extensions;
-    using Fanex.Logging.Extensions.Database;
     using Fanex.NAP.FPS.Renovation.Core;
-    using Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Implement;
-    using Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Interface;
     using Microsoft.Owin.Hosting;
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
-    using System.Net;
-    using System.Net.Sockets;
     using System.ServiceProcess;
-    using System.Threading.Tasks;
-    using System.Timers;
 
     public partial class Runner : ServiceBase
     {

@@ -87,6 +87,40 @@
             return splits;
         }
 
+        public static IEnumerable<List<T>> Partition<T>(this IList<T> source, Int32 size)
+        {
+            for (int i = 0; i < (source.Count / size) + (source.Count % size > 0 ? 1 : 0); i++)
+                yield return new List<T>(source.Skip(size * i).Take(size));
+        }
+
+        public static List<T>[] Partition<T>(List<T> list, int totalPartitions)
+        {
+            if (list == null)
+                throw new ArgumentNullException("list");
+
+            if (totalPartitions < 1)
+                throw new ArgumentOutOfRangeException("totalPartitions");
+
+            List<T>[] partitions = new List<T>[totalPartitions];
+
+            int maxSize = (int)Math.Ceiling(list.Count / (double)totalPartitions);
+            int k = 0;
+
+            for (int i = 0; i < partitions.Length; i++)
+            {
+                partitions[i] = new List<T>();
+                for (int j = k; j < k + maxSize; j++)
+                {
+                    if (j >= list.Count)
+                        break;
+                    partitions[i].Add(list[j]);
+                }
+                k += maxSize;
+            }
+
+            return partitions;
+        }
+
         public static void WriteLog(string filename, string content)
         {
             var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filename);

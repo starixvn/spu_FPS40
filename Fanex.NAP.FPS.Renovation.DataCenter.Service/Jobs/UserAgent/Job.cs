@@ -3,7 +3,6 @@
     using Fanex.Logging;
     using Fanex.Logging.Extensions;
     using Fanex.Logging.Extensions.Database;
-    using Fanex.NAP.FPS.Renovation.Core;
     using Newtonsoft.Json;
     using Quartz;
     using System;

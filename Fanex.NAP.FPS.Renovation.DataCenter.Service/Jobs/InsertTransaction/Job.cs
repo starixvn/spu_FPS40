@@ -9,6 +9,7 @@
     using RestSharp;
     using System;
     using System.Linq;
+    using System.Threading;
     using System.Threading.Tasks;
 
     [DisallowConcurrentExecution]
@@ -33,19 +34,21 @@
                 {
                     var stagingTrans = Enumerable.Range(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId - stagingTranId.MinStagingTransId + 1).ToList();
 
-                    var chunkStagingTrans = stagingTrans.Split(apiUrls.Count);
+                    var chunk = stagingTrans.Count / apiUrls.Count;
+
+                    var chunkStagingTrans = stagingTrans.Chunk(chunk);
 
                     _ = Parallel.ForEach(chunkStagingTrans, new ParallelOptions { MaxDegreeOfParallelism = apiUrls.Count }, (v, s, i) =>
                      {
                          var chunkTrans = v.Chunk(100).ToList();
-                         var baseUrl = apiUrls.ElementAt(Convert.ToInt32(i));
+                         var baseUrl = apiUrls.ElementAt(i >= apiUrls.Count ? 0 : Convert.ToInt32(i));
 
-                         _ = Parallel.ForEach(chunkTrans, new ParallelOptions { MaxDegreeOfParallelism = 3 }, x =>
+                         foreach (var trans in chunkTrans)
                          {
                              var rangeTrans = new StagingRawTransactionModel
                              {
-                                 MinStagingTransId = x.Min(),
-                                 MaxStagingTransId = x.Max()
+                                 MinStagingTransId = trans.Min(),
+                                 MaxStagingTransId = trans.Max()
                              };
 
                              var client = new RestClient(new Uri(baseUrl));
@@ -60,9 +63,10 @@
                              {
                                  LogService.Error(baseUrl + " - " + response.ErrorException.Message);
                              }
-                         });
-                     }
-                     );
+
+                             Thread.Sleep(5);
+                         }
+                     });
                 }
             }
             catch (Exception ex)
