@@ -14,7 +14,6 @@ namespace Fanex.NAP.FPS.Renovation.DataPortal.API
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
 
-
             DbSessionFactory.Init()
                 .RegisterConfigs("GraphDB")
                 .RegisterXmlFile("~/App_Data_Graph")

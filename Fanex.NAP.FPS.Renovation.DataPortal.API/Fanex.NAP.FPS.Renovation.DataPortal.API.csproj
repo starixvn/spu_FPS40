@@ -178,6 +178,7 @@
     <Content Include="App_Data_Graph\scripts\GetAssociationNLevelByCustId.scrypt" />
     <Content Include="App_Data_Graph\scripts\GetAssociationOneLevelByCustId.scrypt" />
     <Content Include="Fanex.NAP.FPS.Renovation.DataPortal.API.ruleset" />
+    <Content Include="App_Data_Graph\scripts\GetShortestPath.scrypt" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

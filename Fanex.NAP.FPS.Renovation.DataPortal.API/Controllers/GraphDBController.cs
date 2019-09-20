@@ -25,5 +25,10 @@ namespace Fanex.NAP.FPS.Renovation.DataPortal.API.Controllers
             return DbSessionFactory.Execute<Customer>("GetAssociationNLevelByCustId", new { CustId = custId }).Data.ToList();
         }
 
+
+        public string GetShortestPath()
+        {
+            return DbSessionFactory.Execute<string>("GetShortestPath").Data.FirstOrDefault();
+        }
     }
 }

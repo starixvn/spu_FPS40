@@ -1,0 +1,2 @@
+﻿match p = shortestpath((:Customer{CustId: 22971808 })-[:USED*]-(:Customer{CustId: 4677919 }))
+return p
