@@ -8,66 +8,55 @@
     using Quartz;
     using RestSharp;
     using System;
+    using System.Collections.Generic;
     using System.Linq;
-    using System.Threading;
     using System.Threading.Tasks;
 
     [DisallowConcurrentExecution]
     public class Job : IJob
     {
         private readonly Services.Interface.IDataTransformService dataTransformService;
-        private const int numberOfRawTrans = 1000;
+        private const int numberOfRawTrans = 100;
 
         public Job()
         {
             dataTransformService = new Services.Implement.DataTransformService();
         }
 
-        public Task Execute(IJobExecutionContext context)
+        public async Task Execute(IJobExecutionContext context)
         {
             try
             {
                 var apiUrls = AppSettings.SelfHostUrl.Split(';').ToList();
-                var stagingTranId = dataTransformService.GetStagingRawTransaction(0, numberOfRawTrans);
 
-                if (stagingTranId.MinStagingTransId != 0 && stagingTranId.MaxStagingTransId != 0)
+                var stagingTranIds = dataTransformService.GetStagingRawTransaction(0, numberOfRawTrans, apiUrls.Count);
+
+                if (stagingTranIds.Any())
                 {
-                    var stagingTrans = Enumerable.Range(stagingTranId.MinStagingTransId, stagingTranId.MaxStagingTransId - stagingTranId.MinStagingTransId + 1).ToList();
+                    var stagingTrans = stagingTranIds.Select((v, i) =>
+                    {
+                        v.APIUrl = i > apiUrls.Count ? apiUrls[0] : apiUrls[i];
 
-                    var chunk = stagingTrans.Count / apiUrls.Count;
+                        return v;
+                    });
 
-                    var chunkStagingTrans = stagingTrans.Chunk(chunk);
+                    var tasks = new List<Task>();
 
-                    _ = Parallel.ForEach(chunkStagingTrans, new ParallelOptions { MaxDegreeOfParallelism = apiUrls.Count }, (v, s, i) =>
-                     {
-                         var chunkTrans = v.Chunk(100).ToList();
-                         var baseUrl = apiUrls.ElementAt(i >= apiUrls.Count ? 0 : Convert.ToInt32(i));
+                    foreach(var trans in stagingTrans)
+                    {
+                        var task = Task.Run(() =>
+                        {
+                           return Executing(trans);
+                        });
 
-                         foreach (var trans in chunkTrans)
-                         {
-                             var rangeTrans = new StagingRawTransactionModel
-                             {
-                                 MinStagingTransId = trans.Min(),
-                                 MaxStagingTransId = trans.Max()
-                             };
+                        await Task.Delay(10);
 
-                             var client = new RestClient(new Uri(baseUrl));
-                             var request = new RestRequest("api/active", Method.POST);
+                        tasks.Add(task);                        
+                    }
 
-                             request.AddHeader("Content-type", "application/json");
-                             request.AddJsonBody(rangeTrans);
-
-                             var response = client.Execute(request);
-
-                             if (response.ResponseStatus != ResponseStatus.Completed)
-                             {
-                                 LogService.Error(baseUrl + " - " + response.ErrorException.Message);
-                             }
-
-                             Thread.Sleep(5);
-                         }
-                     });
+                    await Task.WhenAll(tasks.ToArray());                   
                 }
+
             }
             catch (Exception ex)
             {
@@ -76,9 +65,19 @@
                     .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
 
                 LogService.Error(logMessage);
-            }
+            }            
+        }
 
-            return Task.FromResult(true);
+        private static async Task<IRestResponse> Executing(StagingRawTransactionModel trans)
+        {            
+
+            var client = new RestClient(new Uri(trans.APIUrl));
+            var request = new RestRequest("api/active", Method.POST);
+
+            request.AddHeader("Content-type", "application/json");
+            request.AddJsonBody(trans);
+
+            return await client.ExecuteTaskAsync(request);           
         }
     }
 }

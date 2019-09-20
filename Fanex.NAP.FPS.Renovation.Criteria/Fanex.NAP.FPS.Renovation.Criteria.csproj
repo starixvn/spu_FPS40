@@ -59,6 +59,7 @@
     <Compile Include="GetUpdatedDeviceListCriteria.cs" />
     <Compile Include="GetUpdatedAccountListCriteria.cs" />
     <Compile Include="GetUserAgentCriteria.cs" />
+    <Compile Include="InsertFingerPrintCriteria.cs" />
     <Compile Include="InsertIPTableLogCriteria.cs" />
     <Compile Include="GetAssociationByCustomerCriteria.cs" />
     <Compile Include="GetAssociationForGraphDBCriteria.cs" />

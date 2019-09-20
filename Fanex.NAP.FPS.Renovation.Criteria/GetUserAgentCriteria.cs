@@ -10,7 +10,7 @@ namespace Fanex.NAP.FPS.Renovation.Criteria
 {
     public class GetUserAgentCriteria : CriteriaBase
     {
-        [SpParam(SqlParamName = "in_size")]
+        [SpParam(SqlParamName = "ip_size")]
         public int Size { get; set; }
 
         public override string GetSettingKey()

@@ -294,5 +294,23 @@
                 ErrorCode = errCode
             };
         }
+
+        public DataResult InsertFingerPrint(int fromId, int toId)
+        {
+            var repository = new DynamicRepository();
+
+            var criteria = new InsertFingerPrintCriteria
+            {
+                FromStagingTransId = fromId,
+                ToStagingTransId = toId
+            };
+
+            var errCode = repository.Execute(criteria);
+
+            return new DataResult
+            {
+                ErrorCode = errCode
+            };
+        }
     }
 }

@@ -12,17 +12,18 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
 {
     public class StagingRawTransactionDataAccess
     {
-        public StagingRawTransactionModel GetStagingRawTrans(int isProcessed = 0, int numberOfTicket = 100 )
+        public List<StagingRawTransactionModel> GetStagingRawTrans(int isProcessed, int numberOfTicket, int numberOfBatch)
         {
             var criteria = new GetRawTransactionCriteria
             {
                 IsProcessed = isProcessed,
-                NumberOfTickets = numberOfTicket
+                NumberOfTickets = numberOfTicket,
+                NumberOfBatch = numberOfBatch
             };
 
             using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                return db.QueryEntity<StagingRawTransactionModel>(criteria);
+                return db.Query<StagingRawTransactionModel>(criteria).ToList();
             }
         }        
     }

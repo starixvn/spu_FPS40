@@ -4,6 +4,7 @@ using Fanex.Logging.Extensions.Database;
 using Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Implement;
 using Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Interface;
 using Fanex.NAP.FPS.Renovation.Model;
+using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service
             dataTransformService = new DataTransformService();
         }
 
-        public void Post()
+        public bool Post()
         {
             var requestContent = Request.Content;
             var jsonContent = requestContent.ReadAsStringAsync().Result;
@@ -29,20 +30,24 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service
             {
                 var result = JsonConvert.DeserializeObject<StagingRawTransactionModel>(jsonContent);
 
-                Process(result);
+                return Process(result);
             }
             else
             {
                 LogService.Error("Request content is empty.");
             }
+
+            return false;
         }
 
-        private void Process(StagingRawTransactionModel model)
+        private bool Process(StagingRawTransactionModel model)
         {
             try
             {
                 if (model.MinStagingTransId != 0 && model.MaxStagingTransId != 0)
                 {
+                    Console.WriteLine("===> Min ID:" + model.MinStagingTransId + " - Max ID:" + model.MaxStagingTransId);
+
                     dataTransformService.UnhandleSubscriberAccountProcessing(model.MinStagingTransId, model.MaxStagingTransId);
 
                     Parallel.Invoke(new ParallelOptions { MaxDegreeOfParallelism = maxDegreeOfParallelism },
@@ -62,18 +67,27 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service
 
                     dataTransformService.DeviceProcessing(model.MinStagingTransId, model.MaxStagingTransId);
 
+                    dataTransformService.InsertFingerPrint(model.MinStagingTransId, model.MaxStagingTransId);
+
                     dataTransformService.CompleteProcessing(model.MinStagingTransId, model.MaxStagingTransId);
+
+                    return true;
                 }
             }
             catch (Exception ex)
             {
-                var logMessage = new LogMessage(ex.Message)
-                    .AddSection("Data Info", DatabaseInfoGetters.GetDbExceptionInfo(ex))
-                    .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex))
-                    .ToString();
+                if (((MySqlException)ex.InnerException).Number != 1213)
+                {
+                    var logMessage = new LogMessage(ex.Message)
+                       .AddSection("Data Info", DatabaseInfoGetters.GetDbExceptionInfo(ex))
+                       .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex))
+                       .ToString();
 
-                LogService.Error(logMessage);
+                    LogService.Error(logMessage);
+                }
             }
+
+            return false;
         }
     }
 }

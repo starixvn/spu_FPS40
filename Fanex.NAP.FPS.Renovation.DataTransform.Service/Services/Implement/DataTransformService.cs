@@ -112,14 +112,14 @@
         {
             dataCenter.UserAgentProcess(fromId, toId);
 
-            System.Console.WriteLine("4.UserAgent Process");
+            System.Console.WriteLine("3.UserAgent Process");
         }
 
         public void TransactionProcessing(int fromId, int toId)
         {
             dataCenter.TransactionProcess(fromId, toId);
 
-            System.Console.WriteLine("6.Transaction Process");
+            System.Console.WriteLine("5.Transaction Process");
         }
 
         public void UnhandleSubscriberAccountProcessing(int fromId, int toId)
@@ -133,14 +133,21 @@
         {
             dataCenter.DeviceProcess(fromId, toId);
 
-            System.Console.WriteLine("5.Device Process");
+            System.Console.WriteLine("4.Device Process");
         }
 
         public void CompleteProcessing(int fromId, int toId)
         {
             dataCenter.CompleteProcess(fromId, toId);
 
-            System.Console.WriteLine("7.Completed Process");
-        }        
+            System.Console.WriteLine("8.Completed Process");
+        }
+
+        public void InsertFingerPrint(int fromId, int toId)
+        {
+            dataCenter.InsertFingerPrint(fromId, toId);
+
+            System.Console.WriteLine("7.Insert FingerPrint");
+        }
     }
 }

@@ -3,44 +3,30 @@
     using Fanex.Logging;
     using Fanex.Logging.Extensions;
     using Fanex.Logging.Extensions.Database;
-    using Fanex.NAP.FPS.Renovation.Core;
-    using Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Implement;
-    using Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface;
     using Quartz;
     using Renci.SshNet;
     using System;
     using System.Diagnostics;
     using System.IO;
     using System.Linq;
-    using System.Security.AccessControl;
     using System.Threading.Tasks;
 
     [DisallowConcurrentExecution]
     public class Job : IJob
     {
         private readonly Services.Interface.IPRangeService ipRangeService;
-
         private readonly int batchSize = 10000;
-
         private readonly string rangeIpCSVFileName = "IpRanges.csv";
-
         private readonly string rangeIPTXTFileName = "IpRanges.txt";
-
-        private readonly string originalPath;        
-
-        private readonly PasswordAuthenticationMethod authMethod;
-
+        private readonly string originalPath;                       
         private readonly ConnectionInfo connectionInfo;
-
         private readonly string sshUser = "root";
         private readonly string sshPassword = "1234@qwer";
         private readonly string sshHost = "10.18.200.72";
         private readonly int sshPort = 22;
         private readonly string sshFolderPath = @"\\10.18.200.72\fps40\";
         private readonly string sshScript = "sh /etc/init.d/fps40_mysql_initial_ip_range.sh";
-
         private readonly int timeout = 5000;
-
         private int fromId;
         private int toId;
 
@@ -55,33 +41,33 @@
                 Directory.CreateDirectory(originalPath);
             }
 
-            authMethod = new PasswordAuthenticationMethod(sshUser, sshPassword);
+            var authMethod = new PasswordAuthenticationMethod(sshUser, sshPassword);
 
             connectionInfo = new ConnectionInfo(sshHost, sshPort, sshUser, authMethod);
         }
 
         public Task Execute(IJobExecutionContext context)
         {
-            //try
-            //{
-            //    var ipDBVersionDate = ipRangeService.GetIPDBVersion();
-            //    var ipLatestIPDBLogDate = ipRangeService.GetLatestUpdatedDateIPTableLog();
+            try
+            {
+                var ipDBVersionDate = ipRangeService.GetIPDBVersion();
+                var ipLatestIPDBLogDate = ipRangeService.GetLatestUpdatedDateIPTableLog();
 
-            //    if (ipDBVersionDate.CompareTo(ipLatestIPDBLogDate) != 0)
-            //    {
-            //        var filePath = Path.Combine(originalPath, rangeIpCSVFileName);
+                if (ipDBVersionDate.CompareTo(ipLatestIPDBLogDate) != 0)
+                {
+                    var filePath = Path.Combine(originalPath, rangeIpCSVFileName);
 
-            //        UpdateIpTableV6(ipDBVersionDate, filePath);
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    var logMessage = new LogMessage(ex.Message)
-            //        .AddSection("Data Info", DatabaseInfoGetters.GetDbExceptionInfo(ex))
-            //        .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
+                    UpdateIpTableV6(ipDBVersionDate, filePath);
+                }
+            }
+            catch (Exception ex)
+            {
+                var logMessage = new LogMessage(ex.Message)
+                    .AddSection("Data Info", DatabaseInfoGetters.GetDbExceptionInfo(ex))
+                    .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
 
-            //    LogService.Error(logMessage);
-            //}
+                LogService.Error(logMessage);
+            }
 
             return Task.FromResult(true);
         }

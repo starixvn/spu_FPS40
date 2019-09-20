@@ -15,5 +15,7 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Interface
         void UnhandleSubscriberAccountProcessing(int fromId, int toId);
 
         void CompleteProcessing(int fromId, int toId);
+
+        void InsertFingerPrint(int fromId, int toId);
     }
 }
