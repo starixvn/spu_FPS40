@@ -13,5 +13,7 @@ namespace Fanex.NAP.FPS.Renovation.Model
         public string Username { get; set; }
 
         public string Username2 { get; set; }
+
+        public int RoleId { get; set; }
     }
 }
