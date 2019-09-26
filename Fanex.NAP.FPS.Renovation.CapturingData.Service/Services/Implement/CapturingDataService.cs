@@ -1,7 +1,6 @@
 ﻿namespace Fanex.NAP.FPS.Renovation.RawTransaction.Service
 {
     using Fanex.DeviceDetector.Factory;
-    using Fanex.NAP.FPS.Renovation.Core;
     using Fanex.NAP.FPS.Renovation.Model;
     using Newtonsoft.Json;
     using System.Collections.Generic;
@@ -37,7 +36,7 @@
             }
 
             return TransformEmptyDeviceInfo();
-        }
+        }              
 
         private DeviceInfoModel TransformEmptyDeviceInfo()
         {
@@ -56,7 +55,8 @@
                     Width = 0
                 },
                 TimeZone = string.Empty,
-                UserAgent = string.Empty
+                UserAgent = string.Empty,
+                InvalidDeviceId = true               
             };
         }
 

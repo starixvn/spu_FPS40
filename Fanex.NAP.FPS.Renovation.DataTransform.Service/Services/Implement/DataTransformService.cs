@@ -11,14 +11,30 @@
     class DataTransformService : IDataTransformService
     {
         private readonly DataAccess.DataCenterDataAccess dataCenter;
+
+        private int fromId;
+        private int toId;
+
         public DataTransformService()
         {
             dataCenter = new DataCenterDataAccess();
-        }  
+        }
 
-        public void AccountProcessing(int fromId, int toId)
+        public IDataTransformService Initial(int fromId, int toId)
         {
-            var existingAccounts = AccountProcess(fromId, toId);
+            this.fromId = fromId;
+            this.toId = toId;
+
+            System.Console.WriteLine($"1.Initial Min Id: {fromId} - Max Id: {toId}");
+
+            return this;
+        }
+
+        public IDataTransformService AccountProcessing()
+        {
+            System.Console.WriteLine("4.Account Process");
+
+            var existingAccounts = AccountProcess(this.fromId, this.toId);
 
             if (existingAccounts.Any())
             {
@@ -56,17 +72,53 @@
                     })
                     .ToList();
 
-                var latestCustomerInfo = newCustomerInfo.Union(customerInfoMapping).ToList();
+                var latestCustomerInfo = newCustomerInfo.Union(customerInfoMapping).ToList();                              
 
-                InsertRawAccount(latestCustomerInfo);
+                InsertRawAccount(latestCustomerInfo);                
             }
 
-            System.Console.WriteLine("3.Account Process");
+            return this;
+        }       
+
+        public IDataTransformService UserAgentProcessing()
+        {          
+            dataCenter.UserAgentProcess(this.fromId, this.toId);
+
+            System.Console.WriteLine("3.UserAgent Process");
+
+            return this;
         }
+
+        public IDataTransformService TransactionProcessing()
+        {
+            dataCenter.TransactionProcess(this.fromId, this.toId);
+
+            System.Console.WriteLine("5.Transaction Process");
+
+            return this;
+        }
+
+        public IDataTransformService UnhandleSubscriberAccountProcessing()
+        {
+            dataCenter.UnhandleSubscriberActionProcess(this.fromId, this.toId);
+
+            System.Console.WriteLine("2.UnhandleSubscriberActionProcess");
+
+            return this;
+        }       
+
+        public IDataTransformService CompleteProcessing()
+        {
+            dataCenter.CompleteProcess(this.fromId, this.toId);
+
+            System.Console.WriteLine("===> 6.Completed Process <===");
+
+            return this;
+        }        
 
         private List<CustomerInfoModel> UpdateCustomerInfo(List<AccountExistedModel> accountList)
         {
-            System.Console.WriteLine("=> 3.2.Update Customer Info");
+            System.Console.WriteLine("=> 4.2.Update Customer Info");
 
             var getNewCustomer = accountList.Select(acc => TransformCustomerInfo(acc)).ToList();
 
@@ -90,11 +142,11 @@
                 SubscriberName = model.SubscriberName,
                 LoginNameWithPrefix = model.LoginNameWithPrefix
             };
-        }               
+        }
 
         private List<AccountExistedModel> AccountProcess(int fromId, int toId)
         {
-            System.Console.WriteLine("=> 3.1.Get Existing Account");
+            System.Console.WriteLine("=> 4.1.Get Existing Account");
 
             return dataCenter.AccountProcess(fromId, toId);
         }
@@ -105,49 +157,9 @@
 
             dataCenter.InsertRawAccount(accountListJson);
 
-            System.Console.WriteLine("=> 3.3.Insert Raw Account");
+            System.Console.WriteLine("=> 4.3.Insert Raw Account");
         }
 
-        public void UserAgentProcessing(int fromId, int toId)
-        {
-            dataCenter.UserAgentProcess(fromId, toId);
-
-            System.Console.WriteLine("3.UserAgent Process");
-        }
-
-        public void TransactionProcessing(int fromId, int toId)
-        {
-            dataCenter.TransactionProcess(fromId, toId);
-
-            System.Console.WriteLine("5.Transaction Process");
-        }
-
-        public void UnhandleSubscriberAccountProcessing(int fromId, int toId)
-        {
-            dataCenter.UnhandleSubscriberActionProcess(fromId, toId);
-
-            System.Console.WriteLine("2.UnhandleSubscriberActionProcess");
-        }
-
-        public void DeviceProcessing(int fromId, int toId)
-        {
-            dataCenter.DeviceProcess(fromId, toId);
-
-            System.Console.WriteLine("4.Device Process");
-        }
-
-        public void CompleteProcessing(int fromId, int toId)
-        {
-            dataCenter.CompleteProcess(fromId, toId);
-
-            System.Console.WriteLine("8.Completed Process");
-        }
-
-        public void InsertFingerPrint(int fromId, int toId)
-        {
-            dataCenter.InsertFingerPrint(fromId, toId);
-
-            System.Console.WriteLine("7.Insert FingerPrint");
-        }
+       
     }
 }

@@ -6,6 +6,7 @@
     using Fanex.NAP.FPS.Renovation.Model;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
     public class DataCenterDataAccess
     {       
@@ -98,7 +99,7 @@
             }
         }
 
-        public DataResult InsertRawAccount(string jsonAccounts)
+        public void InsertRawAccount(string jsonAccounts)
         {
             var repository = new DynamicRepository();
 
@@ -107,15 +108,10 @@
                 AccountJson = jsonAccounts
             };
 
-            var errCode = repository.Execute(criteria);
-
-            return new DataResult
-            {
-                ErrorCode = errCode
-            };
+            repository.ExecuteAsync(criteria);           
         }
 
-        public DataResult UserAgentProcess(int fromId, int toId)
+        public void UserAgentProcess(int fromId, int toId)
         {
             var repository = new DynamicRepository();
 
@@ -125,15 +121,10 @@
                 ToStagingTransId = toId
             };
 
-            var errCode = repository.Execute(criteria);
-
-            return new DataResult
-            {
-                ErrorCode = errCode
-            };
+            repository.ExecuteAsync(criteria);          
         }
 
-        public DataResult TransactionProcess(int fromId, int toId)
+        public void TransactionProcess(int fromId, int toId)
         {
             var repository = new DynamicRepository();
 
@@ -143,12 +134,7 @@
                 ToStagingTransId = toId
             };
 
-            var errCode = repository.Execute(criteria);
-
-            return new DataResult
-            {
-                ErrorCode = errCode
-            };
+            repository.ExecuteAsync(criteria);           
         }
 
         public DataResult CompleteProcess(int fromId, int toId)
@@ -265,7 +251,7 @@
             };
         }
 
-        public List<int> GetUpdatedDeviceList(int size)
+        public List<DevicePackage> GetStagingTransIdForDevice(int size)
         {
             var criteria = new GetUpdatedDeviceListCriteria
             {
@@ -274,17 +260,17 @@
 
             using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                return db.Query<int>(criteria).ToList();
+                return db.Query<DevicePackage>(criteria).ToList();
             }
         }
 
-        public DataResult UpdateDeviceId(string deviceIdJson)
+        public DataResult InsertDevice(string transId)
         {
             var repository = new DynamicRepository();
 
             var criteria = new UpdateDeviceIdCriteria
             {
-                DeviceIdJson = deviceIdJson
+                TransId = transId
             };
 
             var errCode = repository.Execute(criteria);

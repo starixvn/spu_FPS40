@@ -92,9 +92,9 @@ namespace Fanex.NAP.FPS.Renovation.DataImported.Service
             foreach (var file in files)
             {
                 var fileName = Path.GetFileName(file);
-                var fileNameWithoutExtension = Path.GetFileName(file);               
+                var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(file);
 
-                if (fileNameWithoutExtension == "12BET.txt")
+                if (fileName == "CN88.txt" || fileName == "Alpha789Y.txt" || fileName == "12BET.txt")
                 {
                     Utilities.DeleteLog(fileName);
 
@@ -102,9 +102,9 @@ namespace Fanex.NAP.FPS.Renovation.DataImported.Service
                     
                     if (dataLog.Length > 0)
                     {
-                        var usernames = loadCsvFile(@"D:\Projects\FPS 4.0\SubscriberTickets\12BET.csv");
+                        var usernames = loadCsvFile(@"D:\Projects\FPS 4.0\SubscriberTickets\"+ fileNameWithoutExtension + ".csv");
 
-                        Executing(fileName, fileNameWithoutExtension, dataLog, usernames);
+                        Executing(fileName, dataLog, usernames);
                     }
 
                     Console.WriteLine(Path.GetFileName(file));
@@ -112,7 +112,7 @@ namespace Fanex.NAP.FPS.Renovation.DataImported.Service
             }
         }
 
-        private static void Executing(string fileName, string fileNameWithoutExtension,  string[] dataLog, List<string> usernames)
+        private static void Executing(string fileName,  string[] dataLog, List<string> usernames)
         {
             var counter = 0;
             var random = new Random();
@@ -142,7 +142,7 @@ namespace Fanex.NAP.FPS.Renovation.DataImported.Service
                         SubscriberDate = Convert.ToDateTime(splitingData[6]),
                         Token = splitingData[7],
                         TransDate = Convert.ToDateTime(splitingData[8]),
-                    };
+                    };                   
 
                     var message = new Message<MessageQueue>(objectData, new MessageProperties { DeliveryMode = 2, Priority = 9 });
 

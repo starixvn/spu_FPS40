@@ -10,12 +10,12 @@ namespace Fanex.NAP.FPS.Renovation.Criteria
 {
     public class UpdateDeviceIdCriteria : NonQueryCommand
     {
-        [SpParam(SqlParamName = "ip_DeviceIDJson")]
-        public string DeviceIdJson { get; set; }
+        [SpParam(SqlParamName = "ip_TransJson")]
+        public string TransId { get; set; }
 
         public override string GetSettingKey()
         {
-            return "FPS_DC_TransformData_Transaction_UpdateDeviceID";
+            return "FPS_DC_TransformData_Device_Insert";
         }
 
         public override bool IsValid()

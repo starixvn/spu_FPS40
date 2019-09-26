@@ -29,5 +29,7 @@
         public string LocalIps { get; set; }
 
         public bool IsNonManilaCSD { get; set; }
+
+        public bool InvalidDeviceId { get; set; }
     }
 }

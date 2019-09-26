@@ -41,6 +41,13 @@
             return deviceSplited.Length > 3 ? deviceSplited[3] : string.Empty;
         }
 
+        public static bool IsGuidDeviceId(string deviceCode)
+        {
+            Guid newGuid;
+
+            return Guid.TryParse(deviceCode, out newGuid);
+        }
+
         public static string GetDeviceCodeFromCapturedData(string di)
         {
             string[] splitingDI = di.Split(new[] { "###" }, StringSplitOptions.None);

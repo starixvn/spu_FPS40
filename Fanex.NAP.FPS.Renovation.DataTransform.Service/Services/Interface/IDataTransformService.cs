@@ -1,21 +1,20 @@
 ﻿using Fanex.NAP.FPS.Renovation.Model;
+using System.Threading.Tasks;
 
 namespace Fanex.NAP.FPS.Renovation.DataTransform.Service.Services.Interface
 {
     interface IDataTransformService
-    {        
-        void AccountProcessing(int fromId, int toId);
+    {
+        IDataTransformService Initial(int fromId, int toId);
 
-        void DeviceProcessing(int fromId, int toId);
+        IDataTransformService AccountProcessing();
+               
+        IDataTransformService UserAgentProcessing();
 
-        void UserAgentProcessing(int fromId, int toId);
+        IDataTransformService TransactionProcessing();
 
-        void TransactionProcessing(int fromId, int toId);
+        IDataTransformService UnhandleSubscriberAccountProcessing();
 
-        void UnhandleSubscriberAccountProcessing(int fromId, int toId);
-
-        void CompleteProcessing(int fromId, int toId);
-
-        void InsertFingerPrint(int fromId, int toId);
+        IDataTransformService CompleteProcessing();
     }
 }

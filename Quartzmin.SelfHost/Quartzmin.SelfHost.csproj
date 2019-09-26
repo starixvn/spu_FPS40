@@ -61,4 +61,8 @@
     <None Remove="*.vspscc" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.WebApi.OwinSelfHost" Version="5.2.7" />
+  </ItemGroup>
+
 </Project>

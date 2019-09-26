@@ -103,7 +103,7 @@
         {
             try
             {
-                 _capturingDataService.InsertTransaction(_transactionList);
+                _capturingDataService.InsertTransaction(_transactionList);
 
                 _lastInsertTrans = DateTime.Now;
                 _transactionList.Clear();
@@ -123,20 +123,45 @@
 
         private RawTransactionModel TransformRawTransaction(MessageQueue message)
         {
-            var deviceCode = Utilities.GetDeviceCodeFromCapturedData(message.Device);
-            var deviceInfo = _capturingDataService.GetDeviceInfo(deviceCode);
+            var invalidDevice = string.Empty;
+            var transStatus = 1;
+
+            var deviceCode = Utilities.GetDeviceCodeFromCapturedData(message.Device);            
+
+            var deviceInfo = _capturingDataService.GetDeviceInfo(deviceCode);                        
+
+            var url = Utilities.GetURLFromDeviceCode(message.Device);
+            var userAgent = Utilities.GetUserAgentFromDeviceCode(message.Device);
+
+            if(string.IsNullOrWhiteSpace(deviceInfo.DeviceNo) || deviceInfo.DeviceNo == "N/A")
+            {                
+                invalidDevice = deviceCode;
+                deviceInfo.DeviceNo = string.Empty;
+                transStatus = -2;
+            }
+            else
+            {
+                if (!Utilities.IsGuidDeviceId(deviceInfo.DeviceNo) || deviceInfo.InvalidDeviceId)
+                {
+                    deviceInfo.DeviceNo = string.Empty;
+                    invalidDevice = deviceCode;
+                    transStatus = -1;
+                }
+            }            
 
             return new RawTransactionModel
             {
-                DeviceCode = deviceInfo.DeviceNo != "N/A" ? deviceInfo.DeviceNo : string.Empty,
+                DeviceCode = deviceInfo.DeviceNo,
+                InvalidDevice = invalidDevice,
+                TransStatus = transStatus,
                 LoginName = message.Account,
                 SubscriberName = message.Subscriber,
                 TransDate = Convert.ToDateTime(message.TransDate.ToString("yyyy-MM-dd HH:mm:ss.ffff")),
                 IP = message.IP,
                 PluginID = 0,
-                URL = deviceInfo.HRef != "N/A" ? deviceInfo.HRef : string.Empty,
+                URL = string.IsNullOrWhiteSpace(url) ? ConvertNA2Empty(deviceInfo.HRef) : url.Split('?')[0],
                 ActionResult = message.ActionResult,
-                UserAgent = deviceInfo.UserAgent != "N/A" ? deviceInfo.UserAgent : string.Empty,
+                UserAgent = string.IsNullOrWhiteSpace(userAgent) ? ConvertNA2Empty(deviceInfo.UserAgent) : userAgent,
                 FingerprintCode = deviceInfo.DeviceFPCode != "N/A" ? deviceInfo.DeviceFPCode : string.Empty,
                 FingerprintMoreInfo = deviceInfo.DeviceFPCode != "N/A" ? EncodeCapturedData(deviceInfo) : string.Empty
             };
@@ -158,6 +183,11 @@
                 deviceInfo.OSName,
                 deviceInfo.TimeZone,
                 deviceInfo.LocalIps));
+        }
+
+        private static string ConvertNA2Empty(string data)
+        {
+            return data != "N/A" ? data : string.Empty;
         }
     }
 }

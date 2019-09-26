@@ -11,7 +11,7 @@ namespace Fanex.NAP.FPS.Renovation.Model
     public class NewCustomerModel
     {
         [XmlAttribute]
-        public int AccountID { get; set; }
+        public long AccountID { get; set; }
 
         [XmlAttribute]
         public int SubscriberID { get; set; }

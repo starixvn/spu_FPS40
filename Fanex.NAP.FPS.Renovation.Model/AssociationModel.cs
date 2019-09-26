@@ -7,7 +7,7 @@
 
         public int AssociationId { get; set; }
 
-        public int DeviceId { get; set; }
+        public long DeviceId { get; set; }
 
         public int SubscriberId { get; set; }
 

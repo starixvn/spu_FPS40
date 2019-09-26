@@ -38,21 +38,25 @@ namespace Fanex.NAP.FPS.Renovation.DataCatching.Service
         {
             try
             {
-                if(!Subscribers.ContainsKey(message.Subscriber))
+                if(message.Subscriber.Contains("Alpha789Y"))
                 {
-                    Subscribers.Add(message.Subscriber, 0);
+                    if (!Subscribers.ContainsKey(message.Subscriber))
+                    {
+                        Subscribers.Add(message.Subscriber, 0);
 
-                    Console.WriteLine(message.Subscriber);
+                        Console.WriteLine(message.Subscriber);
+                    }
+                    else
+                    {
+                        Subscribers[message.Subscriber] += 1;
+                    }
+
+                    if (Subscribers[message.Subscriber] <= AppSettings.TransBatch)
+                    {
+                        Utilities.WriteLog(message.Subscriber + ".txt", message.Account + " | " + message.Device);
+                    }
                 }
-                else
-                {
-                    Subscribers[message.Subscriber] += 1; 
-                }              
-
-                if(Subscribers[message.Subscriber] <= AppSettings.TransBatch)
-                {
-                    Utilities.WriteLog(message.Subscriber + ".txt", TransformMessageQueueToString(message));
-                }              
+                            
             }
             catch (Exception ex)
             {

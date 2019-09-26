@@ -7,6 +7,7 @@ using Fanex.NAP.FPS.Renovation.Model;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -46,30 +47,15 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service
             {
                 if (model.MinStagingTransId != 0 && model.MaxStagingTransId != 0)
                 {
-                    Console.WriteLine("===> Min ID:" + model.MinStagingTransId + " - Max ID:" + model.MaxStagingTransId);
+                    Console.WriteLine("============> Min ID:" + model.MinStagingTransId + " - Max ID:" + model.MaxStagingTransId + " <================");
 
-                    dataTransformService.UnhandleSubscriberAccountProcessing(model.MinStagingTransId, model.MaxStagingTransId);
-
-                    Parallel.Invoke(new ParallelOptions { MaxDegreeOfParallelism = maxDegreeOfParallelism },
-                    () =>
-                    {
-                        dataTransformService.UserAgentProcessing(model.MinStagingTransId, model.MaxStagingTransId);
-                    },
-                    () =>
-                    {
-                        dataTransformService.AccountProcessing(model.MinStagingTransId, model.MaxStagingTransId);
-                    },
-                    () =>
-                    {
-                        dataTransformService.TransactionProcessing(model.MinStagingTransId, model.MaxStagingTransId);
-
-                    });
-
-                    dataTransformService.DeviceProcessing(model.MinStagingTransId, model.MaxStagingTransId);
-
-                    dataTransformService.InsertFingerPrint(model.MinStagingTransId, model.MaxStagingTransId);
-
-                    dataTransformService.CompleteProcessing(model.MinStagingTransId, model.MaxStagingTransId);
+                    dataTransformService
+                    .Initial(model.MinStagingTransId, model.MaxStagingTransId)
+                    .UnhandleSubscriberAccountProcessing()
+                    .UserAgentProcessing()
+                    .AccountProcessing()
+                    .TransactionProcessing()              
+                    .CompleteProcessing();
 
                     return true;
                 }

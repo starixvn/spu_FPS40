@@ -23,13 +23,13 @@
     <Setting Key="FPS_DC_TransformData_Transaction_GetNullAccountIDTransList" SpName="FPS_DC_TransformData_Transaction_GetNullAccountIDTransList" DbName="MySQL.FPS_DataCenter"/>
     <Setting Key="FPS_DC_TransformData_Transaction_UpdateAccountID" SpName="FPS_DC_TransformData_Transaction_UpdateAccountID" DbName="MySQL.FPS_DataCenter"/>
 
-    <Setting Key="FPS_DC_TransformData_Transaction_GetNullDeviceIDTransList" SpName="FPS_DC_TransformData_Transaction_GetNullDeviceIDTransList" DbName="MySQL.FPS_DataCenter"/>
-    <Setting Key="FPS_DC_TransformData_Transaction_UpdateDeviceID" SpName="FPS_DC_TransformData_Transaction_UpdateDeviceID" DbName="MySQL.FPS_DataCenter"/>
+    <Setting Key="FPS_DC_TransformData_Device_GetPackage" SpName="FPS_DC_TransformData_Device_GetPackage" DbName="MySQL.FPS_DataCenter"/>
+    <Setting Key="FPS_DC_TransformData_Device_Insert" SpName="FPS_DC_TransformData_Device_Insert" DbName="MySQL.FPS_DataCenter"/>
 
     
   </Function>
   <Function Name="CapturingTransaction">
-    <Setting Key="FPS_RT_TransformData_GetPackage" SpName="FPS_RT_TransformData_GetPackage_New" DbName="MySQL.FPS_RawTransaction">
+    <Setting Key="FPS_RT_TransformData_GetPackage" SpName="FPS_RT_TransformData_GetPackage" DbName="MySQL.FPS_RawTransaction">
     </Setting>
   </Function>
 </Functions>

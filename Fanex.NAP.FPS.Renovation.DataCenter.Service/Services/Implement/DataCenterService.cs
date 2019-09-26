@@ -2,6 +2,7 @@
 using Fanex.NAP.FPS.Renovation.DataAccess;
 using Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface;
 using Fanex.NAP.FPS.Renovation.Model;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -43,9 +44,9 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Implement
             return dataCenter.GetUpdatedAccountList(size);
         }
 
-        public List<int> GetUpdatedDevice(int size)
+        public List<DevicePackage> GetStagingTransIdForDevice(int size)
         {
-            return dataCenter.GetUpdatedDeviceList(size);
+            return dataCenter.GetStagingTransIdForDevice(size);
         }
 
         public DataResult UpdateAccountId(string accountIdJson)
@@ -62,9 +63,11 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Implement
             return dataCenter.UpdateCustomerInfo(newXmlCustomerInfo);
         }
 
-        public DataResult UpdateDeviceId(string deviceIdJson)
+        public DataResult InsertDevice(List<DevicePackage> transId)
         {
-            return dataCenter.UpdateDeviceId(deviceIdJson);
+            var transJson = JsonConvert.SerializeObject(transId);
+
+            return dataCenter.InsertDevice(transJson);
         }
 
         public DataResult UpdateIsSyncByAssociationId(string associationXml)

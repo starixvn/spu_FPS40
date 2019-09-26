@@ -62,14 +62,14 @@
     <Compile Include="ISchedule.cs" />
     <Compile Include="Jobs\AddAssociation\Job.cs" />
     <Compile Include="Jobs\AddAssociation\Schedule.cs" />
+    <Compile Include="Jobs\InsertDevice\Job.cs" />
+    <Compile Include="Jobs\InsertDevice\Schedule.cs" />
     <Compile Include="Jobs\InsertTransaction\Job.cs" />
     <Compile Include="Jobs\InsertTransaction\Schedule.cs" />
     <Compile Include="Jobs\UpdateAccountId\Job.cs" />
     <Compile Include="Jobs\UpdateAccountId\Schedule.cs" />
     <Compile Include="Jobs\UpdateCustomerInfo\Job.cs" />
     <Compile Include="Jobs\UpdateCustomerInfo\Schedule.cs" />
-    <Compile Include="Jobs\UpdateDeviceId\Job.cs" />
-    <Compile Include="Jobs\UpdateDeviceId\Schedule.cs" />
     <Compile Include="Jobs\UpdateIPRange\Job.cs" />
     <Compile Include="Jobs\UpdateIPRange\Schedule.cs" />
     <Compile Include="Jobs\UserAgent\Job.cs" />
@@ -149,13 +149,13 @@
       <Version>3.5.1</Version>
     </PackageReference>
     <PackageReference Include="Fanex.Data">
-      <Version>4.0.2</Version>
+      <Version>4.1.4</Version>
     </PackageReference>
     <PackageReference Include="Fanex.Data.Repository">
-      <Version>4.0.1</Version>
+      <Version>4.1.4</Version>
     </PackageReference>
     <PackageReference Include="Fanex.Data.SqlServer">
-      <Version>4.0.1</Version>
+      <Version>4.1.4</Version>
     </PackageReference>
     <PackageReference Include="Fanex.Logging">
       <Version>2.0.1</Version>
@@ -164,7 +164,7 @@
       <Version>1.0.6</Version>
     </PackageReference>
     <PackageReference Include="Fanex.Logging.Extensions.Database">
-      <Version>1.0.7</Version>
+      <Version>1.0.8</Version>
     </PackageReference>
     <PackageReference Include="Fanex.Logging.Sentry.RavenClient">
       <Version>1.0.1</Version>

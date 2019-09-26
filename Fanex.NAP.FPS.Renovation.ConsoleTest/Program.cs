@@ -1,6 +1,7 @@
 ﻿using Fanex.Data;
 using Fanex.Data.MySql;
 using Fanex.Data.Repository;
+using Fanex.DeviceDetector.Factory;
 using Fanex.NAP.FPS.Renovation.Core;
 using Fanex.NAP.FPS.Renovation.Model;
 using System;
@@ -30,15 +31,18 @@ namespace Fanex.NAP.FPS.Renovation.ConsoleTest
     {
         static void Main(string[] args)
         {
+            string aa = "86693a2b90f14c3ab0a8735e56f8c779";
+            var d = DeviceFactory.GetDeviceInfo(aa);
+            Console.WriteLine(); 
 
-            var items = new List<int>();
+            //var items = new List<int>();
 
-            for (var i = 0; i < 10; i++)
-            {
-                items.Add(i);
-            }            
+            //for (var i = 0; i < 10; i++)
+            //{
+            //    items.Add(i);
+            //}            
 
-            var result = items.Partition(3);
+            //var result = items.Partition(3);
 
 
 

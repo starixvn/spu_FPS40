@@ -12,13 +12,13 @@ namespace Fanex.NAP.FPS.Renovation.DataAccess
 {
     public class RawTransactionDataAccess
     {
-        public int InsertTransaction(string xmlTrans)
+        public int InsertTransaction(string jsonTrans)
         {
             var repository = new DynamicRepository();
 
             var criteria = new CapturingTransactionCriteria
             {
-                RawTransXml = xmlTrans   
+                RawTrans = jsonTrans   
             };
 
            return repository.Execute(criteria);
