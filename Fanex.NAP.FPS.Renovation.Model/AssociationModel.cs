@@ -5,7 +5,7 @@
         private string username2;
         private int? roleId;
 
-        public int AssociationId { get; set; }
+        public long AssociationId { get; set; }
 
         public long DeviceId { get; set; }
 

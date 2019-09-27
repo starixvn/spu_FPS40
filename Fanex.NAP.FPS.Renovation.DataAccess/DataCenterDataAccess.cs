@@ -108,7 +108,7 @@
                 AccountJson = jsonAccounts
             };
 
-            repository.ExecuteAsync(criteria);           
+            repository.Execute(criteria);           
         }
 
         public void UserAgentProcess(int fromId, int toId)
@@ -121,7 +121,7 @@
                 ToStagingTransId = toId
             };
 
-            repository.ExecuteAsync(criteria);          
+            repository.Execute(criteria);          
         }
 
         public void TransactionProcess(int fromId, int toId)
@@ -134,7 +134,7 @@
                 ToStagingTransId = toId
             };
 
-            repository.ExecuteAsync(criteria);           
+            repository.Execute(criteria);           
         }
 
         public DataResult CompleteProcess(int fromId, int toId)

@@ -11,7 +11,7 @@ namespace Fanex.NAP.FPS.Renovation.Model
     public class IsSynAssociationModel
     {
         [XmlAttribute]
-        public int AssociationID { get; set; }
+        public long AssociationID { get; set; }
 
         [XmlAttribute]
         public int SyncGraphDB { get; set; }

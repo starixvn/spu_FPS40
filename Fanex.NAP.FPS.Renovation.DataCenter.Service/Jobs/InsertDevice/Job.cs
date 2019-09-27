@@ -7,6 +7,7 @@
     using MySql.Data.MySqlClient;
     using Quartz;
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -21,21 +22,34 @@
             dataCenterService = new Services.Implement.DataCenterService();
         }
 
-        public Task Execute(IJobExecutionContext context)
+        public async Task Execute(IJobExecutionContext context)
         {
             try
             {
-                //var trans = dataCenterService.GetStagingTransIdForDevice(numberOfTrans);
+                var listOfTrans = dataCenterService.GetStagingTransIdForDevice(numberOfTrans);
 
-                //if (trans.Any())
-                //{
-                //    var transGroup = trans.Chunk(numberOfTrans / 10);
+                if (listOfTrans.Any())
+                {
+                    var transGroup = listOfTrans.Chunk(numberOfTrans / 10);
 
-                //    Parallel.ForEach(transGroup, new ParallelOptions { MaxDegreeOfParallelism = 3 }, x =>
-                //    {
-                //        dataCenterService.InsertDevice(x.ToList());
-                //    });
-                //}
+                    var tasks = new List<Task>();
+
+                    foreach (var trans in transGroup)
+                    {
+                        var task = Task.Run(() =>
+                        {
+                            dataCenterService.InsertDevice(trans.ToList());
+                        });
+
+                        await Task.Delay(10);
+
+                        tasks.Add(task);                        
+                    }
+
+                    await Task.WhenAll(tasks.ToArray());
+
+                    Console.WriteLine($"Device is inserted at {DateTime.Now}");
+                }
             }
             catch (Exception ex)
             {
@@ -46,13 +60,8 @@
                     .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
 
                     LogService.Error(logMessage);
-                }
-                    
-            } 
-
-            Console.WriteLine($"Device is inserted at {DateTime.Now}");
-
-            return Task.FromResult(true);
+                }                    
+            }             
         }
     }
 }

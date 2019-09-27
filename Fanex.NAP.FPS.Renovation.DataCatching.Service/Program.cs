@@ -3,13 +3,11 @@ using Fanex.NAP.FPS.Renovation.Queue;
 using Fanex.Oneyed.Infrastructure.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Fanex.NAP.FPS.Renovation.DataCatching.Service
 {
-   static class Program
+    static class Program
     {       
         private static Dictionary<string, int> Subscribers;
 
@@ -38,7 +36,7 @@ namespace Fanex.NAP.FPS.Renovation.DataCatching.Service
         {
             try
             {
-                if(message.Subscriber.Contains("Alpha789Y"))
+                if(message.Subscriber.Contains("CN88"))
                 {
                     if (!Subscribers.ContainsKey(message.Subscriber))
                     {
@@ -53,7 +51,7 @@ namespace Fanex.NAP.FPS.Renovation.DataCatching.Service
 
                     if (Subscribers[message.Subscriber] <= AppSettings.TransBatch)
                     {
-                        Utilities.WriteLog(message.Subscriber + ".txt", message.Account + " | " + message.Device);
+                        Utilities.WriteLog(message.Subscriber + ".txt", TransformMessageQueueToString(message));
                     }
                 }
                             

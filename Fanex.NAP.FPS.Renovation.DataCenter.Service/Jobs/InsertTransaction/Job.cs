@@ -42,19 +42,19 @@
 
                     var tasks = new List<Task>();
 
-                    foreach(var trans in stagingTrans)
+                    foreach (var trans in stagingTrans)
                     {
                         var task = Task.Run(() =>
                         {
-                           return Executing(trans);
+                            return Executing(trans);
                         });
 
                         await Task.Delay(10);
 
-                        tasks.Add(task);                        
+                        tasks.Add(task);
                     }
 
-                    await Task.WhenAll(tasks.ToArray());                   
+                    await Task.WhenAll(tasks.ToArray());
                 }
 
             }
