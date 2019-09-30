@@ -3,6 +3,7 @@ using Quartz.Spi;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using System.IO;
 
 #if NETSTANDARD
 using Microsoft.AspNetCore.Hosting;
@@ -54,8 +55,9 @@ namespace Quartzmin.SelfHost
         public Task Start(CancellationToken cancellationToken = default(CancellationToken))
         {
             _webApp = Microsoft.Owin.Hosting.WebApp.Start(Url, app => {
-                app.UseQuartzmin(CreateQuartzminOptions());
-            });
+                    app.UseQuartzmin(CreateQuartzminOptions());
+                });
+
             return Task.FromResult(0);
         }
 #endif
