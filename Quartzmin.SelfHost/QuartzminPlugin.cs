@@ -5,11 +5,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.IO;
 
-#if NETSTANDARD
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Logging;
-#endif
-
 namespace Quartzmin.SelfHost
 {
     public class QuartzminPlugin : ISchedulerPlugin
@@ -30,28 +25,6 @@ namespace Quartzmin.SelfHost
             _scheduler = scheduler;
             return Task.FromResult(0);
         }
-
-#if NETSTANDARD
-        public async Task Start(CancellationToken cancellationToken = default(CancellationToken))
-        {
-            var host = Microsoft.AspNetCore.WebHost.CreateDefaultBuilder().Configure(app => {
-                app.UseQuartzmin(CreateQuartzminOptions());
-            }).ConfigureServices(services => {
-                services.AddQuartzmin();
-            })
-            .ConfigureLogging(logging => {
-                logging.ClearProviders();
-            })
-            .UseUrls(Url)
-            .Build();
-
-            _webApp = host;
-
-            await host.StartAsync();
-        }
-#endif
-
-#if NETFRAMEWORK
         public Task Start(CancellationToken cancellationToken = default(CancellationToken))
         {
             _webApp = Microsoft.Owin.Hosting.WebApp.Start(Url, app => {
@@ -60,7 +33,7 @@ namespace Quartzmin.SelfHost
 
             return Task.FromResult(0);
         }
-#endif
+
         public Task Shutdown(CancellationToken cancellationToken = default(CancellationToken))
         {
             _webApp.Dispose();
