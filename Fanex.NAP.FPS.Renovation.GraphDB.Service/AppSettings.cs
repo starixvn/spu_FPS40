@@ -20,6 +20,10 @@ namespace Fanex.NAP.FPS.Renovation.GraphDB.Service
                 public static string RabbitMQ_Queue => ConfigurationManager.AppSettings["RabbitMQ-Queue"];
                 public static string RabbitMQ_Exchange => ConfigurationManager.AppSettings["RabbitMQ-Exchange"];
                 public static string RabbitMQ_RoutingKey => ConfigurationManager.AppSettings["RabbitMQ-RoutingKey"];
+                public static string Log_SentryLogging_Config => ConfigurationManager.AppSettings["Log-SentryLogging-Config"];
+                public static string Log_SentryLogging_Category => ConfigurationManager.AppSettings["Log-SentryLogging-Category"];
+                public static string AppData_Path => ConfigurationManager.AppSettings["AppData-Path"];
+                public static string Trans_Batch => ConfigurationManager.AppSettings["Trans-Batch"];
             }
 }
 
