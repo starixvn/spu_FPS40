@@ -15,7 +15,7 @@
     public class Job : IJob
     {
         private readonly Services.Interface.IDataCenterService dataCenterService;
-        private const int numberOfTrans = 500;
+        private const int numberOfTrans = 1000;
 
         public Job()
         {
