@@ -7,8 +7,6 @@ using Fanex.NAP.FPS.Renovation.Model;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace Fanex.NAP.FPS.Renovation.DataTransform.Service
@@ -16,7 +14,7 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service
     public class ActiveController : ApiController
     {
         private readonly IDataTransformService dataTransformService;
-        private const int maxDegreeOfParallelism = 3;
+
         public ActiveController()
         {
             dataTransformService = new DataTransformService();
