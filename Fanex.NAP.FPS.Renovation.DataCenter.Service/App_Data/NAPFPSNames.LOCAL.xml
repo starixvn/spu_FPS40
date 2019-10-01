@@ -20,10 +20,10 @@
     <Setting Key="FPS_DC_TransformData_UserAgent_GetNullBrowserOSList" SpName="FPS_DC_TransformData_UserAgent_GetNullBrowserOSList" DbName="MySQL.FPS_DataCenter"/>
     <Setting Key="FPS_DC_TransformData_UserAgent_UpdateOSBrowser" SpName="FPS_DC_TransformData_UserAgent_UpdateOSBrowser" DbName="MySQL.FPS_DataCenter"/>
 
-    <Setting Key="FPS_DC_TransformData_Transaction_GetNullAccountIDTransList" SpName="FPS_DC_TransformData_Transaction_GetNullAccountIDTransList" DbName="MySQL.FPS_DataCenter"/>
-    <Setting Key="FPS_DC_TransformData_Transaction_UpdateAccountID" SpName="FPS_DC_TransformData_Transaction_UpdateAccountID" DbName="MySQL.FPS_DataCenter"/>
+    <Setting Key="FPS_DC_TransformData_Account_Transaction_GetPackage" SpName="FPS_DC_TransformData_Account_Transaction_GetPackage" DbName="MySQL.FPS_DataCenter"/>
+    <Setting Key="FPS_DC_TransformData_Account_Transaction_Update" SpName="FPS_DC_TransformData_Account_Transaction_Update" DbName="MySQL.FPS_DataCenter"/>
 
-    <Setting Key="FPS_DC_TransformData_Device_GetPackage" SpName="FPS_DC_TransformData_Device_GetPackage" DbName="MySQL.FPS_DataCenter"/>
+    <Setting Key="FPS_DC_TransformData_Device_Transaction_GetPackage" SpName="FPS_DC_TransformData_Device_Transaction_GetPackage" DbName="MySQL.FPS_DataCenter"/>
     <Setting Key="FPS_DC_TransformData_Device_Insert" SpName="FPS_DC_TransformData_Device_Insert" DbName="MySQL.FPS_DataCenter"/>
 
 

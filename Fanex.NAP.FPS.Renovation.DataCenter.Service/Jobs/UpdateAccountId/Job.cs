@@ -7,6 +7,7 @@
     using Newtonsoft.Json;
     using Quartz;
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -15,14 +16,13 @@
     {
         private readonly Services.Interface.IDataCenterService dataCenter;
         private const int numberOfAccount = 1000;
-        private const int maxDegreeOfParallelism = 3;
 
         public Job()
         {
             dataCenter = new Services.Implement.DataCenterService();
         }
 
-        public Task Execute(IJobExecutionContext context)
+        public async Task Execute(IJobExecutionContext context)
         {
             try
             {
@@ -32,13 +32,25 @@
                 {
                     var chunkAccountList = accountList.Chunk(numberOfAccount / 10);
 
-                    Parallel.ForEach(chunkAccountList, new ParallelOptions { MaxDegreeOfParallelism = maxDegreeOfParallelism }, x =>
+                    var tasks = new List<Task>();
+
+                    foreach (var accounts in chunkAccountList)
                     {
-                        var accountJson = JsonConvert.SerializeObject(x.Select(a => new { StagingTransID = a }).ToList());
+                        var task = Task.Run(() =>
+                        {
+                            var accountJson = JsonConvert.SerializeObject(accounts.Select(a => new { StagingTransID = a }).ToList());
 
-                        dataCenter.UpdateAccountId(accountJson);
-                    });
+                            dataCenter.UpdateAccountId(accountJson);
+                        });
 
+                        await Task.Delay(10);
+
+                        tasks.Add(task);
+                    }
+
+                    await Task.WhenAll(tasks.ToArray());
+
+                    Console.WriteLine($"Account ID is updated at {DateTime.Now}");
                 }
             }
             catch (Exception ex)
@@ -49,11 +61,6 @@
 
                 LogService.Error(logMessage);
             }
-
-            Console.WriteLine($"Account ID is updated at {DateTime.Now}");
-
-            return Task.FromResult(true);
         }
-
     }
 }
