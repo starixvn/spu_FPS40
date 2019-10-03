@@ -3,6 +3,7 @@
     using Fanex.Logging;
     using Fanex.Logging.Extensions;
     using Fanex.Logging.Extensions.Database;
+    using Fanex.NAP.FPS.Renovation.Core;
     using Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Implement;
     using Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface;
     using Quartz;
@@ -13,8 +14,7 @@
     [DisallowConcurrentExecution]
     public class Job : IJob
     {
-        private readonly IDataCenterService dataCenterService;
-        private const int numberOfCustomer = 1000;        
+        private readonly IDataCenterService dataCenterService;          
 
         public Job()
         {
@@ -27,7 +27,7 @@
             {
                 
 
-                var newCustomer = dataCenterService.GetNewCustomer(numberOfCustomer);
+                var newCustomer = dataCenterService.GetNewCustomer(AppSettings.SizeOfCustomer);
 
                 if (newCustomer != null && newCustomer.Any())
                 {

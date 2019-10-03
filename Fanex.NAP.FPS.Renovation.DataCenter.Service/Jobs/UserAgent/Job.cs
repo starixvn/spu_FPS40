@@ -13,8 +13,7 @@
     public class Job : IJob
     {
         private readonly Services.Interface.IUserAgent userAgent;
-        private const int numberOfUserAgent = 10000;
-
+        
         public Job()
         {
             userAgent = new Services.Implement.UserAgent();            
@@ -24,7 +23,7 @@
         {
             try
             {                
-                var drawUserAgent = userAgent.GetUserAgent(numberOfUserAgent);
+                var drawUserAgent = userAgent.GetUserAgent(Core.AppSettings.SizeOfUserAgent);
 
                 if (drawUserAgent.Any())
                 {

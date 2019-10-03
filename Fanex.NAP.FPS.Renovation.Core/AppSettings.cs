@@ -55,5 +55,19 @@
         public static int TransBatch => Convert.ToInt32(ConfigurationManager.AppSettings["Trans-Batch"]);
 
         public static string SelfHostUrl => ConfigurationManager.AppSettings["SelfHost-Url"];
+
+        public static int SizeOfDevice => Convert.ToInt32(ConfigurationManager.AppSettings["Device-Size"]);
+        
+        public static int SizeOfAssociation => Convert.ToInt32(ConfigurationManager.AppSettings["Association-Size"]);
+        
+        public static int SizeOfTransaction => Convert.ToInt32(ConfigurationManager.AppSettings["Transaction-Size"]);
+        
+        public static int SizeOfAccount => Convert.ToInt32(ConfigurationManager.AppSettings["Account-Size"]);
+        
+        public static int SizeOfCustomer => Convert.ToInt32(ConfigurationManager.AppSettings["Customer-Size"]);
+        
+        public static int SizeOfIpRange => Convert.ToInt32(ConfigurationManager.AppSettings["IpRange-Size"]);
+        
+        public static int SizeOfUserAgent => Convert.ToInt32(ConfigurationManager.AppSettings["UserAgent-Size"]);
     }
 }

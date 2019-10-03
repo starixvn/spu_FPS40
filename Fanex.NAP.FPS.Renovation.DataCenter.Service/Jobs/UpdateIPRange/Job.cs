@@ -14,8 +14,7 @@
     [DisallowConcurrentExecution]
     public class Job : IJob
     {
-        private readonly Services.Interface.IPRangeService ipRangeService;
-        private readonly int batchSize = 10000;
+        private readonly Services.Interface.IPRangeService ipRangeService;        
         private readonly string rangeIpCSVFileName = "IpRanges.csv";
         private readonly string rangeIPTXTFileName = "IpRanges.txt";
         private readonly string originalPath;                       
@@ -76,7 +75,7 @@
         {
             var rangeIpUpdatedPath = Path.Combine(originalPath, rangeIPTXTFileName);
 
-            ipRangeService.GetRangeIpId(ref fromId, ref toId, batchSize, rangeIpUpdatedPath);
+            ipRangeService.GetRangeIpId(ref fromId, ref toId, Core.AppSettings.SizeOfIpRange, rangeIpUpdatedPath);
 
             var ipV6Ranges = ipRangeService.GetIpV6Range(fromId, toId);
 
@@ -101,7 +100,7 @@
                             Console.WriteLine($"IP Range is updated at {DateTime.Now} - {toId}");                           
 
                             fromId = (toId + 1);
-                            toId += batchSize;
+                            toId += Core.AppSettings.SizeOfIpRange;
 
                             ipRangeService.SaveRangeIpId(fromId, toId, rangeIpUpdatedPath);
                         }

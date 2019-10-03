@@ -16,8 +16,7 @@
     public class Job : IJob
     {
         private readonly Services.Interface.IDataTransformService dataTransformService;
-        private const int numberOfRawTrans = 100;
-
+        
         public Job()
         {
             dataTransformService = new Services.Implement.DataTransformService();
@@ -29,7 +28,7 @@
             {                
                 var apiUrls = AppSettings.SelfHostUrl.Split(';').ToList();
 
-                var stagingTranIds = dataTransformService.GetStagingRawTransaction(0, numberOfRawTrans, apiUrls.Count);
+                var stagingTranIds = dataTransformService.GetStagingRawTransaction(0, AppSettings.SizeOfTransaction, apiUrls.Count);
 
                 if (stagingTranIds.Any())
                 {

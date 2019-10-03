@@ -15,8 +15,7 @@
     public class Job : IJob
     {
         private readonly Services.Interface.IDataCenterService dataCenterService;
-        private const int numberOfTrans = 1000;
-
+        
         public Job()
         {
             dataCenterService = new Services.Implement.DataCenterService();
@@ -26,13 +25,13 @@
         {
             try
             {
-                var listOfTrans = dataCenterService.GetStagingTransIdForDevice(numberOfTrans);
+                var listOfTrans = dataCenterService.GetStagingTransIdForDevice(AppSettings.SizeOfDevice);
 
                 if (listOfTrans.Any())
                 {
                     Core.Utilities.WriteLog("InsertDevice.log", "Start: " + DateTime.Now);
 
-                    var transGroup = listOfTrans.Chunk(numberOfTrans / 10);
+                    var transGroup = listOfTrans.Chunk(AppSettings.SizeOfDevice / 10);
 
                     var tasks = new List<Task>();
 

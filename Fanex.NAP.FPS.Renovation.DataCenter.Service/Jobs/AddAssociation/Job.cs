@@ -19,8 +19,7 @@
     {
         private readonly IDataCenterService dataCenterService;
         private readonly EasyNetQConnector _rabbitMQ;
-        private const int numberOfAssociation = 1000;
-
+        
         public Job()
         {
             dataCenterService = new DataCenterService();
@@ -42,7 +41,7 @@
         {
             try
             {
-                var associations = dataCenterService.GetAssociationForGrapDB(0, numberOfAssociation);
+                var associations = dataCenterService.GetAssociationForGrapDB(0, AppSettings.SizeOfAssociation);
 
                 if (associations != null && associations.Any())
                 {

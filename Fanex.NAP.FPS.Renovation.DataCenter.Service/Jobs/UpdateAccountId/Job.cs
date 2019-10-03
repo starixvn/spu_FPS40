@@ -15,8 +15,7 @@
     public class Job : IJob
     {
         private readonly Services.Interface.IDataCenterService dataCenter;
-        private const int numberOfAccount = 1000;
-
+        
         public Job()
         {
             dataCenter = new Services.Implement.DataCenterService();
@@ -26,13 +25,13 @@
         {
             try
             {
-                var accountList = dataCenter.GetUpdatedAccount(numberOfAccount);
+                var accountList = dataCenter.GetUpdatedAccount(AppSettings.SizeOfAccount);
 
                 if (accountList.Any())
                 {
                     Core.Utilities.WriteLog("UpdateAccount.log", "Start: " + DateTime.Now);
 
-                    var chunkAccountList = accountList.Chunk(numberOfAccount / 10);
+                    var chunkAccountList = accountList.Chunk(AppSettings.SizeOfAccount / 10);
 
                     var tasks = new List<Task>();
 
