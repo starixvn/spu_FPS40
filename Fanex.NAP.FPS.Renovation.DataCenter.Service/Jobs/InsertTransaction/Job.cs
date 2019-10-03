@@ -33,7 +33,7 @@
 
                 if (stagingTranIds.Any())
                 {
-                    Core.Utilities.WriteLog("InsertTransaction.log", "Start: " + DateTime.Now.ToLongDateString());
+                    Core.Utilities.WriteLog("InsertTransaction.log", "Start: " + DateTime.Now);
 
                     var stagingTrans = stagingTranIds.Select((v, i) =>
                     {
@@ -58,7 +58,7 @@
 
                     await Task.WhenAll(tasks.ToArray());
 
-                    Core.Utilities.WriteLog("InsertTransaction.log", "End: " + DateTime.Now.ToLongDateString());
+                    Core.Utilities.WriteLog("InsertTransaction.log", "End: " + DateTime.Now);
                 }
             }
             catch (Exception ex)

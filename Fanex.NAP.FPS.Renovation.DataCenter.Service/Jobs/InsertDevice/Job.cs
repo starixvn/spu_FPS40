@@ -30,7 +30,7 @@
 
                 if (listOfTrans.Any())
                 {
-                    Core.Utilities.WriteLog("InsertDevice.log", "Start: " + DateTime.Now.ToLongDateString());
+                    Core.Utilities.WriteLog("InsertDevice.log", "Start: " + DateTime.Now);
 
                     var transGroup = listOfTrans.Chunk(numberOfTrans / 10);
 
@@ -52,7 +52,7 @@
 
                     Console.WriteLine($"Device is inserted at {DateTime.Now}");
 
-                    Core.Utilities.WriteLog("InsertDevice.log", "End: " + DateTime.Now.ToLongDateString());
+                    Core.Utilities.WriteLog("InsertDevice.log", "End: " + DateTime.Now);
                 }
             }
             catch (Exception ex)

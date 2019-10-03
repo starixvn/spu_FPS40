@@ -46,7 +46,7 @@
 
                 if (associations != null && associations.Any())
                 {
-                    Core.Utilities.WriteLog("AddAssociation.log", "Start: " + DateTime.Now.ToLongDateString());
+                    Core.Utilities.WriteLog("AddAssociation.log", "Start: " + DateTime.Now);
 
                     foreach (var association in associations)
                     {
@@ -65,7 +65,7 @@
 
                     dataCenterService.UpdateIsSyncByAssociationId(xmlData);
 
-                    Core.Utilities.WriteLog("AddAssociation.log", "End: " + DateTime.Now.ToLongDateString());
+                    Core.Utilities.WriteLog("AddAssociation.log", "End: " + DateTime.Now);
                 }
             }
             catch (Exception ex)

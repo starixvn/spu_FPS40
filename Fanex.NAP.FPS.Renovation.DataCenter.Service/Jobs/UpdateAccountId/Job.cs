@@ -30,7 +30,7 @@
 
                 if (accountList.Any())
                 {
-                    Core.Utilities.WriteLog("UpdateAccount.log", "Start: " + DateTime.Now.ToLongDateString());
+                    Core.Utilities.WriteLog("UpdateAccount.log", "Start: " + DateTime.Now);
 
                     var chunkAccountList = accountList.Chunk(numberOfAccount / 10);
 
@@ -54,7 +54,7 @@
 
                     Console.WriteLine($"Account ID is updated at {DateTime.Now}");
 
-                    Core.Utilities.WriteLog("UpdateAccount.log", "End: " + DateTime.Now.ToLongDateString());
+                    Core.Utilities.WriteLog("UpdateAccount.log", "End: " + DateTime.Now);
                 }
             }
             catch (Exception ex)

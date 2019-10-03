@@ -24,7 +24,7 @@
         {
             try
             {
-                Core.Utilities.WriteLog("UpdateUserAgent.log", "Start: " + DateTime.Now.ToLongDateString());
+                Core.Utilities.WriteLog("UpdateUserAgent.log", "Start: " + DateTime.Now);
 
                 var drawUserAgent = userAgent.GetUserAgent(numberOfUserAgent);
 
@@ -35,7 +35,7 @@
                     userAgent.UpdateUserAgent(userAgentJson);
                 }
 
-                Core.Utilities.WriteLog("UpdateUserAgent.log", "End: " + DateTime.Now.ToLongDateString());
+                Core.Utilities.WriteLog("UpdateUserAgent.log", "End: " + DateTime.Now);
             }
             catch (Exception ex)
             {
