@@ -25,7 +25,7 @@
         {
             try
             {
-                Core.Utilities.WriteLog("UpdateCustomerInfo", "Start: " + DateTime.Now.ToLongDateString());
+                Core.Utilities.WriteLog("UpdateCustomerInfo.log", "Start: " + DateTime.Now.ToLongDateString());
 
                 var newCustomer = dataCenterService.GetNewCustomer(numberOfCustomer);
 
@@ -39,7 +39,7 @@
                     }
                 }
 
-                Core.Utilities.WriteLog("UpdateCustomerInfo", "End: " + DateTime.Now.ToLongDateString());
+                Core.Utilities.WriteLog("UpdateCustomerInfo.log", "End: " + DateTime.Now.ToLongDateString());
             }
             catch (Exception ex)
             {
