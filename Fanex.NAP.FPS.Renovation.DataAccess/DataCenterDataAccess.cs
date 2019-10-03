@@ -23,13 +23,13 @@
             }
         }
 
-        public DataResult UpdateCustomerInfo(string custDataXml)
+        public DataResult UpdateCustomerInfo(string customerInfo)
         {
             var repository = new DynamicRepository();
 
             var criteria = new UpdateCustomerInfoCriteria
             {
-                CustDataXml = custDataXml
+                CustomerInfo = customerInfo
             };
 
             var errCode = repository.Execute(criteria);

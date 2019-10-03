@@ -54,9 +54,9 @@
                     .Where(x => !newCustomerInfo.Any(a => a.LoginName == x.LoginName || a.LoginNameWithPrefix == x.LoginNameWithPrefix))
                     .Select(s => new CustomerInfoModel
                     {
-                        AccountID = s.AccountID,
+                        AccountId = s.AccountID,
                         CreatedDate = s.CreatedDate,
-                        CurrencyID = 0,
+                        CurrencyId = 0,
                         CurrencyName = string.Empty,
                         CustID = 0,
                         IsDeposit = s.IsDeposit,
@@ -65,7 +65,7 @@
                         RoleID = 0,
                         Site = string.Empty,
                         SubAccId = 0,
-                        SubscriberID = s.SubscriberID,
+                        SubscriberId = s.SubscriberID,
                         SubscriberName = s.SubscriberName,
                         Username = string.Empty,
                         Username2 = string.Empty

@@ -46,6 +46,8 @@
 
                 if (associations != null && associations.Any())
                 {
+                    Core.Utilities.WriteLog("AddAssociation", "Start: " + DateTime.Now.ToLongDateString());
+
                     foreach (var association in associations)
                     {
                         var messageQueue = new Message<AssociationModel>(association, new MessageProperties { DeliveryMode = 2, Priority = 9 });
@@ -62,6 +64,8 @@
                     var xmlData = Core.Utilities.XMLConvert(isSynAssociation);
 
                     dataCenterService.UpdateIsSyncByAssociationId(xmlData);
+
+                    Core.Utilities.WriteLog("AddAssociation", "End: " + DateTime.Now.ToLongDateString());
                 }
             }
             catch (Exception ex)
@@ -75,7 +79,7 @@
 
             Console.WriteLine($"Association is updated at {DateTime.Now}");
 
-            return Task.FromResult(true);            
+            return Task.FromResult(true);
         }
     }
 }

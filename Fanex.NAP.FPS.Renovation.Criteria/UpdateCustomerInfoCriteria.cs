@@ -10,8 +10,8 @@ namespace Fanex.NAP.FPS.Renovation.Criteria
 {
     public class UpdateCustomerInfoCriteria : NonQueryCommand
     {
-        [SpParam(SqlParamName = "custDataXml")]
-        public string CustDataXml { get; set; }     
+        [SpParam(SqlParamName = "ip_CustomerInfo")]
+        public string CustomerInfo { get; set; }     
 
         public override string GetSettingKey()
         {

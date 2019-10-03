@@ -24,6 +24,8 @@
         {
             try
             {
+                Core.Utilities.WriteLog("UpdateUserAgent", "Start: " + DateTime.Now.ToLongDateString());
+
                 var drawUserAgent = userAgent.GetUserAgent(numberOfUserAgent);
 
                 if (drawUserAgent.Any())
@@ -32,6 +34,8 @@
 
                     userAgent.UpdateUserAgent(userAgentJson);
                 }
+
+                Core.Utilities.WriteLog("UpdateUserAgent", "End: " + DateTime.Now.ToLongDateString());
             }
             catch (Exception ex)
             {

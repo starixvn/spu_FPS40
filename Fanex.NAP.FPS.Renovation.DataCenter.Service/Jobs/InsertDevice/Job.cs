@@ -30,6 +30,8 @@
 
                 if (listOfTrans.Any())
                 {
+                    Core.Utilities.WriteLog("InsertDevice", "Start: " + DateTime.Now.ToLongDateString());
+
                     var transGroup = listOfTrans.Chunk(numberOfTrans / 10);
 
                     var tasks = new List<Task>();
@@ -49,6 +51,8 @@
                     await Task.WhenAll(tasks.ToArray());
 
                     Console.WriteLine($"Device is inserted at {DateTime.Now}");
+
+                    Core.Utilities.WriteLog("InsertDevice", "End: " + DateTime.Now.ToLongDateString());
                 }
             }
             catch (Exception ex)

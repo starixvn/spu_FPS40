@@ -30,6 +30,8 @@
 
                 if (accountList.Any())
                 {
+                    Core.Utilities.WriteLog("UpdateAccount", "Start: " + DateTime.Now.ToLongDateString());
+
                     var chunkAccountList = accountList.Chunk(numberOfAccount / 10);
 
                     var tasks = new List<Task>();
@@ -51,6 +53,8 @@
                     await Task.WhenAll(tasks.ToArray());
 
                     Console.WriteLine($"Account ID is updated at {DateTime.Now}");
+
+                    Core.Utilities.WriteLog("UpdateAccount", "End: " + DateTime.Now.ToLongDateString());
                 }
             }
             catch (Exception ex)

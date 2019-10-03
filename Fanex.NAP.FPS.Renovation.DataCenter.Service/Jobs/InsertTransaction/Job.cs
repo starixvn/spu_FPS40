@@ -26,13 +26,15 @@
         public async Task Execute(IJobExecutionContext context)
         {
             try
-            {
+            {                
                 var apiUrls = AppSettings.SelfHostUrl.Split(';').ToList();
 
                 var stagingTranIds = dataTransformService.GetStagingRawTransaction(0, numberOfRawTrans, apiUrls.Count);
 
                 if (stagingTranIds.Any())
                 {
+                    Core.Utilities.WriteLog("InsertTransaction", "Start: " + DateTime.Now.ToLongDateString());
+
                     var stagingTrans = stagingTranIds.Select((v, i) =>
                     {
                         v.APIUrl = i > apiUrls.Count ? apiUrls[0] : apiUrls[i];
@@ -55,8 +57,9 @@
                     }
 
                     await Task.WhenAll(tasks.ToArray());
-                }
 
+                    Core.Utilities.WriteLog("InsertTransaction", "End: " + DateTime.Now.ToLongDateString());
+                }
             }
             catch (Exception ex)
             {

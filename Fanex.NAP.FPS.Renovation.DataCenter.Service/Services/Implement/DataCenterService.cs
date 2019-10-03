@@ -58,9 +58,9 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Implement
         {
             var newCustomerInfo = customerInfo.Select(x => TransformCustomerInfo(x)).ToList();
 
-            var newXmlCustomerInfo = Utilities.XMLConvert(newCustomerInfo);
+            var newJsonCustomerInfo = JsonConvert.SerializeObject(newCustomerInfo);
 
-            return dataCenter.UpdateCustomerInfo(newXmlCustomerInfo);
+            return dataCenter.UpdateCustomerInfo(newJsonCustomerInfo);
         }
 
         public DataResult InsertDevice(List<DevicePackage> transId)
@@ -79,7 +79,7 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Implement
         {
             return new NewCustomerInfo
             {
-                CurrencyID = customerInfo.CurrencyID,
+                CurrencyID = customerInfo.CurrencyId,
                 CurrencyName = customerInfo.CurrencyName,
                 CustID = customerInfo.SubAccId != 0 ? customerInfo.SubAccId : customerInfo.CustID,
                 IsDeposit = customerInfo.IsDeposit,
@@ -87,8 +87,8 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Implement
                 Username = customerInfo.Username,
                 Username2 = customerInfo.Username2,
                 CreatedDate = customerInfo.CreatedDate,
-                AccountID = customerInfo.AccountID,
-                SubscriberID = customerInfo.SubscriberID
+                AccountID = customerInfo.AccountId,
+                SubscriberID = customerInfo.SubscriberId
             };
         }
     }

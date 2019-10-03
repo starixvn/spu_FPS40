@@ -45,6 +45,8 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service
             {
                 if (model.MinStagingTransId != 0 && model.MaxStagingTransId != 0)
                 {
+                    Core.Utilities.WriteLog("Insert Transaction", "Start: " + DateTime.Now.ToLongDateString());
+
                     Console.WriteLine("============> Min ID:" + model.MinStagingTransId + " - Max ID:" + model.MaxStagingTransId + " <================");
 
                     dataTransformService
@@ -54,6 +56,8 @@ namespace Fanex.NAP.FPS.Renovation.DataTransform.Service
                     .AccountProcessing()
                     .TransactionProcessing()              
                     .CompleteProcessing();
+
+                    Core.Utilities.WriteLog("Insert Transaction", "End: " + DateTime.Now.ToLongDateString());
 
                     return true;
                 }
