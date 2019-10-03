@@ -25,21 +25,23 @@
         {
             try
             {
-                Core.Utilities.WriteLog("UpdateCustomerInfo.log", "Start: " + DateTime.Now);
+                
 
                 var newCustomer = dataCenterService.GetNewCustomer(numberOfCustomer);
 
                 if (newCustomer != null && newCustomer.Any())
                 {
+                    Core.Utilities.WriteLog("UpdateCustomerInfo.log", "Start: " + DateTime.Now);
+
                     var customerInfo = dataCenterService.GetCustomerInfo(newCustomer);
 
                     if (customerInfo != null && customerInfo.Any())
                     {
                         dataCenterService.UpdateCustomerInfo(customerInfo);
                     }
-                }
 
-                Core.Utilities.WriteLog("UpdateCustomerInfo.log", "End: " + DateTime.Now);
+                    Core.Utilities.WriteLog("UpdateCustomerInfo.log", "End: " + DateTime.Now);
+                }                
             }
             catch (Exception ex)
             {

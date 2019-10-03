@@ -23,19 +23,19 @@
         public Task Execute(IJobExecutionContext context)
         {
             try
-            {
-                Core.Utilities.WriteLog("UpdateUserAgent.log", "Start: " + DateTime.Now);
-
+            {                
                 var drawUserAgent = userAgent.GetUserAgent(numberOfUserAgent);
 
                 if (drawUserAgent.Any())
                 {
+                    Core.Utilities.WriteLog("UpdateUserAgent.log", "Start: " + DateTime.Now);
+
                     var userAgentJson = JsonConvert.SerializeObject(drawUserAgent);
 
                     userAgent.UpdateUserAgent(userAgentJson);
-                }
 
-                Core.Utilities.WriteLog("UpdateUserAgent.log", "End: " + DateTime.Now);
+                    Core.Utilities.WriteLog("UpdateUserAgent.log", "End: " + DateTime.Now);
+                }                
             }
             catch (Exception ex)
             {
