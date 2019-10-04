@@ -87,11 +87,19 @@
 
         public static IEnumerable<IEnumerable<T>> Split<T>(this IEnumerable<T> list, int parts)
         {
-            int i = 0;
-            var splits = from item in list
-                         group item by i++ % parts into part
-                         select part.AsEnumerable();
-            return splits;
+            var numberOfPage = list.Count() / parts;
+            var floatPoint = list.Count() % parts;
+            if (floatPoint != 0)
+            {
+                parts += floatPoint;
+            }
+
+            for (var i = 0; i < parts; i++)
+            {
+                var takes = list.Skip(numberOfPage * i).Take(numberOfPage);
+
+                yield return takes;
+            }
         }
 
         public static IEnumerable<List<T>> Partition<T>(this IList<T> source, Int32 size)

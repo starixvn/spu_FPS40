@@ -20,7 +20,7 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface
 
         DataResult UpdateAccountId(string accountIdJson);
 
-        List<DevicePackage> GetStagingTransIdForDevice(int size);
+        List<DevicePackage> GetStagingTransIdForDevice(int size, int noOfBatch);
 
         DataResult InsertDevice(List<DevicePackage> transId);
     }

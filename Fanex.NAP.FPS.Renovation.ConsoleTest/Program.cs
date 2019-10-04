@@ -14,39 +14,52 @@ using System.Threading.Tasks;
 
 namespace Fanex.NAP.FPS.Renovation.ConsoleTest
 {
-    static class LinqExtensions
-    {
-        public static IEnumerable<IEnumerable<T>> Split<T>(this IEnumerable<T> list, int parts)
-        {
-            int i = 0;
-            var splits = from item in list
-                         group item by i++ % parts into part
-                         select part.AsEnumerable();
-            return splits;
-        }     
-
-    }
-
     class Program
     {
         static void Main(string[] args)
         {
-            string aa = "86693a2b90f14c3ab0a8735e56f8c779";
-            var d = DeviceFactory.GetDeviceInfo(aa);
-            Console.WriteLine(); 
+            //string aa = "86693a2b90f14c3ab0a8735e56f8c779";
+            //var d = DeviceFactory.GetDeviceInfo(aa);
+            //Console.WriteLine();
 
-            //var items = new List<int>();
+            var items = new List<int>();
 
-            //for (var i = 0; i < 10; i++)
+            for (var i = 0; i < 10; i++)
+            {
+                items.Add(i);
+            }
+
+            //var pages = 7;
+            //var numberOfPage = items.Count / pages;
+            //var floatPoint = items.Count % pages;
+            //if (floatPoint != 0)
             //{
-            //    items.Add(i);
-            //}            
+            //    pages += floatPoint;
+            //}                                               
 
-            //var result = items.Partition(3);
+            //for (var i = 0; i < pages; i++)
+            //{              
+            //    var takes = items.Skip(numberOfPage * i).Take(numberOfPage);
 
+            //    foreach (var take in takes)
+            //    {
+            //        Console.WriteLine(take);
+            //    }
 
+            //    Console.WriteLine("-------------");
+            //}
 
-            Console.WriteLine();
+            var takes = items.Split(3);
+
+            foreach (var take in takes)
+            {
+                foreach(var item in take)
+                {
+                    Console.WriteLine(item);
+                }
+
+                Console.WriteLine("-------------");
+            }
 
 
             //DbSettingProviderManager
@@ -111,7 +124,7 @@ namespace Fanex.NAP.FPS.Renovation.ConsoleTest
 
             //  SaveCSV(ipranges, DateTime.Now, @"D:\ipdbUpdated129.csv");
 
-
+            Console.ReadKey();
 
         }
 
@@ -121,7 +134,7 @@ namespace Fanex.NAP.FPS.Renovation.ConsoleTest
 
 
 
-        //Console.ReadKey();
+
     }
 
     //public static void SaveCSV(IEnumerable<IpRangeModel> IpRanges, DateTime updatedDate, string filePath)

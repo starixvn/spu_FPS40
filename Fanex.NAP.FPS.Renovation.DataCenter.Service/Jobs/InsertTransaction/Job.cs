@@ -26,7 +26,7 @@
         {
             try
             {                
-                var apiUrls = AppSettings.SelfHostUrl.Split(';').ToList();
+                var apiUrls = AppSettings.HostPathForTransaction.Split(';').ToList();
 
                 var stagingTranIds = dataTransformService.GetStagingRawTransaction(0, AppSettings.SizeOfTransaction, apiUrls.Count);
 

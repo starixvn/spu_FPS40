@@ -21,7 +21,7 @@
         {
             try
             {
-                _webApp = WebApp.Start<Startup>(AppSettings.SelfHostUrl);
+                _webApp = WebApp.Start<Startup>(AppSettings.HostPathForTransaction);
             }
             catch
             {
@@ -29,13 +29,13 @@
                 System.Environment.GetFolderPath(System.Environment.SpecialFolder.System), "netsh.exe");
                                 
                 var startInfo = new ProcessStartInfo(netsh);
-                startInfo.Arguments = "http add urlacl url="+ AppSettings.SelfHostUrl + " user=Everyone listen=yes";
+                startInfo.Arguments = "http add urlacl url="+ AppSettings.HostPathForTransaction + " user=Everyone listen=yes";
                 startInfo.UseShellExecute = true;
                 startInfo.Verb = "runas";
                 var process = Process.Start(startInfo);
                 process.WaitForExit();
 
-                _webApp = WebApp.Start<Startup>(AppSettings.SelfHostUrl);
+                _webApp = WebApp.Start<Startup>(AppSettings.HostPathForTransaction);
             }
         }
 

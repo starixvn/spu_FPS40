@@ -6,6 +6,7 @@
     using Fanex.NAP.FPS.Renovation.Core;
     using MySql.Data.MySqlClient;
     using Quartz;
+    using RestSharp;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -15,7 +16,7 @@
     public class Job : IJob
     {
         private readonly Services.Interface.IDataCenterService dataCenterService;
-        
+
         public Job()
         {
             dataCenterService = new Services.Implement.DataCenterService();
@@ -25,31 +26,55 @@
         {
             try
             {
-                var listOfTrans = dataCenterService.GetStagingTransIdForDevice(AppSettings.SizeOfDevice);
+                var apiUrls = AppSettings.HostPathForDevice.Split(';');
+
+                var listOfTrans = dataCenterService.GetStagingTransIdForDevice(AppSettings.SizeOfDevice, apiUrls.Count());
 
                 if (listOfTrans.Any())
                 {
                     Core.Utilities.WriteLog("InsertDevice.log", "Start: " + DateTime.Now);
-
-                    var transGroup = listOfTrans.Chunk(AppSettings.SizeOfDevice / 10);
-
+                    
+                    var groupTrans = listOfTrans.GroupBy(x => x.BatchId);
                     var tasks = new List<Task>();
+                    var index = 0;
 
-                    foreach (var trans in transGroup)
-                    {
+                    foreach (var trans in groupTrans)
+                    {                        
                         var task = Task.Run(() =>
                         {
-                            dataCenterService.InsertDevice(trans.ToList());
+                            return Executing(trans.ToList(), apiUrls[index >= apiUrls.Length ? 0 : index]);
                         });
 
                         await Task.Delay(10);
 
-                        tasks.Add(task);                        
+                        tasks.Add(task);
+
+                        index++;
                     }
 
                     await Task.WhenAll(tasks.ToArray());
 
                     Console.WriteLine($"Device is inserted at {DateTime.Now}");
+
+                    //var transGroup = listOfTrans.Chunk(AppSettings.SizeOfDevice / 10);
+
+                    //var tasks = new List<Task>();
+
+                    //foreach (var trans in transGroup)
+                    //{
+                    //    var task = Task.Run(() =>
+                    //    {
+                    //        dataCenterService.InsertDevice(trans.ToList());
+                    //    });
+
+                    //    await Task.Delay(10);
+
+                    //    tasks.Add(task);                        
+                    //}
+
+                    //await Task.WhenAll(tasks.ToArray());
+
+                    //Console.WriteLine($"Device is inserted at {DateTime.Now}");
 
                     Core.Utilities.WriteLog("InsertDevice.log", "End: " + DateTime.Now);
                 }
@@ -63,8 +88,20 @@
                     .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
 
                     LogService.Error(logMessage);
-                }                    
-            }             
+                }
+            }
+        }
+
+        private static async Task<IRestResponse> Executing(List<Model.DevicePackage> devices, string apiUrl)
+        {
+
+            var client = new RestClient(new Uri(apiUrl));
+            var request = new RestRequest("api/active", Method.POST);
+
+            request.AddHeader("Content-type", "application/json");
+            request.AddJsonBody(devices);
+
+            return await client.ExecuteTaskAsync(request);
         }
     }
 }

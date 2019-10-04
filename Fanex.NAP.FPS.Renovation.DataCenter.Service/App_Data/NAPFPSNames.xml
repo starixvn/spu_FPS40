@@ -23,7 +23,7 @@
     <Setting Key="FPS_DC_TransformData_Account_Transaction_GetPackage" SpName="FPS_DC_TransformData_Account_Transaction_GetPackage" DbName="MySQL.FPS_DataCenter"/>
     <Setting Key="FPS_DC_TransformData_Account_Transaction_Update" SpName="FPS_DC_TransformData_Account_Transaction_Update" DbName="MySQL.FPS_DataCenter"/>
 
-    <Setting Key="FPS_DC_TransformData_Device_Transaction_GetPackage" SpName="FPS_DC_TransformData_Device_Transaction_GetPackage" DbName="MySQL.FPS_DataCenter"/>
+    <Setting Key="FPS_DC_TransformData_Device_Transaction_GetPackage" SpName="FPS_DC_TransformData_Device_Transaction_GetPackage" DbName="MySQL.FPS_RawTransaction"/>
     <Setting Key="FPS_DC_TransformData_Device_Insert" SpName="FPS_DC_TransformData_Device_Insert" DbName="MySQL.FPS_DataCenter"/>
 
     

@@ -10,8 +10,11 @@ namespace Fanex.NAP.FPS.Renovation.Criteria
 {
     public class GetUpdatedDeviceListCriteria : CriteriaBase
     {
-        [SpParam(SqlParamName = "ip_Size")]
+        [SpParam(SqlParamName = "ip_NoOfTickets")]
         public int Size { get; set; }
+
+        [SpParam(SqlParamName = "ip_NoOfBatch")]
+        public int NoOfBatch { get; set; }
 
         public override string GetSettingKey()
         {

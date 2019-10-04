@@ -44,9 +44,9 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Implement
             return dataCenter.GetUpdatedAccountList(size);
         }
 
-        public List<DevicePackage> GetStagingTransIdForDevice(int size)
+        public List<DevicePackage> GetStagingTransIdForDevice(int size, int noOfBatch)
         {
-            return dataCenter.GetStagingTransIdForDevice(size);
+            return dataCenter.GetStagingTransIdForDevice(size, noOfBatch);
         }
 
         public DataResult UpdateAccountId(string accountIdJson)

@@ -11,5 +11,7 @@
         public long UserAgentId { get; set; }
 
         public long DeviceCodeId { get; set; }
+
+        public int BatchId { get; set; }
     }
 }

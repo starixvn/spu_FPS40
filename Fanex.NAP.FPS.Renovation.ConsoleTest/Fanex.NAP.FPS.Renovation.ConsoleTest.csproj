@@ -69,10 +69,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Fanex.Data">
-      <Version>4.1.4</Version>
+      <Version>4.1.5</Version>
     </PackageReference>
     <PackageReference Include="Fanex.Data.MySql">
-      <Version>4.1.4</Version>
+      <Version>4.1.5</Version>
     </PackageReference>
     <PackageReference Include="Fanex.Oneyed.DeviceDetector">
       <Version>2.0.1</Version>

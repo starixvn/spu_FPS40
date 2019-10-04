@@ -54,7 +54,9 @@
 
         public static int TransBatch => Convert.ToInt32(ConfigurationManager.AppSettings["Trans-Batch"]);
 
-        public static string SelfHostUrl => ConfigurationManager.AppSettings["SelfHost-Url"];
+        public static string HostPathForTransaction => ConfigurationManager.AppSettings["SelfHost-Url-Trans"];
+
+        public static string HostPathForDevice=> ConfigurationManager.AppSettings["SelfHost-Url-Device"];
 
         public static int SizeOfDevice => Convert.ToInt32(ConfigurationManager.AppSettings["Device-Size"]);
         

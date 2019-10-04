@@ -27,7 +27,7 @@
                 .WithIdentity("InsertTransactionTrigger", "DataCenterGroup")
                 .StartNow()
                 .WithSimpleSchedule(x => x                    
-                    .WithIntervalInSeconds(2)
+                    .WithIntervalInSeconds(1)
                     .RepeatForever())
                 .Build();
 

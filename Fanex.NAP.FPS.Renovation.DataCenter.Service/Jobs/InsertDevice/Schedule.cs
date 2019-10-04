@@ -27,7 +27,7 @@
                 .WithIdentity("InsertDeviceTrigger", "DataCenterGroup")
                 .StartNow()
                 .WithSimpleSchedule(x => x
-                    .WithIntervalInSeconds(10)
+                    .WithIntervalInSeconds(1)
                     .RepeatForever())
                 .Build();
 

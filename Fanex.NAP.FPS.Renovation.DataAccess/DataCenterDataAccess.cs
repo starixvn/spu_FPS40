@@ -251,11 +251,12 @@
             };
         }
 
-        public List<DevicePackage> GetStagingTransIdForDevice(int size)
+        public List<DevicePackage> GetStagingTransIdForDevice(int size, int noOfBatch)
         {
             var criteria = new GetUpdatedDeviceListCriteria
             {
-                Size = size
+                Size = size,
+                NoOfBatch = noOfBatch
             };
 
             using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
