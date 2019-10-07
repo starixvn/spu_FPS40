@@ -2,7 +2,7 @@
 
 <Functions>
   <Function Name="CapturingTransaction">
-    <Setting Key="FPS_RT_TransformData_GetPackage" SpName="FPS_RT_TransformData_GetPackage" DbName="MySQL.FPS_RawTransaction">
+    <Setting Key="FPS_ST_TransformData_GetPackage" SpName="FPS_ST_TransformData_GetPackage" DbName="MySQL.FPS_RawTransaction">
     </Setting>
   </Function>
 
@@ -12,7 +12,7 @@
     <Setting Key="FPS_DC_TransformData_Device" SpName="FPS_DC_TransformData_Device" DbName="MySQL.FPS_DataCenter" Timeout="600" />
     <Setting Key="FPS_DC_TransformData_UserAgent_Insert" SpName="FPS_DC_TransformData_UserAgent_Insert" DbName="MySQL.FPS_DataCenter" Timeout="600" />
     <Setting Key="FPS_DC_TransformData_Transaction_Insert" SpName="FPS_DC_TransformData_Transaction_Insert" DbName="MySQL.FPS_DataCenter" />
-    <Setting Key="FPS_RT_TransformData_UpdateCompletedProcess" SpName="FPS_RT_TransformData_UpdateCompletedProcess" DbName="MySQL.FPS_RawTransaction" />
+    <Setting Key="FPS_ST_TransformData_UpdateCompletedProcess" SpName="FPS_ST_TransformData_UpdateCompletedProcess" DbName="MySQL.FPS_RawTransaction" />
     <Setting Key="FPS_DC_TransformData_Fingerprint_Insert" SpName="FPS_DC_TransformData_Fingerprint_Insert" DbName="MySQL.FPS_DataCenter"/>
     <Setting Key="FPS_DC_TransformData_UnhandleSubscriberAction" SpName="FPS_DC_TransformData_UnhandleSubscriberAction" DbName="MySQL.FPS_DataCenter" Timeout="600" />
 
