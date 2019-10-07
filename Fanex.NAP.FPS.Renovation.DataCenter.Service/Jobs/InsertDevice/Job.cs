@@ -56,25 +56,6 @@
 
                     Console.WriteLine($"Device is inserted at {DateTime.Now}");
 
-                    //var transGroup = listOfTrans.Chunk(AppSettings.SizeOfDevice / 10);
-
-                    //var tasks = new List<Task>();
-
-                    //foreach (var trans in transGroup)
-                    //{
-                    //    var task = Task.Run(() =>
-                    //    {
-                    //        dataCenterService.InsertDevice(trans.ToList());
-                    //    });
-
-                    //    await Task.Delay(10);
-
-                    //    tasks.Add(task);                        
-                    //}
-
-                    //await Task.WhenAll(tasks.ToArray());
-
-                    //Console.WriteLine($"Device is inserted at {DateTime.Now}");
 
                     Core.Utilities.WriteLog("InsertDevice.log", "End: " + DateTime.Now);
                 }
