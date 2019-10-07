@@ -66,14 +66,11 @@
             }
             catch (Exception ex)
             {
-                if (((MySqlException)ex.InnerException).Number != 1213)
-                {
-                    var logMessage = new LogMessage(ex.Message)
-                    .AddSection("Data Info", DatabaseInfoGetters.GetDbExceptionInfo(ex))
-                    .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
+                var logMessage = new LogMessage(ex.Message)
+                   .AddSection("Data Info", DatabaseInfoGetters.GetDbExceptionInfo(ex))
+                   .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex)).ToString();
 
-                    LogService.Error(logMessage);
-                }
+                LogService.Error(logMessage);
             }
         }
 
