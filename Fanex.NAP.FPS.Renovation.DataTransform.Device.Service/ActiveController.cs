@@ -66,8 +66,8 @@
                 }
             }
             catch (Exception ex)
-            {
-                if (((MySqlException)ex.InnerException).Number != 1213)
+            {                
+                if (!ex.InnerException.Message.Contains("Deadlock found when trying to get lock"))
                 {
                     var logMessage = new LogMessage(ex.Message)
                        .AddSection("Data Info", DatabaseInfoGetters.GetDbExceptionInfo(ex))
