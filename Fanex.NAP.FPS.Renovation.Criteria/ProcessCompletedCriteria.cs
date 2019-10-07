@@ -18,7 +18,7 @@ namespace Fanex.NAP.FPS.Renovation.Criteria
 
         public override string GetSettingKey()
         {
-            return "FPS_RT_TransformData_UpdateCompletedProcess";
+            return "FPS_ST_TransformData_UpdateCompletedProcess";
         }
 
         public override bool IsValid()

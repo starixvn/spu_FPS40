@@ -29,7 +29,7 @@
     
   </Function>
   <Function Name="CapturingTransaction">
-    <Setting Key="FPS_RT_TransformData_GetPackage" SpName="FPS_RT_TransformData_GetPackage" DbName="MySQL.FPS_RawTransaction">
+    <Setting Key="FPS_ST_TransformData_GetPackage" SpName="FPS_ST_TransformData_GetPackage" DbName="MySQL.FPS_RawTransaction">
     </Setting>
   </Function>
 </Functions>
