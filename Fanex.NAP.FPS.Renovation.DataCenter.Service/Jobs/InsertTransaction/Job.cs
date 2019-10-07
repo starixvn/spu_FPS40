@@ -58,11 +58,7 @@
                     await Task.WhenAll(tasks.ToArray());
 
                     Core.Utilities.WriteLog("InsertTransaction.log", "End: " + DateTime.Now);
-                }
-                else
-                {
-                    LogService.Info("There is not existing staging raw transaction.");
-                }
+                }                
             }
             catch (Exception ex)
             {
