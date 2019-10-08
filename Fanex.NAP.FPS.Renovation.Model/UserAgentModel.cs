@@ -1,4 +1,5 @@
-﻿using System.Xml.Serialization;
+﻿using System;
+using System.Xml.Serialization;
 
 namespace Fanex.NAP.FPS.Renovation.Model
 {    
@@ -15,5 +16,7 @@ namespace Fanex.NAP.FPS.Renovation.Model
         public string BrowserName { get; set; }
 
         public long UserAgentId { get; set; }
+
+        public DateTime CreatedDate { get; set; }
     }
 }
