@@ -67,6 +67,10 @@
   <ItemGroup>
     <None Include="App.config" />
     <Content Include="Fanex.NAP.FPS.Renovation.DataTransform.Device.Service.exe.LOCAL.config">
+      <DependentUpon>App.config</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fanex.NAP.FPS.Renovation.DataTransform.Device.Service.exe.PRO.config">
 	<DependentUpon>App.config</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

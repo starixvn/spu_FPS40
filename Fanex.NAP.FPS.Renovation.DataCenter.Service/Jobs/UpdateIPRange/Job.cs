@@ -3,6 +3,7 @@
     using Fanex.Logging;
     using Fanex.Logging.Extensions;
     using Fanex.Logging.Extensions.Database;
+    using Fanex.NAP.FPS.Renovation.Core;
     using Quartz;
     using Renci.SshNet;
     using System;
@@ -19,11 +20,6 @@
         private readonly string rangeIPTXTFileName = "IpRanges.txt";
         private readonly string originalPath;                       
         private readonly ConnectionInfo connectionInfo;
-        private readonly string sshUser = "root";
-        private readonly string sshPassword = "1234@qwer";
-        private readonly string sshHost = "10.18.200.72";
-        private readonly int sshPort = 22;
-        private readonly string sshFolderPath = @"\\10.18.200.72\fps40\";
         private readonly string sshScript = "sh /etc/init.d/fps40_mysql_initial_ip_range.sh";
         private readonly int timeout = 5000;
         private int fromId;
@@ -40,9 +36,9 @@
                 Directory.CreateDirectory(originalPath);
             }
 
-            var authMethod = new PasswordAuthenticationMethod(sshUser, sshPassword);
+            var authMethod = new PasswordAuthenticationMethod(AppSettings.SSHUser, AppSettings.SSHPassword);
 
-            connectionInfo = new ConnectionInfo(sshHost, sshPort, sshUser, authMethod);
+            connectionInfo = new ConnectionInfo(AppSettings.SSHHost, AppSettings.SSHPort, AppSettings.SSHUser, authMethod);
         }
 
         public Task Execute(IJobExecutionContext context)
@@ -75,7 +71,7 @@
         {
             var rangeIpUpdatedPath = Path.Combine(originalPath, rangeIPTXTFileName);
 
-            ipRangeService.GetRangeIpId(ref fromId, ref toId, Core.AppSettings.SizeOfIpRange, rangeIpUpdatedPath);
+            ipRangeService.GetRangeIpId(ref fromId, ref toId, AppSettings.SizeOfIpRange, rangeIpUpdatedPath);
 
             var ipV6Ranges = ipRangeService.GetIpV6Range(fromId, toId);
 
@@ -83,7 +79,7 @@
             {
                 ipRangeService.SaveCSV(ipV6Ranges, updatedDate, filePath);            
                        
-                SaveACopyfileToServer(filePath, Path.Combine(sshFolderPath, rangeIpCSVFileName));
+                SaveACopyfileToServer(filePath, Path.Combine(AppSettings.SSHDestinationPath, rangeIpCSVFileName));
 
                 using (var client = new SshClient(connectionInfo))
                 {
@@ -148,7 +144,7 @@
             var command = "NET USE " + directory + " /delete";
             ExecuteCommand(command, timeout);
 
-            command = "NET USE " + directory + " /user:" + sshUser + " " + sshPassword;
+            command = "NET USE " + directory + " /user:" + AppSettings.SSHUser + " " + AppSettings.SSHPassword;
             ExecuteCommand(command, timeout);
 
             if(!Directory.Exists(directory))

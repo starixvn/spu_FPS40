@@ -71,5 +71,15 @@
         public static int SizeOfIpRange => Convert.ToInt32(ConfigurationManager.AppSettings["IpRange-Size"]);
         
         public static int SizeOfUserAgent => Convert.ToInt32(ConfigurationManager.AppSettings["UserAgent-Size"]);
+
+        public static string SSHUser => ConfigurationManager.AppSettings["ssh-User"];
+
+        public static string SSHPassword => ConfigurationManager.AppSettings["ssh-Password"];
+
+        public static string SSHHost => ConfigurationManager.AppSettings["ssh-Host"];
+
+        public static int SSHPort => Convert.ToInt32(ConfigurationManager.AppSettings["ssh-Port"]);
+
+        public static string SSHDestinationPath => ConfigurationManager.AppSettings["ssh-DestinationPath"];
     }
 }
