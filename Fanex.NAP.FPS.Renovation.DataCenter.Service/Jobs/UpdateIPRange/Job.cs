@@ -105,6 +105,10 @@
                             ipRangeService.SaveRangeIpId(fromId, toId, rangeIpUpdatedPath);
                         }
                     }
+                    else
+                    {
+                        LogService.Error(sshCommand.Error);
+                    }
                 }                              
             }
             else
