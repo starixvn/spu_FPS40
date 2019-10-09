@@ -13,7 +13,7 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface
 
         List<AssociationModel> GetAssociationForGrapDB(int isSync, int size);
 
-        DataResult UpdateIsSyncByAssociationId(string associationXml);
+        DataResult UpdateIsSyncByAssociationId(string association);
 
 
         List<int> GetUpdatedAccount(int size);

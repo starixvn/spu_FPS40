@@ -10,8 +10,8 @@ namespace Fanex.NAP.FPS.Renovation.Criteria
 {
     public class UpdateIsSyncGraphDBByAssociationIdCriteria : NonQueryCommand
     {
-        [SpParam(SqlParamName = "ip_AssociationXML")]
-        public string AssociationXml { get; set; }
+        [SpParam(SqlParamName = "ip_AssociationJSON")]
+        public string Association { get; set; }
 
         public override string GetSettingKey()
         {

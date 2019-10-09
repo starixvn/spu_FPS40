@@ -9,6 +9,7 @@
     using Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Interface;
     using Fanex.NAP.FPS.Renovation.Model;
     using Fanex.NAP.FPS.Renovation.Queue;
+    using Newtonsoft.Json;
     using Quartz;
     using System;
     using System.Linq;
@@ -56,13 +57,13 @@
 
                     var isSynAssociation = associations.Select(x => new IsSynAssociationModel
                     {
-                        AssociationID = x.AssociationId,
+                        AssociationId = x.AssociationId,
                         SyncGraphDB = 1
                     }).ToList();
 
-                    var xmlData = Core.Utilities.XMLConvert(isSynAssociation);
+                    var jsonData = JsonConvert.SerializeObject(isSynAssociation);
 
-                    dataCenterService.UpdateIsSyncByAssociationId(xmlData);
+                    dataCenterService.UpdateIsSyncByAssociationId(jsonData);
 
                     Core.Utilities.WriteLog("AddAssociation.log", "End: " + DateTime.Now);
                 }

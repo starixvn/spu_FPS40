@@ -68,13 +68,13 @@
             }
         }
 
-        public DataResult UpdateIsSyncGraphDBByAssociationId(string associationXml)
+        public DataResult UpdateIsSyncGraphDBByAssociationId(string association)
         {
             var repository = new DynamicRepository();
 
             var criteria = new UpdateIsSyncGraphDBByAssociationIdCriteria
             {
-                AssociationXml = associationXml
+                Association = association
             };
 
             var errCode = repository.Execute(criteria);

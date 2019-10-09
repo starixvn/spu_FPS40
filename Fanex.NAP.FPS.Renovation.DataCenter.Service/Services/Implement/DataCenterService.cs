@@ -70,9 +70,9 @@ namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Services.Implement
             return dataCenter.InsertDevice(transJson);
         }
 
-        public DataResult UpdateIsSyncByAssociationId(string associationXml)
+        public DataResult UpdateIsSyncByAssociationId(string association)
         {
-            return dataCenter.UpdateIsSyncGraphDBByAssociationId(associationXml);
+            return dataCenter.UpdateIsSyncGraphDBByAssociationId(association);
         }
 
         private NewCustomerInfo TransformCustomerInfo(CustomerInfoModel customerInfo)
