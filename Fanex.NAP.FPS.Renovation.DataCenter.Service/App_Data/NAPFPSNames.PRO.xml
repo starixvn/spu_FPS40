@@ -6,10 +6,9 @@
     <Setting Key="FPS_DC_TransformData_Account_UpdateCustomerInfo" SpName="FPS_DC_TransformData_Account_UpdateCustomerInfo" DbName="MySQL.FPS_DataCenter"/>
     <Setting Key="FPS_DC_GetAssociationForGraphDB" SpName="FPS_DC_GetAssociationForGraphDB" DbName="MySQL.FPS_DataCenter"/>
     <Setting Key="FPS_GetCustomerInfo40" SpName="FPS_GetCustomerInfo40" DbName="SQL.FPS_bodb02"/>
-
-    <Setting Key="GetAllIP2Location" SpName="GetAllIP2Location" DbName="SQL.IPDB"/>
-    <Setting Key="GetAllIPv62Location" SpName="GetAllIPv62Location" DbName="SQL.IPDB" TimeOut="3600"/>
-    <Setting Key="GetIPDBVersion" SpName="GetIPDBVersion" DbName="SQL.IPDB"/>
+    
+    <Setting Key="GetAllIPv62Location" SpName="GetAllIPv62Location_xtest" DbName="SQL.IPDB" TimeOut="3600"/>
+    <Setting Key="GetIPDBVersion" SpName="GetIPDBVersion_xtest" DbName="SQL.IPDB"/>
 
     <Setting Key="FPS_DC_UpdateIPTableLog" SpName="FPS_DC_UpdateIPTableLog" DbName="MySQL.FPS_DataCenter"/>
     <Setting Key="FPS_DC_GetLatestUpdatedDate_IPRange" SpName="FPS_DC_GetLatestUpdatedDate_IPRange" DbName="MySQL.FPS_DataCenter"/>
@@ -25,7 +24,6 @@
 
     <Setting Key="FPS_DC_TransformData_Device_Transaction_GetPackage" SpName="FPS_DC_TransformData_Device_Transaction_GetPackage" DbName="MySQL.FPS_DataCenter"/>
     <Setting Key="FPS_DC_TransformData_Device_Insert" SpName="FPS_DC_TransformData_Device_Insert" DbName="MySQL.FPS_DataCenter"/>
-
 
   </Function>
   <Function Name="CapturingTransaction">

@@ -17,6 +17,6 @@
     <Setting Key="FPS_DC_TransformData_UnhandleSubscriberAction" SpName="FPS_DC_TransformData_UnhandleSubscriberAction" DbName="MySQL.FPS_DataCenter" Timeout="600" />
 
     <Setting Key="FPS_DC_CheckAccountExist" SpName="FPS_DC_CheckAccountExist" DbName="MySQL.FPS_DataCenter" />
-    <Setting Key="FPS_GetCustomerInfo40" SpName="FPS_GetCustomerInfo40" DbName="SQL.FPS_bodb02"/>
+    <Setting Key="FPS_GetCustomerInfo40" SpName="FPS_GetCustomerInfo40_xtest" DbName="SQL.FPS_bodb02"/>
   </Function>
 </Functions>
