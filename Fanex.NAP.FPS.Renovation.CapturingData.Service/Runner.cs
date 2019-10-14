@@ -8,7 +8,9 @@
     using Fanex.NAP.FPS.Renovation.Queue;
     using Fanex.Oneyed.Infrastructure.Models;
     using System;
+    using System.Collections;
     using System.Collections.Generic;
+    using System.Linq;
     using System.ServiceProcess;
     using System.Timers;
 
@@ -19,6 +21,8 @@
         private readonly List<RawTransactionModel> _transactionList;
         private readonly System.Timers.Timer _timer;
         private DateTime _lastInsertTrans;
+        private BitArray transBit = new BitArray(8);
+
         public Runner()
         {
             InitializeComponent();
@@ -124,20 +128,19 @@
         private RawTransactionModel TransformRawTransaction(MessageQueue message)
         {
             var invalidDevice = string.Empty;
-            var transStatus = 1;
+                       
+            var deviceCode = Utilities.GetDeviceCodeFromCapturedData(message.Device);
 
-            var deviceCode = Utilities.GetDeviceCodeFromCapturedData(message.Device);            
-
-            var deviceInfo = _capturingDataService.GetDeviceInfo(deviceCode);                        
+            var deviceInfo = _capturingDataService.GetDeviceInfo(deviceCode);
 
             var url = Utilities.GetURLFromDeviceCode(message.Device);
             var userAgent = Utilities.GetUserAgentFromDeviceCode(message.Device);
 
-            if(string.IsNullOrWhiteSpace(deviceInfo.DeviceNo) || deviceInfo.DeviceNo == "N/A")
-            {                
+            if (string.IsNullOrWhiteSpace(deviceInfo.DeviceNo) || deviceInfo.DeviceNo == "N/A")
+            {
                 invalidDevice = deviceCode;
                 deviceInfo.DeviceNo = string.Empty;
-                transStatus = -2;
+                transBit.Set(7, true);
             }
             else
             {
@@ -145,15 +148,20 @@
                 {
                     deviceInfo.DeviceNo = string.Empty;
                     invalidDevice = deviceCode;
-                    transStatus = -1;
+                    transBit.Set(7, true);
                 }
-            }            
+            }
+
+            if(ContainsUnicodeCharacter(message.Account))
+            {
+                transBit.Set(6, true);
+            }
 
             return new RawTransactionModel
             {
                 DeviceCode = deviceInfo.DeviceNo,
                 InvalidDevice = invalidDevice,
-                TransStatus = transStatus,
+                TransStatus = ConvertBitArray2Int(transBit),
                 LoginName = message.Account,
                 SubscriberName = message.Subscriber,
                 TransDate = Convert.ToDateTime(message.TransDate.ToString("yyyy-MM-dd HH:mm:ss.ffff")),
@@ -188,6 +196,24 @@
         private static string ConvertNA2Empty(string data)
         {
             return data != "N/A" ? data : string.Empty;
+        }
+
+        private static bool ContainsUnicodeCharacter(string input)
+        {
+            const int MaxAnsiCode = 255;
+
+            return input.Any(c => c > MaxAnsiCode);
+        }
+
+        private static int ConvertBitArray2Int(BitArray bitArray)
+        {
+            if (bitArray.Length > 32)
+                throw new ArgumentException("Argument length shall be at most 32 bits.");
+
+            int[] array = new int[1];
+            bitArray.CopyTo(array, 0);
+
+            return array[0];
         }
     }
 }
