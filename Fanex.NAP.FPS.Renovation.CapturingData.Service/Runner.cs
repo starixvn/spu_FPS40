@@ -20,8 +20,7 @@
         private readonly ICapturingDataService _capturingDataService;
         private readonly List<RawTransactionModel> _transactionList;
         private readonly System.Timers.Timer _timer;
-        private DateTime _lastInsertTrans;
-        private BitArray transBit = new BitArray(16);
+        private DateTime _lastInsertTrans;        
 
         public Runner()
         {
@@ -136,11 +135,13 @@
             var url = Utilities.GetURLFromDeviceCode(message.Device);
             var userAgent = Utilities.GetUserAgentFromDeviceCode(message.Device);
 
+            var transBit = new BitArray(16);
+
             if (string.IsNullOrWhiteSpace(deviceInfo.DeviceNo) || deviceInfo.DeviceNo == "N/A")
             {
                 invalidDevice = deviceCode;
                 deviceInfo.DeviceNo = string.Empty;
-                transBit.Set(15, true);
+                transBit.Set((int)TransStatus.InvalidDeviceCode, true);
             }
             else
             {
@@ -148,13 +149,13 @@
                 {
                     deviceInfo.DeviceNo = string.Empty;
                     invalidDevice = deviceCode;
-                    transBit.Set(15, true);
+                    transBit.Set((int)TransStatus.InvalidDeviceCode, true);
                 }
             }
 
             if(ContainsUnicodeCharacter(message.Account))
             {
-                transBit.Set(14, true);
+                transBit.Set((int)TransStatus.InvalidLoginName, true);
             }
 
             return new RawTransactionModel
