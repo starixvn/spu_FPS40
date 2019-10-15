@@ -72,6 +72,7 @@ namespace Fanex.NAP.FPS.Renovation.DataImported.Service
         {
             var reader = new StreamReader(File.OpenRead(filePath));
             List<string> searchList = new List<string>();
+
             while (!reader.EndOfStream)
             {
                 var line = reader.ReadLine();

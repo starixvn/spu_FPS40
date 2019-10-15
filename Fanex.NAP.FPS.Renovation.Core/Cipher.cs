@@ -7,7 +7,7 @@
 
     public static class Cipher
     {
-        private static readonly string passwrod = "!QAZxdr5P@ssword";
+        const string passwrod = "!QAZxdr5P@ssword";
 
         public static string Encrypt(string plainText)
         {
@@ -27,14 +27,8 @@
             if (encryptedText == null)
             {
                 return null;
-            }
+            }            
 
-            if (password == null)
-            {
-                password = String.Empty;
-            }
-
-            // Get the bytes of the string
             var bytesToBeDecrypted = Convert.FromBase64String(encryptedText);
             var passwordBytes = Encoding.UTF8.GetBytes(password);
 

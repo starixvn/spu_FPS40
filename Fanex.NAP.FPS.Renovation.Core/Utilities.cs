@@ -12,6 +12,7 @@
     using System.Net.Sockets;
     using System.Numerics;
     using Fanex.NAP.FPS.Renovation.Model;
+    using System.Collections;
 
     public static class Utilities
     {
@@ -225,6 +226,35 @@
             }
 
             return ipAddress.ToString();    // all else treat as to string
+        }
+
+        public static int ConvertBitArray2Int(BitArray bitArray)
+        {
+            var binString = ToBitString(bitArray);
+
+            return Convert.ToInt32(binString, 2);
+        }
+
+        public static int[] ConvertInt2BitArray(int input)
+        {
+            string s = Convert.ToString(input, 2);
+
+            return s.PadLeft(8, '0')
+                         .Select(c => int.Parse(c.ToString()))
+                         .ToArray();
+        }
+
+        public  static string ToBitString(BitArray bits)
+        {
+            var sb = new StringBuilder();
+
+            for (int i = 0; i < bits.Count; i++)
+            {
+                char c = bits[i] ? '1' : '0';
+                sb.Append(c);
+            }
+
+            return sb.ToString();
         }
     }
 }

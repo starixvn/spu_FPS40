@@ -5,6 +5,7 @@ using Fanex.DeviceDetector.Factory;
 using Fanex.NAP.FPS.Renovation.Core;
 using Fanex.NAP.FPS.Renovation.Model;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -16,18 +17,47 @@ namespace Fanex.NAP.FPS.Renovation.ConsoleTest
 {
     class Program
     {
+        //private static int ConvertBitArray2Int(BitArray bitArray)
+        //{
+        //    var binString = ToBitString(bitArray);
+
+        //    return Convert.ToInt32(binString, 2);
+        //}
+
+        // private static int[] ConvertInt2BitArray(int input)
+        //{
+        //    string s = Convert.ToString(input, 2);
+
+        //    return s.PadLeft(8, '0')
+        //                 .Select(c => int.Parse(c.ToString()))
+        //                 .ToArray();
+        //}
+
+        //static string ToBitString(BitArray bits)
+        //{
+        //    var sb = new StringBuilder();
+
+        //    for (int i = 0; i < bits.Count; i++)
+        //    {
+        //        char c = bits[i] ? '1' : '0';
+        //        sb.Append(c);
+        //    }
+
+        //    return sb.ToString();
+        //}
+
         static void Main(string[] args)
         {
             //string aa = "86693a2b90f14c3ab0a8735e56f8c779";
             //var d = DeviceFactory.GetDeviceInfo(aa);
             //Console.WriteLine();
 
-            var items = new List<int>();
+            //var items = new List<int>();
 
-            for (var i = 0; i < 10; i++)
-            {
-                items.Add(i);
-            }
+            //for (var i = 0; i < 10; i++)
+            //{
+            //    items.Add(i);
+            //}
 
             //var pages = 7;
             //var numberOfPage = items.Count / pages;
@@ -49,17 +79,17 @@ namespace Fanex.NAP.FPS.Renovation.ConsoleTest
             //    Console.WriteLine("-------------");
             //}
 
-            var takes = items.Split(3);
+            //var takes = items.Split(3);
 
-            foreach (var take in takes)
-            {
-                foreach(var item in take)
-                {
-                    Console.WriteLine(item);
-                }
+            //foreach (var take in takes)
+            //{
+            //    foreach(var item in take)
+            //    {
+            //        Console.WriteLine(item);
+            //    }
 
-                Console.WriteLine("-------------");
-            }
+            //    Console.WriteLine("-------------");
+            //}
 
 
             //DbSettingProviderManager
@@ -124,6 +154,24 @@ namespace Fanex.NAP.FPS.Renovation.ConsoleTest
 
             //  SaveCSV(ipranges, DateTime.Now, @"D:\ipdbUpdated129.csv");
 
+            //var bitArray = new BitArray(16, false);
+
+            //bitArray.Set(15, true);
+            //bitArray.Set(14, true);
+
+
+            ////var intArray = ConvertInt2BitArray(3);
+            //var binString = ConvertBitArray2Int(bitArray);
+                        
+
+            //Console.WriteLine(binString);
+
+
+            //foreach(var bit in bitArray)
+            //{
+            //    Console.WriteLine(bit);
+            //}
+
             Console.ReadKey();
 
         }
@@ -137,6 +185,8 @@ namespace Fanex.NAP.FPS.Renovation.ConsoleTest
 
     }
 
+
+   
     //public static void SaveCSV(IEnumerable<IpRangeModel> IpRanges, DateTime updatedDate, string filePath)
     //{
     //    var ipRangeEncode = IpRanges.Select(x =>

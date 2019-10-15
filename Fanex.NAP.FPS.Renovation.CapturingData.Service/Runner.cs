@@ -21,7 +21,7 @@
         private readonly List<RawTransactionModel> _transactionList;
         private readonly System.Timers.Timer _timer;
         private DateTime _lastInsertTrans;
-        private BitArray transBit = new BitArray(8);
+        private BitArray transBit = new BitArray(16);
 
         public Runner()
         {
@@ -140,7 +140,7 @@
             {
                 invalidDevice = deviceCode;
                 deviceInfo.DeviceNo = string.Empty;
-                transBit.Set(7, true);
+                transBit.Set(15, true);
             }
             else
             {
@@ -148,20 +148,20 @@
                 {
                     deviceInfo.DeviceNo = string.Empty;
                     invalidDevice = deviceCode;
-                    transBit.Set(7, true);
+                    transBit.Set(15, true);
                 }
             }
 
             if(ContainsUnicodeCharacter(message.Account))
             {
-                transBit.Set(6, true);
+                transBit.Set(14, true);
             }
 
             return new RawTransactionModel
             {
                 DeviceCode = deviceInfo.DeviceNo,
                 InvalidDevice = invalidDevice,
-                TransStatus = ConvertBitArray2Int(transBit),
+                TransStatus = Core.Utilities.ConvertBitArray2Int(transBit),
                 LoginName = message.Account,
                 SubscriberName = message.Subscriber,
                 TransDate = Convert.ToDateTime(message.TransDate.ToString("yyyy-MM-dd HH:mm:ss.ffff")),
@@ -203,17 +203,6 @@
             const int MaxAnsiCode = 255;
 
             return input.Any(c => c > MaxAnsiCode);
-        }
-
-        private static int ConvertBitArray2Int(BitArray bitArray)
-        {
-            if (bitArray.Length > 32)
-                throw new ArgumentException("Argument length shall be at most 32 bits.");
-
-            int[] array = new int[1];
-            bitArray.CopyTo(array, 0);
-
-            return array[0];
-        }
+        }       
     }
 }
