@@ -139,17 +139,17 @@
 
             if (string.IsNullOrWhiteSpace(deviceInfo.DeviceNo) || deviceInfo.DeviceNo == "N/A")
             {
-                invalidDevice = deviceCode;
+                invalidDevice = deviceInfo.DeviceNo;
                 deviceInfo.DeviceNo = string.Empty;
-                transBit.Set((int)TransStatus.InvalidDeviceCode, true);
+                transBit.Set((int)TransStatus.DeviceCodeIsEmpty, true);
             }
             else
             {
                 if (!Utilities.IsGuidDeviceId(deviceInfo.DeviceNo) || deviceInfo.InvalidDeviceId)
                 {
-                    deviceInfo.DeviceNo = string.Empty;
                     invalidDevice = deviceCode;
-                    transBit.Set((int)TransStatus.InvalidDeviceCode, true);
+                    deviceInfo.DeviceNo = string.Empty;                    
+                    transBit.Set((int)TransStatus.InvalidDI, true);
                 }
             }
 

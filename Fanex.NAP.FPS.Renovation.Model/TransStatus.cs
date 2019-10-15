@@ -23,10 +23,14 @@ namespace Fanex.NAP.FPS.Renovation.Model
         /// <summary>
         /// Binary Values is 100
         /// </summary>
-        InvalidDeviceCode = 13,
+        DeviceCodeIsEmpty = 13,
         /// <summary>
         /// Binary Values is 1000
         /// </summary>
-        InvalidLoginName = 12
+        InvalidLoginName = 12,
+        /// <summary>
+        /// Binary Values is 10000
+        /// </summary>
+        InvalidDI = 11
     }
 }
