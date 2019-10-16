@@ -139,7 +139,7 @@
 
             if (string.IsNullOrWhiteSpace(deviceInfo.DeviceNo) || deviceInfo.DeviceNo == "N/A")
             {
-                invalidDevice = deviceInfo.DeviceNo;
+                invalidDevice = string.IsNullOrWhiteSpace(deviceInfo.DeviceNo) ? "Empty" : "N/A";
                 deviceInfo.DeviceNo = string.Empty;
                 transBit.Set((int)TransStatus.DeviceCodeIsEmpty, true);
             }
