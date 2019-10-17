@@ -16,14 +16,14 @@
 
     <Setting Key="FPS_DC_UpdateIsSyncGraphDBByAssociationID" SpName="FPS_DC_UpdateIsSyncGraphDBByAssociationID" DbName="MySQL.FPS_DataCenter" Timeout="600"/>
 
-    <Setting Key="FPS_DC_TransformData_UserAgent_GetNullBrowserOSList" SpName="FPS_DC_TransformData_UserAgent_GetNullBrowserOSList" DbName="MySQL.FPS_DataCenter"/>
-    <Setting Key="FPS_DC_TransformData_UserAgent_UpdateOSBrowser" SpName="FPS_DC_TransformData_UserAgent_UpdateOSBrowser" DbName="MySQL.FPS_DataCenter"/>
+    <Setting Key="FPS_DC_TransformData_UserAgent_GetNullBrowserOSList" SpName="FPS_DC_TransformData_UserAgent_GetNullBrowserOSList" DbName="MySQL.FPS_DataCenter" Timeout="600"/>
+    <Setting Key="FPS_DC_TransformData_UserAgent_UpdateOSBrowser" SpName="FPS_DC_TransformData_UserAgent_UpdateOSBrowser" DbName="MySQL.FPS_DataCenter" Timeout="600"/>
 
-    <Setting Key="FPS_DC_TransformData_Account_Transaction_GetPackage" SpName="FPS_DC_TransformData_Account_Transaction_GetPackage" DbName="MySQL.FPS_DataCenter"/>
-    <Setting Key="FPS_DC_TransformData_Account_Transaction_Update" SpName="FPS_DC_TransformData_Account_Transaction_Update" DbName="MySQL.FPS_DataCenter"/>
+    <Setting Key="FPS_DC_TransformData_Account_Transaction_GetPackage" SpName="FPS_DC_TransformData_Account_Transaction_GetPackage" DbName="MySQL.FPS_DataCenter" Timeout="600"/>
+    <Setting Key="FPS_DC_TransformData_Account_Transaction_Update" SpName="FPS_DC_TransformData_Account_Transaction_Update" DbName="MySQL.FPS_DataCenter" Timeout="600"/>
 
-    <Setting Key="FPS_DC_TransformData_Device_Transaction_GetPackage" SpName="FPS_DC_TransformData_Device_Transaction_GetPackage" DbName="MySQL.FPS_DataCenter"/>
-    <Setting Key="FPS_DC_TransformData_Device_Insert" SpName="FPS_DC_TransformData_Device_Insert" DbName="MySQL.FPS_DataCenter"/>
+    <Setting Key="FPS_DC_TransformData_Device_Transaction_GetPackage" SpName="FPS_DC_TransformData_Device_Transaction_GetPackage" DbName="MySQL.FPS_DataCenter" Timeout="600"/>
+    <Setting Key="FPS_DC_TransformData_Device_Insert" SpName="FPS_DC_TransformData_Device_Insert" DbName="MySQL.FPS_DataCenter" Timeout="600"/>
 
   </Function>
   <Function Name="CapturingTransaction">
