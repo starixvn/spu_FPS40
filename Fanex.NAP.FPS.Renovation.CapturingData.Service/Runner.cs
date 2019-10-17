@@ -126,15 +126,11 @@
 
         private RawTransactionModel TransformRawTransaction(MessageQueue message)
         {
-            var invalidDevice = string.Empty;
-                       
+            var invalidDevice = string.Empty;                       
             var deviceCode = Utilities.GetDeviceCodeFromCapturedData(message.Device);
-
             var deviceInfo = _capturingDataService.GetDeviceInfo(deviceCode);
-
             var url = Utilities.GetURLFromDeviceCode(message.Device);
             var userAgent = Utilities.GetUserAgentFromDeviceCode(message.Device);
-
             var transBit = new BitArray(16);
 
             if (string.IsNullOrWhiteSpace(deviceInfo.DeviceNo) || deviceInfo.DeviceNo == "N/A")

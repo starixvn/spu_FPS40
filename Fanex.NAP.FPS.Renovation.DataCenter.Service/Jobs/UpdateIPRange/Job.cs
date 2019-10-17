@@ -168,7 +168,7 @@
 
             var destinationFilePath = directory + filenameToSave;
 
-            File.Copy(filePath, destinationFilePath);
+            File.Copy(filePath, destinationFilePath, true);
 
             File.Delete(filePath);
         }
