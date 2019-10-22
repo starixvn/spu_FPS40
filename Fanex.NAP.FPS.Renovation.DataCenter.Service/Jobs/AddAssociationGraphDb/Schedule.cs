@@ -1,4 +1,4 @@
-﻿namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Jobs.AddAssociation
+﻿namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Jobs.AddAssociationGraphDb
 {
     using Quartz;
     using Quartz.Impl;

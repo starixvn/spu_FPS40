@@ -61,8 +61,8 @@
   <ItemGroup>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ISchedule.cs" />
-    <Compile Include="Jobs\AddAssociation\Job.cs" />
-    <Compile Include="Jobs\AddAssociation\Schedule.cs" />
+    <Compile Include="Jobs\AddAssociationGraphDb\Job.cs" />
+    <Compile Include="Jobs\AddAssociationGraphDb\Schedule.cs" />
     <Compile Include="Jobs\InsertDevice\Job.cs" />
     <Compile Include="Jobs\InsertDevice\Schedule.cs" />
     <Compile Include="Jobs\InsertTransaction\Job.cs" />

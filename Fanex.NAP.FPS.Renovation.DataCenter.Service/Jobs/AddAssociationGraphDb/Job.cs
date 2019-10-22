@@ -1,4 +1,4 @@
-﻿namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Jobs.AddAssociation
+﻿namespace Fanex.NAP.FPS.Renovation.DataCenter.Service.Jobs.AddAssociationGraphDb
 {
     using EasyNetQ;
     using Fanex.Logging;
@@ -77,7 +77,7 @@
                 LogService.Error(logMessage);
             }
 
-            Console.WriteLine($"Association is updated at {DateTime.Now}");
+            Console.WriteLine($"Association for GraphDB is updated at {DateTime.Now}");
 
             return Task.FromResult(true);
         }

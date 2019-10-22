@@ -1,4 +1,6 @@
-﻿namespace Fanex.NAP.FPS.Renovation.Model
+﻿using System;
+
+namespace Fanex.NAP.FPS.Renovation.Model
 {
     public class AssociationModel
     {
@@ -8,6 +10,8 @@
         public long AssociationId { get; set; }
 
         public long DeviceId { get; set; }
+
+        public DateTime AssociatedDate { get; set; }
 
         public int SubscriberId { get; set; }
 
@@ -19,22 +23,22 @@
 
         public string Username { get; set; }
 
+        public int CurrencyId { get; set; }
+
+        public string CurrencyName { get; set; }
+
+        public DateTime AccountCreatedDate { get; set; }
+
         public string Username2
         {
             get => username2 == string.Empty ? null : username2;
-            set { username2 = value; }
+            set => username2 = value;
         }
 
         public int? RoleId
         {
             get => roleId == 0 ? null : roleId;
-            set { roleId = value; }
+            set => roleId = value;
         }
-
-        public int CurrencyId { get; set; }
-
-        public string CurrencyName { get; set; }
-
-        public string CreatedDate { get; set; }
     }
 }

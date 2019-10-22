@@ -92,6 +92,7 @@ namespace Fanex.NAP.FPS.Renovation.GraphDB.Service
                     var deviceId = DbSessionFactory.Query<int>(FPS.GetDeviceById, new { criteria.DeviceId });
                     var association = DbSessionFactory.Query<int>(FPS.CheckExistedAssociation, new { criteria.CustId, criteria.DeviceId });
 
+                    // case N/A
                     if (criteria.DeviceId == 0)
                     {
                         if (!custId.Any())
