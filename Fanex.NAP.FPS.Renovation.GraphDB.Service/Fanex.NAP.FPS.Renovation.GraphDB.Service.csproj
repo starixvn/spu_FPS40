@@ -39,10 +39,12 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Fanex.Graph.Data">
-      <HintPath>GraphDBLib\Fanex.Graph.Data.dll</HintPath>
+    <Reference Include="Fanex.Graph.Data, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>GraphDBLib\ver1.1.1\Fanex.Graph.Data.dll</HintPath>
     </Reference>
-    <Reference Include="Neo4j.Driver">
+    <Reference Include="Neo4j.Driver, Version=1.6.70.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>GraphDBLib\Neo4j.Driver.dll</HintPath>
     </Reference>
     <Reference Include="System" />
